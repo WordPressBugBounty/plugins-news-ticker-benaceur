@@ -1,0 +1,1452 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: news ticker benaceur v2.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-31 09:29+0000\n"
+"PO-Revision-Date: 2023-01-18 20:29+0000\n"
+"Last-Translator: BENACEUR\n"
+"Language-Team: العربية\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
+"&& n%100<=10 ? 3 : n%100 >= 11 && n%100<=99 ? 4 : 5;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-Language: Arabic\n"
+"X-Poedit-Country: ALGERIA\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Loco-Target-Locale: ar_AE\n"
+"X-Loco-Version: 2.6.3; wp-6.1.1"
+
+#: opts-page/global-options.php:682
+msgid " (comment)"
+msgstr " (التعليق comment)"
+
+#: opts-page/global-options.php:675
+msgid " (post)"
+msgstr " (المقالة post)"
+
+#: opts-page/animations.php:56 opts-page/animations.php:63
+msgid "(not fot typing1)"
+msgstr "(غير متوافقة مع Typing1)"
+
+#: opts-page/animations.php:377
+msgid "+ date and title"
+msgstr "+ التاريخ والعنوان"
+
+#: opts-page.php:71
+msgid ""
+"- If you choose to fix the news bar at the top or bottom of the site, it&#39;"
+"s recommended to add the code automatically by activating the option: &#34;"
+"Automatically add the code to show the news ticker to the theme&#34; in the "
+"fixation options at the bottom of this page and not here, unless the bar "
+"doesn&#39;t appear (according to your theme) add it manually, as for the "
+"shortcode, put it manually, and doesn&#39;t work until you activate it below "
+"this note, and cannot be fixed."
+msgstr ""
+"- إذا اخترت تثبيت شريط الأخبار أعلى الموقع أو أسفله فمن المستحسن إضافة الكود "
+"تلقائيا وليس يدويا وذلك عبر تفعيل خيار &#34;إضافة كود إظهار شريط الأخبار "
+"تلقائياً إلى القالب&#34; في خيارات التبيث أسفل هذه الصفحة وليس هنا، إلا إذا "
+"لم يظهر الشريط (حسب قالبك) فقم بإضافته يدويا, أما بالنسبة للكود القصير فيوضع "
+"يدويا ولا يشتغل حتى تقوم بتفعيله أسفل هذا الملاحظة,  ولا تثبيت فيه."
+
+#: opts-page.php:234
+#| msgid ""
+#| "1- If you use a caching plugin, it is necessary in most cases to clear "
+#| "the cache after each animation change"
+msgid ""
+"1- If you use a caching plugin, it is necessary in most cases to clear the "
+"cache after plugin settings is updated"
+msgstr ""
+"1- إذا كنت تستخدم إضافة لحفظ الكاش caching plugin, فمن الضروري في أغلب "
+"الحالات إفراغ الكاش بعد تحديث الإعدادات (حفظ التغييرات)"
+
+#: opts-page.php:235
+msgid ""
+"2- Note for developers: When you use (query_posts) to identify articles that "
+"appear in the home page, for example, or in search page or ... must be taken "
+"into account that it affects the inclusion or exclusion articles that appear "
+"in the ticker, and to avoid this problem, and so as not to interfere with "
+"the insertion or exception settings for latest articles, must use this "
+"condition: $query->is_main_query()"
+msgstr ""
+"2- ملاحظة خاصة بالمطورين: عند استعمال (query_posts) لتحديد المقالات التي "
+"تظهر في الرئيسية مثلا أو في صفحة البحث أو ... يجب الأخذ بعين الاعتبار أن ذلك "
+"يؤثر على إدراج أو استثناء المقالات التي تظهر في الشريط ولتفادي هذه المشكلة "
+"وحتى لا تتعارض مع إعدادات الإدراج أو الاستثناء الخاصة بالإضافة نستعمل شرط: "
+"$query->is_main_query()"
+
+#: includes/filter-functions.php:11
+msgid "Add date and other"
+msgstr "إضافة التاريخ وغيره"
+
+#: opts-page.php:78
+msgid "Add the code automatically to bottom "
+msgstr "إضافة الكود تلقائياً أسفل الموقع"
+
+#: opts-page.php:77
+msgid "Add the code automatically to top"
+msgstr "إضافة الكود تلقائياً أعلى الموقع"
+
+#: opts-page.php:79
+msgid "Add the code manually"
+msgstr "إضافة الكود يدوياً"
+
+#: opts-page/global-options.php:396
+msgid "all"
+msgstr ""
+
+#: includes/global.php:227
+msgid "All changes saved successfully, close this message!"
+msgstr "تم حفظ جميع التغييرات بنجاح, أغلق هذه الرسالة"
+
+#: opts-page/style.php:310
+msgid ""
+"and if you choose manually with fixation at the bottom, add it exactly "
+"before the closing body tag in the footer:"
+msgstr ""
+"أما إذا اخترت يدويا مع التبيث في الأسفل فقم بإضافة الكود مباشرة قبل وسم "
+"إغلاق البودي في الفوتر footer:"
+
+#: includes/filter-functions.php:37
+msgid ""
+"And replace No. 1 with the appropriate number, and you can exclude more than "
+"one membership, for example: array(&#39;1&#39;, &#39;55&#39;, &#39;9&#39;)"
+msgstr ""
+"واستبدل رقم 1 بالرقم المناسب ويمكنك استثناء أكثر من عضوية, مثال: array(&#39;"
+"1&#39;, &#39;55&#39;, &#39;9&#39;)"
+
+#: opts-page/style.php:70
+msgid "and use px if your theme uses the pixels in width.)"
+msgstr "وباستعمال px إذا كان القالب يحسب العرض بالبيكسل.) "
+
+#: opts-page/animations.php:11
+msgid "Animation"
+msgstr "المؤثرات (Animation)"
+
+#: opts-page/animations.php:7
+msgid "Animation / effects"
+msgstr "المؤثرات (Animation / effects)"
+
+#: opts-page/global-options.php:394
+msgid "approve"
+msgstr ""
+
+#: opts-page/style.php:293
+msgid "At the bottom"
+msgstr "في الأسفل"
+
+#: opts-page/style.php:294
+msgid "At the top"
+msgstr "في الأعلى"
+
+#: opts-page/global-options.php:190
+msgid "author page"
+msgstr "صفحة مقالات الكاتب"
+
+#: opts-page/global-options.php:668
+msgid "Auto"
+msgstr ""
+
+#: opts-page/global-options.php:376
+msgid "auto-draft"
+msgstr ""
+
+#: opts-page/style.php:278
+#| msgid "Automatically add the code to show the news ticker to the theme"
+msgid ""
+"Automatically add the code to show the news ticker to the theme (recommended)"
+msgstr "إضافة كود إظهار شريط الأخبار تلقائياً إلى القالب (مستحسن)"
+
+#: opts-page/style.php:11
+msgid "Background color"
+msgstr "لون الخلفية background-color"
+
+#: opts-page/style.php:13
+msgid "Background color of title"
+msgstr "لون خلفية العنوان background-color"
+
+#. Author of the plugin
+msgid "benaceur"
+msgstr ""
+
+#: opts-page/animations.php:52
+msgid "Black"
+msgstr "سوداء"
+
+#: opts-page/animations.php:38
+msgid "Blind bott"
+msgstr ""
+
+#: opts-page/animations.php:132 opts-page/style.php:114 opts-page/style.php:176
+msgid "Bold"
+msgstr "عريض"
+
+#: opts-page/style.php:35
+msgid "border bottom"
+msgstr "الإطار السفلي border-bottom"
+
+#: opts-page/style.php:31
+msgid "border bottom (Title)"
+msgstr "الإطار السفلي border-bottom (العنوان)"
+
+#: opts-page/style.php:15
+msgid "Border color"
+msgstr "لون الإطار border-color"
+
+#: opts-page/style.php:16
+msgid "Border color (Title)"
+msgstr "لون الإطار border-color (العنوان)"
+
+#: opts-page/style.php:36 opts-page/style.php:37
+msgid "border left"
+msgstr "الإطار الأيسر border-left"
+
+#: opts-page/style.php:32 opts-page/style.php:33
+msgid "border left (Title)"
+msgstr "الإطار الأيسر border-left (العنوان)"
+
+#: opts-page/style.php:38
+msgid "border radius"
+msgstr "زوايا الإطار border radius"
+
+#: opts-page/style.php:36 opts-page/style.php:37
+msgid "border right"
+msgstr "الإطار الأيمن border-right"
+
+#: opts-page/style.php:32 opts-page/style.php:33
+msgid "border right (Title)"
+msgstr "الإطار الأيمن border-right (العنوان)"
+
+#: opts-page/style.php:34
+msgid "border top"
+msgstr "الإطار العلوي border-top"
+
+#: opts-page/style.php:30
+msgid "border top (Title)"
+msgstr "الإطار العلوي border-top (العنوان)"
+
+#: opts-page/global-options.php:642
+msgid "Bottom left"
+msgstr "أسفل اليسار"
+
+#: opts-page/global-options.php:636
+msgid "Bottom right"
+msgstr "أسفل اليمين"
+
+#: opts-page/animations.php:573
+msgid "Bottom the news bar"
+msgstr "أسفل شريط الأخبار"
+
+#: opts-page/style.php:141
+msgid "box shadow"
+msgstr "ظل الصندوق box-shadow"
+
+#: opts-page/style.php:149
+msgid "box shadow color"
+msgstr "لون ظل الصندوق box shadow color"
+
+#: opts-page/style.php:157
+msgid "box shadow pixel"
+msgstr "بيكسل ظل الصندوق box-shadow"
+
+#: opts-page/global-options.php:451
+msgid "Category id"
+msgstr "رقم التصنيف id"
+
+#: opts-page/global-options.php:431
+msgid "category id (include/exclude)"
+msgstr "تصنيف رقم (إدراج/استثناء)"
+
+#: opts-page/global-options.php:451
+msgid "Category name"
+msgstr "اسم التصنيف"
+
+#: opts-page/global-options.php:178
+msgid "category page"
+msgstr "صفحة التصنيف"
+
+#: opts-page.php:162
+msgid "Choose a section to reset"
+msgstr "اختر قسما لإعادة الإعدادات الافتراضية"
+
+#: opts-page/global-options.php:551
+msgid ""
+"Choose one title for each site according direction if your multilingual site"
+msgstr "اختر عنوانا لكل موقع حسب الاتجاه إذا كان موقعك متعدد اللغات"
+
+#: opts-page/global-options.php:407
+msgid "Choose the name of taxonomy"
+msgstr "اختر اسم taxonomy"
+
+#: opts-page/global-options.php:367 opts-page/global-options.php:391
+msgid "Choose the post status (You can select more than one status)"
+msgstr "اختر حالة المقالة post status (يمكنك تحديد أكثر من حالة)"
+
+#: opts-page/global-options.php:342
+msgid "Choose the post type (You can select more than one type)"
+msgstr "اختر نوع المقالة post type (يمكنك تحديد أكثر من نوع)"
+
+#: opts-page/animations.php:568
+msgid "Choose where to place the Java file"
+msgstr "اختر مكان وضع ملف الجافا"
+
+#: opts-page/style.php:408
+msgid "Class or id (fixed at the bottom)"
+msgstr "الكلاس أو الإيدي (إذا كان التثبيت أسفل)"
+
+#: opts-page/style.php:395
+msgid "Class or id (fixed at the top)"
+msgstr "الكلاس أو الإيدي (إذا كان التثبيت أعلى)"
+
+#: opts-page/global-options.php:529
+msgid "click here"
+msgstr "اضغط هنا"
+
+#: opts-page.php:202
+msgid ""
+"Click on \"Import\" to restore all your saved settings from the XML file"
+msgstr "اضغط على \"استيراد\" لإعادة جميع إعداداتك المحفوظة عبر ملف xml."
+
+#: opts-page/style.php:163
+msgid "Color of prev/next button"
+msgstr "لون زر السابق/التالي color"
+
+#: opts-page.php:90
+msgid "Common"
+msgstr "مشتَرك"
+
+#: opts-page.php:228
+msgid "Contribute to translation of plugin"
+msgstr "المساهمة في ترجمة الإضافة"
+
+#: opts-page/animations.php:21
+msgid "Curtain Hor"
+msgstr ""
+
+#: opts-page/animations.php:20
+msgid "Curtain Ver"
+msgstr ""
+
+#: opts-page.php:89
+msgid "Customed"
+msgstr "مخصص"
+
+#: opts-page/global-options.php:301 opts-page/global-options.php:322
+msgid "Day"
+msgstr "يوم"
+
+#: opts-page/global-options.php:664
+msgid "Direction"
+msgstr "الاتجاه"
+
+#: opts-page/animations.php:51
+msgid "Disable"
+msgstr "تعطيل"
+
+#: opts-page/animations.php:152 opts-page/animations.php:220
+#: opts-page/animations.php:293 opts-page/animations.php:437
+msgid "Disable autostart"
+msgstr "تعطيل التشغيل التلقائي"
+
+#: opts-page/animations.php:114
+msgid "Disable cursor"
+msgstr "تعطيل المؤشر"
+
+#: opts-page/style.php:336
+msgid "Disable fixation (bottom) in a screen less than 600px"
+msgstr "تعطيل التثبيت (أسفل) في شاشة عرضها أقل من 600px"
+
+#: opts-page/style.php:325
+msgid "Disable fixation (top) in a screen less than 600px"
+msgstr "تعطيل التثبيت (أعلى) في شاشة عرضها أقل من 600px"
+
+#: opts-page/global-options.php:140
+msgid "Disable hide/show option"
+msgstr "تعطيل خيار إخفاء/إظهار"
+
+#: opts-page/animations.php:148 opts-page/animations.php:191
+#: opts-page/animations.php:266 opts-page/animations.php:422
+msgid "Disable img next/prev"
+msgstr "تعطيل زر السابق/التالي"
+
+#: opts-page/animations.php:480
+msgid "Disable the icon"
+msgstr "تعطيل الأيقونة"
+
+#: opts-page/style.php:80
+msgid "Disable this font: DroidKufi_Ben "
+msgstr "تعطيل هذا الخط إن كان موجودا عندك: DroidKufi_Ben"
+
+#: opts-page/global-options.php:269
+msgid "Disable this option"
+msgstr "تعطيل هذا الخيار"
+
+#: opts-page/global-options.php:565
+msgid "Disable Title"
+msgstr "تعطيل العنوان"
+
+#: opts-page/animations.php:366
+msgid "Disable title (screen mobile)"
+msgstr "تعطيل العنوان (شاشة موبايل)"
+
+#: opts-page/global-options.php:439
+msgid "Display all categories"
+msgstr "إظهار جميع التصنيفات"
+
+#: opts-page/animations.php:89 opts-page/animations.php:243
+#: opts-page/animations.php:276 opts-page/animations.php:324
+#: opts-page/animations.php:408
+msgid "Distance from the left"
+msgstr "المسافة عن الشمال"
+
+#: opts-page/animations.php:345
+msgid "Distance from the left/right of the image"
+msgstr "المسافة عن شمال/يمين الصورة"
+
+#: opts-page/animations.php:83 opts-page/animations.php:243
+#: opts-page/animations.php:276 opts-page/animations.php:324
+#: opts-page/animations.php:408
+msgid "Distance from the right"
+msgstr "المسافة عن اليمين"
+
+#: opts-page/animations.php:345
+msgid "Distance from the right/left of the image"
+msgstr "المسافة عن يمين/شمال الصورة"
+
+#: opts-page/style.php:187
+msgid "distance top the prev/next button"
+msgstr "المسافة أعلى زر السابق/التالي top or margin-top"
+
+#: opts-page.php:142
+msgid "Do not delete"
+msgstr "لا تحذف"
+
+#: opts-page.php:253
+msgid "Do not forget to rate the plugin"
+msgstr "لا تنس تقييم الإضافة"
+
+#: opts-page.php:157
+msgid "Do not remove"
+msgstr "لا تحذف"
+
+#: opts-page/global-options.php:516
+msgid "Do not update the date"
+msgstr "عدم تحديث التاريخ"
+
+#: opts-page/animations.php:204
+msgid "Down"
+msgstr "إلى أسفل"
+
+#: opts-page/global-options.php:373
+msgid "draft"
+msgstr ""
+
+#: includes/filter-functions.php:20
+msgid ""
+"Edit the functions.php file for your active theme and put the following "
+"below it:"
+msgstr "حرر ملف functions.php الخاص بقالبك المفعّل وضع أسفله التالي:"
+
+#: opts-page/animations.php:108
+msgid "Enable cursor"
+msgstr "تفعيل المؤشر"
+
+#: opts-page/animations.php:142 opts-page/animations.php:185
+#: opts-page/animations.php:259 opts-page/animations.php:416
+msgid "Enable img next/prev"
+msgstr "تفعيل زر السابق/التالي"
+
+#: opts-page/global-options.php:45
+msgid "Enable News Ticker Benaceur on admin bar in admin panel"
+msgstr ""
+"تفعيل News Ticker Benaceur في شريط الإدارة (admin bar) على لوحة الإدارة"
+
+#: opts-page/global-options.php:44
+msgid "Enable News Ticker Benaceur on admin bar in frontend"
+msgstr ""
+"تفعيل News Ticker Benaceur في شريط الإدارة (admin bar) على واجهة الموقع"
+
+#: opts-page/global-options.php:11
+msgid "Enable plugin"
+msgstr "تفعيل الإضافة"
+
+#: opts-page/style.php:200
+msgid "Enable style of mobile (recommended)"
+msgstr "تفعيل نمط الموبايل (يستحسن تفعيله)"
+
+#: opts-page.php:80
+msgid "Enable the shortcode -only manully-"
+msgstr "تفعيل الكود القصير -يدويا فقط-"
+
+#: opts-page/style.php:190
+msgid ""
+"Enable this feature (style of mobile) if your theme uses the percentage % in "
+"the width of the site"
+msgstr ""
+"تفعيل هذه الخاصية (نمط الموبايل) إذا كان قالبك يستعمل النسبة المئوية % في "
+"عرض الموقع"
+
+#: opts-page/global-options.php:112
+msgid "Enter here the user id"
+msgstr "أدخل هنا رقم العضوية"
+
+#: opts-page/global-options.php:437
+msgid "Enter the id"
+msgstr "أدخل المعرّف"
+
+#: opts-page/global-options.php:513
+msgid "Enter your news (manually) here:"
+msgstr "أدخل أخبارك (يدويا) هنا:"
+
+#: opts-page/style.php:419 opts-page/style.php:426
+msgid "Ex:"
+msgstr "مثال:"
+
+#: opts-page/global-options.php:523
+msgid "ex:"
+msgstr "مثال:"
+
+#: opts-page/global-options.php:491
+msgid "Exclude cat id"
+msgstr "استثناء تصنيف رقم"
+
+#: opts-page/global-options.php:492
+msgid "Exclude post id"
+msgstr "استثناء مقالة رقم"
+
+#: includes/filter-functions.php:17
+msgid "Exclude the comments of a specific member or group"
+msgstr "استثناء تعليقات عضو أو مجموعة معينة"
+
+#: opts-page.php:188
+msgid ""
+"Export all plugin settings in an XML file that helps you to save all your "
+"settings for reuse here or at another location with ease."
+msgstr ""
+"تصدير جميع اعدادات الإضافة في ملف  xml يسمح لك ويساعدك في حفظ جميع إعداداتك "
+"الخاصة لإعادة استعمالها هنا أو في موقع آخر بكل سهولة."
+
+#: opts-page.php:186
+msgid "Export settings"
+msgstr "تصدير الإعدادات"
+
+#: opts-page/animations.php:19
+msgid "Fade"
+msgstr ""
+
+#: opts-page/animations.php:35
+msgid "Fade In"
+msgstr ""
+
+#: opts-page/animations.php:33
+msgid "Fade LR"
+msgstr ""
+
+#: opts-page/animations.php:34
+msgid "Fade On"
+msgstr ""
+
+#: opts-page/animations.php:32
+msgid "Fade Up"
+msgstr ""
+
+#: opts-page/animations.php:15
+msgid "FadeIn"
+msgstr ""
+
+#: opts-page/style.php:269
+msgid "Fixation the bar top/bottom the site"
+msgstr "تثبيت الشريط أعلى/أسفل الموقع"
+
+#: opts-page/style.php:77
+msgid "Font family"
+msgstr "عائلة الخط font-family"
+
+#: opts-page/style.php:99
+msgid "Font family (title)"
+msgstr "عائلة الخط font-family (العنوان)"
+
+#: opts-page/style.php:91 opts-page/style.php:208
+msgid "Font size"
+msgstr "حجم الخط font-size"
+
+#: opts-page/style.php:109
+msgid "Font size (title)"
+msgstr "حجم الخط font-size (العنوان)"
+
+#: opts-page/style.php:171
+msgid "Font size of prev/next button"
+msgstr "حجم خط زر السابق/التالي font-size"
+
+#: opts-page/style.php:117
+msgid "Font weight"
+msgstr "عرض الخط font-weight"
+
+#: opts-page/global-options.php:374
+msgid "future"
+msgstr ""
+
+#: opts-page.php:108
+msgid "General settings"
+msgstr "إعدادات عامة"
+
+#: opts-page/global-options.php:315
+msgid "Get only comments published less than:"
+msgstr "جلب فقط التعليقات التي مرّ عليها أقل من:"
+
+#: opts-page/global-options.php:314
+msgid "Get only posts published less than:"
+msgstr "جلب فقط المواضيع التي تم على نشرها أقل من:"
+
+#: opts-page/animations.php:28
+msgid "Grow Hor"
+msgstr ""
+
+#: opts-page/animations.php:29
+msgid "Grow Ver"
+msgstr ""
+
+#: opts-page/style.php:40 opts-page/style.php:209
+msgid "Height"
+msgstr "الإرتفاع height"
+
+#: opts-page/style.php:42
+msgid "height (Title)"
+msgstr "الإرتفاع height (العنوان)"
+
+#: opts-page/global-options.php:277
+msgid "Hide (when page reloaded)"
+msgstr "إخفاء (يتم بعد إعادة تحميل الصفحة)"
+
+#: opts-page/global-options.php:285
+msgid "hide (without reloading the page - jquery)"
+msgstr "إخفاء (دون الحاجة لإعادة تحميل الصفحة - جكيري)"
+
+#: opts-page/global-options.php:293
+msgid "Hide after spending a (the time entered here) of your recent comment:"
+msgstr "إخفاء بعد مرور (الوقت المختار هنا) من تاريخ آخر تعليق:"
+
+#: opts-page/global-options.php:292
+msgid "Hide after spending a (the time entered here) of your recent post:"
+msgstr "الإخفاء بعد مرور على نشر آخر موضوع أكثر من:"
+
+#: opts-page/global-options.php:294
+msgid ""
+"Hide after spending a (the time entered here) of your recent update date:"
+msgstr "إخفاء بعد مرور (الوقت المختار هنا) من تاريخ التحديث الأخير:"
+
+#: opts-page/global-options.php:258
+msgid "Hide after time:"
+msgstr "إخفاء بعد مدة:"
+
+#: opts-page/global-options.php:76
+msgid "Hide for all except administrator"
+msgstr "إخفاء عن الجميع ماعدا المدير"
+
+#: opts-page/global-options.php:64
+msgid "Hide for all users"
+msgstr "إخفاء عن جميع الأعضاء"
+
+#: opts-page/global-options.php:88
+msgid "Hide for this group(s) (You can select more than one group)"
+msgstr "إخفاء عن مجموعة (يمكنك تحديد أكثر من مجموعة)"
+
+#: opts-page/global-options.php:109
+msgid "Hide for this user id"
+msgstr "إخفاء عن المستخدم حسب المعرف ID"
+
+#: opts-page/global-options.php:52
+msgid "Hide for visitors"
+msgstr "إخفاء عن الزوار"
+
+#: opts-page/global-options.php:117
+msgid "Hide if no items (no posts or)"
+msgstr "إخفاء عند عدم وجود عناصر (لا توجد مواضيع أو ...)"
+
+#: opts-page/global-options.php:148
+msgid "Hide in"
+msgstr "إخفاء في"
+
+#: opts-page/style.php:247
+msgid "Hide the news ticker in a screen where the width is less than"
+msgstr "إخفاء الشريط (news ticker) في شاشة عرضها أقل من"
+
+#: opts-page/style.php:439
+msgid "Hide the plugin rating icon"
+msgstr "إخفاء أيقونة تقييم الإضافة"
+
+#: opts-page/global-options.php:129
+msgid "Hide/Show in:"
+msgstr "إخفاء/إظهار في:"
+
+#: opts-page/global-options.php:166
+msgid "home"
+msgstr "الرئيسية"
+
+#: opts-page/global-options.php:300 opts-page/global-options.php:321
+msgid "Hour"
+msgstr "ساعة"
+
+#: opts-page/style.php:17
+msgid "Hover color"
+msgstr "لون الروابط عند تمرير الفأرة a:hover"
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://benaceur-php.com/"
+msgstr ""
+
+#: opts-page/global-options.php:247
+msgid "ID of page"
+msgstr "معرف الصفحة (ID of page)"
+
+#: opts-page/global-options.php:226
+msgid "ID of post"
+msgstr "معرف المقالة (ID of post)"
+
+#: opts-page/global-options.php:506
+msgid "If no news (text)"
+msgstr "إذا لم تكن هناك أخبار (النص)"
+
+#: opts-page/style.php:81 opts-page/style.php:100
+msgid ""
+"If you are using a non-latin font (like arabic) it should be preceded by "
+"&#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi"
+msgstr ""
+"إذا كنت تستخدم خطًا غير لاتيني (مثل العربية)  فيجب أن يسبقه &#34;Verdana&#34;"
+"  متبوعًا بفاصلة  ثم الخط. على سبيل المثال: Verdana, Kufi"
+
+#: opts-page/style.php:304
+msgid ""
+"If you choose manually with fixation at the top, add the code exactly under "
+"the body tag in the header:"
+msgstr ""
+"إذا اخترت يدويا مع التبيث في الأعلى فقم بإضافة الكود مباشرة تحت وسم البودي "
+"body في الهيدر header:"
+
+#: opts-page.php:230
+msgid ""
+"If you want to translate this plugin to your language then send me the "
+"translation files via:"
+msgstr "إذا أردت ترجمة هذه الإضافة إلى لغتك أرسل لي ملفات الترجمة عبر:"
+
+#: opts-page/animations.php:336
+msgid "Image dimensions"
+msgstr "أبعاد الصورة"
+
+#: opts-page.php:200
+msgid "Import settings"
+msgstr "استيراد الإعددات"
+
+#: includes/notices-ntb.php:19
+msgid "Important"
+msgstr "مُهمّ"
+
+#: opts-page.php:71
+msgid ""
+"Important: this option under the note is considered null if the fixation "
+"option is activated."
+msgstr ""
+"هام: هذا الخيار الذي أسفل الملاحظة يعتبر ملغى إذا كان خيار التثبيت مفعلا."
+
+#: opts-page/style.php:206
+msgid "In a screen where the maximum width is"
+msgstr "في شاشة عرضها أقل من media screen and max-width"
+
+#: opts-page/style.php:207
+msgid "In a screen where the minimum width is"
+msgstr "في شاشة عرضها أكبر من media screen and min-width"
+
+#: opts-page/animations.php:572
+msgid "In footer (recommended)"
+msgstr "في الفوتر -الأسفل- (مستحسن)"
+
+#: opts-page/global-options.php:480
+msgid "Include cat id"
+msgstr "إدراج تصنيف رقم"
+
+#: opts-page/global-options.php:481
+msgid "Include post id"
+msgstr "إدراج مقالة رقم"
+
+#: opts-page/animations.php:127
+msgid "Indicator size"
+msgstr "حجم المؤشر"
+
+#: opts-page/global-options.php:377
+msgid "inherit"
+msgstr ""
+
+#: includes/filter-functions.php:8
+msgid "Last update"
+msgstr "آخر تحديث"
+
+#: opts-page/global-options.php:21
+msgid "Latest comments"
+msgstr "آخر التعليقات"
+
+#: opts-page/global-options.php:22
+msgid "Latest news Manually"
+msgstr "آخر الأخبار يدوياً"
+
+#: opts-page/global-options.php:20
+msgid "Latest posts"
+msgstr "آخر المقالات (posts)"
+
+#: opts-page/global-options.php:229 opts-page/global-options.php:250
+#: opts-page/global-options.php:437
+msgid "Leave blank to activate All"
+msgstr "اتركه فارغا لتفعيل الجميع"
+
+#: opts-page/global-options.php:508
+msgid "Leave it blank (default text)"
+msgstr "اتركه فارغا (النص الافتراضي)"
+
+#: opts-page/global-options.php:326
+msgid "Leave it blank to get all comments"
+msgstr "اتركه فارغا لجلب جميع التعليقات"
+
+#: opts-page/global-options.php:325
+msgid "Leave it blank to get all posts"
+msgstr "اتركه فارغا لجلب جميع المواضيع"
+
+#: opts-page/global-options.php:669
+msgid "LTR"
+msgstr ""
+
+#: opts-page/style.php:285
+msgid "Manually add"
+msgstr "أضفه يدويا"
+
+#: opts-page/style.php:48
+msgid "margin bottom"
+msgstr "المسافة السفلية من الخارج margin-bottom"
+
+#: opts-page/style.php:50
+msgid "margin left"
+msgstr "المسافة عن الشمال من الخارج margin-left"
+
+#: opts-page/style.php:49
+msgid "margin right"
+msgstr "المسافة عن اليمين من الخارج margin-right"
+
+#: opts-page/style.php:45
+msgid "margin the title from the left (Title)"
+msgstr "تحريك صندوق العنوان من الجانب الأيسر (العنوان)"
+
+#: opts-page/style.php:45
+msgid "margin the title from the right (Title)"
+msgstr "تحريك صندوق العنوان من الجانب الأيمن margin-right (العنوان)"
+
+#: opts-page/style.php:47
+msgid "margin top"
+msgstr "المسافة العلوية من الخارج margin-top"
+
+#: opts-page/style.php:46
+msgid "margin top  (Title)"
+msgstr "المسافة العلوية من الخارج margin-top (العنوان)"
+
+#: opts-page/style.php:345
+msgid "margin top/bottom"
+msgstr "\tالمسافة العلوية/السفلية من الخارج top/bottom"
+
+#: opts-page/global-options.php:36
+msgid "Menu"
+msgstr "قائمة رئيسية"
+
+#: opts-page/global-options.php:299 opts-page/global-options.php:320
+msgid "Minute"
+msgstr "دقيقة"
+
+#: includes/filter-functions.php:7
+msgid "Modifications and additions by &#34;filter&#34;"
+msgstr "تعديلات وإضافات عن طريق &#34;filter&#34;"
+
+#: includes/notices-ntb.php:19
+msgid ""
+"my latest plugin,perhaps you might be interested <a target=\"_blank\" "
+"href=\"https://wordpress.org/plugins/restrict-usernames-emails-characters/\">"
+"Restrict Usernames Emails Characters</a>"
+msgstr ""
+"أحدث إضافاتي plugins, ربما قد تهمك <a target=\"_blank\" href=\"https:"
+"//wordpress.org/plugins/restrict-usernames-emails-characters/\">Restrict "
+"Usernames Emails Characters</a>"
+
+#: opts-page.php:241
+msgid "My plugins"
+msgstr "إضافاتي My plugins"
+
+#. Name of the plugin
+msgid "news ticker benaceur"
+msgstr ""
+
+#: opts-page.php:53
+msgid "News-Ticker-Benaceur"
+msgstr ""
+
+#: news-ticker-benaceur-page.php:22 news-ticker-benaceur-page.php:24
+#: includes/global.php:457 style-anim/inc/ie8.php:141
+#: style-anim/inc/ie8.php:143
+msgid "next"
+msgstr "التالي"
+
+#: opts-page/style.php:122 opts-page/style.php:138
+msgid "no"
+msgstr "لا"
+
+#: get-news.php:70
+msgid "No comments"
+msgstr "لا توجد تعليقات"
+
+#: get-news.php:27
+msgid "No items"
+msgstr "لا توجد عناصر"
+
+#: get-news.php:91
+msgid "No news"
+msgstr "لا توجد أخبار"
+
+#: opts-page/animations.php:131 opts-page/style.php:114 opts-page/style.php:176
+msgid "Normal"
+msgstr "عادي"
+
+#: opts-page.php:69
+msgid ""
+"Note: After activating the plugin, choose how to put the code in the theme, "
+"manually or automatically."
+msgstr "بعد تفعيل الإضافة اختر طريقة وضع الكود في القالب، يدويا أو تلقائيا."
+
+#: opts-page/global-options.php:539 opts-page/global-options.php:675
+#: opts-page/global-options.php:682
+msgid "Number of characters of the news"
+msgstr "عدد أحرف الخبر"
+
+#: opts-page/animations.php:318
+msgid "Number of title characters"
+msgstr "عدد حروف العنوان"
+
+#: opts-page/global-options.php:656
+msgid "Numbre of comments"
+msgstr "عدد التعليقات"
+
+#: opts-page/global-options.php:655
+msgid "Numbre of posts"
+msgstr "عدد المواضيع"
+
+#: opts-page/style.php:237
+msgid "Or choose:"
+msgstr "أو اختيار:"
+
+#: opts-page.php:99
+msgid "or put this short code in post or page (only manually):"
+msgstr "أو ضع هذا الكود القصير داخل المقالة أو الصفحة (يدويا فقط):"
+
+#: opts-page.php:128
+msgid "Other settings"
+msgstr "إعدادات أخرى"
+
+#: opts-page/style.php:233
+msgid "padding left"
+msgstr " المسافة عن الشمال من الداخل padding-left"
+
+#: opts-page/style.php:233
+msgid "padding right"
+msgstr "المسافة عن اليمين من الداخل padding-right"
+
+#: opts-page/animations.php:77 opts-page/style.php:211
+msgid "padding top"
+msgstr "المسافة العلوية من الداخل padding-top"
+
+#: opts-page/global-options.php:235
+msgid "pages"
+msgstr "الصفحات pages"
+
+#: opts-page/animations.php:95 opts-page/animations.php:209
+#: opts-page/animations.php:282 opts-page/animations.php:355
+#: opts-page/animations.php:426
+msgid "Pause on hover"
+msgstr "توقف عند تمرير الفأرة"
+
+#: opts-page/global-options.php:371 opts-page/global-options.php:395
+msgid "pending"
+msgstr ""
+
+#: includes/global.php:226
+msgid "Please wait..."
+msgstr "انتظر قليلا ..."
+
+#: opts-page/global-options.php:451
+msgid "Post Count"
+msgstr "عدد المواضيع"
+
+#: opts-page/global-options.php:434
+msgid "post id"
+msgstr "مقالة رقم"
+
+#: news-ticker-benaceur-page.php:21 news-ticker-benaceur-page.php:25
+#: includes/global.php:458 style-anim/inc/ie8.php:140
+#: style-anim/inc/ie8.php:144
+msgid "prev"
+msgstr "السابق"
+
+#: opts-page/global-options.php:375
+msgid "private"
+msgstr ""
+
+#: opts-page/global-options.php:370
+msgid "publish"
+msgstr ""
+
+#: opts-page.php:170 opts-page.php:174 opts-page/animations.php:580
+#: opts-page/global-options.php:690 opts-page/style.php:445
+msgid ""
+"Purge the cache after each settings change, If you were of course using a "
+"cache plugin."
+msgstr ""
+"قم بإفراغ الكاش بعد كل تغيير في الإعدادات، إذا كنت تستخدم بالطبع إضافة خاصة "
+"بحفظ الكاش."
+
+#: opts-page/global-options.php:542 opts-page/global-options.php:678
+#: opts-page/global-options.php:685
+msgid "Put 0 to disable"
+msgstr "ضع 0 لتعطيلها"
+
+#: opts-page/global-options.php:523
+msgid "Put each news in new line between this tags"
+msgstr "ضع كل خبر في سطر بين هذين التاجين"
+
+#: includes/filter-functions.php:68
+msgid ""
+"Put the code php in the functions.php file when you update your theme, "
+"because it will be deleted after each update of the theme. You can resolve "
+"this problem by using the child theme method. For more details, follow the "
+"following subject: "
+msgstr ""
+"أعد وضع الكود في ملف functions.php عند كل تحديث لقالبك, فسوف يُحذف بعد كل "
+"تحديث للقالب, ويمكنك التخلص من هذه المشكلة باستعمال طريقة القالب الإبن "
+"ولمزيد من التفصيل تابع الموضوع التالي: "
+
+#: opts-page/global-options.php:594
+msgid "Radius"
+msgstr ""
+
+#: opts-page/style.php:41 opts-page/style.php:210
+msgid "Raise or lower the text (line-height)"
+msgstr "رفع النص إلى أعلى أو خفضه (line-height)"
+
+#: opts-page/style.php:43
+msgid "Raise or lower the title (line-height)"
+msgstr "رفع نص العنوان إلى أعلى أو خفضه (line-height)"
+
+#: opts-page.php:150
+msgid ""
+"Remove [wp_news_ticker_benaceur_short_code] from posts and pages when the "
+"plugin is disabled (is recommended that take a copy of the database before "
+"this operation)"
+msgstr ""
+"حذف [wp_news_ticker_benaceur_short_code] من المقالات والصفحات عند تعطيل "
+"الإضافة (يستحسن أخذ نسخة احتياطية من قاعدة البيانات قبل هذه العملية)"
+
+#: opts-page.php:135
+msgid ""
+"Remove all settings and data of the plugin from database when the plugin is "
+"disabled"
+msgstr "حذف جميع إعدادات وبيانات الإضافة من قاعدة البيانات عند تعطيلها"
+
+#: opts-page/global-options.php:93
+msgid "Remove Selection"
+msgstr "إلغاء التحديد"
+
+#: opts-page.php:166
+msgid "reset all settings"
+msgstr "إعادة جميع الإعدادات الافتراضية للإضافة"
+
+#: opts-page.php:164
+msgid "reset animation settings"
+msgstr "إعادة الإعدادات الافتراضية (المؤثرات Animation)"
+
+#: opts-page/animations.php:475
+msgid "Reset default image"
+msgstr "إعادة الصورة الافتراضية"
+
+#: opts-page.php:163
+msgid "reset general settings"
+msgstr "إعادة الإعدادات الافتراضية (إعدادات عامة)"
+
+#: opts-page.php:165
+msgid "reset style settings"
+msgstr "إعادة الإعدادات الافتراضية (خصائص الستايل)"
+
+#: opts-page/global-options.php:670
+msgid "RTL"
+msgstr ""
+
+#: opts-page.php:173
+msgid "Save all Changes"
+msgstr "حفظ جميع التغييرات"
+
+#: opts-page/style.php:424
+msgid "Script customization or adding (java/jquery)"
+msgstr "تخصيص أو إضافة سكريبت (java/jquery)"
+
+#: opts-page/animations.php:30
+msgid "Scroll left"
+msgstr ""
+
+#: opts-page/animations.php:31
+msgid "Scroll right"
+msgstr ""
+
+#: opts-page/animations.php:17
+msgid "Scroll-H"
+msgstr ""
+
+#: opts-page/global-options.php:202
+msgid "search page"
+msgstr "صفحة نتائج البحث"
+
+#: includes/filter-functions.php:39
+msgid ""
+"Second, depending on the group, for example by excluding comments from the "
+"&#34;administrator&#34; group, in this case put the following code instead "
+"of the first:"
+msgstr ""
+"ثانيا حسب المجموعة, على سبيل المثال استثناء تعليقات مجموعة &#34;مدير&#34; في "
+"هذه الحالة ضع الكود التالي بدلا من الأول:"
+
+#: opts-page/style.php:298
+msgid "Select the fixing method"
+msgstr "حدد طريقة التثبيت"
+
+#: opts-page/global-options.php:113 opts-page/global-options.php:230
+#: opts-page/global-options.php:251 opts-page/global-options.php:469
+msgid "Separate between id by commas, for example: 2,16,223"
+msgstr "  افصل بين المعرفات بفاصلة (,) على سبيل المثال : 2,16,223"
+
+#: includes/global.php:90
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: opts-page/style.php:5
+msgid "Settings of style"
+msgstr "خصائص الستايل style"
+
+#: opts-page/global-options.php:156
+msgid "Show in"
+msgstr "إظهار في"
+
+#: opts-page/animations.php:36
+msgid "Shuffle"
+msgstr ""
+
+#: opts-page/animations.php:40 opts-page/global-options.php:593
+msgid "Simple"
+msgstr ""
+
+#: opts-page/global-options.php:214
+msgid "single post (in post)"
+msgstr "داخل المقالة loop single"
+
+#: opts-page/animations.php:26
+msgid "Slide"
+msgstr ""
+
+#: opts-page/animations.php:27
+msgid "Slide Hor"
+msgstr ""
+
+#: opts-page/animations.php:16
+msgid "Slide-Up-Down"
+msgstr ""
+
+#: opts-page/animations.php:71 opts-page/animations.php:237
+#: opts-page/animations.php:312 opts-page/animations.php:396
+msgid "Speed"
+msgstr "السرعة"
+
+#: opts-page/style.php:417
+msgid "Style customization (css)"
+msgstr "تخصيص الستايل (css)"
+
+#: opts-page/global-options.php:37
+msgid "Submenu"
+msgstr "قائمة فرعية"
+
+#: opts-page.php:32
+msgid "Submitted successfully."
+msgstr "تم الإرسال بنجاح."
+
+#: opts-page.php:224
+msgid "Support"
+msgstr "الدعم الفني Support"
+
+#: opts-page/global-options.php:432
+msgid "taxonomy id"
+msgstr ""
+
+#: opts-page/style.php:12
+msgid "Text color"
+msgstr "لون النص color"
+
+#: opts-page/style.php:14
+msgid "Text color of title (if animation pulsate is disabled)"
+msgstr "لون نص العنوان color (إذا كان تأثير pulsate معطلا) "
+
+#: opts-page/global-options.php:520
+msgid "Text direction"
+msgstr "إتجاه النص"
+
+#: opts-page/style.php:125
+msgid "text shadow"
+msgstr "ظل النص text-shadow"
+
+#: opts-page/style.php:133
+msgid "text shadow color"
+msgstr "لون ظل النص text shadow color"
+
+#: opts-page/animations.php:330
+msgid "The distance between elements"
+msgstr "المسافة بين العناصر"
+
+#: opts-page/animations.php:118
+msgid "The distance top of the indicator"
+msgstr "المسافة أعلى المؤشر"
+
+#: opts-page/style.php:383
+msgid ""
+"The height of the admin bar in a screen width of less than 682px (default "
+"&#34;46&#34; leave blank) | This doesn&#39;t affect the height of the admin "
+"bar, but rather affects the news ticker when you place it at the top of the "
+"site compared to the height of the admin bar"
+msgstr ""
+"ارتفاع height الأدمن بار admin bar في شاشة عرضها أقل من 682 بكسل (الافتراضي "
+"&#34;46&#34; اتركه فارغًا) | لا يؤثر هذا على ارتفاع الأدمن بار ، بل يؤثر على "
+"شريط الأخبار عند جعله أعلى الموقع بالنسبة إلى ارتفاع الأدمن بار."
+
+#: opts-page/style.php:374
+msgid ""
+"The height of the admin bar in a screen width of more than 682px (default "
+"&#34;32&#34; leave blank) | This doesn&#39;t affect the height of the admin "
+"bar, but rather affects the news ticker when you place it at the top of the "
+"site compared to the height of the admin bar"
+msgstr ""
+"ارتفاع height الأدمن بار admin bar في شاشة عرضها أكبر من 682 بكسل (الافتراضي "
+"&#34;32&#34; اتركه فارغًا) | لا يؤثر هذا على ارتفاع الأدمن بار ، بل يؤثر على "
+"شريط الأخبار عند جعله أعلى الموقع بالنسبة إلى ارتفاع الأدمن بار."
+
+#: opts-page/global-options.php:514
+msgid "The last update of manually news date:"
+msgstr "آخر تحديث لتاريخ الأخبار اليدوية:"
+
+#: opts-page/animations.php:63 opts-page/style.php:39
+msgid "The level of transparency 1-0.1"
+msgstr "نسبة الشفافية opacity من 1 إلى 0.1"
+
+#: opts-page/style.php:257
+msgid "The smaller width than"
+msgstr "العرض screen width أقل من"
+
+#: opts-page/global-options.php:553
+msgid "The title ltr"
+msgstr ""
+
+#: opts-page/global-options.php:559
+msgid "The title rtl"
+msgstr "العنوان rtl"
+
+#: includes/global.php:792
+msgid "There is a newer version, it's recommended to"
+msgstr "هناك نسخة أحدث متاحة, يستحسن"
+
+#: opts-page/global-options.php:524
+msgid "This form is correct:"
+msgstr "هذا النموذج صحيح:"
+
+#: opts-page/global-options.php:528
+msgid "This form is incorrect:"
+msgstr "هذا النموذج غير صحيح:"
+
+#. Description of the plugin
+msgid ""
+"This plugin allow you to display the latest posts or latest comments in a "
+"bar with twenty seven beautiful animations and effects..."
+msgstr ""
+
+#: opts-page/style.php:399 opts-page/style.php:412
+msgid ""
+"This will display the item behind the fixed news ticker. By default, leave "
+"the field blank. If the element does not appear (depending on your theme), "
+"enter the class or ID of the element."
+msgstr ""
+"هذه لإظهار العنصر الموجود خلف الشريط المثبت، افتراضيا اترك الحقل فارغا، أما "
+"إذا لم يظهر العنصر (حسب قالبك) أدخل الكلاس class أو الإيدي id الخاص بالعنصر."
+
+#: opts-page/animations.php:231 opts-page/animations.php:270
+#: opts-page/animations.php:402
+msgid "TimeOut"
+msgstr "وقت التوقف (بين عنوان وآخر)"
+
+#: opts-page/global-options.php:577
+msgid "Title animation pulsate"
+msgstr "تأثير pulsate على العنوان"
+
+#: opts-page/global-options.php:589
+msgid "Title styles"
+msgstr "ستايل العنوان"
+
+#: includes/filter-functions.php:13
+msgid ""
+"To add the date / author of the post / last modification of the post / the "
+"number of comments on the post, see the following topic:"
+msgstr ""
+"لإضافة التاريخ / صاحب الموضوع / آخر تعديل للموضوع / عدد التعليقات على "
+"الموضوع, تابع الموضوع التالي:"
+
+#: opts-page/global-options.php:610 opts-page/global-options.php:623
+msgid "Top left"
+msgstr "أعلى اليسار"
+
+#: opts-page/global-options.php:616 opts-page/global-options.php:629
+msgid "Top right"
+msgstr "أعلى اليمين"
+
+#: opts-page/animations.php:37
+msgid "Toss"
+msgstr ""
+
+#: opts-page/animations.php:56
+msgid "Transparent background"
+msgstr "خلفية شفّافة"
+
+#: opts-page/global-options.php:372
+msgid "trash"
+msgstr ""
+
+#: opts-page/animations.php:23
+msgid "Turn Down"
+msgstr ""
+
+#: opts-page/animations.php:24
+msgid "Turn Left"
+msgstr ""
+
+#: opts-page/animations.php:25
+msgid "Turn Right"
+msgstr ""
+
+#: opts-page/animations.php:22
+msgid "Turn Up"
+msgstr ""
+
+#: opts-page/animations.php:18
+msgid "Typing 1"
+msgstr ""
+
+#: opts-page/animations.php:41
+msgid "Typing 2"
+msgstr ""
+
+#: opts-page/animations.php:39
+msgid "Uncover"
+msgstr ""
+
+#: opts-page/animations.php:198
+msgid "Up"
+msgstr "إلى أعلى"
+
+#: includes/global.php:792
+msgid "update now"
+msgstr "التحديث الآن"
+
+#: opts-page/global-options.php:517
+msgid "Update the date of manually news"
+msgstr "تحديث تاريخ الأخبار اليدوية"
+
+#: opts-page/animations.php:473
+msgid "Upload image"
+msgstr "رفع صورة"
+
+#: opts-page.php:232
+msgid "Very important"
+msgstr "هام جدا"
+
+#: opts-page.php:239
+msgid "Visit plugin site:"
+msgstr "زيارة موقع الإضافة:"
+
+#: opts-page/style.php:179
+msgid "Weight of prev/next button"
+msgstr "عرض زر السابق/التالي font-weight"
+
+#: includes/filter-functions.php:19
+msgid ""
+"When choosing the last comments, it&#39;s possible to exclude the comments "
+"of a specific member from appearing, by his user id:"
+msgstr ""
+"عند اختيار آخر التعليقات يمكن استثناء تعليقات عضو معين من الظهور وذلك حسب "
+"معرفه:"
+
+#: opts-page/animations.php:53
+msgid "White"
+msgstr "بيضاء"
+
+#: opts-page/style.php:70
+msgid ""
+"Width by adding: px or % (It is recommended to use % if your theme uses the "
+"percentage in width,"
+msgstr ""
+"العرض width بإضافة % أو px (يستحسن استخدام % إذا كان قالبك يحسب العرض "
+"بالنسبة المئوية,"
+
+#: opts-page/style.php:353
+msgid "Width in percent %"
+msgstr "العرض width بالنسبة المئوية %"
+
+#: opts-page/style.php:44
+msgid "Width of the title"
+msgstr "عرض العنوان (width)"
+
+#: opts-page/style.php:122 opts-page/style.php:138
+msgid "yes"
+msgstr "نعم"
+
+#: includes/global.php:792
+msgid "You are using Version"
+msgstr "أنت تستخدم النسخة"
+
+#: opts-page.php:226
+msgid "You can ask questions about plugin and settings via this topic:"
+msgstr "يمكنك طرح استفساراتك حول الإضافة وإعداداتها عبر هذا الموضوع:"
+
+#: style-anim/inc/ie8.php:149
+msgid ""
+"Your browser is an old version, that's not compatible with this news ticker, "
+"update it!"
+msgstr "متصفحك الحالي قديم, غير متوافق مع شريط الأخبار هذا, يرجى تحديثه!"
+
+#: opts-page/global-options.php:525 opts-page/global-options.php:529
+msgid "your first news ..."
+msgstr "الخبر الأول ..."
+
+#: opts-page/global-options.php:526
+msgid "your second news ..."
+msgstr "الخبر الثاني ..."
+
+#: opts-page/global-options.php:527
+msgid "your third news ..."
+msgstr "الخبر الثالث ..."
+
+#: opts-page/style.php:361
+msgid "z-index"
+msgstr ""
