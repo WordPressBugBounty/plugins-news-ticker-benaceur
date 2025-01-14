@@ -14,6 +14,7 @@ font-size:14px;
 
 .enable_ntb_plugin {font-family:DroidKufi_Ben, Tahoma;font-size:15px;font-weight:bold;margin-top:10px;}
 
+/* setting msg updated */
 #setting-error-settings_updated {display:none;}
 
 #message.updated p {
@@ -32,7 +33,7 @@ font-size:14px;
 	right:0; 
 	left:160px;
 	top:15%; 
-	background:#00C90A; 
+	background:#00B509; 
 	color:#fff;
 	opacity:1;
 	z-index:8;
@@ -50,6 +51,34 @@ font-size:14px;
 #message.updated,[dir=rtl] #message.updated{right:0;left:0;}
 }
 @media only screen and (max-width: 510px) { #message.updated {max-width:200px;}}
+
+.ntb__export__file {
+	position:fixed;
+	background: #37a514;
+	font-family: DroidKufi_Ben,Tahoma,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	color: #fff;
+	font-size: 15px;
+	padding:11px 0;
+	font-weight: normal;
+	z-index: 99;
+	margin: auto !important;
+	text-align: center;
+	display: none;
+}
+.ntb__export__file#err {
+	background: #ff4848;
+}
+.ntb__export__file p {
+	font-size: 15px;
+	line-height: 1.7;
+	margin: 0;
+	padding: 0;
+}
+
+.admin-bar .ntb__export__file {top: 32px;}
+@media only screen and (max-width: 960px) { .ntb__export__file {right:0;left:0;} }
+@media only screen and (max-width: 782px) { .admin-bar .ntb__export__file {top: 46px;} }
+/* setting msg updated */
 
 .DroidArabicKufi {font-family: DroidKufi_Ben, sans-serif;}
 
@@ -79,6 +108,7 @@ font-size:14px;
 
 #col-nontb {
     font-family: DroidKufi_Ben, tahoma;
+	margin-bottom: 15px;
 }
 #col-nontb p {
 	font-size: 15px;
@@ -97,11 +127,13 @@ input.button-benTheme {
     font-size: 15px;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 	border-radius: 5px;
-	}
+}
 input.button-benTheme:hover {
     box-shadow: none;
 	cursor: pointer;
 }
+
+#wpcontent-benaceur-ntb .submit input {width:185px; padding-right:15px; padding-left:15px;}
 
 #sub-ntbCat td {
 	padding:6px;
@@ -1307,27 +1339,31 @@ padding:4px;
 }
 /*rtl*/
 
-#display_modif_by_filter_ntb {
-	width: 100%;
-}
-#display_modif_by_filter_ntb input {
-	display: block;
-}
-
-#wpcontent-benaceur-ntb #display_modif_by_filter_ntb .button-secondary {color: #2c0101; border-color: #989c9d;}
+#display_modif_by_filter_ntb, #display__note__ntb {width: 100%;}
+#display_modif_by_filter_ntb input, #display__note__ntb input {display: block;}
+#wpcontent-benaceur-ntb #display_modif_by_filter_ntb .button-secondary, #wpcontent-benaceur-ntb #display__note__ntb .button-secondary {color: #2c0101; border-color: #989c9d;}
 
 .note-benaceur_shortcode.note2 {
     background: #f0f8ff;
     border: #cee1ef 1px solid;
 }
+.note-benaceur_shortcode.note2 > div {
+	padding-right:0;
+	padding-left:70px;
+}
+[dir=rtl] .note-benaceur_shortcode.note2 > div {padding-left:0; padding-right:70px;}
+
 .note-benaceur_shortcode {
 	font-family: DroidKufi_Ben, Arial;
-	font-size: 13px;
     padding: 10px 20px;
     margin-top: 30px;
 	border-radius: 6px;
     word-wrap: break-word;
 	text-shadow: 2px 2px 2px #837d87;
+}
+.note-benaceur_shortcode p {
+	font-size: 14px;
+	line-height: 1.6;
 }
 .aligncenter-ben_note {
     clear: both;
@@ -1335,9 +1371,13 @@ padding:4px;
     margin-right: auto;
 }
 @media (max-width: 782px) {
-.note-benaceur_shortcode {font-size: 15px;}
+.note-benaceur_shortcode p {font-size: 15px; line-height: 1.7;}
 
 #ntb-11-class-or-id {margin-bottom:10px;}
+
+.note-benaceur_shortcode.note2 > span {display:none;}
+
+.note-benaceur_shortcode.note2 > div {padding:0 !important;}
 }
 .note-benaceur_shortcode .box-inner-block777 p {
 line-height: 1.8;
@@ -1353,3 +1393,71 @@ line-height: 1.8;
 @media only screen and (max-width: 370px) {
 .nice-select {font-size:14px;}
 }
+
+@media only screen and (max-width: 335px) {
+.custom_select_auto_add_code, #ntb__personalize_not_fixed {
+  font-family: Arial;
+  font-size:15px;
+}
+}
+
+#click_display_note_ntb:focus, #click_modif_by_filter_ntb:focus {
+  color: #2271b1;
+  border: solid 1px #2271b1;
+  background: #f6f7f7;
+  box-shadow: none;
+  outline: none;
+}
+#click_display_note_ntb:hover, #click_modif_by_filter_ntb:hover {
+  background: #f0f0f1;
+  border: solid 1px #0a4b78;
+  color: #0a4b78;
+}
+
+.class_display_note_ntb {padding-bottom: 1px;}
+.class_display_note_ntb > span, #wrap_modif_by_filter_ntb > span {
+  position: absolute; margin-left: 10px; margin-right: 0; cursor: pointer;
+}
+.class_display_note_ntb > span {margin-top: 10px;}
+#wrap_modif_by_filter_ntb > span {margin-top: 20px;}
+[dir=rtl] .class_display_note_ntb > span, [dir=rtl] #wrap_modif_by_filter_ntb > span {margin-right: 10px; margin-left: 0;}
+
+#ntb_button_h_sh_in input {padding: 0 30px;}
+#ntb_button_h_sh_in span {
+	position: absolute; margin-top: 25px; margin-left: 6px; margin-right: 0; cursor: pointer;
+}
+.cat_ntb_button_h_sh_in #ntb_button_h_sh_in span {margin-top: 6px;}
+
+@media (max-width: 782px) {
+    #ntb_button_h_sh_in span {margin-top: 27px;}
+	.cat_ntb_button_h_sh_in #ntb_button_h_sh_in span {margin-top: 8px;}
+}
+
+[dir=rtl] #ntb_button_h_sh_in span {
+	margin-left: 0; margin-right: 6px;
+}
+
+#wpcontent-benaceur-ntb .form-table th, .news-ticker-benaceur-colwrap2, 
+.news-ticker-benaceur-colwrap2-if, .news-ticker-benaceur-font-size, #pre710166-note,
+.note_7101add_the_code p, .ntb_excluded-reset-text p {
+	font-size: 14px;
+}
+
+@media (max-width: 782px) {
+.form-table44-moh, #wpcontent-benaceur-ntb .form-table td, #wpcontent-benaceur-ntb label,
+#wpcontent-benaceur-ntb .button-secondary, #wpcontent-benaceur-ntb .form-table label,
+#wpcontent-benaceur-ntb .form-table th, .ntb_cache_changesSaved, .news-ticker-benaceur-colwrap2,
+.news-ticker-benaceur-colwrap2-if, .news-ticker-benaceur-font-size, #pre710166-note,
+.ntb_cache_changesSaved-s-oth, .ntb_cache_changesSaved-s-all, [dir=rtl] .koalapse__content-NTB p,
+.note_7101add_the_code p, .main-NTB h3, .ntb_excluded-reset-text p {
+	font-size: 15px;
+}
+
+.news-ticker-benaceur-s-style, #example-head3, #example-head4 {font-size: 14px;}
+}
+
+#ntb_excluded-reset_checkbox {margin-right:4px; margin-left:4px;}
+.ntb_excluded-reset_checkbox > span {cursor:pointer;}
+.ntb_excluded-reset-text p {font-family: DroidKufi_Ben,Tahoma,Arial,sans-serif;}
+.ntb_excluded-reset-text .ntb_ert_class {margin-top:5px; margin-bottom:13px; padding:0 4px;}
+.ntb_excluded-reset-text .ntb_ert_class span {border-bottom: 1px solid #347575;}

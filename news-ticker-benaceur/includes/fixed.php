@@ -22,18 +22,23 @@ class class______news_ticker_benaceur_fixed extends class______news_ticker_benac
 		
 	ob_start();
 	
-	$top = false;
+	$top = $bottom = false;
 	
     if ($this->options_sty('fixed')) {
 		
 	if ($this->options_sty('fixed_top_bottom_site') == 'top')
     $top = true;
+
+	if ($this->options_sty('fixed_top_bottom_site') == 'bottom')
+    $bottom = true;
 	
 	?><style><?php
 		
-	$height = $this->options_anim('animation') == 'ScrollNTB' || !$this->options_sty('enable_style_mobile') ? $this->options_sty('height') : $this->options_sty('height_mobile');
+	//$height = $this->options_anim('animation') == 'ScrollNTB' || !$this->options_sty('enable_style_mobile') ? $this->options_sty('height') : $this->options_sty('height_mobile');
+	$height = $this->options_sty('height');
+	$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') : $height;
 		
-	$fixed_top_bottom = !$this->options_sty('fixed_top_bottom') ? '0' : $this->options_sty('fixed_top_bottom') . 'px';
+	$fixed_top_bottom = !$this->options_sty('fixed_top_bottom') ? '0' : $this->options_sty('fixed_top_bottom');
 	$fixed_class_for_bottom = $this->options_sty('fixed_class_for_bottom') == '' ? '.ntb_add_class_to_wp_body_footer' : $this->options_sty('fixed_class_for_bottom');
 	
 	printf('
@@ -52,7 +57,7 @@ class class______news_ticker_benaceur_fixed extends class______news_ticker_benac
     if ($top) {
 	?>
 	.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {
-	top:<?php echo $fixed_top_bottom; ?>;
+	top:<?php echo $fixed_top_bottom; ?>px;
     }
 
 	.news_ticker_ntb_ie8 {position: fixed;}
@@ -60,11 +65,11 @@ class class______news_ticker_benaceur_fixed extends class______news_ticker_benac
 
     @media only screen and (min-width: <?php echo $this->options_sty('screen_min_width'); ?>px) {
 	.n_t_ntb_b, .news-ticker-ntb {position: fixed;}
-    .admin-bar .news-ticker-ntb, .admin-bar .n_t_ntb_b {top: <?php echo $this->adminbar32; ?>px;}
+    .admin-bar .news-ticker-ntb, .admin-bar .n_t_ntb_b {top: <?php echo $this->adminbar32 + (int) $fixed_top_bottom; ?>px;}
     }
     @media screen and (max-width: <?php echo $this->options_sty('screen_max_width'); ?>px) <?php echo $and; ?> {
 	.n_t_ntb_b, .news-ticker-ntb {position: fixed;}
-    .admin-bar .news-ticker-ntb, .admin-bar .n_t_ntb_b {top: <?php echo $this->adminbar46; ?>px;}
+    .admin-bar .news-ticker-ntb, .admin-bar .n_t_ntb_b {top: <?php echo $this->adminbar46 + (int) $fixed_top_bottom; ?>px;}
     }
 	
 	<?php if (!$this->options_sty('disable_fixed_600_for_top')) { ?>
@@ -80,7 +85,7 @@ class class______news_ticker_benaceur_fixed extends class______news_ticker_benac
 	$and_bottom = $this->options_sty('disable_fixed_600_for_bottom') ? 'and (min-width: 600px)' : '';
 	?>
 	.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {
-	bottom:<?php echo $fixed_top_bottom; ?>;
+	bottom:<?php echo $fixed_top_bottom; ?>px;
     }
 	
 	.news_ticker_ntb_ie8 {position: fixed;}
@@ -88,7 +93,7 @@ class class______news_ticker_benaceur_fixed extends class______news_ticker_benac
     @media only screen and (min-width: <?php echo $this->options_sty('screen_min_width'); ?>px) {
 	.n_t_ntb_b, .news-ticker-ntb {position: fixed;}
 	<?php echo $fixed_class_for_bottom; ?> {
-	<?php echo $this->height_marginBottom() .': '. $this->options_sty('height'); ?>px;
+	<?php echo $this->height_marginBottom() .': '. $height; ?>px;
     display: table;	
     }
     }
@@ -96,11 +101,20 @@ class class______news_ticker_benaceur_fixed extends class______news_ticker_benac
     @media screen and (max-width: <?php echo $this->options_sty('screen_max_width'); ?>px) <?php echo $and_bottom; ?> {
 	.n_t_ntb_b, .news-ticker-ntb {position: fixed;}
       <?php echo $fixed_class_for_bottom; ?> {
-      <?php echo $this->height_marginBottom() .': '. $height; ?>px;
+      <?php echo $this->height_marginBottom() .': '. $height_mobile; ?>px;
 	  display: table;
       }
     }
     <?php 
+	}
+	
+	// remove margin-top and margin-bottom if ticker is fixed.
+	if ($top || $bottom ) {
+		echo apply_filters( 'ntb_filter_fixed_remove_margin', 
+		'.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {
+			margin-top: 0;
+			margin-bottom: 0;
+		}' );
 	}
 	
 	?></style><?php

@@ -125,9 +125,18 @@
                    </label>
 				   </td>
                 </tr>
-				</table>
+                <tr class="ntb_is_no_elements" valign="top">
+                    <th scope="row"><?php _e('The text that appears if there is no items (posts or comments)', 'news-ticker-benaceur'); ?></th>
+                    <td>
+					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:250px;" type="text" name="<?php echo $this->option('txt_noItems'); ?>" value="<?php echo esc_attr( $this->options('txt_noItems') ); ?>" placeholder="<?php _e('Leave it blank (default text)', 'news-ticker-benaceur'); ?>" /></div>
+                   </td>
+                </tr>
+			</table>
+				
+<div id="ntb_button_h_sh_in">			
+<span id="ntb_button_h_sh_in1" class="dashicons dashicons-arrow-down-alt2"></span>				
 <input type='button' style="min-width:130px;margin-top:20px;"  id='H-ntbSelpage' class="button-secondary" value='<?php _e('Hide/Show in:', 'news-ticker-benaceur'); ?>';>
-<span style="position:absolute;margin: 23px 5px;font-size: 25px;" class="dashicons dashicons-arrow-down"></span>
+</div>
 
 <div id="H2-ntbSelpage" style="display:none;">
 
@@ -254,9 +263,9 @@
 </table>
 </div>
 
-<div>
+<div id="ntb_button_h_sh_in">			
+<span id="ntb_button_h_sh_in2" class="dashicons dashicons-arrow-down-alt2"></span>				
 <input type='button' style="min-width:130px;margin-top:20px;"  id='show-H-ntbSelpage-hide' class="button-secondary" value='<?php _e('Hide after time:', 'news-ticker-benaceur'); ?>';>
-<span style="position:absolute;margin: 23px 5px;font-size: 25px;" class="dashicons dashicons-arrow-down"></span>
 </div>
 
 <div id="H3-ntbSelpage-hide" style="display:none;">
@@ -388,7 +397,7 @@
 
 <table style="margin-top:35px; margin-bottom:-60px;" class="form-table">
                  <tr valign="top">
-                    <th scope="row"><?php _e('Choose the post status (You can select more than one status)', 'news-ticker-benaceur'); ?></th>
+                    <th scope="row"><?php _e('Choose the comment status', 'news-ticker-benaceur'); ?></th>
                     <td>
 				<div class="bold-3"><select style="min-width:150px; text-align:center;"  name="<?php echo $this->option('comment_status'); ?>">
 				<option value="approve" <?php selected('approve', $this->options('comment_status')); ?>><?php _e("approve", 'news-ticker-benaceur'); ?></option>
@@ -429,15 +438,23 @@
                     <th scope="row">
 					<span class="fsub_lat-pos-ntb box_lat-com">
 					<span class="fsub_cat-or-tax-ntb box_cat-tax"><?php _e('category id (include/exclude)', 'news-ticker-benaceur'); ?></span>
-					<span class="fsub_tax-or-cat-ntb box_cat-tax"><?php _e('taxonomy id', 'news-ticker-benaceur'); ?></span>
+					<span class="fsub_tax-or-cat-ntb box_cat-tax"><?php _e('taxonomy id (required)', 'news-ticker-benaceur'); ?></span>
 					</span>
 					<span class="fsub_lat-com-ntb box_lat-com"><?php _e('post id', 'news-ticker-benaceur'); ?></span>
 					</th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="direction:ltr;font-weight:bold;" type="text" name="<?php echo $this->option('for_cat'); ?>" placeholder="<?php if ($this->options('for_cat_tax') == 'category') { _e( 'Leave blank to activate All', 'news-ticker-benaceur' ); } else { _e( 'Enter the id', 'news-ticker-benaceur' ); } ?>" value="<?php echo esc_attr( $this->options('for_cat') ); ?>" />
-<span class=""><span class="fsub_lat-pos-ntb_hide-sel">
-<input type='button' style="margin-top:-1px;" id='bt-ntbCat' class="button-secondary" value='<?php _e('Display all categories', 'news-ticker-benaceur'); ?>';>
-<span style="position:absolute;margin: -2px 5px;font-size: 25px;" class="dashicons dashicons-arrow-down"></span>
+                    <div style="margin-bottom: 15px;"><em><?php _e( 'Separate between id by commas, for example: 2,16,223', 'news-ticker-benaceur' ); ?></em></div>
+
+<?php
+$cats = get_categories(array('hide_empty' => false, 'taxonomy' => $this->options('for_cat_tax') ? $this->options('for_cat_tax') : 'category'));
+if ( count($cats) < apply_filters( 'ntb_filter_number_cat_display', 300 ) ) {
+?>
+<span class="cat_ntb_button_h_sh_in"><span class="fsub_lat-pos-ntb_hide-sel">
+<div id="ntb_button_h_sh_in">			
+<span id="ntb_button_h_sh_in3" class="dashicons dashicons-arrow-down-alt2"></span>				
+<input type='button' id='bt-ntbCat' class="button-secondary" value='<?php _e('Display all categories', 'news-ticker-benaceur'); ?>'; />
+</div>
 </span></span>
 <div id="sub-ntbCat" style="display:none;">		
 <?php
@@ -450,7 +467,6 @@
 	</tr>
 </table></div>', '%', __( 'Category name', 'news-ticker-benaceur'), __( 'Category id', 'news-ticker-benaceur'), __( 'Post Count', 'news-ticker-benaceur'), $this->rtl_left_right());
 
-$cats = get_categories(array('hide_empty' => false, 'taxonomy' => $this->options('for_cat_tax') ? $this->options('for_cat_tax') : 'category'));
 foreach($cats as $cat) {
   printf('<div>
 <table width="100%1$s" cellspacing="1" style="border:1px solid #999999;">
@@ -464,9 +480,10 @@ foreach($cats as $cat) {
 ?>
 <br><br>
 </div>
+<?php } ?>
 
 					</div>
-                    &nbsp;&nbsp;<em><?php _e( 'Separate between id by commas, for example: 2,16,223', 'news-ticker-benaceur' ); ?></em></td>
+                    </td>
                     
                 </tr>
 				
@@ -503,7 +520,7 @@ foreach($cats as $cat) {
 
             <table class="form-table">
                 <tr valign="top">
-                    <th scope="row"><?php _e('If no news (text)', 'news-ticker-benaceur'); ?></th>
+                    <th scope="row"><?php _e('The text that appears if there is no items (manually news)', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:250px;" type="text" name="<?php echo $this->option('empty_txt_news_manually'); ?>" value="<?php echo esc_attr( $this->options('empty_txt_news_manually') ); ?>" placeholder="<?php _e('Leave it blank (default text)', 'news-ticker-benaceur'); ?>" /></div>
                    </td>
@@ -548,7 +565,7 @@ foreach($cats as $cat) {
 </div>
 			  
               <table class="form-table">
-			  <?php _e('Choose one title for each site according direction if your multilingual site', 'news-ticker-benaceur'); ?>
+			  <label style="padding-top: 20px;"><?php _e('Choose one title for each site according direction if your multilingual site', 'news-ticker-benaceur'); ?></label>
                 <tr valign="top">
                     <th scope="row"><?php _e('The title ltr', 'news-ticker-benaceur'); ?></th>
                     <td>
@@ -607,39 +624,39 @@ foreach($cats as $cat) {
 <table class="form-table">
 				<?php if (!is_rtl() && $this->options('dir') != 'rtl' || is_rtl() && $this->options('dir') == 'ltr') { ?>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Top left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Top left', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option('title_styles_topleft_lef'); ?>" value="<?php echo esc_attr( $this->options('title_styles_topleft_lef') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Top right', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Top right', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option('title_styles_topright_lef'); ?>" value="<?php echo esc_attr( $this->options('title_styles_topright_lef') ); ?>" /></div>
                    </td>
                 </tr>
 				<?php } else { ?>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Top left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Top left', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option('title_styles_topleft_ri'); ?>" value="<?php echo esc_attr( $this->options('title_styles_topleft_ri') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Top right', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Top right', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option('title_styles_topright_ri'); ?>" value="<?php echo esc_attr( $this->options('title_styles_topright_ri') ); ?>" /></div>
                    </td>
                 </tr>
 				<?php } ?>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Bottom right', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Bottom right', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option('title_styles_bottomright'); ?>" value="<?php echo esc_attr( $this->options('title_styles_bottomright') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Bottom left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Bottom left', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option('title_styles_bottomleft'); ?>" value="<?php echo esc_attr( $this->options('title_styles_bottomleft') ); ?>" /></div>
                    </td>
@@ -686,5 +703,5 @@ foreach($cats as $cat) {
 				   </td>
                 </tr>
 </table>
-		<p class="submit"><input type="submit" name="submit_global" id="submit-ftb1" class="button-benTheme" value="<?php _e( 'Save Changes' ); ?>"  /></p>
-		<p class="ntb_cache_changesSaved"><?php _e( 'Purge the cache after each settings change, If you were of course using a cache plugin.','news-ticker-benaceur' ); ?></p>
+		<p class="submit"><input type="submit" name="submit_global" id="submit-ftb1" class="button-benTheme" value="<?php _e( 'Save general settings', 'news-ticker-benaceur' ); ?>"  /></p>
+		<p class="ntb_cache_changesSaved"><?php echo $this->purge_cache_msg(); ?></p>

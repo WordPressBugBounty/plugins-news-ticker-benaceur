@@ -1,60 +1,37 @@
 <?php
-    if ( ! defined( 'ABSPATH' ) ) exit;
-	
-   global $themename;
+   if ( ! defined( 'ABSPATH' ) ) exit;
    
+   $glob_options = $this->glob_options();
 /**
- * Process a settings export that generates a .xml file.
+ * Process a settings export that generates a .json file.
  */
 	
 	if( !empty( $_POST['ntb_action'] ) && 'export_settings' == $_POST['ntb_action'] && wp_verify_nonce( $_POST['ntb_export_nonce'], 'ntb_export_nonce' ) ) {
-	//$backup_file   = $backup_dir .'/cbtm-settings-export-' . substr( md5( __FILE__ ), 0, 6 ). '(' . date("d-m-Y__H-i-s",current_time( 'timestamp' )) . ').xml'; 	// chemin vers le fichier xml du dossier de backup
-    $filename = 'news-ticker-benaceur-settings-export-' . date("d-m-Y__H-i-s",current_time( 'timestamp' )) . '.xml';
- 
-	nocache_headers(); 
-	header( 'Content-Type: text/xml; charset='. get_option( 'blog_charset') .'' );
-	header( 'Content-disposition: attachment; filename='.$filename.'' );
-	// cache
-    header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-    header("Pragma: no-cache"); // HTTP 1.0
-    header("Expires: 0"); // Proxies
-   
-   $AllOptions_ie_ntb = array (array("",$this->AllOptionsNTB()),array("",$this->AllOptionssNTB()),array("",$this->AllOptions_anim_NTB()),
-   array("",array('news_ticker_benaceur_delete_all_options','news_ticker_benaceur_ntb_st_code'))
-   );
-  
-    foreach($AllOptions_ie_ntb as $inner) {
-	if (is_array($inner)) {
-	foreach ($inner[1] as $optionN_ntb) {	
-	$options = array($optionN_ntb => get_option($optionN_ntb));
-	foreach ($options as $key => $value) {
-            $value = maybe_unserialize($value);
-            $need_options[$key] = $value;
-        }
-    $xml_file = json_encode($need_options);
-    }
-    }
-    }
-  
-    echo $xml_file;
-  	
+    $filename = 'news-ticker-benaceur-settings_' . date("d-m-Y__H-i-s", current_time( 'timestamp' )) . '.json';
+	
+	nocache_headers();
+	header( 'Content-Description: File Transfer' );
+	header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset') );
+	header( 'Content-Disposition: attachment; filename=' . $filename );
+	
+    //$json_file = version_compare( PHP_VERSION, '5.4.0', '>=' ) ? json_encode($glob_options, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) : json_encode($glob_options);
+    
+	/*
+	PHP_VERSION 5.4.0 >= : JSON_UNESCAPED_UNICODE
+	*/
+	$flags = defined( 'JSON_UNESCAPED_UNICODE' ) ? JSON_UNESCAPED_UNICODE : null;
+
+    echo wp_json_encode($glob_options, $flags);
 	exit;
 	}
-	
-/**
- * Process a settings export that generates a .xml file.
- */
- 
 
 /**
- * Process a settings import from a xml file.
+ * Process a settings import from a json file.
  */
 
 	if( empty( $_POST['ntb_action'] ) || 'import_settings' != $_POST['ntb_action'] )
 		return;
 	if( ! wp_verify_nonce( $_POST['ntb_import_nonce'], 'ntb_import_nonce' ) )
-		return;
-	if( ! current_user_can( 'manage_options' ) )
 		return;
 	
 	$import_file = $_FILES['NTB_import_file']['tmp_name'];
@@ -64,21 +41,24 @@
 	
 	$tmp = explode('.', $_FILES['NTB_import_file']['name']);
 	$extension = end( $tmp );
-	if( $extension != 'xml' ) {
-		wp_die( __( 'Please upload a valid .xml file' ) );
+	if( $extension != 'json' ) {
+		wp_die( __( 'Please upload a valid .json file' ) );
 	}
-	// Retrieve the settings from the file and convert the xml object to an array.
+	// Retrieve the settings from the file and convert the json object to an associative array.
 
-$file_impor = file_get_contents($import_file);
-                        $options = json_decode($file_impor, true);
-                        foreach ($options as $key => $value) {
-                            update_option($key, $value);
-                        }
-	 
+    $json_options = wp_json_file_decode($import_file, array( 'associative' => true ));
 	
-	wp_safe_redirect( admin_url( NTB_BEN_O_G.'?page='.NS_TR_BEN.'#ntb-top-import-setts' ) );
-	exit;
+	update_option("news_ticker_benaceur_glob_options", $json_options);
+	
+	$get__option = $this->get_serialized_glob_options();
+	
+	if ( ( $get__option && is_array($json_options) && trim(maybe_serialize($json_options)) == trim($get__option) ) || apply_filters( 'ntb_filter_import_json_auth', false) ) {
+	    add_user_meta( get_current_user_id(), 'news_ticker_benaceur_msg_opts_up', '1' );
+	} else {
+		update_option("news_ticker_benaceur_glob_options", $glob_options);
+		add_user_meta( get_current_user_id(), 'news_ticker_benaceur_error_msg_opts_up', '1' );
+	}
 
 /**
- * Process a settings import from a xml file.
+ * Process a settings import from a json file.
  */

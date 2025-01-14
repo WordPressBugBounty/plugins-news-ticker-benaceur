@@ -44,8 +44,8 @@
 					'width_title_background' => __('Width of the title', 'news-ticker-benaceur'),
 					'margin_r_l_title' => $this->is_ntb_rtl() ? __('margin the title from the right (Title)', 'news-ticker-benaceur') : __('margin the title from the left (Title)', 'news-ticker-benaceur'),
 					'margin_top_title' => __('margin top  (Title)', 'news-ticker-benaceur'),
-					'margin_top' => __('margin top', 'news-ticker-benaceur'),
-					'margin_bottom' => __('margin bottom', 'news-ticker-benaceur'),
+					'margin_top' => __('margin top (If it&#39;s not fixed)', 'news-ticker-benaceur'),
+					'margin_bottom' => __('margin bottom (If it&#39;s not fixed)', 'news-ticker-benaceur'),
 					'margin_right' => __('margin right', 'news-ticker-benaceur'),
 					'margin_left' => __('margin left', 'news-ticker-benaceur')
 					);
@@ -77,8 +77,8 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;<?php _e("Font family",'news-ticker-benaceur'); ?> /
                                <input type="hidden" value="" name="<?php echo $this->option_sty('disable_this_font'); ?>" />
 							   <input type="checkbox"  value="1" <?php checked( $this->options_sty('disable_this_font'), 1 ); ?> name="<?php echo $this->option_sty('disable_this_font'); ?>" />
-                        <?php _e("Disable this font: DroidKufi_Ben ",'news-ticker-benaceur'); ?> / 
-						<span style="color:#a24b4b;"><?php _e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></span>
+                        <?php _e("Disable this font: DroidKufi_Ben ",'news-ticker-benaceur'); ?>
+						<div style="color:#a24b4b;"><?php _e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></div>
 							</div>
 						</td>
 					</tr>
@@ -97,7 +97,7 @@
 							</div></div>
 						</td>
 						<div class="colwrap-display"><td><?php _e("Font family (title)",'news-ticker-benaceur'); ?></td></div>
-                         / <span style="color:#a24b4b;"><?php _e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></span>
+                         <div class="news-ticker-benaceur-colwrap2-if" style="color:#a24b4b;"><?php _e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></div>
 					<div style="margin-bottom:10px;"></div>
 					</tr>
 					<tr>
@@ -187,7 +187,7 @@
 						<div class="colwrap-display"><td><?php _e("distance top the prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 <br><div class="to-tr2"></div>
-<p><?php _e("Enable this feature (style of mobile) if your theme uses the percentage % in the width of the site",'news-ticker-benaceur'); ?></p>
+<p class="news-ticker-benaceur-font-size"><?php _e("Enable this feature (style of mobile) if your theme uses the percentage % in the width of the site",'news-ticker-benaceur'); ?></p>
                 <tr>  
                     <td> 
 					<label class="switch-nab">				
@@ -197,7 +197,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <td style="font-size: 13px;font-weight:normal;"><?php _e('Enable style of mobile (recommended)', 'news-ticker-benaceur'); ?></td>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Enable style of mobile (recommended)', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr>
 				<br><br>
@@ -234,7 +234,7 @@
 						?>
 						<div class="colwrap-display"><td><?php echo $p_rl; ?> </td></div><br>
 					</tr>
-<p><?php _e("Or choose:",'news-ticker-benaceur'); ?></p>
+<p class="news-ticker-benaceur-font-size"><?php _e("Or choose:",'news-ticker-benaceur'); ?></p>
                 <tr>  
                     <td> 
 					<label class="switch-nab">				
@@ -244,7 +244,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <td style="font-size: 13px;font-weight:normal;"><?php _e('Hide the news ticker in a screen where the width is less than', 'news-ticker-benaceur'); ?></td>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Hide the news ticker in a screen where the width is less than', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr>
 				<br><br>
@@ -266,7 +266,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <td style="font-size: 13px;font-weight:normal;"><?php _e('Fixation the bar top/bottom the site', 'news-ticker-benaceur'); ?></td>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Fixation the bar top/bottom the site', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr><br><br>
 <table style="margin-bottom:20px;" class="form-table44-moh">
@@ -322,7 +322,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <td style="font-size: 13px;font-weight:normal;"><?php _e('Disable fixation (top) in a screen less than 600px', 'news-ticker-benaceur'); ?></td>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Disable fixation (top) in a screen less than 600px', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr><br><br>
                 <tr>  
@@ -333,7 +333,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <td style="font-size: 13px;font-weight:normal;"><?php _e('Disable fixation (bottom) in a screen less than 600px', 'news-ticker-benaceur'); ?></td>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Disable fixation (bottom) in a screen less than 600px', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr><br><br>
 					<tr>
@@ -371,7 +371,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('adminbar_height') ); ?>" name="<?php echo $this->option_sty('adminbar_height'); ?>" />
 							</div></div>
 						</td>
-						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php _e("The height of the admin bar in a screen width of more than 682px (default &#34;32&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div>
+						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php _e("The height of the admin bar in a screen width of more than 782px (default &#34;32&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div>
 						<div style="margin-bottom:15px;width:140px;border-bottom:1px solid #999999;"></div>
 					</tr>
 					<tr>
@@ -380,7 +380,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('adminbar_height_mobile') ); ?>" name="<?php echo $this->option_sty('adminbar_height_mobile'); ?>" />
 							</div></div>
 						</td>
-						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php _e("The height of the admin bar in a screen width of less than 682px (default &#34;46&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div><div style="width:30%;border-bottom:2px solid #974c16;"></div><br>
+						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php _e("The height of the admin bar in a screen width of less than 782px (default &#34;46&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div><div style="width:30%;border-bottom:2px solid #974c16;"></div><br>
 					</tr><br>
 
 
@@ -414,16 +414,16 @@
 			</div>		
 <br><div class="to-tr2"></div>
 
-            <p><?php _e("Style customization (css)",'news-ticker-benaceur'); ?></p>
-			<p class="news-ticker-benaceur-s-style"><textarea id="news-ticker-benaceur-CodeMirrorCss" class="news-ticker-benaceur-s--style" name="<?php echo $this->option_sty('s_style'); ?>" ><?php echo esc_textarea( $this->options_sty('s_style') ); ?></textarea></p>
-			<p><em><?php _e("Ex:",'news-ticker-benaceur'); ?></em></p>			
+            <p class="news-ticker-benaceur-font-size"><?php _e("Style customization (css)",'news-ticker-benaceur'); ?></p>
+			<p class="news-ticker-benaceur-s-style"><textarea id="news-ticker-benaceur-CodeMirrorCss" class="news-ticker-benaceur-s--style" name="<?php echo $this->option_sty('s_style'); ?>" ><?php echo html_entity_decode( $this->options_sty('s_style') ); ?></textarea></p>
+			<p><em class="news-ticker-benaceur-font-size"><?php _e("Ex:",'news-ticker-benaceur'); ?></em></p>			
 			<p><em><div id="pre710166-note" class="ntb-ex"><?php echo esc_html(".news-ticker-ntb li {margin-right:30px;}"); ?></div></em></p>			
 
 <div class="to-tr2"></div>
 
-            <p><?php _e("Script customization or adding (java/jquery)",'news-ticker-benaceur'); ?></p>
-			<p class="news-ticker-benaceur-s-style"><textarea id="news-ticker-benaceur-CodeMirrorJs" class="news-ticker-benaceur-s--script" name="<?php echo $this->option_sty('s_script'); ?>" ><?php echo esc_textarea( $this->options_sty('s_script') ); ?></textarea></p>
-			<p><em><?php _e("Ex:",'news-ticker-benaceur'); ?></em></p>			
+            <p class="news-ticker-benaceur-font-size"><?php _e("Script customization or adding (java/jquery)",'news-ticker-benaceur'); ?></p>
+			<p class="news-ticker-benaceur-s-style"><textarea id="news-ticker-benaceur-CodeMirrorJs" class="news-ticker-benaceur-s--script" name="<?php echo $this->option_sty('s_script'); ?>" ><?php echo html_entity_decode( $this->options_sty('s_script') ); ?></textarea></p>
+			<p><em class="news-ticker-benaceur-font-size"><?php _e("Ex:",'news-ticker-benaceur'); ?></em></p>			
 			<p><em><div id="pre710166-note" class="ntb-ex"><?php echo esc_html('(function($) {$(".class").hide();})(jQuery);'); ?></div></em></p>			
 
 <div class="to-tr2"></div><br>
@@ -436,11 +436,11 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <td style="font-size: 13px;font-weight:normal;"><?php _e('Hide the plugin rating icon', 'news-ticker-benaceur'); ?></td>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Hide the plugin rating icon', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr>
 				<br><br>
 
-		<p class="submit"><input type="submit" name="submit_style" id="submit-ftb5" class="button-benTheme" value="<?php _e( 'Save Changes' ); ?>"  /></p>
-		<p class="ntb_cache_changesSaved"><?php _e( 'Purge the cache after each settings change, If you were of course using a cache plugin.','news-ticker-benaceur' ); ?></p>
+		<p class="submit"><input type="submit" name="submit_style" id="submit-ftb5" class="button-benTheme" value="<?php _e( 'Save style settings', 'news-ticker-benaceur' ); ?>"  /></p>
+		<p class="ntb_cache_changesSaved"><?php echo $this->purge_cache_msg(); ?></p>
 				</div>	

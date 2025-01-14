@@ -23,23 +23,26 @@
         <script src="<?php echo plugins_url( 'admin/code-box-copy/js/code-box-copy.js' , __FILE__ ); ?>"></script>
         <!-- Cod Box Copy end -->
 
-<?php if (isset($_GET['settings-updated'])) {
-$options_i = get_option('news_ticker_benaceur_glob_options');
-$options_i['scrool_to'] = '';
-update_option('news_ticker_benaceur_glob_options', $options_i);
-?>
-		<div id="message" class="updated" >
-        <p><?php _e('Submitted successfully.', 'news-ticker-benaceur') ?></p>
-        </div>
-<?php }
+<?php 
+    if (isset($_GET['settings-updated'])) {
+	    $this->update_add_option( array('scrool_to' => '') );
 
-		if (in_array(get_user_locale(), array('ar','ary'))) {
+        $msg_sbmitted = $this->options_s('reset') == 'submit' ? __('Settings saved successfully', 'news-ticker-benaceur') : __('Saved + reset successfully', 'news-ticker-benaceur');
+        echo "<div id='message' class='updated' ><p>$msg_sbmitted</p></div>";
+        
+        if ($this->options_s('reset') != 'submit')
+            $this->update_add_option( array('reset' => 'submit') );
+    }
+	
+	if (in_array(get_user_locale(), array('ar','ary'))) {
 		echo '<style>.wrap.ntb table th, .wrap.ntb .ntb-title2, .wrap.ntb table .td_ntb_radio {font-family:DroidKufi_Ben,Tahoma,Arial;font-size:15px;font-weight:normal;line-height:1.5;}</style>';	
-		} else {
+	} else {
 		echo '<style>.wrap.ntb table th, .wrap.ntb .ntb-title2, .wrap.ntb table .td_ntb_radio {font-family:Tahoma,Arial;} .wrap.ntb table td {font-size:14px;}</style>';	
-		}
-
+	}
  ?>
+<div class="wrap">
+   <h1><?php _e('News-Ticker-Benaceur', 'news-ticker-benaceur'); echo ' V '. $this->ntb_version(); ?></h1>
+</div>
 
 <div id="ntb-top-import-setts"></div>
     <div id="wpcontent-benaceur-ntb">
@@ -48,12 +51,11 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
             <?php settings_fields( 'news_ticker_benaceur_glob_group' ); 
 				do_settings_sections( 'news_ticker_benaceur_glob_group' );
 			?>
-			
+		<div id="go1-setting-ntb"></div>
 		<div class="wrap ntb">
-            <h2><?php _e('News-Ticker-Benaceur', 'news-ticker-benaceur'); echo ' V '. $this->ntb_version(); ?></h2>
-        <?php $this->msg_update_func();  ?>
+        <?php 
+		$this->msg_update_func();
 
-<?php 
         if ($this->options_sty('fixed')) {
 		echo '<style>
 		.custom_select_auto_add_code span::after, .custom_select_auto_add_code .option.selected::after {content:" (off)"; color: red;}
@@ -64,18 +66,29 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 		</style>';
 		}
 ?>
+    <h3 style="font-family: DroidKufi_Ben, sans-serif;margin-top:15px; margin-bottom: 35px;"><span style="position:absolute;margin-top:-1px;" class="dashicons dashicons-admin-generic"></span><span style="padding:0 26px;"><span style="padding:0 6px;border-bottom:3px solid #666;"><?php _e('General settings', 'news-ticker-benaceur'); ?></span></span></h3>
 
 <div id="col-nontb">
-<p style="margin-bottom:-5px;"><?php _e('Note: After activating the plugin, choose how to put the code in the theme, manually or automatically.', 'news-ticker-benaceur'); ?></p>
-<div id="go1-setting-ntb"></div>
-<p style="font-family:tahoma;font-size:14px;color:#b61818;"><?php _e('- If you choose to fix the news bar at the top or bottom of the site, it&#39;s recommended to add the code automatically by activating the option: &#34;Automatically add the code to show the news ticker to the theme&#34; in the fixation options at the bottom of this page and not here, unless the bar doesn&#39;t appear (according to your theme) add it manually, as for the shortcode, put it manually, and doesn&#39;t work until you activate it below this note, and cannot be fixed.', 'news-ticker-benaceur'); echo '<span style="color:#ea4620;font-weight:bold;"> '; _e('Important: this option under the note is considered null if the fixation option is activated.', 'news-ticker-benaceur'); echo '</span>'; ?></p>
+<p><?php _e('Note: After activating the plugin, choose how to put the code in the theme, manually or automatically.', 'news-ticker-benaceur'); ?></p>
+
+<div class="class_display_note_ntb">
+<span id="class_display_note_ntb1" class="dashicons dashicons-arrow-down-alt2"></span>
+<input type='button' style="width:100%;margin:0 0 15px;height:40px;font-size:15px;" id='click_display_note_ntb' class="button-secondary" value='<?php _e('To read ...', 'news-ticker-benaceur'); ?>';>
+<div id="display__note__ntb" style="display:none;">
+<div style="margin-top:0; margin-bottom:10px; text-shadow: 1px 1px 1px #eacbff;" class="note-benaceur_shortcode note2 aligncenter-ben_note">
+<p><?php _e('- If you choose to fix the news bar at the top or bottom of the site, it&#39;s recommended to add the code automatically by activating the option: &#34;Automatically add the code to show the news ticker to the theme&#34; in the fixation options at the bottom of this page and not here, unless the bar doesn&#39;t appear (according to your theme) add it manually, as for the shortcode, put it manually, and doesn&#39;t work until you activate it below this note, and cannot be fixed.', 'news-ticker-benaceur'); echo '<span style="color:#ea4620;font-weight:bold;"> '; _e('Important: this option under the note is considered null if the fixation option is activated.', 'news-ticker-benaceur'); echo '</span>'; ?></p>
+<p><?php _e('- For both &#34;Absolute Position (default)&#34; and &#34;Relative Position&#34; options, absolute means that the news ticker location is absolutely at the header location if we choose top and at the footer location if we choose bottom, while relative means that it&#39;s in the header or footer relatively, for those who have no idea about css and html languages, try the first option, which is the default. If it doesn&#39;t work, choose the second one, and it depends on the theme you are using. Note: these two options only work with &#34;Add the code automatically to top&#34; and &#34;Add the code automatically to bottom&#34; option.', 'news-ticker-benaceur'); ?></p>
+</div>
+</div>
+</div>
+
 <table class="form-table">
 	
                  <tr valign="top">
                <td style="padding:0px;">
 				<select style="display:none;" name="<?php echo $this->option('auto_add_ntb_not_fixed'); ?>" class="custom_select_auto_add_code" >
 				<option value="top" <?php selected('top', $this->options('auto_add_ntb_not_fixed')); ?>><?php _e("Add the code automatically to top", 'news-ticker-benaceur'); ?></option>
-				<option value="bottom" <?php selected('bottom', $this->options('auto_add_ntb_not_fixed')); ?>><?php _e("Add the code automatically to bottom ", 'news-ticker-benaceur'); ?></option>
+				<option value="bottom" <?php selected('bottom', $this->options('auto_add_ntb_not_fixed')); ?>><?php _e("Add the code automatically to bottom", 'news-ticker-benaceur'); ?></option>
 				<option value="no" <?php selected('no', $this->options('auto_add_ntb_not_fixed')); ?>><?php _e("Add the code manually", 'news-ticker-benaceur'); ?></option>
 				<option value="shortcode" <?php selected('shortcode', $this->options('auto_add_ntb_not_fixed')); ?>><?php _e("Enable the shortcode -only manully-", 'news-ticker-benaceur'); ?></option>
 				</select>
@@ -84,10 +97,10 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 				
 </table>
 
-<div style="display:none;" id="ntb__personalize_not_fixed">
-						<select name="<?php echo $this->option('personalize_not_fixed'); ?>" class="personalize_not_fixed_select" >
-						<option value="customed" <?php selected('customed', $this->options('personalize_not_fixed')); ?>><?php _e('Customed', 'news-ticker-benaceur'); ?></option>
-						<option value="common" <?php selected('common', $this->options('personalize_not_fixed')); ?>><?php _e('Common', 'news-ticker-benaceur'); ?></option>
+<div id="ntb__personalize_not_fixed">
+						<select style="display:none;" name="<?php echo $this->option('personalize_not_fixed'); ?>" class="personalize_not_fixed_select" >
+						<option value="customed" <?php selected('customed', $this->options('personalize_not_fixed')); ?>><?php _e('Absolute Position (default)', 'news-ticker-benaceur'); ?></option>
+						<option value="common" <?php selected('common', $this->options('personalize_not_fixed')); ?>><?php _e('Relative Position', 'news-ticker-benaceur'); ?></option>
 						</select>
 </div>
 
@@ -102,10 +115,7 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 <pre><code class="language-html" id="example-head2"><?php echo esc_html("[wp_news_ticker_benaceur_short_code]"); ?></code></pre>
 </div>
 
-<br><br><hr style="width:92%;clear:both;margin-top:12px;">
 </div>
-
-        <h3 style="font-family: DroidKufi_Ben, sans-serif;margin-top:25px;"><span style="position:absolute;margin-top:-1px;" class="dashicons dashicons-admin-generic"></span><span style="padding:0 26px;"><span style="padding:0 6px;border-bottom:3px solid #666;"><?php _e('General settings', 'news-ticker-benaceur'); ?></span></span></h3>
 	
     <?php require_once ('opts-page/global-options.php'); ?>
 	
@@ -158,7 +168,10 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 					</tr>
 </table>
 
-<table style="margin:40px 0 50px 0;" class="form-table">
+<table style="margin:25px 0 0 0;" class="form-table">
+					<tr> 
+                   <td><p style="font-family: DroidKufi_Ben,Tahoma,Arial,sans-serif; font-size:15px; font-weight:bold;"><?php _e("Reset:",'news-ticker-benaceur'); ?></p></td>
+					</tr>
 
                  <tr valign="top">
                <td style="padding:0px;">
@@ -171,14 +184,31 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 				</select></div>
 			   </td>
                 </tr>
+				
+                <tr>  
+                    <td> 
+					<label class="ntb_excluded-reset_checkbox" for="ntb_excluded-reset_checkbox">
+                        <span><?php _e('Disable the reset exclude for below options', 'news-ticker-benaceur'); ?></span>
+	                    <input type="hidden" value="" name="<?php echo $this->option_s('exclude_from_reset'); ?>" />
+						<input type="checkbox" id="ntb_excluded-reset_checkbox" name="<?php echo $this->option_s('exclude_from_reset'); ?>" value="1" <?php checked( $this->options_s('exclude_from_reset'), 1 ); ?> />
+                   </label>
+				   </td>
+                </tr>
 </table>
 
-		<p class="submit"><input type="submit" name="submit_others" id="submit-ftb7" class="button-benTheme" value="<?php _e( 'Save Changes' ); ?>"  /></p>
-		<p class="ntb_cache_changesSaved-s-oth"><?php _e( 'Purge the cache after each settings change, If you were of course using a cache plugin.','news-ticker-benaceur' ); ?></p>
+<div class="ntb_excluded-reset-text">
+<p class="ntb_ert_class"><span><?php _e( 'The following options are excluded from reset:', 'news-ticker-benaceur' ); ?></span></p>
+<p style="margin:0 0 55px;">
+<?php _e( '- Enter your news (manually) here (General settings)<br>- The last update of manually news date (General settings)<br>- Style customization css (Settings of style)<br>- Script customization or adding java/jquery (Settings of style)', 'news-ticker-benaceur' ); ?>
+</p>
+</div>
+
+		<p class="submit"><input type="submit" name="submit_others" id="submit-ftb7" class="button-benTheme" value="<?php _e( 'Save other settings', 'news-ticker-benaceur' ); ?>"  /></p>
+		<p class="ntb_cache_changesSaved-s-oth"><?php echo $this->purge_cache_msg(); ?></p>
 	
 <div class="to-tr2"></div><br><br>
 <input type="submit" name="submit__ntb_all" id="submit-ftb-all" class="button-benTheme" value="<?php _e("Save all Changes", 'news-ticker-benaceur'); ?>"  /><br /><br />
-<p class="ntb_cache_changesSaved-s-all"><?php _e( 'Purge the cache after each settings change, If you were of course using a cache plugin.','news-ticker-benaceur' ); ?></p>
+<p class="ntb_cache_changesSaved-s-all"><?php echo $this->purge_cache_msg(); ?></p>
 <br />
 
 	</form>
@@ -192,7 +222,7 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 			<div class="wrap ntb">
 				<h3><span class="DroidArabicKufi"><span style="position:absolute;margin-top:-2px;font-size:26px;" class="dashicons dashicons-arrow-right"></span><span style="padding:0 26px;"><span style="padding:0 6px;border-bottom:3px solid #666;"><?php _e('Export settings', 'news-ticker-benaceur');?></span></span></span></h3><br>
 				<div class="inside">
-					<p><?php _e('Export all plugin settings in an XML file that helps you to save all your settings for reuse here or at another location with ease.', 'news-ticker-benaceur');?></p>
+					<p class="news-ticker-benaceur-font-size"><?php _e('Export all plugin settings in an json file that helps you to save all your settings for reuse here or at another location with ease.', 'news-ticker-benaceur');?></p>
 					<form method="post">
 						<p><input type="hidden" name="ntb_action" value="export_settings" /></p>
 						<p>
@@ -206,7 +236,7 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 			<div class="wrap ntb">
 				<h3><span class="DroidArabicKufi"><span style="position:absolute;margin-top:-3px;font-size:26px;" class="dashicons dashicons-arrow-left"></span><span style="padding:0 26px;"><span style="padding:0 6px;border-bottom:3px solid #666;"><?php _e('Import settings', 'news-ticker-benaceur');?></span></span></span></h3><br>
 				<div class="inside">
-					<p><?php _e('Click on "Import" to restore all your saved settings from the XML file', 'news-ticker-benaceur');?></p>
+					<p class="news-ticker-benaceur-font-size"><?php _e('Click on "Import" to restore all your saved settings from the json file', 'news-ticker-benaceur');?></p>
 					<form method="post" enctype="multipart/form-data">
 						<p>
 							<input type="file" name="NTB_import_file"/>
@@ -256,7 +286,7 @@ update_option('news_ticker_benaceur_glob_options', $options_i);
 
 <br>
   <div id="NTB-up-page"></div>
-<?php if ($this->options_sty('hide_icon_evol_plug') != 1) {?>
+<?php if (!$this->options_sty('hide_icon_evol_plug')) {?>
 <div style="text-transform: uppercase;" class="hov-button-primary-sub"><div class="button button-primary"><a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/news-ticker-benaceur?filter=5"><?php _e('Do not forget to rate the plugin', 'news-ticker-benaceur');?></a></div></div>
 <?php } ?>
 	</div>

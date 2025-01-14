@@ -3,16 +3,19 @@
 
 class class______news_ticker_benaceur {
 
-    protected $no_items = false;
 	protected $scriptVer = '1.0.2';
+	protected $ntb_notice = false;
 	public $adminbar32;
 	public $adminbar46;
 
     function __construct(){
-	$this->adminbar32 = $this->options_sty('adminbar_height') && is_numeric($this->options_sty('adminbar_height')) ? $this->options_sty('adminbar_height') : 32;
-    $this->adminbar46 = $this->options_sty('adminbar_height_mobile') && is_numeric($this->options_sty('adminbar_height_mobile')) ? $this->options_sty('adminbar_height_mobile') : 46;
+	$adminbar_height = (int) $this->options_sty('adminbar_height');
+	$adminbar_height_mobile = (int) $this->options_sty('adminbar_height_mobile');
+	$this->adminbar32 = $adminbar_height ? $adminbar_height : 32;
+    $this->adminbar46 = $adminbar_height_mobile ? $adminbar_height_mobile : 46;
 	
 	add_action("admin_head-settings_page_news_ticker_benaceur", array($this, 'ntb__admin_head'));
+	add_action("admin_notices", array($this, 'ntb_admin_notices'));
 	add_action('wp_head', array($this, 'ntb_css'));	
 	add_action('wp_loaded', array($this, 'auto_code__'));
     add_action('wp_head', array($this, 'ntb_head'), 11);
@@ -24,11 +27,10 @@ class class______news_ticker_benaceur {
 	register_activation_hook( NTB_BEN_PLUGIN_DIR, array($this, 'plugin_activation'));
 	add_shortcode('wp_news_ticker_benaceur_short_code', array($this, 'shortcode_ntb_func'));
 	add_action('admin_bar_menu', array($this, 'links_on_admin_bar'), 99);
-	add_action('admin_init', array($this, 'admin_notices'));
 	register_deactivation_hook( NTB_BEN_PLUGIN_DIR, array($this, 'plugin_deactivation'));
     add_action('admin_init', array($this, 'reset_options'));
     add_action('wp_ntb_msg_update', array($this, 'verPlug'));
-	add_action( 'admin_init', array($this, 'exp_imp'));
+	add_action( 'init', array($this, 'exp_imp'));
 	
 	add_action('wp_enqueue_scripts', array($this, 'scripts_'));
 	if ($this->options_anim('scripts_animation') == 'bottom_news_bar')
@@ -87,7 +89,7 @@ class class______news_ticker_benaceur {
     }
 
     function action_links($links){
-    $links[] = '<a href="'.get_admin_url(null, NTB_BEN_O_G.'?page='.NS_TR_BEN).'">'.__("Settings", 'news-ticker-benaceur').'</a>';
+    $links[] = '<a href="'. get_admin_url(null, NTB_BEN_O_G .'?page='. NS_TR_BEN) .'">'. __("Settings", 'news-ticker-benaceur') .'</a>';
     return $links;
     }
 
@@ -115,7 +117,7 @@ class class______news_ticker_benaceur {
 	}
 
     function menu() {
-    $menu = add_options_page('news-ticker-benaceur', 'News-Ticker-Benaceur', apply_filters( 'ntb_manage_options_cap', 'manage_options' ), ''.NS_TR_BEN.'', array($this,'page_options'));
+    $menu = add_options_page('news-ticker-benaceur', 'News-Ticker-Benaceur', apply_filters( 'ntb_manage_options_cap', 'manage_options' ), NS_TR_BEN, array($this, 'page_options'));
     add_action("admin_print_styles-$menu", array($this, 'js_page_panel'));
     //add_action("admin_head-$menu", array($this, 'droidkufi_ben'));
     }
@@ -126,39 +128,17 @@ class class______news_ticker_benaceur {
             );
     register_setting('news_ticker_benaceur_glob_group', 'news_ticker_benaceur_glob_options', $args);
     }
-  
-    function remove_from_array_2_3($option_name, $get_options, $get_key1, $Keys) {
-         
-        foreach ($Keys as $key) {
-            if (!is_array($key))
-              unset($get_options[$get_key1][$key]);
-         
-        }
-        
-        foreach ($Keys as $key => $val) {
-            if (is_array($val))  {  
-            foreach ($val as $k) {
-              unset($get_options[$get_key1][$key][$k]);
-            }
-            }
-        } 
-    return update_option($option_name, $get_options);
-	}
 	 
     function unset_options_deleted() {
 	$ver = get_option('news_ticker_benaceur_version');
 	$option_name = 'news_ticker_benaceur_glob_options';
 	
-    if ( get_option('news_ticker_benaceur_glob_options') === false ) return;
+    if ( $this->glob_options() === false ) return;
 		
 		if ( $ver <= "2.6.5" ) {
-           $this->remove_from_array_2_3($option_name, get_option('news_ticker_benaceur_glob_options'), 'global_options',  
-           array(
-           'textarea_height_new'
-           )
-           );
+           $this->remove_option($option_name, 'global_options', array('textarea_height_new'));
 		   
-           $this->remove_from_array_2_3($option_name, get_option('news_ticker_benaceur_glob_options'), 'anim_options',  
+           $this->remove_option($option_name, 'anim_options',  
            array(
            'timeout_tickerntb',
            'speedin_typing_2',
@@ -177,7 +157,7 @@ class class______news_ticker_benaceur {
            )
            );
 		   
-           $this->remove_from_array_2_3($option_name, get_option('news_ticker_benaceur_glob_options'), 'style_options',  
+           $this->remove_option($option_name, 'style_options',  
            array(
            'padding_top_title',
            'padding_top',
@@ -194,14 +174,15 @@ class class______news_ticker_benaceur {
 	 
 	// add_option / update_option
     function options_default_up() {
+		
 	$this->unset_options_deleted();
 	$ver = get_option('news_ticker_benaceur_version');
-	$glob = get_option('news_ticker_benaceur_glob_options');
+	$glob = $this->glob_options();
 	
     if ( $glob === false ) {
-	add_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
 	add_option('news_ticker_benaceur_glob_options', $this->all_options('all'));
-	
+	add_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
+		
 	$this->oldOptionsToDeleting();
 	
     } else if ( $ver != NTB_VERSION_BEN ) {
@@ -222,10 +203,11 @@ class class______news_ticker_benaceur {
     function js_page_panel(){
 	wp_enqueue_script ('js-page-panel', plugins_url(NTB_BEN_NAME) . '/admin/js.js', array(), $this->ntb_version(), true);
 	$ntb_js_params = array(
-	    'code_copied' => __("Copied"),
-		'wait_click' => __("Please wait...","news-ticker-benaceur"),
+	    'code_copied'   => __("Copied"),
+		'wait_click'    => __("Please wait...","news-ticker-benaceur"),
 		'changes_saved' => __("All changes saved successfully, close this message!","news-ticker-benaceur"),
-		'scrool_to' => $this->options_s('scrool_to') ? $this->options_s('scrool_to') : '',
+		'scrool_to'     => $this->options_s('scrool_to') ? $this->options_s('scrool_to') : '',
+		'is_rtl'        => is_rtl() ? true : false,
 	);
 	wp_localize_script( 'js-page-panel', 'ntb_admin_js', $ntb_js_params );
 	
@@ -366,8 +348,8 @@ class class______news_ticker_benaceur {
     if ($this->options('enable') != '1') return;
 	   
     $action_hide = $hide = false;
-    $ntb_in_page_id_arr = array_filter(array_unique(array_map('trim',explode(',', $this->options('in_page_id'))))); 
-    $ntb_in_single_id_arr = array_filter(array_unique(array_map('trim',explode(',', $this->options('in_single_id')))));
+    $ntb_in_page_id_arr = array_filter(array_unique(array_map('trim', explode(',', $this->options('in_page_id'))))); 
+    $ntb_in_single_id_arr = array_filter(array_unique(array_map('trim', explode(',', $this->options('in_single_id')))));
 
     $is_single = (is_single() && $this->options('in_single_id') == '');
     $is_page_id = (is_page($ntb_in_page_id_arr) && !is_front_page());
@@ -405,7 +387,7 @@ class class______news_ticker_benaceur {
     }
 	
 	function scripts__() {
-	echo '<script src="' . plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts_1-0-3.js?ver='. $this->scriptVer .'" id="ntb_js-anims-js"></script>';
+	echo '<script src="' . plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts.js?ver='. $this->scriptVer .'" id="ntb_js-anims-js"></script>';
 	}
 
     function scripts_() {
@@ -446,7 +428,7 @@ class class______news_ticker_benaceur {
 	// pas encore utilisé
 	
 		if ($this->options_anim('scripts_animation') == 'footer') {
-		wp_register_script ('ntb_js-anims', plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts_1-0-3.js', array('jquery'), $this->scriptVer, true);
+		wp_register_script ('ntb_js-anims', plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts.js', array('jquery'), $this->scriptVer, true);
 		} else {
 		wp_register_script ('ntb_js-anims', null, array('jquery'), $this->scriptVer, false);
 		}
@@ -471,7 +453,7 @@ class class______news_ticker_benaceur {
 			'isrtl'                   => $rtl,
 	        'rtl'                     => $this->is_ntb_rtl() ? 'right' : 'left',
 			'top_600'                 => $this->fixed_top_600_script(),
-			'arr_s_script'            => array_filter(array_unique(array_map('trim',explode(PHP_EOL, $this->options_sty('s_script'))))) ? true : false,
+			'arr_s_script'            => array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options_sty('s_script'))))) ? true : false,
 			's_script'                => $this->options_sty('s_script'),
 	        'rtl_'                    => $rtl ? 'right' : 'left',
 	        'ocf'                     => $rtl ? 'opts.cssFirst.right' : 'opts.cssFirst.left',
@@ -510,6 +492,8 @@ class class______news_ticker_benaceur {
 			'typ1_margin_mobile'      => apply_filters( 'ntb_filter_typ1_margin_mobile', 15 ),
 			'hide_ntb'                => $this->options_hi('hide'),
 			'ellipsis'                => apply_filters( 'ntb_filter_enable_ellipsis', true ),
+			'time_recent_hide'        => $this->get_time_recent(true),
+			'disable_anim'               => apply_filters( 'ntb_filter_play_animation', true ) && $this->ntb_items(true),
 		);
 		wp_localize_script( 'ntb_js-anims', 'ntb_anims', $params );
 		wp_enqueue_script( 'ntb_js-anims' );
@@ -538,7 +522,7 @@ class class______news_ticker_benaceur {
 	$current_user = wp_get_current_user();
 	$user_id = get_current_user_id();
 	
-	$iduser_ntb = array_filter(array_unique(array_map('trim',explode(',', $this->options('for_user_id')))));
+	$iduser_ntb = array_filter(array_unique(array_map('trim', explode(',', $this->options('for_user_id')))));
 	
 	    if($this->options('for_user_id') && in_array($user_id, $iduser_ntb) && is_user_logged_in())
 		return true;
@@ -579,13 +563,13 @@ class class______news_ticker_benaceur {
 
     function links_on_admin_bar($wp_admin_bar) {
 
-    if (current_user_can( 'manage_options' ) && $this->options('links_admin_bar_front') && !is_admin() && $this->options('enable') == '1') {
+    if (current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) && $this->options('links_admin_bar_front') && !is_admin() && $this->options('enable') == '1') {
     if ($this->options('links_admin_bar_menu') == 'menu') {
     $wp_admin_bar->add_menu( array( 'id' => 'PLB_ntb5', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
     } elseif ($this->options('links_admin_bar_menu') == 'submenu' ) { 
     $wp_admin_bar->add_menu( array( 'parent' => 'appearance', 'id' => 'PLB_ntb6', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
     }
-	} elseif (current_user_can( 'manage_options' ) && $this->options('links_admin_bar_admin') && is_admin() && $this->options('enable') == '1')  {
+	} elseif (current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) && $this->options('links_admin_bar_admin') && is_admin() && $this->options('enable') == '1')  {
     if ($this->options('links_admin_bar_menu') == 'menu') {
     $wp_admin_bar->add_menu( array( 'id' => 'PLB_ntb7', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
     } elseif ($this->options('links_admin_bar_menu') == 'submenu') { 
@@ -593,12 +577,14 @@ class class______news_ticker_benaceur {
     }
 	}	
     }
-
-    function admin_notices() {
-    $ntb_notice_admin = false;
-    if ( $ntb_notice_admin && $GLOBALS['pagenow'] == NTB_BEN_O_G && isset($_GET['page']) && $_GET['page'] == NS_TR_BEN ) {
-    require_once ('notices-ntb.php');
-    }
+	
+    function ntb_admin_notices() {
+		
+		if ($this->ntb_notice == false) return;
+		
+		$screen = get_current_screen()->id;
+		if ('settings_page_news_ticker_benaceur' === $screen)
+            include_once ('notices-ntb.php');
 	}
 
     function page_options() {
@@ -606,9 +592,6 @@ class class______news_ticker_benaceur {
 	}
 
     function plugin_deactivation() {
-    global $wpdb;
-	$NTB_sht_code = "[wp_news_ticker_benaceur_short_code]";
-
 
     if ( $this->options_oth('delete_all_options') == 'delete') {
     delete_option('news_ticker_benaceur_glob_options');	   
@@ -616,57 +599,47 @@ class class______news_ticker_benaceur {
     }
 
 	if ( $this->options_oth('remove_short_code') == 'remove') {
-    $wpdb->get_results( "UPDATE $wpdb->posts SET post_content = replace(post_content, '$NTB_sht_code', '') " );
+	$this->remove_shortcode_wpdb();	
+	
     if ( $this->options_oth('delete_all_options') != 'delete') {
-	$opts = get_option('news_ticker_benaceur_glob_options');
-	$opts['other_options']['remove_short_code'] = 'not_remove';
-	update_option('news_ticker_benaceur_glob_options', $opts);
+	$this->update_add_option( array('other_options' => array('remove_short_code' => 'not_remove')) );
 	}
+	
     }
   
     }
   
-  function reset_options() {
-  //$nonce = isset($_REQUEST['_wpnonce']) ? esc_attr( $_REQUEST['_wpnonce'] ) : '';
-  //if (!wp_verify_nonce( $nonce, 'nonce_ntb_group_sty_reset' )) return;
-  
-  $glob = get_option('news_ticker_benaceur_glob_options');
+    function reset_options() {
 
-// reset group
-   if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_glob' ) {
-   $global_options = $glob; 
-   $global_options['global_options'] = $this->all_options('global_options');
-   $global_options['reset'] = 'submit';
-   update_option('news_ticker_benaceur_glob_options', $global_options);
-   }
-// reset group
+    // reset glob
+    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_glob' ) {
+		$this->update_add_option( array('global_options' => $this->unset_from_global_options()) );
+    }
+    // reset glob
 
-// reset group anim 
-   if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_anim' ) {
-   $anim_options = $glob; 
-   $anim_options['anim_options'] = $this->all_options('anim_options');
-   $anim_options['reset'] = 'submit';
-   update_option('news_ticker_benaceur_glob_options', $anim_options);
-   }
-// reset group anim
+    // reset anim 
+    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_anim' ) {
+		$this->update_add_option( array('anim_options' => $this->all_options('anim_options')) );
+    }
+    // reset anim
 
-// reset group sty
-   if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_sty' ) {
-   $style_options = $glob; 
-   $style_options['style_options'] = $this->all_options('style_options');
-   $style_options['reset'] = 'submit';
-   update_option('news_ticker_benaceur_glob_options', $style_options);
-   }
-// reset group sty
+    // reset sty
+    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_sty' ) {
+		$this->update_add_option( array('style_options' => $this->unset_from_style_options()) );
+	}
+    // reset sty
 
-// reset all
-   if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_all' ) {
-   update_option('news_ticker_benaceur_glob_options', $this->all_options('all'));
-   update_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
-   }
-// reset all
+    // reset all
+    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_all' ) {
+    $this->_reset_all();
+    }
+    // reset all
+	
+    if ( isset($_GET['settings-updated']) ) {
+		$this->update_add_option( array('exclude_from_reset' => '') );
+	}
 
-   }
+    }
   
     function settings_callback($posted_options) {
 	
@@ -684,35 +657,36 @@ class class______news_ticker_benaceur {
 	$posted_options['global_options']['hide_after_time']['update_manually_date'] = 'no';
 	
 	$global_options = $posted_options;
-	$posted_options = get_option('news_ticker_benaceur_glob_options');
+	$posted_options = $this->glob_options();
 	$posted_options['global_options'] = $global_options['global_options'];
 	$posted_options['scrool_to'] = 'glob_options';
     }
 	// Prevent saving all parameters except "anim_options" when "submit_animation" posted.	
     else if (isset( $_POST['submit_animation'] )) {
 	$anim_options = $posted_options;
-	$posted_options = get_option('news_ticker_benaceur_glob_options');
+	$posted_options = $this->glob_options();
 	$posted_options['anim_options'] = $anim_options['anim_options'];
 	$posted_options['scrool_to'] = 'anim_options';
     }
 	// Prevent saving all parameters except "image_att_scrollntb" when "reset_image_selector_ntb" posted.	
     else if (isset( $_POST['reset_image_selector_ntb'] )) {
-	$posted_options = get_option('news_ticker_benaceur_glob_options');
+	$posted_options = $this->glob_options();
 	$posted_options['anim_options']['image_att_scrollntb'] = '0';
 	$posted_options['scrool_to'] = 'anim_options';
     }
 	// Prevent saving all parameters except "style_options" when "submit_style" posted.	
     else if (isset( $_POST['submit_style'] )) {
 	$style_options = $posted_options;
-	$posted_options = get_option('news_ticker_benaceur_glob_options');
+	$posted_options = $this->glob_options();
 	$posted_options['style_options'] = $style_options['style_options'];
 	$posted_options['scrool_to'] = 'sty_options';
     }
 	// Prevent saving all parameters except "other_options" and "reset" when "submit_others" posted.	
     else if (isset( $_POST['submit_others'] )) {
 	$other_options = $posted_options;
-	$posted_options = get_option('news_ticker_benaceur_glob_options');
+	$posted_options = $this->glob_options();
 	$posted_options['other_options'] = $other_options['other_options'];
+	$posted_options['exclude_from_reset'] = $other_options['exclude_from_reset'];
 	$posted_options['reset'] = $other_options['reset'];
 	$posted_options['scrool_to'] = 'oth_options';
     }
@@ -726,12 +700,12 @@ class class______news_ticker_benaceur {
 	$posted_options['global_options']['hide_after_time']['update_manually_date'] = 'no';
 	
 	} else if (!empty($_POST)) {
-	$posted_options = get_option('news_ticker_benaceur_glob_options');
+	$posted_options = $this->glob_options();
 	}		
 	
 	// sécuriser les options (les values) avant de les sauveguarder avec wp_kses_post()
 	    $output = array();
-		foreach($posted_options as $key => $value) {
+		foreach((array)$posted_options as $key => $value) {
 			//if ($key == 'reset') continue;
 			if (is_array($posted_options[$key])) { // global_options,anim_options,style_options,other_options
 			$output2 = $posted_options[$key];
@@ -830,7 +804,7 @@ class class______news_ticker_benaceur {
     }
 
     function exp_imp() {
-    require_once ('ie-setts.php');
+        require_once ('ie-setts.php');
 	}
 	
 	function droidkufi_ben() {
@@ -849,18 +823,61 @@ class class______news_ticker_benaceur {
     }
 	
     function ntb__admin_head() {
+		
+		$glob = $this->glob_options();
+		
+        if ( empty($glob) && $glob !== false ) {
+            update_option('news_ticker_benaceur_glob_options', $this->all_options('all'));
+		}
+		
 		echo $this->droidkufi_ben();
+		
+		$cur_userid = get_current_user_id();
+		
+		if (get_user_meta( $cur_userid, 'news_ticker_benaceur_msg_opts_up' )) {
+		?>
+		<div style="display:none;" class="ntb__export__file">
+        <p><?php _e('The settings file was imported successfully', 'news-ticker-benaceur') ?></p>
+		</div>
+		
+        <script type="text/javascript">	
+        jQuery(document).ready( function($) {
+	        setTimeout(function(){
+	            $(".ntb__export__file").slideDown(200).delay(5000).slideUp(300);
+            }, 300);
+        });
+        </script>
+        <?php
+		delete_user_meta( $cur_userid, 'news_ticker_benaceur_msg_opts_up' );
+		}
+		
+		if (get_user_meta( $cur_userid, 'news_ticker_benaceur_error_msg_opts_up' )) {
+		?>
+		<div style="display:none;" class="ntb__export__file" id="err">
+        <p><?php _e('An error occurred while importing the file.', 'news-ticker-benaceur') ?></p>
+		</div>
+		
+        <script type="text/javascript">	
+        jQuery(document).ready( function($) {
+	        setTimeout(function(){
+	            $(".ntb__export__file").slideDown(200).delay(5000).slideUp(300);
+            }, 300);
+        });
+        </script>
+        <?php
+		delete_user_meta( $cur_userid, 'news_ticker_benaceur_error_msg_opts_up' );
+		}
+		
     }
 	
     function ntb_head() {
 	if ($this->ntb_disabled_or_hide()) return;
 	
 	$height = $this->options_sty('height');
-	$height_ = $height + $this->adminbar32;
 	$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') : $height;
-	$height_mobile_ = $height_mobile + $this->adminbar46;
 	$max_width = $this->options_sty('screen_max_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_max_width') : 782;
-	$min_width = $this->options_sty('screen_min_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_min_width') : 783;
+	$min_width = $this->options_sty('screen_min_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_min_width') : 782;
+	$fixed_top_bottom = (int) $this->options_sty('fixed_top_bottom');
 	$ori = is_rtl() ? 'right' : 'left';
 	$theme = wp_get_theme();
 	$and = is_admin_bar_showing() || $this->options_sty('disable_fixed_600_for_top') ? 'and (min-width: 600px)' : '';
@@ -869,6 +886,11 @@ class class______news_ticker_benaceur {
 	
 	if ($this->options_sty('fixed') && $this->options_sty('fixed_top_bottom_site') == 'top') {
 		
+	$height_ = $height + $this->adminbar32 + $fixed_top_bottom;
+	$height_mobile_ = $height_mobile + $this->adminbar46 + $fixed_top_bottom;
+	$height = $height + $fixed_top_bottom;
+	$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') + $fixed_top_bottom : $height;
+	
 	$adminbar1 = is_admin_bar_showing() ? "
 	@media only screen and (min-width: {$min_width}px) {
 	    html {margin-top: {$height_}px !important;}
@@ -885,7 +907,7 @@ class class______news_ticker_benaceur {
 	}
 	";
 	echo $adminbar1;
-	
+	/*
 	if ( $theme->name == 'Twenty Fourteen' ) {
 	$adminbar_top = is_admin_bar_showing() ? '
 	@media screen and (min-width: 783px) {
@@ -898,8 +920,8 @@ class class______news_ticker_benaceur {
 	';
 	echo $adminbar_top;
 	}
-	
-	}		
+	*/
+	}
 	
 	if (!$this->options_sty('fixed') && $this->options('personalize_not_fixed') == 'customed') {
 		
@@ -914,6 +936,12 @@ class class______news_ticker_benaceur {
 	    ";
 	}
 	if ($this->options('auto_add_ntb_not_fixed') == 'top') {
+		
+	$margin_top = (int) $this->options_sty('margin_top');	
+	$height_ = $height + $this->adminbar32 + $margin_top;
+	$height_mobile_ = $height_mobile + $this->adminbar46 + $margin_top;
+	$height = $height + $margin_top;
+	$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') + $margin_top : $height;
 		
 	$adminbar = is_admin_bar_showing() ? "
 	.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: {$this->adminbar32}px;} 
@@ -931,24 +959,89 @@ class class______news_ticker_benaceur {
 	";
 	echo $adminbar;
 	
-	if ( $theme->name == 'Twenty Fourteen' )
-	echo '@media screen and (min-width: 783px) {.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {margin-top:48px;}}';
+	//if ( $theme->name == 'Twenty Fourteen' )
+	//echo '@media screen and (min-width: 783px) {.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {margin-top:48px;}}';
 	}
 	
 	}
 	
 	echo '</style>';
 	
+	if ( $theme->name == 'Twenty Fifteen' ) {
+		
+		if ($this->options_sty('fixed') && $this->options_sty('fixed_top_bottom_site') == 'bottom') {
+			echo "<style>
+			@media screen and (min-width: 955px) {
+			    .sidebar {padding-bottom: {$height}px;}
+			}
+			
+			@media screen and (max-width: {$max_width}px) {
+				.sidebar {padding-bottom: {$height_mobile}px;}
+			}
+			</style>
+			
+			<script type='text/javascript'>
+			jQuery(document).ready( function($) {
+                if (ntb_anims.hide_ntb == 'hide_jquery') {
+                setTimeout(function() {
+				$('.sidebar').css({'padding-bottom': 'inherit'});
+				}, ntb_anims.time_recent_hide );
+				}
+			});	
+			</script>";
+		}
+		
+	    if (!$this->options_sty('fixed') && $this->options('auto_add_ntb_not_fixed') == 'bottom') {
+			
+			echo "<script type='text/javascript'>
+			jQuery(document).ready( function($) {
+				
+				var ntbDiv = $('<div>', {id: 'secondaryntb', 'class': 'secondaryntb'}); 
+				$('#secondary').append(ntbDiv);
+				
+                if (ntb_anims.hide_ntb == 'hide_jquery') {
+                setTimeout(function() {
+				$('.secondaryntb').remove();
+				}, ntb_anims.time_recent_hide );
+				}
+				
+			    $(window).scroll(function () {
+					
+				if( window.innerWidth >= 955 ) {
+					
+                var heightOfBar = $('.news-ticker-ntb,.n_t_ntb_b,.news_ticker_ntb_ie8').outerHeight();
+                //var scrollBottom = $(window).scrollTop() + $(window).height();
+                var scrollBottom = $(this).scrollTop() + $(this).height();
+                var scroll__Bottom =  $(document).height() - heightOfBar;
+				
+                if(scrollBottom > scroll__Bottom){
+					$('.secondaryntb').css({'padding-bottom': heightOfBar + 'px'});
+                } else {
+					$('.secondaryntb').css({'padding-bottom': 'inherit'});
+                }
+				
+				}
+	
+                });
+	
+			});	
+			</script>";
+		}
+		
+	}
+	
 	//if (apply_filters( 'ntb_filter_hide_ntb_ul', true ))
 	//echo '<style>.news-ticker-ntb ul, .n_t_ntb_b ul {display:none;}</style>';
-	
+
+        $option = $this->glob_options();
+        do_action('news_ticker_benaceur_ntb_head', $option, $theme);
 	}
 	
 	function ntb_css() {
-
+		
 	if ($this->ntb_disabled_or_hide()) return;	
 		
-    $s_style = array_filter(array_unique(array_map('trim',explode(PHP_EOL, $this->options_sty('s_style')))));
+    $s_style = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options_sty('s_style')))));
     $bor = $this->options_sty('border_top') + $this->options_sty('border_bottom');
     $bor__ = $bor > 0 ? $bor + 1 : $bor;
     $bor_ = $bor > 0 ? $bor - 1 : $bor;
@@ -1054,6 +1147,8 @@ class class______news_ticker_benaceur {
     jQuery(document).ready( function($) {
     setTimeout(function() {
        $('.news-ticker-ntb,.n_t_ntb_b').fadeOut("slow");
+	   
+	   //$('.sidebar').css({'padding-bottom': '0px'});
 	   /*
 		var newid = 'ntb_class_hideTop';	
 		var id = $('html').attr('id');
@@ -1070,7 +1165,7 @@ class class______news_ticker_benaceur {
 	   <?php } else { ?>
 	   $(<?php echo "'{$fixed_class_for_bottom}'"; ?>).css({<?php echo "'{$this->height_marginBottom()}'"; ?>: '0px', 'display' : 'none'});
 	   <?php } ?>
-    }, <?php echo $this->get_time_recent(true); ?> );
+    }, ntb_anims.time_recent_hide );
     });
     // hide ticker after delay
     </script>

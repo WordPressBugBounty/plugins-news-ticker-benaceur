@@ -3,7 +3,7 @@
  * Plugin Name: news ticker benaceur
  * Plugin URI: https://benaceur-php.com/
  * Description: This plugin allow you to display the latest posts or latest comments in a bar with twenty seven beautiful animations and effects...
- * Version: 3.3.3
+ * Version: 3.4
  * Author: benaceur
  * Text Domain: news-ticker-benaceur
  * Domain Path: /lang
@@ -14,7 +14,7 @@
     if ( ! defined( 'ABSPATH' ) ) exit;
 
     if (!defined('NTB_VERSION_BEN'))
-	define("NTB_VERSION_BEN", "2.6.8");
+	define("NTB_VERSION_BEN", "2.6.9");
 
     if (!defined('NS_TR_BEN')) 
 	define("NS_TR_BEN", "news_ticker_benaceur");

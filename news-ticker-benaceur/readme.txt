@@ -3,7 +3,7 @@ Contributors: Benaceur
 Tags: news ticker, latest posts, latest comments, news post, latest news animation
 Requires at least: 3.0
 Tested up to: 6.7
-Stable tag: 3.3.3
+Stable tag: 3.4
 License: GPLv2 or later
 
 This plugin allow you to display the latest posts or latest comments in a bar with twenty seven beautiful animations and effects...
@@ -63,6 +63,22 @@ Link to preview <a href="http://benaceur-php.com/" target="_blank">Demo</a>
 
 == Changelog ==
 
+= 3.4 =
+* Fixed: remove margin-top and margin-bottom if the ticker news is fixed.
+* Fixed: margin-top if the ticker news is automatically added to top.
+* Fixed: theme Twenty Fourteen: if it's fixed at the top or automatically added to top (not fixed).
+* Fixed: theme Twenty Fifteen (sidebar): if it's fixed at the bottom or automatically added to bottom (not fixed).
+* Fixed: "Style customization (css)" and "Script customization or adding (java/jquery)".
+* Fixed: technical problem while exporting plugin settings "export".
+* Changed: extension import file from xml to json.
+* New option: "Disable the reset exclude for below options".
+* New option: "The text that appears if there is no element (posts or comments)" for (Latest posts and Latest comments) and remove: "ben_ntb_filter_no_items","ben_ntb_filter_no_comments" filters.
+* New filters: "ntb_filter_fixed_remove_margin","ntb_filter_import_json_auth","ntb_filter_text_no_items","ntb_filter_number_ntb_items","ntb_filter_number_cat_display".
+* New action: news_ticker_benaceur_ntb_head.
+* new: disable animation (effect) if no items, with filter: "ntb_filter_play_animation"
+* Added: uninstall file.
+* upgrade to php 8.4
+* Update: other adjustments.
 = 3.3.3 =
 * Tested up to wordpress 6.7
 = 3.3.2 =
@@ -76,19 +92,19 @@ Link to preview <a href="http://benaceur-php.com/" target="_blank">Demo</a>
 = 3.2.3 =
 * Tested up to wordpress 6.3
 = 3.2.2 =
-* Fix: constant filter_sanitize_string is deprecated in php 8.1+
+* Fixed: constant filter_sanitize_string is deprecated in php 8.1+
 * New filters: ntb_filter_comment_content, ntb_filter_ntb_comment.
-* Fix: Manually news.
+* Fixed: Manually news.
 = 3.2.1 =
-* Fix: Some modifications needed for compatibility with php 8.1+ (for the moment wordpress is not 100% compatible with 8.1+).
+* Fixed: Some modifications needed for compatibility with php 8.1+ (for the moment wordpress is not 100% compatible with 8.1+).
 * Tested up to wordpress 6.2
 = 3.2 =
 * New option: height admin bar in media screen and min-width/max-width 682.
-* Fix: option "Hide for all except administrator".
-* Fix: remove space if the news bar is fixed to top or auto added to top and the option "Hide in" is enabled.
-* Fix: changed style slot (css) to improve bar loading.
+* Fixed: option "Hide for all except administrator".
+* Fixed: remove space if the news bar is fixed to top or auto added to top and the option "Hide in" is enabled.
+* Fixed: changed style slot (css) to improve bar loading.
 * New: notification to purge cache (if you are using a caching plugin) after each plugin settings update (Save Changes).
-* Fix: some changes in Arabic translation in style section in plugin control panel.
+* Fixed: some changes in Arabic translation in style section in plugin control panel.
 * New: add Post Count to "Display all categories" in plugin control panel.
 * Update: some other adjustments.
 = 3.1.3 =

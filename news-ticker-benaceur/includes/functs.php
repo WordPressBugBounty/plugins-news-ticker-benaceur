@@ -2,6 +2,10 @@
     if ( ! defined( 'ABSPATH' ) ) exit;
 
 class class______news_ticker_benaceur_functs extends class______news_ticker_benaceur {
+	
+	function glob_options() {
+		return get_option( 'news_ticker_benaceur_glob_options' );
+	}
 
 	function all__options() {
 	return array (
@@ -38,7 +42,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'expt_txt_title' => '100',
 	    'expt_txt_comment' => '100',
 	    'expt_txt_manually_news' => '100',
-	    'post_type' => 'post',
+	    'post_type' => array('post'),
 	    'post_status' => 'publish',
 	    'comment_status' => 'approve',
 	    'title_styles_topleft_lef' => '0',
@@ -47,7 +51,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'title_styles_topright_ri' => '0',
 	    'title_styles_bottomright' => '0',
 	    'title_styles_bottomleft' => '0',
-		'txt_news_manually' => get_option( 'news_ticker_benaceur_glob_options' ) !== false ? $this->options('txt_news_manually') : '', // prevent this value to reset
+		'txt_news_manually' => '',
 		'hide_or_noHide_in' => 'disable_this_option',
 		'hide_after_time' => array(
 		     'hide' => 'disable_this_option',
@@ -55,11 +59,12 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 			 'ago_in_seconds' => 'days',
 			 'time_latest' => '',
 			 'latest_in_seconds' => 'minute',
-			 'manually_date' => get_option( 'news_ticker_benaceur_glob_options' ) !== false ? $this->options_hi('manually_date') : current_time( 'mysql' ), // prevent this value to reset
+			 'manually_date' => current_time( 'mysql' ),
 			 'update_manually_date' => 'no',
 			 ),
 		'empty_txt_news_manually' => '',
 		'hide_if_noItems' => '',
+		'txt_noItems' => '',
 		'auto_add_ntb_not_fixed' => 'no',
 	),
 	'anim_options' => array (
@@ -152,7 +157,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'height_mobile' => '46',
 	    'line_height_mobile' => '46',
 	    'padding_top_mobile' => '0',
-	    'padding_right_left_mobile' => '5',
+	    'padding_right_left_mobile' => '6',
 	    'size_mobile' => '15',
 	    'v_screen_max_width' => '782',
 	    'height' => '44',
@@ -171,8 +176,8 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'fixed_top_bottom' => '0',
 	    'fixed_width' => '100',
 	    'fixed_index' => '10000',
-		's_style' => get_option( 'news_ticker_benaceur_glob_options' ) !== false ? $this->options('s_style') : '', // prevent this value to reset
-		's_script' => get_option( 'news_ticker_benaceur_glob_options' ) !== false ? $this->options('s_script') : '', // prevent this value to reset
+		's_style' => '',
+		's_script' => '',
 		'fixed_class_for_top' => '',
 		'fixed_class_for_bottom'=> '',
 		'adminbar_height' => '',
@@ -185,6 +190,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'delete_all_options' => 'not_delete',
 	    'remove_short_code' => 'not_remove',
 	),
+	'exclude_from_reset' => '',
 	'reset' => 'submit',
 	'scrool_to' => '',
 	);
@@ -370,18 +376,18 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	}
 	
 	function options($value){ // $this->options('enable')
-		$opts = get_option( 'news_ticker_benaceur_glob_options' );
+		$opts = $this->glob_options();
 		$opt_s = isset($opts['global_options'][$value]) && str_replace(' ','', $opts['global_options'][$value]) != '' ? $opts['global_options'][$value] : '' ;
 		return $opt_s;
 	}
 	
-	function option_hi($value){ // ex: $this->option('enable')
+	function option_hi($value){ // ex: $this->option_hi('enable')
 	    $opt = "news_ticker_benaceur_glob_options[global_options][hide_after_time][$value]";
 	    return $opt;
 	}
 	
-	function options_hi($value){ // $this->options('enable')
-		$opts = get_option( 'news_ticker_benaceur_glob_options' );
+	function options_hi($value){ // $this->options_hi('enable')
+		$opts = $this->glob_options();
 		$opt_s = isset($opts['global_options']['hide_after_time'][$value]) && str_replace(' ','', $opts['global_options']['hide_after_time'][$value]) != '' ? $opts['global_options']['hide_after_time'][$value] : '' ;
 		return $opt_s;
 	}
@@ -392,7 +398,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	}
 	
 	function options_anim($value){ // $this->options_anim('enable')
-		$opts = get_option( 'news_ticker_benaceur_glob_options' );
+		$opts = $this->glob_options();
 		$opt_s = isset($opts['anim_options'][$value]) && str_replace(' ','', $opts['anim_options'][$value]) != '' ? $opts['anim_options'][$value] : '' ;
 		return $opt_s;
 	}
@@ -403,7 +409,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	}
 		
 	function options_sty($value){ // $this->options_sty('enable')
-		$opts = get_option( 'news_ticker_benaceur_glob_options' );
+		$opts = $this->glob_options();
 		$opt_s = isset($opts['style_options'][$value]) && str_replace(' ','', $opts['style_options'][$value]) != '' ? $opts['style_options'][$value] : '' ;
 		return $opt_s;
 	}
@@ -414,7 +420,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	}
 		
 	function options_oth($value){ // $this->options_oth('enable')
-		$opts = get_option( 'news_ticker_benaceur_glob_options' );
+		$opts = $this->glob_options();
 		$opt_s = isset($opts['other_options'][$value]) && str_replace(' ','', $opts['other_options'][$value]) != '' ? $opts['other_options'][$value] : '' ;
 		return $opt_s;
 	}
@@ -425,59 +431,184 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	}
 		
 	function options_s($value){ // $this->options_s($value)
-		$opts = get_option( 'news_ticker_benaceur_glob_options' );
+		$opts = $this->glob_options();
 		$opt_s = isset($opts[$value]) && str_replace(' ','', $opts[$value]) != '' ? $opts[$value] : '' ;
 		return $opt_s;
+	}
+	
+	/*
+	$this->update_add_option(
+    array(
+    'reset' => 'submit',
+    'anim_options' => array('bbbb','cccc','cursor_bold_typ1' => 'bold2', '_bold_typ1' => 'bold3333'),
+    'global_options' => array('gggg','kkkk','enable' => 'on22', 'hide_after_time' => array('time_ago' => '14000', 'hide' => 'oooo55', 
+    'nnhide' => 'oooo'), 'for_cat_tax' => 'ben', 'post_type' => array('post','page')),
+    )
+    );
+	*/
+	function update_add_option($data){
+		
+        $opts = $this->glob_options();
+
+		if ($opts == false || !is_array($opts))
+			return false;
+		
+		if ( ! is_array( $data ) )
+		    return false;
+        
+		foreach ( $data as $key => $val ) {
+			if ( in_array($key, array('exclude_from_reset','reset','scrool_to')) ) {
+			    
+			    $opts[$key] = $val;
+			    
+			} else {
+			    
+		        foreach ( $val as $key2 => $val2 ) {
+			        if (  is_array($val2) && $key == 'global_options' ) {
+		                foreach ( $val2 as $key3 => $val3 ) {
+		                    $opts[$key][$key2][$key3] = $val3;
+		                }
+			        } else {
+		                $opts[$key][$key2] = $val2;
+				    }
+		        }
+			}
+		}
+
+		return update_option( 'news_ticker_benaceur_glob_options', $opts);
+	}
+	
+	/*
+	$this->remove_option('news_ticker_benaceur_glob_options', 'global_options', array('personalize_not_fixed','for_visitors'));
+	$this->remove_option('news_ticker_benaceur_glob_options', 'global_options', array('for_users','for_user_id','hide_after_time' => array('latest_in_seconds', 'ago_in_seconds')));
+	$this->remove_option('news_ticker_benaceur_glob_options', 'global_options', array('hide_after_time' => array('latest_in_seconds', 'ago_in_seconds')));
+	$this->remove_option('news_ticker_benaceur_glob_options', 'reset');
+    */
+	function remove_option($option_name, $get_key1, $keys = '') {
+		
+		$get_options = get_option( $option_name );
+		if (!$get_options) return;
+		
+		if (!$keys) {
+			
+			unset($get_options[$get_key1]);
+			
+		} else {
+		 
+        foreach ($keys as $key => $val) {
+            if (is_array($val)) {
+				foreach ($val as $k) {
+                    unset($get_options[$get_key1][$key][$k]);
+				}
+			} else if (!is_array($key)) {
+				unset($get_options[$get_key1][$val]);
+			}
+        }
+		
+		}
+		
+        return update_option($option_name, $get_options);
+	}
+	
+	// prevent this value to reset
+	function _reset_all() {
+		$opts = $this->all_options('all');
+		
+		if (!$this->options_s('exclude_from_reset')) {
+		    unset($opts['global_options']['txt_news_manually'],
+		    $opts['global_options']['hide_after_time']['manually_date'],
+		    $opts['style_options']['s_style'],
+		    $opts['style_options']['s_script']);
+		}
+		
+		unset($opts['reset']); // to display __('Saved + reset successfully', 'news-ticker-benaceur') message
+		$this->update_add_option( $opts );
+        update_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
+	}
+	
+	// prevent this value to reset
+	function unset_from_global_options() {
+		$opts = $this->all_options('global_options');
+		
+		if (!$this->options_s('exclude_from_reset')) {
+		    unset($opts['txt_news_manually'], $opts['hide_after_time']['manually_date']);
+		}
+		
+		return $opts;
+	}
+	
+	// prevent this value to reset
+	function unset_from_style_options() {
+		$opts = $this->all_options('style_options');
+		
+		if (!$this->options_s('exclude_from_reset')) {
+		    unset($opts['s_style'], $opts['s_script']);
+		}
+		
+		return $opts;
 	}
 	
     function is_ntb_top_site() {
         if ($this->options_sty('fixed')) {
             if ($this->options_sty('fixed_top_bottom_site') == 'top')
             return true;
-        //return;
         } else if ($this->options('auto_add_ntb_not_fixed') == 'top') {
         return true;
         }
-
-       // return;
     }
 	
-    function get_recent() {
-    $get_for_cat = array_filter(array_unique(array_map('trim',explode(',', $this->options('for_cat')))));
-
+    function get_recent($recent) {
+		
+    $cat_post_ids = array_filter(array_unique(array_map('trim', explode(',', $this->options('for_cat')))));
+    $for_cat_tax = $this->options('for_cat_tax');
+	$include_exclude_id = $this->options('include_exclude_id');
+	
     // L comments	
     $args_comms = array(
-    'status' => $this->options('comment_status'),
-	'number' => $this->options('num_posts'),
-	'post__in' => ( $this->options('include_exclude_id') == 'include_id' ) ? $get_for_cat : '',
-	'post__not_in' => ( $this->options('include_exclude_id') == 'exclude_id' ) ? $get_for_cat : '',
+    'status'    => $this->options('comment_status'),
+	'number'    => $this->options('num_posts'),
 	'post_type' => $this->options('post_type'),
-	'order' => 'DESC',
+	'orderby'   => 'comment_date',
+	'order'     => 'DESC'
     );
     // L comments
+	
+	if ($cat_post_ids) {
+		if ($include_exclude_id == 'include_id') {
+		    $args_comms['post__in'] = $cat_post_ids;
+		} else if ($include_exclude_id == 'exclude_id') {
+		    $args_comms['post__not_in'] = $cat_post_ids;
+		}
+	}
 
     //
-    $catID_b = array_filter(array_unique(array_map('trim',explode(',', $this->options('for_cat')))));
-    foreach ($catID_b as &$value){
-    $value = '-' . trim($value);
+	$value = array();
+    foreach ($cat_post_ids as $val){
+		if ($include_exclude_id == 'include_id') {
+		    $value[] = $val;
+		} else if ($include_exclude_id == 'exclude_id') {
+		    $value[] = '-' . $val;
+		}
     }
-    $ntb_cat_excl = implode(',', $catID_b);
+    $inc_exc_ids = implode(',', $value);
     // 	
-	 $lp = array(
-			'post_type' => $this->options('post_type'),
-			'posts_per_page' => $this->options('num_posts'),
-			'order' => 'DESC',
-			'post_status' => $this->options('post_status')
-			);
+	$lp = array(
+		'post_type'      => $this->options('post_type'),
+		'posts_per_page' => $this->options('num_posts'),
+		'orderby'        => 'date', // modified
+		'order'          => 'DESC',
+		'post_status'    => $this->options('post_status')
+		);
 	 
-	if ($this->options('for_cat_tax') == 'category' || !$this->options('for_cat_tax')) {
-		$lp['cat'] = ( $this->options('include_exclude_id') == 'include_id' ) ? $get_for_cat : $ntb_cat_excl;
+	if ($for_cat_tax == 'category' || !$for_cat_tax) {
+		if ($cat_post_ids)
+		    $lp['cat'] = $inc_exc_ids;
 	} else {
 		$lp['tax_query'] = array(
 		    array(
-			'taxonomy' => $this->options('for_cat_tax'),
-			'field' => 'id',
-			'terms' => $get_for_cat
+			'taxonomy' => $for_cat_tax,
+			'field'    => 'term_id',
+			'terms'    => $cat_post_ids
 		    )
 	        );
 	}
@@ -485,25 +616,24 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	if ($this->options_hi('hide') != 'disable_this_option') {
 		$lp['date_query'] = array(
               array(
-                'after' => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
+                'after'     => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
 				'inclusive' => true,
-				'column' => 'post_date',
+				'column'    => 'post_date',
               )
             );
 			
 		$args_comms['date_query'] = array(
               array(
-                'after' => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
+                'after'     => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
 				'inclusive' => true,
-				'column' => 'comment_date',
+				'column'    => 'comment_date',
               )
             );
 	}
 	 
 	$lp = apply_filters( 'ntb_filter_arguments_recent_posts', $lp );
-	$recent_posts_ntb = apply_filters( 'ntb_filter_get_all_recent_posts', wp_get_recent_posts( $lp ) );
 	
-    /* exemple
+    /* Ex
     add_filter( 'ntb_filter_arguments_recent_posts', function($args) {
 	    $args['posts_per_page']  = 2;
 	    $args['order'] = 'ASC';
@@ -518,18 +648,38 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 
 	return $posts;
     });
-    exemple */
+    */
 	
 	$args_comms = apply_filters( 'ntb_filter_arguments_recent_comments', $args_comms );
-    $comments_list = apply_filters( 'ntb_filter_get_all_recent_comments', get_comments($args_comms) );
 	
-	return array($recent_posts_ntb, $comments_list);
+	if ($recent == 'posts')
+		return apply_filters( 'ntb_filter_get_all_recent_posts', wp_get_recent_posts( $lp ) );
+	
+	if ($recent == 'comments')
+		return apply_filters( 'ntb_filter_get_all_recent_comments', get_comments($args_comms) );
+
+    }
+	
+    function ntb_items($i = '') {
+		
+	$nm = $i ? apply_filters( 'ntb_filter_number_ntb_items', 0 ) : 0;
+	$txt_news_manually = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options('txt_news_manually')))));	
+	 
+	if ( $this->options('latest_p_c') == 'latest_posts' && count( $this->get_recent('posts') ) <= $nm )
+	    return true;
+		
+	if ( $this->options('latest_p_c') == 'latest_comments' && count( $this->get_recent('comments') ) <= $nm )
+	    return true;
+		
+	if ( $this->options('latest_p_c') == 'manually' && count( $txt_news_manually ) <= $nm )
+	    return true;
+	
+	return false;
     }
 	
     function get_time_recent($time_Out = '') {
-	$recent = $this->get_recent();
-	$recent_posts_ntb = $recent[0];
-    $comments_list = $recent[1];
+	$recent_posts_ntb = $this->get_recent('posts');
+    $comments_list = $this->get_recent('comments');
 	
 	$in_seconds = MINUTE_IN_SECONDS;
 	if ($this->options_hi('latest_in_seconds') == 'minute')
@@ -540,7 +690,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	$in_seconds = DAY_IN_SECONDS;
 
 	$time = $in_seconds * (int)$this->options_hi('time_latest');
-	$get_news = array_filter(array_unique(array_map('trim',explode(PHP_EOL, $this->options('txt_news_manually')))));	
+	$get_news = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options('txt_news_manually')))));	
 	
 	if ($this->options('latest_p_c') == 'latest_posts') {
 	$diference = $recent_posts_ntb ? current_time( 'timestamp' ) - mysql2date('U', $recent_posts_ntb[0]["post_date"]) : current_time( 'timestamp' );
@@ -555,13 +705,8 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	}		
 	 
 	if ($time_Out && $timeOut) return $timeOut;
-	 
-	if ( $this->options('latest_p_c') == 'latest_posts' && !$recent_posts_ntb || 
-	$this->options('latest_p_c') == 'latest_comments' && count( $comments_list ) <= 0 ||
-	$this->options('latest_p_c') == 'manually' && !$get_news) 
-	$this->no_items = true; 
 
-    if ($this->options('hide_if_noItems') && $this->no_items) return true; // hide if no item and hide_if_noItems option is enabled
+    if ($this->options('hide_if_noItems') && $this->ntb_items()) return true; // hide if no item and hide_if_noItems option is enabled
 
     if ($this->options_hi('hide') == 'hide') { // hide after time without jquery
 		
@@ -575,9 +720,38 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	}
     }
 	
+	function get_serialized_glob_options() {
+		global $wpdb;
+		
+		if (!$this->glob_options())
+			return;
+		
+		return $wpdb->get_var( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", "news_ticker_benaceur_glob_options" ) );
+	}
+	
+	function remove_shortcode_wpdb() {
+		global $wpdb;
+		
+	    $fields = "post_content = replace(post_content, '%s', '')";	
+	    $sql = "UPDATE $wpdb->posts SET $fields";
+        return $wpdb->query( $wpdb->prepare( $sql, '[wp_news_ticker_benaceur_short_code]' ) );
+	}
+	
 	function is_php_8_1_wpcore() {
 		if (version_compare( PHP_VERSION, '8.1', '>=' ) && version_compare( get_bloginfo('version'), '6.2', '<'))
 		return true;
+	}
+	
+	function purge_cache_msg() {
+		return __( 'You may need to purge the cache after saving the settings, with some cache plugins, if you are using a cache plugin of course.', 'news-ticker-benaceur' );
+	}
+	
+	function txtNoItems() {
+		return trim($this->options('txt_noItems')) != '' ? $this->options('txt_noItems') : __("No items", 'news-ticker-benaceur');
+	}
+	
+	function txtNoNews() {
+		return trim($this->options('empty_txt_news_manually')) != '' ? $this->options('empty_txt_news_manually') : __("No news", 'news-ticker-benaceur');
 	}
 	 
 }

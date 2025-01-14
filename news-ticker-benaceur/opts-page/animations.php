@@ -68,31 +68,31 @@
 <div class="fsub-ntb box">
 <table class="form-table">
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('speed_no_scr_typ'); ?>" value="<?php echo esc_attr( $this->options_anim('speed_no_scr_typ') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('padding top', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('padding top', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('margin_top_no_scr_typ'); ?>" value="<?php echo esc_attr( $this->options_anim('margin_top_no_scr_typ') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr style="<?php if (!$this->is_ntb_rtl()) echo "display:none;"; ?>" valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Distance from the right', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Distance from the right', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('margin_right_ltr_no_scr_typ'); ?>" value="<?php echo esc_attr( $this->options_anim('margin_right_ltr_no_scr_typ') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr style="<?php if ($this->is_ntb_rtl()) echo "display:none;"; ?>" valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('margin_left_ltr_no_scr_typ'); ?>" value="<?php echo esc_attr( $this->options_anim('margin_left_ltr_no_scr_typ') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('pause__typing'); ?>" />
@@ -115,7 +115,7 @@
 						</td>
 					</tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('The distance top of the indicator', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('The distance top of the indicator', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('cursor_top_typ1'); ?>" value="<?php echo esc_attr( $this->options_anim('cursor_top_typ1') ); ?>" /></div>
                    </td>
@@ -149,7 +149,7 @@
 						</td>
 					</tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('autostart_typ1'); ?>" />
@@ -206,7 +206,7 @@
 					</tr>
 <tr><td style="padding-top:0;padding-bottom:0;">------------</tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('pause_slide_up_down'); ?>" />
@@ -217,7 +217,7 @@
 				   </td>
                 </tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('autostart_slide_up_down'); ?>" />
@@ -228,19 +228,19 @@
 				   </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('TimeOut', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('TimeOut', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('timeout_slide_up_down'); ?>" value="<?php echo esc_attr( $this->options_anim('timeout_slide_up_down') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('speed_slide_up_down'); ?>" value="<?php echo esc_attr( $this->options_anim('speed_slide_up_down') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
 					<td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('dist_from_left_right_scrollup'); ?>" value="<?php echo esc_attr( $this->options_anim('dist_from_left_right_scrollup') ); ?>" /></div>
                    </td>
@@ -267,19 +267,19 @@
 					</tr>
 <tr><td style="padding-top:0;padding-bottom:0;">------------</tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('TimeOut', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('TimeOut', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('timeout_fadein'); ?>" value="<?php echo esc_attr( $this->options_anim('timeout_fadein') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
 					<td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('dist_from_left_right_fadein'); ?>" value="<?php echo esc_attr( $this->options_anim('dist_from_left_right_fadein') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('pause_fadein'); ?>" />
@@ -290,7 +290,7 @@
 				   </td>
                 </tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">	
                         <input type="hidden" value="" name="<?php echo $this->option_anim('autostart_fadein'); ?>" />
@@ -309,31 +309,31 @@
 <div class="sevsub-ntb box">
 <table class="form-table">
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('speed_scrollntb_'); ?>" value="<?php echo esc_attr( $this->options_anim('speed_scrollntb_') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr class="fsub_lat-com-ntb box_lat-com" valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Number of title characters', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Number of title characters', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('expt_title_scrollntb'); ?>" value="<?php echo esc_attr( $this->options_anim('expt_title_scrollntb') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
 					<td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('dist_from_left_right_scrollntb'); ?>" value="<?php echo esc_attr( $this->options_anim('dist_from_left_right_scrollntb') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('The distance between elements', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('The distance between elements', 'news-ticker-benaceur'); ?></th>
 					<td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('dist_between_scrollntb'); ?>" value="<?php echo esc_attr( $this->options_anim('dist_between_scrollntb') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Image dimensions', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Image dimensions', 'news-ticker-benaceur'); ?></th>
 					<td>
 					<div class="sm_benaceurlist_caps_input-ntb">
 					<input style="font-weight:bold;max-width:70px;text-align:center;" type="text" name="<?php echo $this->option_anim('w_img_scrollntb'); ?>" value="<?php echo esc_attr( $this->options_anim('w_img_scrollntb') ); ?>" /> x
@@ -343,7 +343,7 @@
                 </tr>
                 <tr valign="top">
 				<?php $distance_trl = ($this->options('dir') == 'auto' && is_rtl() || $this->options('dir') == 'rtl') ?  __('Distance from the left/right of the image', 'news-ticker-benaceur') : __('Distance from the right/left of the image', 'news-ticker-benaceur'); ?>
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php echo $distance_trl; ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php echo $distance_trl; ?></th>
 					<td>
 					<div class="sm_benaceurlist_caps_input-ntb">
 					<input style="font-weight:bold;max-width:70px;text-align:center;" type="text" name="<?php echo $this->option_anim('ri_le_img_scrollntb'); ?>" value="<?php echo esc_attr( $this->options_anim('ri_le_img_scrollntb') ); ?>" /> /
@@ -352,7 +352,7 @@
                    </td>
                 </tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('pause_scrollntb'); ?>" />
@@ -363,7 +363,7 @@
 				   </td>
                 </tr>
                 <tr>
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable title (screen mobile)', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable title (screen mobile)', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('disable_title_scr_mobile_s'); ?>" />
@@ -374,7 +374,7 @@
 				   </td>
                 </tr>
                 <tr class="fsub_lat-com-ntb box_lat-com">  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('+ date and title', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('+ date and title', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('all_scrollntb'); ?>" />
@@ -393,19 +393,19 @@
 <div class="anim-two-sub-ntb box">
 <table class="form-table">
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('Speed', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('speed_anms_two'); ?>" value="<?php echo esc_attr( $this->options_anim('speed_anms_two') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php _e('TimeOut', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php _e('TimeOut', 'news-ticker-benaceur'); ?></th>
                     <td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('timeout_anms_two'); ?>" value="<?php echo esc_attr( $this->options_anim('timeout_anms_two') ); ?>" /></div>
                    </td>
                 </tr>
                 <tr valign="top">
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
+                    <th style="font-weight:normal;" scope="row"><?php if ($this->is_ntb_rtl()) _e('Distance from the right', 'news-ticker-benaceur'); else _e('Distance from the left', 'news-ticker-benaceur'); ?></th>
 					<td>
 					<div class="sm_benaceurlist_caps_input-ntb"><input style="font-weight:bold;max-width:100px;text-align:center;" type="text" name="<?php echo $this->option_anim('width_anms__two'); ?>" value="<?php echo esc_attr( $this->options_anim('width_anms__two') ); ?>" /></div>
                    </td>
@@ -423,7 +423,7 @@
 						</td>
 					</tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Pause on hover', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('pause_anms_two'); ?>" />
@@ -434,7 +434,7 @@
 				   </td>
                 </tr>
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable autostart', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('autostart_animtwo'); ?>" />
@@ -477,7 +477,7 @@ if( intval( $image_id ) > 0 ) {
 	
 <table class="form-table">
                 <tr>  
-                    <th style="font-size: 13px;font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable the icon', 'news-ticker-benaceur'); ?></div></th>
+                    <th style="font-weight:normal;" scope="row"><div class="dd"><?php _e('Disable the icon', 'news-ticker-benaceur'); ?></div></th>
                     <td> 
 					<label class="switch-nab">
                         <input type="hidden" value="" name="<?php echo $this->option_anim('dis_icon_scrollntb'); ?>" />
@@ -576,7 +576,7 @@ function Refresh_Image_news_ticker_benaceur(the_id){
                 </tr>
 </table>
 
-		<p class="submit"><input type="submit" name="submit_animation" id="submit-ftb3" class="button-benTheme" value="<?php _e( 'Save Changes' ); ?>"  /></p>
-		<p class="ntb_cache_changesSaved"><?php _e( 'Purge the cache after each settings change, If you were of course using a cache plugin.','news-ticker-benaceur' ); ?></p>
+		<p class="submit"><input type="submit" name="submit_animation" id="submit-ftb3" class="button-benTheme" value="<?php _e( 'Save animation settings', 'news-ticker-benaceur' ); ?>"  /></p>
+		<p class="ntb_cache_changesSaved"><?php echo $this->purge_cache_msg(); ?></p>
 
 </div>		

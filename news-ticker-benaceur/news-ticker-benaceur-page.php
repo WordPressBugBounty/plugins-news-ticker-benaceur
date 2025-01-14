@@ -42,7 +42,7 @@
         </div>	
 		
 <?php		
-        //if ($this->no_items) echo '<style type="text/css">.news-ticker-ntb {display:none;}</style>';
+        //if ($this->ntb_items()) echo '<style type="text/css">.news-ticker-ntb {display:none;}</style>';
 
 		} else {
 		$li1 = '<span class="n_t_ntb_bimg"><span><span class="ntb_img_post_t_scrollntb"></span></span><span>';
@@ -67,7 +67,7 @@
             </div></div>
 
 			<?php
-	    //if ($this->no_items) echo '<style type="text/css">.n_t_ntb_b {display:none;}</style>';
+	    //if ($this->ntb_items()) echo '<style type="text/css">.n_t_ntb_b {display:none;}</style>';
 		 }
 			
 	$this->div_in_top_bottom();

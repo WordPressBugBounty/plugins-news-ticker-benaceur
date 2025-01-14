@@ -270,7 +270,10 @@
 	
 	}
     <?php } ?>
-	.n_t_ntb_b a, .news-ticker-ntb a, .news_ticker_ntb_ie8 a {display:block !important;}
+	.n_t_ntb_b a, .news-ticker-ntb a, .news_ticker_ntb_ie8 a {
+		display:block !important;
+		border: none;
+	}
 </style>
 
 <?php include ('inc/ie8.php'); ?>
