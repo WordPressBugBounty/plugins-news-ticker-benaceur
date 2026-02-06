@@ -778,7 +778,9 @@ class class______news_ticker_benaceur {
 
     function verPlug(){
 		
-	if ( $this->is_php_8_1_wpcore() ) return;	
+	if ( $this->is_php_8_1_wpcore() ) return;
+	
+	if ( !apply_filters( 'ntb_filter_check_ntb_version', true ) ) return;
     
     // $update_plugins = get_site_transient('update_plugins');
     // if ( isset( $update_plugins->response[ NTB_BEN_BASENAME ] ) ) { 

@@ -13,7 +13,7 @@
 		$ani = $this->is_ntb_rtl() ? 'margin_right_ltr_no_scr_typ' : 'margin_left_ltr_no_scr_typ';
 		break;
 		
-		default;
+		default:
 		$ani = 'width_anms__two';
 	}
 ?>
