@@ -2,7 +2,7 @@
 
 <div id="go3-setting-ntb"></div> 
 	<div class="option-box">
-        <h3 style="font-family: DroidKufi_Ben, sans-serif;"><span style="position:absolute;margin-top:-1px;" class="dashicons dashicons-art"></span><span style="padding:0 26px;"><span style="padding:0 6px;border-bottom:3px solid #666;"><?php _e('Settings of style', 'news-ticker-benaceur'); ?></span></span></h3><br>
+        <h3 style="font-family: DroidKufi_Ben, sans-serif;"><span style="position:absolute;margin-top:-1px;" class="dashicons dashicons-art"></span><span style="padding:0 26px;"><span style="padding:0 6px;border-bottom:3px solid #666;"><?php esc_html_e('Settings of style', 'news-ticker-benaceur'); ?></span></span></h3><br>
 <br>
 
                     <?php
@@ -67,18 +67,18 @@
 								<input type="text" name="<?php echo $this->option_sty('width'); ?>" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('width') ); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><div class="wwid"><td ><?php _e("Width by adding: px or % (It is recommended to use % if your theme uses the percentage in width,",'news-ticker-benaceur'); ?><br><?php _e("and use px if your theme uses the pixels in width.)",'news-ticker-benaceur'); ?></td></div></div><br>
+						<div class="colwrap-display"><div class="wwid"><td ><?php esc_html_e("Width by adding: px or % (It is recommended to use % if your theme uses the percentage in width,",'news-ticker-benaceur'); ?><br><?php esc_html_e("and use px if your theme uses the pixels in width.)",'news-ticker-benaceur'); ?></td></div></div><br>
 					</tr>
 					<div class="colwrap-display-media-only ltr"></div>
 					<tr>
 						<td>
 							<div style="margin-bottom:10px;" class="news-ticker-benaceur-colwrap2">
 								<input type="text" name="<?php echo $this->option_sty('font_family'); ?>" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('font_family') ); ?>" />
-						&nbsp;&nbsp;&nbsp;&nbsp;<?php _e("Font family",'news-ticker-benaceur'); ?> /
+						&nbsp;&nbsp;&nbsp;&nbsp;<?php esc_html_e("Font family",'news-ticker-benaceur'); ?> /
                                <input type="hidden" value="" name="<?php echo $this->option_sty('disable_this_font'); ?>" />
 							   <input type="checkbox"  value="1" <?php checked( $this->options_sty('disable_this_font'), 1 ); ?> name="<?php echo $this->option_sty('disable_this_font'); ?>" />
-                        <?php _e("Disable this font: DroidKufi_Ben ",'news-ticker-benaceur'); ?>
-						<div style="color:#a24b4b;"><?php _e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></div>
+                        <?php esc_html_e("Disable this font: DroidKufi_Ben ",'news-ticker-benaceur'); ?>
+						<div style="color:#a24b4b;"><?php esc_html_e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></div>
 							</div>
 						</td>
 					</tr>
@@ -88,7 +88,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('font_size') ); ?>" name="<?php echo $this->option_sty('font_size'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Font size",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Font size",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
@@ -96,8 +96,8 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('title_font_family') ); ?>" name="<?php echo $this->option_sty('title_font_family'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Font family (title)",'news-ticker-benaceur'); ?></td></div>
-                         <div class="news-ticker-benaceur-colwrap2-if" style="color:#a24b4b;"><?php _e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></div>
+						<div class="colwrap-display"><td><?php esc_html_e("Font family (title)",'news-ticker-benaceur'); ?></td></div>
+                         <div class="news-ticker-benaceur-colwrap2-if" style="color:#a24b4b;"><?php esc_html_e("If you are using a non-latin font (like arabic) it should be preceded by &#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi",'news-ticker-benaceur'); ?></div>
 					<div style="margin-bottom:10px;"></div>
 					</tr>
 					<tr>
@@ -106,23 +106,23 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('font_size_title') ); ?>" name="<?php echo $this->option_sty('font_size_title'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Font size (title)",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Font size (title)",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
 						<div class="colwrap-display"><div class="news-ticker-benaceur-colwrap">
-						<div class="bold-3"><select  name="<?php echo $this->option_sty('font_weight'); ?>" class="news-ticker-benaceur-color-inp"><option value="normal" <?php selected('normal', $this->options_sty('font_weight')); ?>><?php _e('Normal', 'news-ticker-benaceur'); ?></option><option value="bold" <?php selected('bold', $this->options_sty('font_weight')); ?>><?php _e('Bold', 'news-ticker-benaceur'); ?></option></select></div>
+						<div class="bold-3"><select  name="<?php echo $this->option_sty('font_weight'); ?>" class="news-ticker-benaceur-color-inp"><option value="normal" <?php selected('normal', $this->options_sty('font_weight')); ?>><?php esc_html_e('Normal', 'news-ticker-benaceur'); ?></option><option value="bold" <?php selected('bold', $this->options_sty('font_weight')); ?>><?php esc_html_e('Bold', 'news-ticker-benaceur'); ?></option></select></div>
 						</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Font weight",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Font weight",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
 						<div class="colwrap-display"><div class="news-ticker-benaceur-colwrap">
-						<div class="bold-3"><select  name="<?php echo $this->option_sty('text_shadow'); ?>" class="news-ticker-benaceur-color-inp"><option value="no" <?php selected('no', $this->options_sty('text_shadow')); ?>><?php _e('no', 'news-ticker-benaceur'); ?></option><option value="5px 5px 5px" <?php selected('5px 5px 5px', $this->options_sty('text_shadow')); ?>><?php _e('yes', 'news-ticker-benaceur'); ?></option></select></div>
+						<div class="bold-3"><select  name="<?php echo $this->option_sty('text_shadow'); ?>" class="news-ticker-benaceur-color-inp"><option value="no" <?php selected('no', $this->options_sty('text_shadow')); ?>><?php esc_html_e('no', 'news-ticker-benaceur'); ?></option><option value="5px 5px 5px" <?php selected('5px 5px 5px', $this->options_sty('text_shadow')); ?>><?php esc_html_e('yes', 'news-ticker-benaceur'); ?></option></select></div>
 						</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("text shadow",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("text shadow",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
@@ -130,15 +130,15 @@
 								<input type="text" class="news-ticker-benaceur-color-inp3" value="<?php echo esc_attr( $this->options_sty('text_shadow_color') ); ?>" name="<?php echo $this->option_sty('text_shadow_color'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("text shadow color",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("text shadow color",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
 						<div class="colwrap-display"><div class="news-ticker-benaceur-colwrap">
-						<div class="bold-3"><select  name="<?php echo $this->option_sty('box_shadow'); ?>" class="news-ticker-benaceur-color-inp"><option value="no" <?php selected('no', $this->options_sty('box_shadow')); ?>><?php _e('no', 'news-ticker-benaceur'); ?></option><option value="0px 1px 3px" <?php selected('0px 1px 3px', $this->options_sty('box_shadow')); ?>><?php _e('yes', 'news-ticker-benaceur'); ?></option></select></div>
+						<div class="bold-3"><select  name="<?php echo $this->option_sty('box_shadow'); ?>" class="news-ticker-benaceur-color-inp"><option value="no" <?php selected('no', $this->options_sty('box_shadow')); ?>><?php esc_html_e('no', 'news-ticker-benaceur'); ?></option><option value="0px 1px 3px" <?php selected('0px 1px 3px', $this->options_sty('box_shadow')); ?>><?php esc_html_e('yes', 'news-ticker-benaceur'); ?></option></select></div>
 						</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("box shadow",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("box shadow",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
@@ -146,7 +146,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp3" value="<?php echo esc_attr( $this->options_sty('box_shadow_color') ); ?>" name="<?php echo $this->option_sty('box_shadow_color'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("box shadow color",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("box shadow color",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
@@ -154,13 +154,13 @@
 								<input type="text" id="news-ticker-benaceur-txtclr_a" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('box_shadow_v') ); ?>" name="<?php echo $this->option_sty('box_shadow_v'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("box shadow pixel",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("box shadow pixel",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<div class="hide_trans_bk box_trans_bk">
 							<div class="colwrap-display"><div class="news-ticker-benaceur-colwrap">
 								<input type="text" class="news-ticker-benaceur-color-inp3" value="<?php echo esc_attr( $this->options_sty('prevNext_color') ); ?>" name="<?php echo $this->option_sty('prevNext_color'); ?>" />
 							</div></div>
-						<div class="colwrap-display"><td><?php _e("Color of prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Color of prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
 					</div>
 					<tr>
 						<td>
@@ -168,15 +168,15 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('prevNext_font_size') ); ?>" name="<?php echo $this->option_sty('prevNext_font_size'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Font size of prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Font size of prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
 						<div class="colwrap-display"><div class="news-ticker-benaceur-colwrap">
-						<div class="bold-3"><select  name="<?php echo $this->option_sty('prevNext_weight'); ?>" class="news-ticker-benaceur-color-inp"><option value="normal" <?php selected('normal', $this->options_sty('prevNext_weight')); ?>><?php _e('Normal', 'news-ticker-benaceur'); ?></option><option value="bold" <?php selected('bold', $this->options_sty('prevNext_weight')); ?>><?php _e('Bold', 'news-ticker-benaceur'); ?></option></select></div>
+						<div class="bold-3"><select  name="<?php echo $this->option_sty('prevNext_weight'); ?>" class="news-ticker-benaceur-color-inp"><option value="normal" <?php selected('normal', $this->options_sty('prevNext_weight')); ?>><?php esc_html_e('Normal', 'news-ticker-benaceur'); ?></option><option value="bold" <?php selected('bold', $this->options_sty('prevNext_weight')); ?>><?php esc_html_e('Bold', 'news-ticker-benaceur'); ?></option></select></div>
 						</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Weight of prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Weight of prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
@@ -184,10 +184,10 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('prevNext_top') ); ?>" name="<?php echo $this->option_sty('prevNext_top'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("distance top the prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("distance top the prev/next button",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 <br><div class="to-tr2"></div>
-<p class="news-ticker-benaceur-font-size"><?php _e("Enable this feature (style of mobile) if your theme uses the percentage % in the width of the site",'news-ticker-benaceur'); ?></p>
+<p class="news-ticker-benaceur-font-size"><?php esc_html_e("Enable this feature (style of mobile) if your theme uses the percentage % in the width of the site",'news-ticker-benaceur'); ?></p>
                 <tr>  
                     <td> 
 					<label class="switch-nab">				
@@ -197,7 +197,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Enable style of mobile (recommended)', 'news-ticker-benaceur'); ?></span>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php esc_html_e('Enable style of mobile (recommended)', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr>
 				<br><br>
@@ -234,7 +234,7 @@
 						?>
 						<div class="colwrap-display"><td><?php echo $p_rl; ?> </td></div><br>
 					</tr>
-<p class="news-ticker-benaceur-font-size"><?php _e("Or choose:",'news-ticker-benaceur'); ?></p>
+<p class="news-ticker-benaceur-font-size"><?php esc_html_e("Or choose:",'news-ticker-benaceur'); ?></p>
                 <tr>  
                     <td> 
 					<label class="switch-nab">				
@@ -244,7 +244,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Hide the news ticker in a screen where the width is less than', 'news-ticker-benaceur'); ?></span>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php esc_html_e('Hide the news ticker in a screen where the width is less than', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr>
 				<br><br>
@@ -254,7 +254,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('v_screen_max_width') ); ?>" name="<?php echo $this->option_sty('v_screen_max_width'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("The smaller width than",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("The smaller width than",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 
 <br><div class="to-tr2"></div><br>
@@ -266,7 +266,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Fixation the bar top/bottom the site', 'news-ticker-benaceur'); ?></span>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php esc_html_e('Fixation the bar top/bottom the site', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr><br><br>
 <table style="margin-bottom:20px;" class="form-table44-moh">
@@ -275,14 +275,14 @@
 						
 						<td>
                    <input type="radio" id="sty_auto_add_ntb_fixed_yes" name="<?php echo $this->option_sty('auto_add_ntb_fixed'); ?>" value="yes" <?php if( $this->options_sty('auto_add_ntb_fixed') == 'yes') echo 'checked';?> />
-					<td><label for="sty_auto_add_ntb_fixed_yes"><?php _e("Automatically add the code to show the news ticker to the theme (recommended)",'news-ticker-benaceur'); ?></label></td>
+					<td><label for="sty_auto_add_ntb_fixed_yes"><?php esc_html_e("Automatically add the code to show the news ticker to the theme (recommended)",'news-ticker-benaceur'); ?></label></td>
 						</td>
 					</tr>
 					<tr> 
 						<td>
                    <input type="radio" id="sty_auto_add_ntb_fixed_no" name="<?php echo $this->option_sty('auto_add_ntb_fixed'); ?>" value="no" <?php if( $this->options_sty('auto_add_ntb_fixed') == 'no') echo 'checked';?> >
 						</td>
-                   <td><label for="sty_auto_add_ntb_fixed_no"><?php _e("Manually add",'news-ticker-benaceur'); ?></label></td>
+                   <td><label for="sty_auto_add_ntb_fixed_no"><?php esc_html_e("Manually add",'news-ticker-benaceur'); ?></label></td>
 					</tr>
 </table>
 					<tr>
@@ -290,24 +290,24 @@
 						<div class="colwrap-display"><div style="min-width:145px;" class="news-ticker-benaceur-colwrap">
 						<div class="bold-3">
 						<select style="min-width:135px;text-align:center;" name="<?php echo $this->option_sty('fixed_top_bottom_site'); ?>" class="news-ticker-benaceur-color-inp">
-						<option value="bottom" <?php selected('bottom', $this->options_sty('fixed_top_bottom_site')); ?>><?php _e('At the bottom', 'news-ticker-benaceur'); ?></option>
-						<option value="top" <?php selected('top', $this->options_sty('fixed_top_bottom_site')); ?>><?php _e('At the top', 'news-ticker-benaceur'); ?></option>
+						<option value="bottom" <?php selected('bottom', $this->options_sty('fixed_top_bottom_site')); ?>><?php esc_html_e('At the bottom', 'news-ticker-benaceur'); ?></option>
+						<option value="top" <?php selected('top', $this->options_sty('fixed_top_bottom_site')); ?>><?php esc_html_e('At the top', 'news-ticker-benaceur'); ?></option>
 						</select></div>
 						</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Select the fixing method",'news-ticker-benaceur'); ?></td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Select the fixing method",'news-ticker-benaceur'); ?></td></div><br>
 					</tr>
 					<br>
 					
 			<div class="note_7101add_the_code" style="margin-bottom:27px;">
 			<p style="max-width:460px;margin-bottom:-8px;">
-			<em><?php _e("If you choose manually with fixation at the top, add the code exactly under the body tag in the header:",'news-ticker-benaceur'); ?></em>
+			<em><?php esc_html_e("If you choose manually with fixation at the top, add the code exactly under the body tag in the header:",'news-ticker-benaceur'); ?></em>
 			</p>			
 			<p class="body_add_the_code_directly">
 			<?php echo esc_html("<body <?php body_class(); ?>>"); ?>
 			</p>
 			<p style="max-width:460px;margin-bottom:-8px;">
-			<em><?php _e("and if you choose manually with fixation at the bottom, add it exactly before the closing body tag in the footer:",'news-ticker-benaceur'); ?></em>
+			<em><?php esc_html_e("and if you choose manually with fixation at the bottom, add it exactly before the closing body tag in the footer:",'news-ticker-benaceur'); ?></em>
 			</p>			
 			<p class="body_add_the_code_directly">
 			<?php echo esc_html("</body>"); ?>
@@ -322,7 +322,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Disable fixation (top) in a screen less than 600px', 'news-ticker-benaceur'); ?></span>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php esc_html_e('Disable fixation (top) in a screen less than 600px', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr><br><br>
                 <tr>  
@@ -333,7 +333,7 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Disable fixation (bottom) in a screen less than 600px', 'news-ticker-benaceur'); ?></span>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php esc_html_e('Disable fixation (bottom) in a screen less than 600px', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr><br><br>
 					<tr>
@@ -342,7 +342,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php if (!$this->options_sty('fixed_top_bottom')) echo esc_attr( '0' ); else echo esc_attr( $this->options_sty('fixed_top_bottom') ); ?>" name="<?php echo $this->option_sty('fixed_top_bottom'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("margin top/bottom",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("margin top/bottom",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
@@ -350,7 +350,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('fixed_width') ); ?>" name="<?php echo $this->option_sty('fixed_width'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("Width in percent %",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("Width in percent %",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr>
 					<tr>
 						<td>
@@ -358,7 +358,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('fixed_index') ); ?>" name="<?php echo $this->option_sty('fixed_index'); ?>" />
 							</div></div>
 						</td>
-						<div class="colwrap-display"><td><?php _e("z-index",'news-ticker-benaceur'); ?> </td></div><br>
+						<div class="colwrap-display"><td><?php esc_html_e("z-index",'news-ticker-benaceur'); ?> </td></div><br>
 					</tr><br>
 
 
@@ -371,7 +371,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('adminbar_height') ); ?>" name="<?php echo $this->option_sty('adminbar_height'); ?>" />
 							</div></div>
 						</td>
-						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php _e("The height of the admin bar in a screen width of more than 782px (default &#34;32&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div>
+						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php esc_html_e("The height of the admin bar in a screen width of more than 782px (default &#34;32&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div>
 						<div style="margin-bottom:15px;width:140px;border-bottom:1px solid #999999;"></div>
 					</tr>
 					<tr>
@@ -380,7 +380,7 @@
 								<input type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('adminbar_height_mobile') ); ?>" name="<?php echo $this->option_sty('adminbar_height_mobile'); ?>" />
 							</div></div>
 						</td>
-						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php _e("The height of the admin bar in a screen width of less than 782px (default &#34;46&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div><div style="width:30%;border-bottom:2px solid #974c16;"></div><br>
+						<div style="line-height:24px;margin-bottom:15px;" class="colwrap-display"><td><?php esc_html_e("The height of the admin bar in a screen width of less than 782px (default &#34;46&#34; leave blank) | This doesn&#39;t affect the height of the admin bar, but rather affects the news ticker when you place it at the top of the site compared to the height of the admin bar",'news-ticker-benaceur'); ?> </td></div><div style="width:30%;border-bottom:2px solid #974c16;"></div><br>
 					</tr><br>
 
 
@@ -392,11 +392,11 @@
 								<input style="min-width:175px;direction:ltr;" type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('fixed_class_for_top') ); ?>" name="<?php echo $this->option_sty('fixed_class_for_top'); ?>" />
 							</div></div>
 						</td>
-						<div id="ntb-11-class-or-id" class="colwrap-display"><td><?php _e("Class or id (fixed at the top)",'news-ticker-benaceur'); ?> </td></div>
+						<div id="ntb-11-class-or-id" class="colwrap-display"><td><?php esc_html_e("Class or id (fixed at the top)",'news-ticker-benaceur'); ?> </td></div>
 					</tr>
 			<div class="note_7101add_the_code" style="margin-bottom:27px;">
 			<p style="max-width:460px;">
-			<em><?php _e("This will display the item behind the fixed news ticker. By default, leave the field blank. If the element does not appear (depending on your theme), enter the class or ID of the element.",'news-ticker-benaceur'); ?></em>
+			<em><?php esc_html_e("This will display the item behind the fixed news ticker. By default, leave the field blank. If the element does not appear (depending on your theme), enter the class or ID of the element.",'news-ticker-benaceur'); ?></em>
 			</p>
 			</div>			
 					<tr>
@@ -405,25 +405,25 @@
 								<input style="min-width:175px;direction:ltr;" type="text" class="news-ticker-benaceur-color-inp" value="<?php echo esc_attr( $this->options_sty('fixed_class_for_bottom') ); ?>" name="<?php echo $this->option_sty('fixed_class_for_bottom'); ?>" />
 							</div></div>
 						</td>
-						<div id="ntb-11-class-or-id" class="colwrap-display"><td><?php _e("Class or id (fixed at the bottom)",'news-ticker-benaceur'); ?> </td></div>
+						<div id="ntb-11-class-or-id" class="colwrap-display"><td><?php esc_html_e("Class or id (fixed at the bottom)",'news-ticker-benaceur'); ?> </td></div>
 					</tr>
 			<div class="note_7101add_the_code">
 			<p style="max-width:460px;">
-			<em><?php _e("This will display the item behind the fixed news ticker. By default, leave the field blank. If the element does not appear (depending on your theme), enter the class or ID of the element.",'news-ticker-benaceur'); ?></em>
+			<em><?php esc_html_e("This will display the item behind the fixed news ticker. By default, leave the field blank. If the element does not appear (depending on your theme), enter the class or ID of the element.",'news-ticker-benaceur'); ?></em>
 			</p>
 			</div>		
 <br><div class="to-tr2"></div>
 
-            <p class="news-ticker-benaceur-font-size"><?php _e("Style customization (css)",'news-ticker-benaceur'); ?></p>
+            <p class="news-ticker-benaceur-font-size"><?php esc_html_e("Style customization (css)",'news-ticker-benaceur'); ?></p>
 			<p class="news-ticker-benaceur-s-style"><textarea id="news-ticker-benaceur-CodeMirrorCss" class="news-ticker-benaceur-s--style" name="<?php echo $this->option_sty('s_style'); ?>" ><?php echo html_entity_decode( $this->options_sty('s_style') ); ?></textarea></p>
-			<p><em class="news-ticker-benaceur-font-size"><?php _e("Ex:",'news-ticker-benaceur'); ?></em></p>			
+			<p><em class="news-ticker-benaceur-font-size"><?php esc_html_e("Ex:",'news-ticker-benaceur'); ?></em></p>			
 			<p><em><div id="pre710166-note" class="ntb-ex"><?php echo esc_html(".news-ticker-ntb li {margin-right:30px;}"); ?></div></em></p>			
 
 <div class="to-tr2"></div>
 
-            <p class="news-ticker-benaceur-font-size"><?php _e("Script customization or adding (java/jquery)",'news-ticker-benaceur'); ?></p>
+            <p class="news-ticker-benaceur-font-size"><?php esc_html_e("Script customization or adding (java/jquery)",'news-ticker-benaceur'); ?></p>
 			<p class="news-ticker-benaceur-s-style"><textarea id="news-ticker-benaceur-CodeMirrorJs" class="news-ticker-benaceur-s--script" name="<?php echo $this->option_sty('s_script'); ?>" ><?php echo html_entity_decode( $this->options_sty('s_script') ); ?></textarea></p>
-			<p><em class="news-ticker-benaceur-font-size"><?php _e("Ex:",'news-ticker-benaceur'); ?></em></p>			
+			<p><em class="news-ticker-benaceur-font-size"><?php esc_html_e("Ex:",'news-ticker-benaceur'); ?></em></p>			
 			<p><em><div id="pre710166-note" class="ntb-ex"><?php echo esc_html('(function($) {$(".class").hide();})(jQuery);'); ?></div></em></p>			
 
 <div class="to-tr2"></div><br>
@@ -436,11 +436,11 @@
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                    </label>
-       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php _e('Hide the plugin rating icon', 'news-ticker-benaceur'); ?></span>
+       &nbsp;&nbsp;&nbsp; <span class="news-ticker-benaceur-font-size" style="font-weight:normal;"><?php esc_html_e('Hide the plugin rating icon', 'news-ticker-benaceur'); ?></span>
 				   </td>
                 </tr>
 				<br><br>
 
-		<p class="submit"><input type="submit" name="submit_style" id="submit-ftb5" class="button-benTheme" value="<?php _e( 'Save style settings', 'news-ticker-benaceur' ); ?>"  /></p>
+		<p class="submit"><input type="submit" name="submit_style" id="submit-ftb5" class="button-benTheme" value="<?php esc_attr_e( 'Save style settings', 'news-ticker-benaceur' ); ?>"  /></p>
 		<p class="ntb_cache_changesSaved"><?php echo $this->purge_cache_msg(); ?></p>
 				</div>	

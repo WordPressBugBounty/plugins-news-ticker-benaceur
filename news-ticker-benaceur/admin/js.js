@@ -28,7 +28,7 @@
             }
             else if($(this).attr("value")=="shuffle" || $(this).attr("value")=="toss" || $(this).attr("value")=="turnUp" ||
 			$(this).attr("value")=="turnDown" || $(this).attr("value")=="zoom" || $(this).attr("value")=="fadeZoom" ||
-			$(this).attr("value")=="growX" || $(this).attr("value")=="growY" || $(this).attr("value")=="curtainX" ||
+			$(this).attr("value")=="growX" || $(this).attr("value")=="growY" || $(this).attr("value")=="curtainX" || $(this).attr("value")=="curtainXRL" ||
 			$(this).attr("value")=="curtainY" || $(this).attr("value")=="slideX" || $(this).attr("value")=="turnLeft" ||
 			$(this).attr("value")=="turnRight" || $(this).attr("value")=="fade" || $(this).attr("value")=="slideY" ||
 			$(this).attr("value")=="blindZ" || $(this).attr("value")=="scrollLeft" || $(this).attr("value")=="scrollRight" ||
@@ -441,10 +441,17 @@ var backgroundInterval = setInterval(function(){
 }(jQuery));
 
 jQuery(document).ready(function($){ 
-     $('.custom-select-news,.custom_select_auto_add_code,.personalize_not_fixed_select').niceSelect() 
+     $('.custom-select-news,.custom_select_auto_add_code,.personalize_not_fixed_select,.news-ticker-benaceur-cache-selsect').niceSelect() 
 });
 // custom select
 
+// show/hide cache note
+(function($) {
+    $('#ntb_button_hide_cache_notes,#ntb_button_hide_cache_notes2').click(function() {
+        $('.ntb_cache_notes_txt_sh').slideToggle("slow");
+    });
+})(jQuery);
+// show/hide cache note
 
 // hide in
 (function($) {
@@ -934,7 +941,10 @@ $('input[type=radio][name="news_ticker_benaceur_glob_options[global_options][hid
     $('#click_modif_by_filter_ntb2').click(function() {
         $('#display_modif_by_filter_ntb2').slideToggle(100);
     });
-    $('#class_display_note_ntb1,#click_display_note_ntb').click(function() {
+    $('#click_modif_by_filter_ntb3').click(function() {
+        $('#display_modif_by_filter_ntb3').slideToggle(100);
+    });    
+	$('#class_display_note_ntb1,#click_display_note_ntb').click(function() {
         $('#display__note__ntb').slideToggle("slow");
     });
 })(jQuery);

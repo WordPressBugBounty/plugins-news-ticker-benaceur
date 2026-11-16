@@ -12,15 +12,19 @@ word-break: break-word;
 font-size:14px;
 }
 
-.enable_ntb_plugin {font-family:DroidKufi_Ben, Tahoma;font-size:15px;font-weight:bold;margin-top:10px;}
+.enable_ntb_plugin {
+	font-family:DroidKufi_Ben, Tahoma, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-size:15px;font-weight:bold;margin-top:10px;
+}
 
 /* setting msg updated */
 #setting-error-settings_updated {display:none;}
 
 #message.updated p {
-	font-family:DroidKufi_Ben, Arial;
+	font-family:DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	font-size:15px !important;
-    line-height:1.5em !important;
+    color:#fff;
+	line-height:1.5em !important;
 	font-weight:normal !important;
 	padding:initial;
 }
@@ -33,7 +37,7 @@ font-size:14px;
 	right:0; 
 	left:160px;
 	top:15%; 
-	background:#00B509; 
+	background:#009107; 
 	color:#fff;
 	opacity:1;
 	z-index:8;
@@ -55,7 +59,7 @@ font-size:14px;
 .ntb__export__file {
 	position:fixed;
 	background: #37a514;
-	font-family: DroidKufi_Ben,Tahoma,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-family: DroidKufi_Ben, Tahoma, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	color: #fff;
 	font-size: 15px;
 	padding:11px 0;
@@ -80,7 +84,7 @@ font-size:14px;
 @media only screen and (max-width: 782px) { .admin-bar .ntb__export__file {top: 46px;} }
 /* setting msg updated */
 
-.DroidArabicKufi {font-family: DroidKufi_Ben, sans-serif;}
+.DroidArabicKufi {font-family: DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
 
 #NTB-up-page {
   height:60px;
@@ -107,7 +111,7 @@ font-size:14px;
 .ntb-new {background:url('../img/ntb-new.gif') no-repeat ;width:33px; height:11px;}
 
 #col-nontb {
-    font-family: DroidKufi_Ben, tahoma;
+    font-family: DroidKufi_Ben, Tahoma, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	margin-bottom: 15px;
 }
 #col-nontb p {
@@ -115,7 +119,7 @@ font-size:14px;
 }
 
 input.button-benTheme {
-	font-family: DroidKufi_Ben;
+	font-family: DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     background-color: #297FB8; 
     border: none;
     color: white;
@@ -142,7 +146,7 @@ input.button-benTheme:hover {
 .styled-select-ntb select {
     color:#5D5D5D;
     border-radius:5px;
-	font-family: DroidKufi_Ben, Tahoma;
+	font-family: DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	font-size: 13px;
 	line-height: 1;
 	font-weight:normal;
@@ -155,7 +159,7 @@ input.button-benTheme:hover {
     background-color:#2F76EC;
 	border: 0 none;
 	border-radius: 3px;
-	font-family: Tahoma;
+	font-family: Tahoma, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	color: #fff;
 	font-size: 14px;
 	line-height: 1;
@@ -460,7 +464,7 @@ width:99%;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
+	font-family:Arial, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	font-size:20px;
 	font-weight:bold;
 	padding:11px 28px;
@@ -509,10 +513,11 @@ input#ntb0.button-benTheme {width:98% !important;}
 
 	/* -- version -- */
 .ntb-mm411112 {
-	    width:100%;
-	    background:#F4A297;
-		color:#000;
-font-family: DroidKufi_Ben, sans-serif;font-size:15px;
+	width:100%;
+	background:#F4A297;
+	color:#000;
+	font-family: DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-size:15px;
 }
  .ntb-mm411112-backgroundRed{
         background:#F2897B;
@@ -535,7 +540,7 @@ font-family: DroidKufi_Ben, sans-serif;font-size:15px;
 /* STYLE SELECT */
 
 .custom-select-news, .custom_select_auto_add_code {
-  font-family: DroidKufi_Ben ,Arial;
+  font-family: DroidKufi_Ben ,Arial, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 .nice-select.custom_select_auto_add_code, .nice-select.personalize_not_fixed_select {
   width: 100%;
@@ -1151,7 +1156,7 @@ select[multiple] {
 .main-NTB .NTBP4577 a { color:#fff;text-decoration:underline; }
 
 .main-NTB h3 {
-	font-family: DroidKufi_Ben, Tahoma, Arial, sans-serif;
+	font-family: DroidKufi_Ben, Tahoma, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	font-size: 0.79rem;
 }
 .main-NTB {
@@ -1175,8 +1180,8 @@ select[multiple] {
     transition: all 0.5s ease-in-out;
 }
 
-.koalapse__content-NTB p {font-family:sans-serif;font-size:15px;}
-[dir=rtl] .koalapse__content-NTB p {font-family: DroidKufi_Ben, sans-serif;font-size:14px;}
+.koalapse__content-NTB p {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-size:15px;}
+[dir=rtl] .koalapse__content-NTB p {font-family: DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-size:14px;}
 
 .koalapse__content-NTB[aria-hidden="true"] {
     display: none;
@@ -1204,7 +1209,7 @@ select[multiple] {
 }
 
 .koalapse__title-NTB {
-	font-family: Tahoma, Arial, sans-serif;
+	font-family: Tahoma, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -1230,7 +1235,7 @@ select[multiple] {
 }
 /* -- accordion-NTB -- */
 
-input.button-secondary,input.button-secondary.sec {font-family: DroidKufi_Ben, Noto Sans,sans-serif;}
+input.button-secondary,input.button-secondary.sec {font-family: DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
 
 input.button-secondary.sec, input.button-secondary.sec:focus {
 background-color: #ffffff;
@@ -1265,7 +1270,7 @@ text-align:right;
 }
 #wpcontent-benaceur-ntb textarea {border: 1px solid #E0E0E0;}
 #wpcontent-benaceur-ntb input[type="text"] {
-	font-family: Tahoma;
+	font-family: Tahoma, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	color: #545254;
 	font-size: 13px;
 	line-height: 1;
@@ -1299,7 +1304,7 @@ text-align:right;
 }
 
 #pre710166-note {
-font-family: Monaco,Consolas,"Andale Mono","DejaVu Sans Mono",monospace,Tahoma;
+font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 line-height:1.6em;
 width:fit-content;
 background:#e6dfdf;
@@ -1354,7 +1359,7 @@ padding:4px;
 [dir=rtl] .note-benaceur_shortcode.note2 > div {padding-left:0; padding-right:70px;}
 
 .note-benaceur_shortcode {
-	font-family: DroidKufi_Ben, Arial;
+	font-family: DroidKufi_Ben, -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     padding: 10px 20px;
     margin-top: 30px;
 	border-radius: 6px;
@@ -1380,7 +1385,8 @@ padding:4px;
 .note-benaceur_shortcode.note2 > div {padding:0 !important;}
 }
 .note-benaceur_shortcode .box-inner-block777 p {
-line-height: 1.8;
+	line-height: 1.8;
+	text-shadow: none !important;
 }
 
 .ntb_cache_changesSaved,.ntb_cache_changesSaved-s-oth,.ntb_cache_changesSaved-s-all {
@@ -1423,6 +1429,10 @@ line-height: 1.8;
 [dir=rtl] .class_display_note_ntb > span, [dir=rtl] #wrap_modif_by_filter_ntb > span {margin-right: 10px; margin-left: 0;}
 
 #ntb_button_h_sh_in input {padding: 0 30px;}
+
+@media (max-width: 400px) { #ntb_button_h_sh_in.ntb_button_h_sh_in_cache_notes input {padding: 0 4px;} }
+@media (max-width: 340px) { #ntb_button_h_sh_in.ntb_button_h_sh_in_cache_notes input {font-size: 14px;} }
+
 #ntb_button_h_sh_in span {
 	position: absolute; margin-top: 25px; margin-left: 6px; margin-right: 0; cursor: pointer;
 }
@@ -1458,6 +1468,24 @@ line-height: 1.8;
 
 #ntb_excluded-reset_checkbox {margin-right:4px; margin-left:4px;}
 .ntb_excluded-reset_checkbox > span {cursor:pointer;}
-.ntb_excluded-reset-text p {font-family: DroidKufi_Ben,Tahoma,Arial,sans-serif;}
+.ntb_excluded-reset-text p {font-family: DroidKufi_Ben,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
 .ntb_excluded-reset-text .ntb_ert_class {margin-top:5px; margin-bottom:13px; padding:0 4px;}
 .ntb_excluded-reset-text .ntb_ert_class span {border-bottom: 1px solid #347575;}
+
+.news-ticker-benaceur-cache-note {
+	font-family: DroidKufi_Ben,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-size: 14px;
+	line-height: 1.6;
+}
+@media (max-width: 782px) {
+    .news-ticker-benaceur-cache-note {font-size: 15px;}
+}
+.ntb_submit_delete_data_stored_now {
+	margin-top: 30px;
+}
+.ntb_submit_delete_data_stored_now > input, .news-ticker-benaceur-cache-selsect {
+	font-family: DroidKufi_Ben,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+.news-ticker-benaceur-cache-selsect {font-size: 15px;}
+
+#display_modif_by_filter_ntb3 a {padding:0 4px;}

@@ -38,6 +38,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'dir' => 'auto',
 	    'num_posts' => '10',
 	    'latest_p_c' => 'latest_posts',
+		'cache_p_c' => 'disabled',
 	    'include_exclude_id' => 'exclude_id',
 	    'expt_txt_title' => '100',
 	    'expt_txt_comment' => '100',
@@ -75,7 +76,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'animation' => 'fadein',
 	    'speed_anms_two' => '1000',
 	    'timeout_anms_two' => '4000',
-	    'speed_scrollntb_' => '7',
+	    'speed_scrollntb_' => '5',
 	    'pause_scrollntb' => '1',
 	    'expt_title_scrollntb' => '28',
 	    'all_scrollntb' => '1',
@@ -96,7 +97,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'pause_anms_two' => '1',
 	    'pause_slide_up_down' => '1',
 	    'pause_fadein' => '1',
-	    'pause__typing' => '',
+	    'pause__typing' => '1',
 	    'dist_from_left_right_fadein' => '5',
 	    'dist_from_left_right_scrollup' => '5',
 	    'dist_from_left_right_scrollntb' => '5',
@@ -127,7 +128,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	    'color_text_title' => '#FFFFFF',
 	    'color_border' => '#CE1031',
 	    'border_top' => '0',
-	    'border_bottom' => '2',
+	    'border_bottom' => '0',
 	    'border_right' => '0',
 	    'border_left' => '0',
 	    'border_radius' => '1',
@@ -349,12 +350,12 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 	);
 	
 	foreach ( $names as $name ) {
-	delete_option($name);	
+	delete_option( $name );	
 	}
 	
 	}
 	
-	function all_options($name) { // $this->all_options('global_options');
+	function all_options( $name ) { // $this->all_options('global_options');
 	
     $opts = $this->all__options();
 	
@@ -450,7 +451,7 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
 		
         $opts = $this->glob_options();
 
-		if ($opts == false || !is_array($opts))
+		if ( $opts == false || !is_array( $opts ) )
 			return false;
 		
 		if ( ! is_array( $data ) )
@@ -557,188 +558,759 @@ class class______news_ticker_benaceur_functs extends class______news_ticker_bena
         }
     }
 	
-    function get_recent($recent) {
-		
-    $cat_post_ids = array_filter(array_unique(array_map('trim', explode(',', $this->options('for_cat')))));
-    $for_cat_tax = $this->options('for_cat_tax');
-	$include_exclude_id = $this->options('include_exclude_id');
-	
-    // L comments	
-    $args_comms = array(
-    'status'    => $this->options('comment_status'),
-	'number'    => $this->options('num_posts'),
-	'post_type' => $this->options('post_type'),
-	'orderby'   => 'comment_date',
-	'order'     => 'DESC'
-    );
-    // L comments
-	
-	if ($cat_post_ids) {
-		if ($include_exclude_id == 'include_id') {
-		    $args_comms['post__in'] = $cat_post_ids;
-		} else if ($include_exclude_id == 'exclude_id') {
-		    $args_comms['post__not_in'] = $cat_post_ids;
-		}
+	function post_status_args_comments() {
+		return apply_filters( 'news_ticker_benaceur_post_status_args_comments', 'publish' );
 	}
+	
+	// cache
+	
+	function ntb_get_recent_posts( $args ) {
+		$posts = wp_get_recent_posts( $args );
 
-    //
-	$value = array();
-    foreach ($cat_post_ids as $val){
-		if ($include_exclude_id == 'include_id') {
-		    $value[] = $val;
-		} else if ($include_exclude_id == 'exclude_id') {
-		    $value[] = '-' . $val;
-		}
-    }
-    $inc_exc_ids = implode(',', $value);
-    // 	
-	$lp = array(
-		'post_type'      => $this->options('post_type'),
-		'posts_per_page' => $this->options('num_posts'),
-		'orderby'        => 'date', // modified
-		'order'          => 'DESC',
-		'post_status'    => $this->options('post_status')
+		return apply_filters_deprecated(
+			'ntb_filter_get_all_recent_posts',
+			array( $posts ),
+			'3.5',
+			'ntb_pre_get_recent_posts',
+			__( 'This filter runs after the plugin retrieves the posts. To provide your own results before retrieval, use ntb_pre_get_recent_posts. Return null from the new filter to use the plugin default.', 'news-ticker-benaceur' )
 		);
-	 
-	if ($for_cat_tax == 'category' || !$for_cat_tax) {
-		if ($cat_post_ids)
-		    $lp['cat'] = $inc_exc_ids;
-	} else {
-		$lp['tax_query'] = array(
-		    array(
-			'taxonomy' => $for_cat_tax,
-			'field'    => 'term_id',
-			'terms'    => $cat_post_ids
-		    )
-	        );
+	}	
+	
+	function ntb_get_recent_comments( $args ) {
+		$comments = get_comments( $args );
+
+		return apply_filters_deprecated(
+			'ntb_filter_get_all_recent_comments',
+			array( $comments ),
+			'3.5',
+			'ntb_pre_get_recent_comments',
+			__( 'This filter runs after the plugin retrieves the comments. To provide your own results before retrieval, use ntb_pre_get_recent_comments. Return null from the new filter to use the plugin default.', 'news-ticker-benaceur' )
+		);
+	}	
+	
+	function posts_comments_transient_time() {
+		return apply_filters( 'news_ticker_benaceur_transient_time', 12 * HOUR_IN_SECONDS );
 	}
-	 
-	if ($this->options_hi('hide') != 'disable_this_option') {
-		$lp['date_query'] = array(
-              array(
-                'after'     => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
-				'inclusive' => true,
-				'column'    => 'post_date',
-              )
-            );
+	
+	function posts_cache_name() {
+		return 'news_ticker_benaceur_posts_cache';
+	}
+	
+	function comments_cache_name() {
+		return 'news_ticker_benaceur_comments_cache';
+	}
+
+	/**
+	 * Return the current generation for a transient cache family.
+	 */
+	function transient_cache_generation( $type ) {
+		$option_name = 'posts' === $type ? 'news_ticker_benaceur_posts_cache_generation' : 'news_ticker_benaceur_comments_cache_generation';
+		return (string) get_option( $option_name, '1' );
+	}
+
+	/**
+	 * Invalidate every argument-specific transient in a cache family.
+	 */
+	function bump_transient_cache_generation( $type ) {
+		$args = $this->get_arguments( $type );
+
+		$cache_key = 'posts' === $type
+			? $this->posts_cache_key( $args )
+			: $this->comments_cache_key( $args );
+
+		delete_transient( $cache_key );
+
+		$option_name = 'posts' === $type
+			? 'news_ticker_benaceur_posts_cache_generation'
+			: 'news_ticker_benaceur_comments_cache_generation';
+
+		update_option( $option_name, md5( uniqid( (string) mt_rand(), true ) ), false );
+	}	 
+
+	function posts_cache_key( $args ) {
+		return $this->posts_cache_name() . '_' . $this->transient_cache_generation( 'posts' ) . '_' . md5( serialize( $args ) );
+	}
+
+	function comments_cache_key( $args ) {
+		return $this->comments_cache_name() . '_' . $this->transient_cache_generation( 'comments' ) . '_' . md5( serialize( $args ) );
+	}
+
+	function set_argument_cache( $type, $cache_key, $value, $expiration ) {
+		$stored = set_transient( $cache_key, $value, $expiration );
+		if ( ! $stored ) {
+			return;
+		}
+
+		$option_name = 'posts' === $type ? 'news_ticker_benaceur_posts_cache_marker' : 'news_ticker_benaceur_comments_cache_marker';
+		$expiration  = (int) $expiration;
+		$marker      = array(
+			'generation' => $this->transient_cache_generation( $type ),
+			'expires'    => 0 !== $expiration ? time() + $expiration : 0,
+		);
+		update_option( $option_name, $marker, false );
+	}
+
+	function has_argument_cache( $type ) {
+		$option_name = 'posts' === $type ? 'news_ticker_benaceur_posts_cache_marker' : 'news_ticker_benaceur_comments_cache_marker';
+		$marker      = get_option( $option_name, false );
+
+		return is_array( $marker )
+			&& isset( $marker['generation'], $marker['expires'] )
+			&& $marker['generation'] === $this->transient_cache_generation( $type )
+			&& ( 0 === (int) $marker['expires'] || (int) $marker['expires'] > time() );
+	}
+	
+	function delete_all_transient_p_c_caches() {
+		$this->bump_transient_cache_generation( 'posts' );
+		$this->bump_transient_cache_generation( 'comments' );
+	}
+	
+	
+	// Vérifier si le paramètre `orderby` est défini sur `rand` via le filtre, afin de déterminer si les articles sont affichés de manière aléatoire ou non.
+	
+	function ntb_posts_orderby_is_random( $args ) {
+		if ( ! isset( $args['orderby'] ) ) {
+			return false;
+		}
+
+		$orderby = $args['orderby'];
+
+		if ( is_string( $orderby ) ) {
+			return $this->ntb_orderby_value_is_random( $orderby );
+		}
+
+		if ( is_array( $orderby ) ) {
+			foreach ( $orderby as $key => $value ) {
+				// WP_Query can receive an orderby array such as array( 'rand' => 'ASC' ).
+				if ( is_string( $key ) && $this->ntb_orderby_value_is_random( $key ) ) {
+					return true;
+				}
+
+				// Also support a numeric array such as array( 'rand' ).
+				if ( is_int( $key ) && is_string( $value ) && $this->ntb_orderby_value_is_random( $value ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	function ntb_orderby_value_is_random( $value ) {
+		if ( ! is_string( $value ) ) {
+			return false;
+		}
+
+		$value = trim( $value );
+
+		// WP_Query accepts the unseeded alias only in lowercase.
+		if ( preg_match( '/(^|[\s,])rand($|[\s,])/', $value ) ) {
+			return true;
+		}
+
+		// WP_Query also accepts RAND(seed), case-insensitively.
+		return (bool) preg_match( '/(^|[\s,])RAND\([0-9]+\)($|[\s,])/i', $value );
+	}
+	
+	// Vérifier si le paramètre `orderby` est défini sur `rand` via le filtre, afin de déterminer si les articles sont affichés de manière aléatoire ou non.
+	
+	function ntb_recent_posts( $args ) {
+		$custom_posts = apply_filters( 'ntb_pre_get_recent_posts', null, $args );
+		if ( null !== $custom_posts ) {
+			return $custom_posts;
+		}
+
+		// The legacy result filter may depend on data outside the plugin's invalidation hooks.
+		if ( 'enabled' !== $this->options('cache_p_c') || has_filter( 'ntb_filter_get_all_recent_posts' ) ) {
+			return $this->ntb_get_recent_posts( $args );
+		}
+
+		$cache_key = $this->posts_cache_key( $args );
+		$posts_cached = get_transient( $cache_key );
+		
+		if ( false !== $posts_cached ) {
+			return $posts_cached;
+		}
+		
+		$recent_posts = $this->ntb_get_recent_posts( $args );
+		if ( $recent_posts ) {
+			$this->set_argument_cache( 'posts', $cache_key, $recent_posts, $this->posts_comments_transient_time() );
+		}
+		
+		return $recent_posts;
+	}
+	/**
+	* apply_filters( 'ntb_pre_get_recent_posts', null, $args )
+	* هنا null تعني: «لا أقدّم نتائج مخصصة؛ أكمل بالطريقة الافتراضية للإضافة». إذا أعاد الفلتر null، تستدعي الإضافة مسارها المعتاد. أما إذا أعاد مصفوفة، حتى لو كانت فارغة، فتعتبرها الإضافة النتيجة المطلوبة وتعيدها مباشرة، من دون الجلب الافتراضي أو كاش الإضافة.
+	* مثال: تقديم مقالات مخصصة
+		add_filter( 'ntb_pre_get_recent_posts', 'my_custom_recent_posts', 10, 2 );
+		function my_custom_recent_posts( $posts, $args ) {
+			// إرجاع null يطلب من الإضافة متابعة الجلب الافتراضي.
+			if ( ! is_front_page() ) {
+				return $posts;
+			}
+
+			// عند إرجاع نتائج، تتجاوز الإضافة الجلب الافتراضي وكاشها.
+			return array(
+				array(
+					'ID'            => 123,
+					'post_title'    => 'عنوان المقال',
+					'post_author'   => 1,
+					'post_date'     => '2026-11-02 12:00:00',
+					'post_date_gmt' => '2026-11-02 11:00:00',
+					'post_modified' => '2026-11-02 12:00:00',
+					'comment_count' => '0',
+				),
+			);
+		}
+	* يجب أن تكون نتيجة المقالات مصفوفة من المصفوفات، وبها الحقول التي تتوقعها الإضافة مثل ID و`post_title` و`post_author` والتواريخ.	
+	 */
+	
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * post inserted or updated
+	 */
+	function transient_wp_insert_post( $post_id, $post, $update ) {
+		if ( $this->options('latest_p_c') !== 'latest_posts' || ! in_array( $post->post_type, (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'posts' );
+	}
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * post deleted
+	 */
+	function transient_post_deleted( $post_id, $post ) {
+		if ( $this->options('latest_p_c') !== 'latest_posts' || ! in_array( $post->post_type, (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'posts' );
+	}
+
+	function transient_post_updated( $post_id, $post_after, $post_before ) {
+		if ( $post_before->post_type === $post_after->post_type ) {
+			return;
+		}
+
+		$post_types = (array) $this->options('post_type');
+		if ( ! in_array( $post_before->post_type, $post_types, true ) && ! in_array( $post_after->post_type, $post_types, true ) ) {
+			return;
+		}
+
+		if ( 'latest_posts' === $this->options('latest_p_c') ) {
+			$this->bump_transient_cache_generation( 'posts' );
+		} elseif ( 'latest_comments' === $this->options('latest_p_c') ) {
+			$this->bump_transient_cache_generation( 'comments' );
+		}
+	}
+
+	function transient_post_terms_updated( $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids ) {
+		$tax_query = $this->options('for_cat_tax') ? $this->options('for_cat_tax') : 'category';
+		$term_ids  = array_filter( array_unique( array_map( 'trim', explode( ',', $this->options('for_cat') ) ) ) );
+		$post_type = get_post_type( $object_id );
+
+		if ( 'latest_posts' !== $this->options('latest_p_c') || ! $term_ids || $taxonomy !== $tax_query || ! in_array( $post_type, (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+
+		$this->bump_transient_cache_generation( 'posts' );
+	}
+
+	function transient_post_term_deleted( $term, $tt_id, $taxonomy ) {
+		$tax_query = $this->options('for_cat_tax') ? $this->options('for_cat_tax') : 'category';
+		$term_ids  = array_map( 'intval', array_filter( array_unique( array_map( 'trim', explode( ',', $this->options('for_cat') ) ) ) ) );
+
+		if ( 'latest_posts' !== $this->options('latest_p_c') || $taxonomy !== $tax_query || ! in_array( (int) $term, $term_ids, true ) ) {
+			return;
+		}
+
+		$this->bump_transient_cache_generation( 'posts' );
+	}
+	
+	function ntb_recent_comments( $args ) {
+		$custom_comments = apply_filters( 'ntb_pre_get_recent_comments', null, $args );
+		if ( null !== $custom_comments ) {
+			return $custom_comments;
+		}
+
+		// The legacy result filter may depend on data outside the plugin's invalidation hooks.
+		if ( 'enabled' !== $this->options('cache_p_c') || has_filter( 'ntb_filter_get_all_recent_comments' ) ) {
+			return $this->ntb_get_recent_comments( $args );
+		}
+
+		$cache_key = $this->comments_cache_key( $args );
+		$comments_cached = get_transient( $cache_key );
+		
+		if ( false !== $comments_cached ) {
+			return $comments_cached;
+		}
+		
+		$recent_comments = $this->ntb_get_recent_comments( $args );
+		if ( $recent_comments ) {
+			$this->set_argument_cache( 'comments', $cache_key, $recent_comments, $this->posts_comments_transient_time() );
+		}
+		
+		return $recent_comments;
+	}
+	/**
+	* apply_filters( 'ntb_pre_get_recent_comments', null, $args )
+	* هنا null تعني: «لا أقدّم نتائج مخصصة؛ أكمل بالطريقة الافتراضية للإضافة». إذا أعاد الفلتر null، تستدعي الإضافة مسارها المعتاد. أما إذا أعاد مصفوفة، حتى لو كانت فارغة، فتعتبرها الإضافة النتيجة المطلوبة وتعيدها مباشرة، من دون الجلب الافتراضي أو كاش الإضافة.
+	* مثال: تقديم تعليقات مخصصة
+		add_filter( 'ntb_pre_get_recent_comments', 'my_custom_recent_comments', 10, 2 );
+		function my_custom_recent_comments( $comments, $args ) {
+			if ( ! is_front_page() ) {
+				return $comments; // ما زالت null، فيستمر الجلب الافتراضي.
+			}
+
+			return array(
+				new WP_Comment(
+					(object) array(
+						'comment_ID'       => 456,
+						'comment_post_ID'  => 123,
+						'comment_author'   => 'اسم المعلّق',
+						'comment_content'  => 'نص التعليق',
+						'comment_date'     => '2026-11-02 12:00:00',
+						'comment_date_gmt' => '2026-11-02 11:00:00',
+					)
+				),
+			);
+		}
+	* نتيجة التعليقات يجب أن تكون مصفوفة من كائنات التعليقات التي توفر الخصائص التي تستخدمها الإضافة، مثل comment_author و`comment_content` و`comment_post_ID`.	
+	 */
+	
+	
+	function transient_new_comment( $comment_id, $comment ) {
+		$post_id = $comment->comment_post_ID;
+		if ( $this->options('latest_p_c') !== 'latest_comments' || ! in_array( get_post_type( $post_id ), (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'comments' );
+	}
+
+	function transient_comment_update_data( $data, $old_comment, $commentarr ) {
+		if ( $this->options('latest_p_c') !== 'latest_comments' ) {
+			return $data;
+		}
+
+		$old_post_id = isset( $old_comment['comment_post_ID'] ) ? (int) $old_comment['comment_post_ID'] : 0;
+		$new_post_id = isset( $data['comment_post_ID'] ) ? (int) $data['comment_post_ID'] : $old_post_id;
+		$post_types  = (array) $this->options('post_type');
+
+		if ( in_array( get_post_type( $old_post_id ), $post_types, true ) || in_array( get_post_type( $new_post_id ), $post_types, true ) ) {
+			$this->bump_transient_cache_generation( 'comments' );
+		}
+
+		return $data;
+	}
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * comment edited
+	 */
+	function transient_edit_comment( $comment_id, $data ) {
+		$post_id = isset( $data['comment_post_ID'] ) ? (int) $data['comment_post_ID'] : 0;
+		if ( $this->options('latest_p_c') !== 'latest_comments' || ! in_array( get_post_type( $post_id ), (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'comments' );
+	}
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * comment status is chenged (including comment trashed) or comment is permanently deleted or the post for this comment is permanently deleted
+	 */
+	function transient_status_comment_updated( $new_status, $old_status, $comment ) {
+		$post_id = $comment->comment_post_ID;
+		if ( 'delete' === $new_status || $this->options('latest_p_c') !== 'latest_comments' || ! in_array( get_post_type( $post_id ), (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'comments' );
+	}
+
+	function transient_comment_deleted( $comment_id, $comment ) {
+		$post_id = $comment->comment_post_ID;
+		if ( $this->options('latest_p_c') !== 'latest_comments' || ! in_array( get_post_type( $post_id ), (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'comments' );
+	}
+
+	function transient_post_comments_changed( $post_id ) {
+		if ( $this->options('latest_p_c') !== 'latest_comments' || ! in_array( get_post_type( $post_id ), (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'comments' );
+	}
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * post status for this comment is chenged (including post trashed)
+	 */
+	function transient_status_post_updated__comment( $new_status, $old_status, $post ) {
+		if ( $this->options('latest_p_c') !== 'latest_comments' || ! in_array( $post->post_type, (array) $this->options('post_type'), true ) ) {
+			return;
+		}
+		$this->bump_transient_cache_generation( 'comments' );
+	}
+
+	function update_transient_global_or_all_posted() {
+		if ( ! current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) ) {
+			return;
+		}
+
+		// and in this plugin_deactivation function (when the plugin is disabled)
+	    $this->delete_all_transient_p_c_caches();
+	}
+	
+	function delete_all_caches_now_action() {
+		if ( ! current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) ) {
+			return;
+		}
+		
+		if ( isset( $_POST['ntb_submit_delete_data_stored_now'] ) ) {
+			check_admin_referer( 'news_ticker_benaceur_glob_group-options' );
+
+			if ( 'enabled' === $this->options('cache_p_c') ) {
+				$this->delete_all_transient_p_c_caches();
+				update_user_meta( get_current_user_id(), 'ntb_submit_delete_data_stored_now', true );
+			}
+		}		
+	}
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * delete all transient for recent posts and comments when glob or all options reset
+	 */
+	function delete_all_transient_reset() {
+		if ( isset($_GET['settings-updated']) && in_array( $this->options_s('reset'), array( 'reset_glob', 'reset_all' ) ) ) {
+			$this->delete_all_transient_p_c_caches();
+		}
+	}
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * delete all transient for recent posts and comments when plugin is deactivated
+	 */
+	function delete_all_transient_deactivation() {
+		$this->delete_all_transient_p_c_caches();
+	}
+	
+	function exists_ntb_cache() {
+		if ( 'enabled' !== $this->options('cache_p_c') ) {
+			return false;
+		}
+
+		if ( 'latest_posts' === $this->options('latest_p_c') ) {
+			return $this->has_argument_cache( 'posts' );
+		}
+
+		if ( 'latest_comments' === $this->options('latest_p_c') ) {
+			return $this->has_argument_cache( 'comments' );
+		}
+		return false;
+	}
+	
+	// cache
+	
+    function get_arguments( $type ) {
+		
+		$cat_post_ids = array_filter(array_unique(array_map('trim', explode(',', $this->options('for_cat')))));
+		$for_cat_tax = $this->options('for_cat_tax');
+		$include_exclude_id = $this->options('include_exclude_id');
+		
+		// L comments
+		$_comment_status = $this->options('comment_status');
+		$comment_statuses = array(
+			'all' => array( 'approve', 'hold', 'trash', 'spam' )
+		);
+		if ( isset( $comment_statuses[ $_comment_status ] ) ) {
+			$_comment_status = $comment_statuses[ $_comment_status ];
+		}
+		
+		$args_comms = array(
+		'post_status' => $this->post_status_args_comments(),
+		'status'      => $_comment_status,
+		'number'      => $this->options('num_posts'),
+		'post_type'   => $this->options('post_type'),
+		'orderby'     => 'comment_date',
+		'order'       => 'DESC'
+		);
+		// L comments
+		
+		if ( $cat_post_ids ) {
+			if ( $include_exclude_id == 'include_id' ) {
+				$args_comms['post__in'] = $cat_post_ids;
+			} else if ( $include_exclude_id == 'exclude_id' ) {
+				$args_comms['post__not_in'] = $cat_post_ids;
+			}
+		}
+
+		//
+		$value = array();
+		foreach ( $cat_post_ids as $val ){
+			if ($include_exclude_id == 'include_id') {
+				$value[] = $val;
+			} else if ($include_exclude_id == 'exclude_id') {
+				$value[] = '-' . $val;
+			}
+		}
+		$inc_exc_ids = implode(',', $value);
+		// 	
+		$lp = array(
+			'post_type'      => $this->options('post_type'),
+			'posts_per_page' => $this->options('num_posts'),
+			'orderby'        => 'date', // modified
+			'order'          => 'DESC',
+			'post_status'    => $this->options('post_status')
+		);
+		 
+		if ( $for_cat_tax == 'category' || ! $for_cat_tax ) {
+			if ($cat_post_ids) {
+				$lp['cat'] = $inc_exc_ids;
+			}
+		} else {
+			$lp['tax_query'] = array(
+				array(
+				'taxonomy' => $for_cat_tax,
+				'field'    => 'term_id',
+				'terms'    => $cat_post_ids
+				)
+			);
+		}
+		 
+		if ( $this->options_hi('hide') != 'disable_this_option' ) {
+			$lp['date_query'] = array(
+				array(
+					'after'     => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
+					'inclusive' => true,
+					'column'    => 'post_date',
+				)
+			);
+				
+			$args_comms['date_query'] = array(
+				array(
+					'after'     => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
+					'inclusive' => true,
+					'column'    => 'comment_date',
+				)
+			);
+		}
+		
+		/* Ex
+		add_filter( 'ntb_filter_arguments_recent_posts', function($args) {
+			$args['posts_per_page']  = 2;
+			$args['order'] = 'ASC';
+
+			return $args;
+		});
+
+		add_filter( 'ntb_filter_get_all_recent_posts', function($posts) {
+		global $wpdb;
+
+		$posts = $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE `post_type` = 'post' AND `post_status` = 'publish' ORDER BY `post_date` DESC LIMIT 10", ARRAY_A);
+
+		return $posts;
+		});
+		*/
+		
+		if ( 'posts' === $type ) {
+			return apply_filters( 'ntb_filter_arguments_recent_posts', $lp );
+		}
+		
+		if ( 'comments' === $type ) {
+			return apply_filters( 'ntb_filter_arguments_recent_comments', $args_comms );
+		}
+    }
+	
+    function get_recent( $recent ) {
+		if ( $recent == 'posts' ) {
+			return $this->ntb_recent_posts( $this->get_arguments( 'posts' ) );
+		}
+		
+		if ( $recent == 'comments' ) {
+			return $this->ntb_recent_comments( $this->get_arguments( 'comments' ) );
+		}
+    }
+	
+    function ntb_items( $i = '' ) {
+		$nm = $i ? apply_filters( 'ntb_filter_number_ntb_items', 0 ) : 0;
+		$txt_news_manually = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options('txt_news_manually')))));	
+		 
+		if ( $this->options('latest_p_c') == 'latest_posts' && count( $this->get_recent('posts') ) <= $nm )
+			return true;
 			
-		$args_comms['date_query'] = array(
-              array(
-                'after'     => $this->options_hi('time_ago') . ' ' . $this->options_hi('ago_in_seconds') . ' ago',
-				'inclusive' => true,
-				'column'    => 'comment_date',
-              )
-            );
+		if ( $this->options('latest_p_c') == 'latest_comments' && count( $this->get_recent('comments') ) <= $nm )
+			return true;
+			
+		if ( $this->options('latest_p_c') == 'manually' && count( $txt_news_manually ) <= $nm )
+			return true;
+		
+		return false;
+    }
+	
+    function get_time_in_second() {
+		
+		$in_seconds = MINUTE_IN_SECONDS;
+		
+		if ($this->options_hi('latest_in_seconds') == 'minute')
+			$in_seconds = MINUTE_IN_SECONDS;
+		if ($this->options_hi('latest_in_seconds') == 'hour')
+			$in_seconds = HOUR_IN_SECONDS;
+		if ($this->options_hi('latest_in_seconds') == 'day')
+			$in_seconds = DAY_IN_SECONDS;
+
+		return ( (int) apply_filters( 'news_ticker_benaceur_hide_time_in_seconds', $in_seconds ) * (int) $this->options_hi('time_latest') );
 	}
-	 
-	$lp = apply_filters( 'ntb_filter_arguments_recent_posts', $lp );
 	
-    /* Ex
-    add_filter( 'ntb_filter_arguments_recent_posts', function($args) {
-	    $args['posts_per_page']  = 2;
-	    $args['order'] = 'ASC';
+    function get_time_recent( $time_out = '' ) {
 
-	    return $args;
-    });
+		$time = $this->get_time_in_second();
+		$get_news = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options('txt_news_manually')))));	
+		
+		if ( $this->options('latest_p_c') == 'latest_posts' ) {
+		    $recent_posts_ntb = $this->get_recent('posts');
+			$diference = $recent_posts_ntb ? current_time( 'timestamp' ) - mysql2date('U', apply_filters( 'news_ticker_benaceur_hide_time_post_date', $recent_posts_ntb[0]["post_date"], $recent_posts_ntb[0] ) ) : current_time( 'timestamp' );
+			$timeOut = $diference >= $time ? '' : ($time - $diference) * 1000 ;	
+		} else if ( $this->options('latest_p_c') == 'latest_comments' ) {
+			$comments_list = $this->get_recent('comments');
+			$comments__list = $comments_list ? $comments_list[0] : array();	
+			$diference = $comments__list ? current_time( 'timestamp' ) - mysql2date('U', apply_filters( 'news_ticker_benaceur_hide_time_comment_date', $comments__list->comment_date, $comments__list ) ) : current_time( 'timestamp' );
+			$timeOut = $diference >= $time ? '' : ($time - $diference) * 1000 ;	
+		} else if ( $this->options('latest_p_c') == 'manually' ) {
+			$diference = $get_news && $this->options_hi('manually_date') ? current_time( 'timestamp' ) - mysql2date('U', $this->options_hi('manually_date')) : current_time( 'timestamp' );
+			$timeOut = $diference >= $time ? '' : ($time - $diference) * 1000 ;	
+		}		
+		 
+		if ( $time_out && $timeOut ) return $timeOut;
 
-    add_filter( 'ntb_filter_get_all_recent_posts', function($posts) {
-    global $wpdb;
+		if ( $this->options('hide_if_noItems') && $this->ntb_items() ) return true; // hide if no item and hide_if_noItems option is enabled
 
-    $posts = $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE `post_type` = 'post' AND `post_status` = 'publish' ORDER BY `post_date` DESC LIMIT 10", ARRAY_A);
-
-	return $posts;
-    });
-    */
-	
-	$args_comms = apply_filters( 'ntb_filter_arguments_recent_comments', $args_comms );
-	
-	if ($recent == 'posts')
-		return apply_filters( 'ntb_filter_get_all_recent_posts', wp_get_recent_posts( $lp ) );
-	
-	if ($recent == 'comments')
-		return apply_filters( 'ntb_filter_get_all_recent_comments', get_comments($args_comms) );
-
+		if ( $this->options_hi('hide') == 'hide' ) { // hide after time without jquery
+			
+			if ( $diference >= $time )
+			return true;
+		
+		} else if ($this->options_hi('hide') == 'hide_jquery') { // hide after time with jquery
+		
+			if ( $diference >= $time + 1 )
+			return true;	
+		}
     }
 	
-    function ntb_items($i = '') {
-		
-	$nm = $i ? apply_filters( 'ntb_filter_number_ntb_items', 0 ) : 0;
-	$txt_news_manually = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options('txt_news_manually')))));	
-	 
-	if ( $this->options('latest_p_c') == 'latest_posts' && count( $this->get_recent('posts') ) <= $nm )
-	    return true;
-		
-	if ( $this->options('latest_p_c') == 'latest_comments' && count( $this->get_recent('comments') ) <= $nm )
-	    return true;
-		
-	if ( $this->options('latest_p_c') == 'manually' && count( $txt_news_manually ) <= $nm )
-	    return true;
+	// filter comment date if hide after time is enabled
 	
-	return false;
-    }
-	
-    function get_time_recent($time_Out = '') {
-	$recent_posts_ntb = $this->get_recent('posts');
-    $comments_list = $this->get_recent('comments');
-	
-	$in_seconds = MINUTE_IN_SECONDS;
-	if ($this->options_hi('latest_in_seconds') == 'minute')
-	$in_seconds = MINUTE_IN_SECONDS;
-	if ($this->options_hi('latest_in_seconds') == 'hour')
-	$in_seconds = HOUR_IN_SECONDS;
-	if ($this->options_hi('latest_in_seconds') == 'day')
-	$in_seconds = DAY_IN_SECONDS;
-
-	$time = $in_seconds * (int)$this->options_hi('time_latest');
-	$get_news = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options('txt_news_manually')))));	
-	
-	if ($this->options('latest_p_c') == 'latest_posts') {
-	$diference = $recent_posts_ntb ? current_time( 'timestamp' ) - mysql2date('U', $recent_posts_ntb[0]["post_date"]) : current_time( 'timestamp' );
-	$timeOut = $diference >= $time ? '' : ($time - $diference) * 1000 ;	
-	} else if ($this->options('latest_p_c') == 'latest_comments') {
-	$comments__list = $comments_list ? $comments_list[0] : $comments_list;	
-	$diference = $comments_list ? current_time( 'timestamp' ) - mysql2date('U', $comments__list->comment_date) : current_time( 'timestamp' );
-	$timeOut = $diference >= $time ? '' : ($time - $diference) * 1000 ;	
-	} else if ($this->options('latest_p_c') == 'manually') {
-	$diference = $get_news && $this->options_hi('manually_date') ? current_time( 'timestamp' ) - mysql2date('U', $this->options_hi('manually_date')) : current_time( 'timestamp' );
-	$timeOut = $diference >= $time ? '' : ($time - $diference) * 1000 ;	
-	}		
-	 
-	if ($time_Out && $timeOut) return $timeOut;
-
-    if ($this->options('hide_if_noItems') && $this->ntb_items()) return true; // hide if no item and hide_if_noItems option is enabled
-
-    if ($this->options_hi('hide') == 'hide') { // hide after time without jquery
-		
-    if ( $diference >= $time )
-	return true;
-	
-	} else if ($this->options_hi('hide') == 'hide_jquery') { // hide after time with jquery
-	
-	if ($diference >= $time + 1)
-    return true;	
+	function meta_comment_date_key() {
+		return 'news_ticker_benaceur_comment_date_time_hide';
 	}
-    }
 	
-	function get_serialized_glob_options() {
+	function _comment_status_to_new_status( $new_status, $old_status, $comment ) {
+		
+		if ( $this->options('latest_p_c') != 'latest_comments' ) {
+			return;
+		}
+		
+		$status = apply_filters( 'news_ticker_benaceur_comment_status_args', $this->options('comment_status') );
+		$comment_statuses = array(
+			'hold'    => 'unapproved', // $this->options('comment_status') uses "hold".
+			'approve' => 'approved',   // $this->options('comment_status') uses "approve".
+		);
+		if ( isset( $comment_statuses[ $status ] ) ) {
+			$status = $comment_statuses[ $status ];
+		}
+		
+		if ( $status !== $new_status && 'all' !== $status ) {
+			return;
+		}
+		
+		if ( $this->options_hi('hide') != 'disable_this_option' ) {
+			
+			$comment_ID = $comment->comment_ID;
+			$meta_comment_date_key = $this->meta_comment_date_key();
+			$comment_ids = wp_list_pluck( get_comments( $this->get_arguments( 'comments' ) ), 'comment_ID' );
+			
+			if ( in_array( $comment_ID, $comment_ids ) ) {
+				// wp_cache_delete and delete_metadata in this settings_callback function
+				wp_cache_delete( 'news_ticker_benaceur_comment_date_cache_time_hide' );
+				delete_metadata( 'comment', 0, $meta_comment_date_key, '', true );
+				add_comment_meta( $comment_ID, $meta_comment_date_key, current_time( 'mysql' ) );
+			}
+				
+		}
+	
+	}
+
+	function filter_hide_time_comment_date( $comment_date, $comment ) {
 		global $wpdb;
 		
-		if (!$this->glob_options())
+		if ( $this->options('latest_p_c') != 'latest_comments' ) {
 			return;
+		}
 		
-		return $wpdb->get_var( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", "news_ticker_benaceur_glob_options" ) );
+		$comment_ID = $comment->comment_ID;
+		
+		if ( $this->options_hi('hide') != 'disable_this_option' ) {
+		
+			$cache_key = 'news_ticker_benaceur_comment_date_cache_time_hide';
+			$meta_values = wp_cache_get( $cache_key );
+
+			if ( false === $meta_values ) {
+				$get_time_in_second = $this->get_time_in_second() + MONTH_IN_SECONDS;
+				// Cache get_var
+				$meta_values = $wpdb->get_var( $wpdb->prepare(
+					"SELECT meta_value FROM {$wpdb->commentmeta} WHERE meta_key = %s ORDER BY comment_id DESC LIMIT 1",
+					$this->meta_comment_date_key()
+				) );
+
+				wp_cache_set( $cache_key, $meta_values, '', $get_time_in_second );
+			}
+			
+			if ( ! empty( $meta_values ) ) {
+				$comment_date = $meta_values;
+			}
+		}
+		
+		return $comment_date;
+			
 	}
+	
+	/**
+	 * @since news ticker benaceur 3.5
+	 * delete delete_metadata and wp_cache for comment_date when ntb hides after time
+	 */
+	function delete_metadata_comment_date() {
+		$hide_setting = isset( $_POST['news_ticker_benaceur_glob_options']['global_options']['hide_after_time']['hide'] )
+			? $_POST['news_ticker_benaceur_glob_options']['global_options']['hide_after_time']['hide']
+			: null;
+
+		if ( 'disable_this_option' !== $hide_setting || 'disable_this_option' === $this->options_hi('hide') ) {
+			return;
+		}
+
+		if ( ! current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) ) {
+			return;
+		}
+
+		check_admin_referer( 'news_ticker_benaceur_glob_group-options' );
+
+		wp_cache_delete( 'news_ticker_benaceur_comment_date_cache_time_hide' );
+		delete_metadata( 'comment', 0, $this->meta_comment_date_key(), '', true );
+	}	 
+
+	
+	// filter comment date if hide after time is enabled
 	
 	function remove_shortcode_wpdb() {
 		global $wpdb;
 		
 	    $fields = "post_content = replace(post_content, '%s', '')";	
-	    $sql = "UPDATE $wpdb->posts SET $fields";
+	    $sql    = "UPDATE $wpdb->posts SET $fields";
         return $wpdb->query( $wpdb->prepare( $sql, '[wp_news_ticker_benaceur_short_code]' ) );
 	}
 	
 	function is_php_8_1_wpcore() {
-		if (version_compare( PHP_VERSION, '8.1', '>=' ) && version_compare( get_bloginfo('version'), '6.2', '<'))
+		if ( version_compare( PHP_VERSION, '8.1', '>=' ) && version_compare( get_bloginfo('version'), '6.2', '<' ) )
 		return true;
 	}
 	

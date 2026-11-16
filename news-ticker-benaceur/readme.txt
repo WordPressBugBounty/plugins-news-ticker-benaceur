@@ -1,9 +1,10 @@
 === news ticker benaceur ===
 Contributors: Benaceur 
 Tags: news ticker, latest posts, latest comments, news post, latest news animation
-Requires at least: 3.0
-Tested up to: 6.9
-Stable tag: 3.4.2
+Requires at least: 5.9
+Tested up to: 7.1
+Requires PHP: 5.6.20
+Stable tag: 3.5
 License: GPLv2 or later
 
 This plugin allow you to display the latest posts or latest comments in a bar with twenty seven beautiful animations and effects...
@@ -63,6 +64,36 @@ Link to preview <a href="http://benaceur-php.com/" target="_blank">Demo</a>
 
 == Changelog ==
 
+= 3.5 =
+* New option: "Temporarily store recent posts and comments (cache)" to reduce database load.
+* Corrections to the following animations: Curtain Hor - Turn Right - Turn Left - Scroll right - Scroll left
+* New animation: "Curtain Hor RL".
+* Raising the plugin’s minimum required WordPress version from 3.0 to 5.9
+* Raising the plugin’s minimum required PHP version from 5.5 to 5.6.20
+* Add trashed and spam comments status to "Choose the comment status" option.
+* New filter: "news_ticker_benaceur_post_status_args_comments" post_status in recent comments arguments.
+* New filter: "news_ticker_benaceur_hide_time_in_seconds".
+* Added: a 'trash' status to all status.
+* Changed: The comment date will be updated if the new status matches the one chosen in the "comment status" option, if the 'Hide after time' (recent comments) option is enabled.
+* New note and code in: 'Modifications and additions by "filter"' section.
+* New note below the "Disable autostart" option: 'This option only works if "Previous/Next button" option is enabled and "Enable style of mobile" option is disabled.'.
+* New note below 'Upload image' in 'Scroll-H Animation' section.
+* Remove filter: "ntb_filter_import_json_auth".
+* This version has fixed some security vulnerabilities.
+* The default value for `border bottom` has been changed from 2 to 0.
+* The default value for `Scroll-H speed` has been changed from 7 to 5.
+* Scroll-H animation:
+* Improved: Ticker script rewritten for smoother, more reliable animation (uses CSS transforms instead of jQuery animate).
+* Improved: Scroll speed now adapts to the ticker width (slower on narrow screens, faster on wide ones). The "speed" option keeps its meaning (higher value = slower), but the exact pace may differ slightly from previous versions, so you may want to re-adjust it.
+* Improved: The ticker now re-measures itself when the window is resized, the device is rotated, or images/fonts finish loading.
+* Improved: Pause on hover works on devices with a mouse; on touch devices the ticker pauses while a finger is held on it and resumes on release. Keyboard focus on a ticker link also pauses the ticker.
+* Fixed: Option values are now read safely whether they are passed as strings, numbers or booleans.
+* Fixed: Ticker no longer breaks on RTL sites; the text direction of your site is preserved.
+* Cycle-based animations:
+* Improved: On touch devices the slideshow pauses while a finger is held on it and resumes on release. Keyboard focus on a link also pauses it.
+* Fixed: The script no longer throws an error when the settings object or the slideshow library is missing.
+* Improved TickerNTB controls and playback: fixed previous/next navigation so automatic scrolling resumes, and added pause-on-hover and touch, with playback resuming when interaction ends or the Android link menu opens.
+* Fixed repeated hover pauses that could hide the ticker text and leave only the cursor visible.
 = 3.4.2 =
 * Tested up to php 8.5
 = 3.4.1 =

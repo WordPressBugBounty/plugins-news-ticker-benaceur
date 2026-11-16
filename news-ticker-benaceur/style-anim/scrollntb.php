@@ -9,9 +9,18 @@ $img_attachment = $getID_attachment ? wp_get_attachment_url( $getID_attachment )
 .n_t_ntb_bimg {display: none;}
 
 .n_t_ntb_bimg {
-margin:0 <?php echo $this->options_anim('dist_between_scrollntb'); ?>px;
+	margin: 0 <?php echo $this->options_anim('dist_between_scrollntb'); ?>px;
+	font-family: <?php echo $this->options_sty('font_family'); ?>;
 }
-.n_t_ntb_bimg span {display:inline-block; vertical-align:middle;}
+
+.n_t_ntb_bimg > span {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+.n_t_ntb_bimg > span:first-child {
+	vertical-align: middle;
+}
 
 .ntb_img_post_t_scrollntb::before {
 content:"<?php echo apply_filters( 'ntb_filter_content_before_scrollntb', '' ); ?>";

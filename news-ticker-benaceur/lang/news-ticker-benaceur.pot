@@ -1,0 +1,1617 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: news ticker benaceur\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 18:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.4; wp-7.0; php-8.3.6\n"
+"X-Domain: news-ticker-benaceur"
+
+#: opts-page/global-options.php:738
+msgid " (comment)"
+msgstr ""
+
+#: opts-page/global-options.php:731
+msgid " (post)"
+msgstr ""
+
+#: opts-page/animations.php:60 opts-page/animations.php:67
+msgid "(not fot typing1)"
+msgstr ""
+
+#: opts-page/animations.php:381
+msgid "+ date and title"
+msgstr ""
+
+#: opts-page.php:216
+msgid ""
+"- Enter your news (manually) here (General settings)<br>- The last update of "
+"manually news date (General settings)<br>- Style customization css (Settings "
+"of style)<br>- Script customization or adding java/jquery (Settings of style)"
+msgstr ""
+
+#: opts-page.php:92
+msgid ""
+"- For both &#34;Absolute Position (default)&#34; and &#34;Relative "
+"Position&#34; options, absolute means that the news ticker location is "
+"absolutely at the header location if we choose top and at the footer "
+"location if we choose bottom, while relative means that it&#39;s in the "
+"header or footer relatively, for those who have no idea about css and html "
+"languages, try the first option, which is the default. If it doesn&#39;t "
+"work, choose the second one, and it depends on the theme you are using. Note:"
+" these two options only work with &#34;Add the code automatically to top&#34;"
+" and &#34;Add the code automatically to bottom&#34; option."
+msgstr ""
+
+#: opts-page.php:91
+msgid ""
+"- If you choose to fix the news bar at the top or bottom of the site, it&#39;"
+"s recommended to add the code automatically by activating the option: &#34;"
+"Automatically add the code to show the news ticker to the theme&#34; in the "
+"fixation options at the bottom of this page and not here, unless the bar "
+"doesn&#39;t appear (according to your theme) add it manually, as for the "
+"shortcode, put it manually, and doesn&#39;t work until you activate it below "
+"this note, and cannot be fixed."
+msgstr ""
+
+#: opts-page.php:288
+msgid ""
+"1- If you use a caching plugin, it is necessary in most cases to clear the "
+"cache after plugin settings is updated"
+msgstr ""
+
+#: opts-page.php:289
+msgid ""
+"2- Note for developers: When you use (query_posts) to identify articles that "
+"appear in the home page, for example, or in search page or ... must be taken "
+"into account that it affects the inclusion or exclusion articles that appear "
+"in the ticker, and to avoid this problem, and so as not to interfere with "
+"the insertion or exception settings for latest articles, must use this "
+"condition: $query->is_main_query()"
+msgstr ""
+
+#: opts-page.php:114
+msgid "Absolute Position (default)"
+msgstr ""
+
+#: includes/filter-functions.php:12
+msgid "Add date and other"
+msgstr ""
+
+#: opts-page.php:103
+msgid "Add the code automatically to bottom"
+msgstr ""
+
+#: opts-page.php:102
+msgid "Add the code automatically to top"
+msgstr ""
+
+#: opts-page.php:104
+msgid "Add the code manually"
+msgstr ""
+
+#: includes/filter-functions.php:75
+msgid ""
+"After each new code is added or updated, you must clear the cache if you are "
+"using the (Temporarily store of data) option by clicking on: (Delete data "
+"stored now)."
+msgstr ""
+
+#: includes/global.php:227
+msgid "All changes saved successfully, close this message!"
+msgstr ""
+
+#: opts-page/global-options.php:443
+msgid "All status"
+msgstr ""
+
+#: includes/global.php:1000
+msgid "An error occurred while importing the file."
+msgstr ""
+
+#: opts-page/style.php:310
+msgid ""
+"and if you choose manually with fixation at the bottom, add it exactly "
+"before the closing body tag in the footer:"
+msgstr ""
+
+#: includes/filter-functions.php:37
+msgid ""
+"And replace No. 1 with the appropriate number, and you can exclude more than "
+"one membership, for example: array(&#39;1&#39;, &#39;55&#39;, &#39;9&#39;)"
+msgstr ""
+
+#: opts-page/style.php:70
+msgid "and use px if your theme uses the pixels in width.)"
+msgstr ""
+
+#: opts-page/global-options.php:439
+msgid "Approved comments"
+msgstr ""
+
+#: opts-page/global-options.php:60
+msgid "Are you sure you want to clear the plugin cache now?"
+msgstr ""
+
+#: opts-page/style.php:293
+msgid "At the bottom"
+msgstr ""
+
+#: opts-page/style.php:294
+msgid "At the top"
+msgstr ""
+
+#: opts-page/global-options.php:235
+msgid "author page"
+msgstr ""
+
+#: opts-page/global-options.php:724
+msgid "Auto"
+msgstr ""
+
+#: opts-page/global-options.php:421
+msgid "auto-draft"
+msgstr ""
+
+#: opts-page/style.php:278
+msgid ""
+"Automatically add the code to show the news ticker to the theme (recommended)"
+msgstr ""
+
+#: opts-page/style.php:11
+msgid "Background color"
+msgstr ""
+
+#: opts-page/style.php:13
+msgid "Background color of title"
+msgstr ""
+
+#. Author of the plugin
+msgid "benaceur"
+msgstr ""
+
+#: opts-page/animations.php:56
+msgid "Black"
+msgstr ""
+
+#: opts-page/animations.php:42
+msgid "Blind bott"
+msgstr ""
+
+#: opts-page/animations.php:136 opts-page/style.php:114 opts-page/style.php:176
+msgid "Bold"
+msgstr ""
+
+#: opts-page/style.php:35
+msgid "border bottom"
+msgstr ""
+
+#: opts-page/style.php:31
+msgid "border bottom (Title)"
+msgstr ""
+
+#: opts-page/style.php:15
+msgid "Border color"
+msgstr ""
+
+#: opts-page/style.php:16
+msgid "Border color (Title)"
+msgstr ""
+
+#: opts-page/style.php:36 opts-page/style.php:37
+msgid "border left"
+msgstr ""
+
+#: opts-page/style.php:32 opts-page/style.php:33
+msgid "border left (Title)"
+msgstr ""
+
+#: opts-page/style.php:38
+msgid "border radius"
+msgstr ""
+
+#: opts-page/style.php:36 opts-page/style.php:37
+msgid "border right"
+msgstr ""
+
+#: opts-page/style.php:32 opts-page/style.php:33
+msgid "border right (Title)"
+msgstr ""
+
+#: opts-page/style.php:34
+msgid "border top"
+msgstr ""
+
+#: opts-page/style.php:30
+msgid "border top (Title)"
+msgstr ""
+
+#: opts-page/global-options.php:698
+msgid "Bottom left"
+msgstr ""
+
+#: opts-page/global-options.php:692
+msgid "Bottom right"
+msgstr ""
+
+#: opts-page/animations.php:577
+msgid "Bottom the news bar"
+msgstr ""
+
+#: opts-page/style.php:141
+msgid "box shadow"
+msgstr ""
+
+#: opts-page/style.php:149
+msgid "box shadow color"
+msgstr ""
+
+#: opts-page/style.php:157
+msgid "box shadow pixel"
+msgstr ""
+
+#: opts-page.php:31
+msgid "Cache purged successfully"
+msgstr ""
+
+#: opts-page/global-options.php:506
+msgid "Category id"
+msgstr ""
+
+#: opts-page/global-options.php:478
+msgid "category id (include/exclude)"
+msgstr ""
+
+#: opts-page/global-options.php:506
+msgid "Category name"
+msgstr ""
+
+#: opts-page/global-options.php:223
+msgid "category page"
+msgstr ""
+
+#: opts-page.php:191
+msgid "Choose a section to reset"
+msgstr ""
+
+#: opts-page/animations.php:14
+msgid "Choose an animation"
+msgstr ""
+
+#: opts-page/global-options.php:605
+msgid ""
+"Choose one title for each site according direction if your multilingual site"
+msgstr ""
+
+#: opts-page/global-options.php:436
+msgid "Choose the comment status"
+msgstr ""
+
+#: opts-page/global-options.php:454
+msgid "Choose the name of taxonomy"
+msgstr ""
+
+#: opts-page/global-options.php:412
+msgid "Choose the post status (You can select more than one status)"
+msgstr ""
+
+#: opts-page/global-options.php:387
+msgid "Choose the post type (You can select more than one type)"
+msgstr ""
+
+#: opts-page/animations.php:572
+msgid "Choose where to place the Java file"
+msgstr ""
+
+#: opts-page/style.php:408
+msgid "Class or id (fixed at the bottom)"
+msgstr ""
+
+#: opts-page/style.php:395
+msgid "Class or id (fixed at the top)"
+msgstr ""
+
+#: opts-page/global-options.php:584
+msgid "click here"
+msgstr ""
+
+#: opts-page.php:256
+msgid ""
+"Click on \"Import\" to restore all your saved settings from the json file"
+msgstr ""
+
+#: opts-page/style.php:163
+msgid "Color of prev/next button"
+msgstr ""
+
+#: opts-page.php:282
+msgid "Contribute to translation of plugin"
+msgstr ""
+
+#: opts-page/animations.php:24
+msgid "Curtain Hor"
+msgstr ""
+
+#: opts-page/animations.php:25
+msgid "Curtain Hor RL"
+msgstr ""
+
+#: opts-page/animations.php:23
+msgid "Curtain Ver"
+msgstr ""
+
+#: opts-page/global-options.php:51
+msgid ""
+"Custom filters: The plugin cache is for the latest posts and comments "
+"retrieved by the plugin by default. To provide your own results before the "
+"plugin retrieves the latest comments, use ntb_pre_get_recent_comments. For "
+"the latest posts, use ntb_pre_get_recent_posts. Results provided through "
+"these filters do not use the plugin cache. If you want to cache them, create "
+"your own cache and invalidate it when your data changes. The legacy "
+"ntb_filter_get_all_recent_comments and ntb_filter_get_all_recent_posts "
+"filters also bypass the plugin cache. If you use "
+"ntb_filter_get_all_recent_comments to replace the plugin results with your "
+"own, we recommend switching to ntb_pre_get_recent_comments. For posts, "
+"replace ntb_filter_get_all_recent_posts with ntb_pre_get_recent_posts."
+msgstr ""
+
+#: opts-page/global-options.php:346 opts-page/global-options.php:367
+msgid "Day"
+msgstr ""
+
+#: opts-page/global-options.php:59
+msgid "Delete data stored now"
+msgstr ""
+
+#: opts-page/global-options.php:720
+msgid "Direction"
+msgstr ""
+
+#: opts-page/animations.php:55
+msgid "Disable"
+msgstr ""
+
+#: opts-page/animations.php:156 opts-page/animations.php:224
+#: opts-page/animations.php:297 opts-page/animations.php:441
+msgid "Disable autostart"
+msgstr ""
+
+#: opts-page/animations.php:118
+msgid "Disable cursor"
+msgstr ""
+
+#: opts-page/style.php:336
+msgid "Disable fixation (bottom) in a screen less than 600px"
+msgstr ""
+
+#: opts-page/style.php:325
+msgid "Disable fixation (top) in a screen less than 600px"
+msgstr ""
+
+#: opts-page/global-options.php:185
+msgid "Disable hide/show option"
+msgstr ""
+
+#: opts-page/animations.php:152 opts-page/animations.php:195
+#: opts-page/animations.php:270 opts-page/animations.php:426
+msgid "Disable Previous/Next button"
+msgstr ""
+
+#: opts-page/animations.php:484
+msgid "Disable the icon"
+msgstr ""
+
+#: opts-page.php:203
+msgid "Disable the reset exclude for below options"
+msgstr ""
+
+#: opts-page/style.php:80
+msgid "Disable this font: DroidKufi_Ben "
+msgstr ""
+
+#: opts-page/global-options.php:314
+msgid "Disable this option"
+msgstr ""
+
+#: opts-page/global-options.php:621
+msgid "Disable Title"
+msgstr ""
+
+#: opts-page/animations.php:370
+msgid "Disable title (screen mobile)"
+msgstr ""
+
+#: opts-page/global-options.php:494
+msgid "Display all categories"
+msgstr ""
+
+#: opts-page/animations.php:93 opts-page/animations.php:247
+#: opts-page/animations.php:280 opts-page/animations.php:328
+#: opts-page/animations.php:412
+msgid "Distance from the left"
+msgstr ""
+
+#: opts-page/animations.php:349
+msgid "Distance from the left/right of the image"
+msgstr ""
+
+#: opts-page/animations.php:87 opts-page/animations.php:247
+#: opts-page/animations.php:280 opts-page/animations.php:328
+#: opts-page/animations.php:412
+msgid "Distance from the right"
+msgstr ""
+
+#: opts-page/animations.php:349
+msgid "Distance from the right/left of the image"
+msgstr ""
+
+#: opts-page/style.php:187
+msgid "distance top the prev/next button"
+msgstr ""
+
+#: opts-page.php:164
+msgid "Do not delete"
+msgstr ""
+
+#: opts-page.php:307
+msgid "Do not forget to rate the plugin"
+msgstr ""
+
+#: opts-page.php:179
+msgid "Do not remove"
+msgstr ""
+
+#: opts-page/global-options.php:35
+msgid "Do not temporarily store data"
+msgstr ""
+
+#: opts-page/global-options.php:571
+msgid "Do not update the date"
+msgstr ""
+
+#: opts-page/animations.php:208
+msgid "Down"
+msgstr ""
+
+#: opts-page/global-options.php:418
+msgid "draft"
+msgstr ""
+
+#: includes/filter-functions.php:21
+msgid ""
+"Edit the functions.php file for your active theme and put the following "
+"below it:"
+msgstr ""
+
+#: opts-page/animations.php:112
+msgid "Enable cursor"
+msgstr ""
+
+#: opts-page/global-options.php:81
+msgid "Enable News Ticker Benaceur on admin bar in admin panel"
+msgstr ""
+
+#: opts-page/global-options.php:80
+msgid "Enable News Ticker Benaceur on admin bar in frontend"
+msgstr ""
+
+#: opts-page/global-options.php:11
+msgid "Enable plugin"
+msgstr ""
+
+#: opts-page/animations.php:146 opts-page/animations.php:189
+#: opts-page/animations.php:263 opts-page/animations.php:420
+msgid "Enable Previous/Next button"
+msgstr ""
+
+#: opts-page/style.php:200
+msgid "Enable style of mobile (recommended)"
+msgstr ""
+
+#: opts-page.php:105
+msgid "Enable the shortcode -only manully-"
+msgstr ""
+
+#: opts-page/style.php:190
+msgid ""
+"Enable this feature (style of mobile) if your theme uses the percentage % in "
+"the width of the site"
+msgstr ""
+
+#: opts-page/global-options.php:148
+msgid "Enter here the user id"
+msgstr ""
+
+#: opts-page/global-options.php:484
+msgid "Enter the id"
+msgstr ""
+
+#: opts-page/global-options.php:568
+msgid "Enter your news (manually) here:"
+msgstr ""
+
+#: opts-page/style.php:419 opts-page/style.php:426
+msgid "Ex:"
+msgstr ""
+
+#: opts-page/global-options.php:578
+msgid "ex:"
+msgstr ""
+
+#: opts-page/global-options.php:546
+msgid "Exclude cat id"
+msgstr ""
+
+#: opts-page/global-options.php:547
+msgid "Exclude post id"
+msgstr ""
+
+#: includes/filter-functions.php:18
+msgid "Exclude the comments of a specific member or group"
+msgstr ""
+
+#: opts-page.php:242
+msgid ""
+"Export all plugin settings in an json file that helps you to save all your "
+"settings for reuse here or at another location with ease."
+msgstr ""
+
+#: opts-page.php:240
+msgid "Export settings"
+msgstr ""
+
+#: opts-page/animations.php:22
+msgid "Fade"
+msgstr ""
+
+#: opts-page/animations.php:39
+msgid "Fade In"
+msgstr ""
+
+#: opts-page/animations.php:37
+msgid "Fade LR"
+msgstr ""
+
+#: opts-page/animations.php:38
+msgid "Fade On"
+msgstr ""
+
+#: opts-page/animations.php:36
+msgid "Fade Up"
+msgstr ""
+
+#: opts-page/animations.php:18
+msgid "FadeIn"
+msgstr ""
+
+#: opts-page/style.php:269
+msgid "Fixation the bar top/bottom the site"
+msgstr ""
+
+#: opts-page/style.php:77
+msgid "Font family"
+msgstr ""
+
+#: opts-page/style.php:99
+msgid "Font family (title)"
+msgstr ""
+
+#: opts-page/style.php:91 opts-page/style.php:208
+msgid "Font size"
+msgstr ""
+
+#: opts-page/style.php:109
+msgid "Font size (title)"
+msgstr ""
+
+#: opts-page/style.php:171
+msgid "Font size of prev/next button"
+msgstr ""
+
+#: opts-page/style.php:117
+msgid "Font weight"
+msgstr ""
+
+#: opts-page/global-options.php:419
+msgid "future"
+msgstr ""
+
+#: opts-page.php:81
+msgid "General settings"
+msgstr ""
+
+#: opts-page/global-options.php:360
+msgid "Get only comments published less than:"
+msgstr ""
+
+#: opts-page/global-options.php:359
+msgid "Get only posts published less than:"
+msgstr ""
+
+#: opts-page/animations.php:32
+msgid "Grow Hor"
+msgstr ""
+
+#: opts-page/animations.php:33
+msgid "Grow Ver"
+msgstr ""
+
+#: opts-page/style.php:40 opts-page/style.php:209
+msgid "Height"
+msgstr ""
+
+#: opts-page/style.php:42
+msgid "height (Title)"
+msgstr ""
+
+#: opts-page/global-options.php:322
+msgid "Hide (when page reloaded)"
+msgstr ""
+
+#: opts-page/global-options.php:330
+msgid "hide (without reloading the page - jquery)"
+msgstr ""
+
+#: opts-page/global-options.php:338
+msgid "Hide after spending a (the time entered here) of your recent comment:"
+msgstr ""
+
+#: opts-page/global-options.php:337
+msgid "Hide after spending a (the time entered here) of your recent post:"
+msgstr ""
+
+#: opts-page/global-options.php:339
+msgid ""
+"Hide after spending a (the time entered here) of your recent update date:"
+msgstr ""
+
+#: opts-page/global-options.php:304
+msgid "Hide after time:"
+msgstr ""
+
+#: opts-page/global-options.php:112
+msgid "Hide for all except administrator"
+msgstr ""
+
+#: opts-page/global-options.php:100
+msgid "Hide for all users"
+msgstr ""
+
+#: opts-page/global-options.php:124
+msgid "Hide for this group(s) (You can select more than one group)"
+msgstr ""
+
+#: opts-page/global-options.php:145
+msgid "Hide for this user id"
+msgstr ""
+
+#: opts-page/global-options.php:88
+msgid "Hide for visitors"
+msgstr ""
+
+#: opts-page/global-options.php:153
+msgid "Hide if no items (no posts or)"
+msgstr ""
+
+#: opts-page/global-options.php:193
+msgid "Hide in"
+msgstr ""
+
+#: opts-page/style.php:247
+msgid "Hide the news ticker in a screen where the width is less than"
+msgstr ""
+
+#: opts-page/style.php:439
+msgid "Hide the plugin rating icon"
+msgstr ""
+
+#: opts-page/global-options.php:174
+msgid "Hide/Show in:"
+msgstr ""
+
+#: opts-page/global-options.php:211
+msgid "home"
+msgstr ""
+
+#: opts-page/global-options.php:345 opts-page/global-options.php:366
+msgid "Hour"
+msgstr ""
+
+#: opts-page/style.php:17
+msgid "Hover color"
+msgstr ""
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://benaceur-php.com/"
+msgstr ""
+
+#: opts-page/global-options.php:292
+msgid "ID of page"
+msgstr ""
+
+#: opts-page/global-options.php:271
+msgid "ID of post"
+msgstr ""
+
+#: opts-page/style.php:81 opts-page/style.php:100
+msgid ""
+"If you are using a non-latin font (like arabic) it should be preceded by "
+"&#34;Verdana&#34; followed by a comma then our font. ex: Verdana, Kufi"
+msgstr ""
+
+#: opts-page/style.php:304
+msgid ""
+"If you choose manually with fixation at the top, add the code exactly under "
+"the body tag in the header:"
+msgstr ""
+
+#: opts-page.php:284
+msgid ""
+"If you want to translate this plugin to your language then send me the "
+"translation files via:"
+msgstr ""
+
+#: opts-page/animations.php:340
+msgid "Image dimensions"
+msgstr ""
+
+#: opts-page.php:254
+msgid "Import settings"
+msgstr ""
+
+#: includes/notices-ntb.php:10
+msgid "Important"
+msgstr ""
+
+#: opts-page/global-options.php:45
+msgid "Important before enabling the cache!"
+msgstr ""
+
+#: opts-page.php:91
+msgid ""
+"Important: this option under the note is considered null if the fixation "
+"option is activated."
+msgstr ""
+
+#: opts-page/style.php:206
+msgid "In a screen where the maximum width is"
+msgstr ""
+
+#: opts-page/style.php:207
+msgid "In a screen where the minimum width is"
+msgstr ""
+
+#: opts-page/animations.php:576
+msgid "In footer (recommended)"
+msgstr ""
+
+#: opts-page/global-options.php:535
+msgid "Include cat id"
+msgstr ""
+
+#: opts-page/global-options.php:536
+msgid "Include post id"
+msgstr ""
+
+#: opts-page/animations.php:131
+msgid "Indicator size"
+msgstr ""
+
+#: opts-page/global-options.php:422
+msgid "inherit"
+msgstr ""
+
+#: includes/filter-functions.php:9
+msgid "Last update"
+msgstr ""
+
+#: opts-page/global-options.php:21
+msgid "Latest comments"
+msgstr ""
+
+#: opts-page/global-options.php:22
+msgid "Latest news Manually"
+msgstr ""
+
+#: opts-page/global-options.php:20
+msgid "Latest posts"
+msgstr ""
+
+#: opts-page/global-options.php:274 opts-page/global-options.php:295
+#: opts-page/global-options.php:484
+msgid "Leave blank to activate All"
+msgstr ""
+
+#: opts-page/global-options.php:167 opts-page/global-options.php:563
+msgid "Leave it blank (default text)"
+msgstr ""
+
+#: opts-page/global-options.php:371
+msgid "Leave it blank to get all comments"
+msgstr ""
+
+#: opts-page/global-options.php:370
+msgid "Leave it blank to get all posts"
+msgstr ""
+
+#: opts-page/global-options.php:725
+msgid "LTR"
+msgstr ""
+
+#: opts-page/style.php:285
+msgid "Manually add"
+msgstr ""
+
+#: opts-page/style.php:48
+msgid "margin bottom (If it&#39;s not fixed)"
+msgstr ""
+
+#: opts-page/style.php:50
+msgid "margin left"
+msgstr ""
+
+#: opts-page/style.php:49
+msgid "margin right"
+msgstr ""
+
+#: opts-page/style.php:45
+msgid "margin the title from the left (Title)"
+msgstr ""
+
+#: opts-page/style.php:45
+msgid "margin the title from the right (Title)"
+msgstr ""
+
+#: opts-page/style.php:46
+msgid "margin top  (Title)"
+msgstr ""
+
+#: opts-page/style.php:47
+msgid "margin top (If it&#39;s not fixed)"
+msgstr ""
+
+#: opts-page/style.php:345
+msgid "margin top/bottom"
+msgstr ""
+
+#: opts-page/global-options.php:72
+msgid "Menu"
+msgstr ""
+
+#: opts-page/global-options.php:344 opts-page/global-options.php:365
+msgid "Minute"
+msgstr ""
+
+#: includes/filter-functions.php:8
+msgid "Modifications and additions by &#34;filter&#34;"
+msgstr ""
+
+#: includes/notices-ntb.php:10
+msgid ""
+"my latest plugin,perhaps you might be interested <a target=\"_blank\" "
+"href=\"https://wordpress.org/plugins/restrict-usernames-emails-characters/\">"
+"Restrict Usernames Emails Characters</a>"
+msgstr ""
+
+#: opts-page.php:295
+msgid "My plugins"
+msgstr ""
+
+#. Name of the plugin
+msgid "news ticker benaceur"
+msgstr ""
+
+#: opts-page.php:56
+msgid "News-Ticker-Benaceur"
+msgstr ""
+
+#: news-ticker-benaceur-page.php:22 news-ticker-benaceur-page.php:24
+#: includes/global.php:518 style-anim/inc/ie8.php:141
+#: style-anim/inc/ie8.php:143
+msgid "next"
+msgstr ""
+
+#: opts-page/style.php:122 opts-page/style.php:138
+msgid "no"
+msgstr ""
+
+#: includes/functs.php:1322
+msgid "No items"
+msgstr ""
+
+#: includes/functs.php:1326
+msgid "No news"
+msgstr ""
+
+#: includes/ie-setts.php:67
+msgid "No settings file was uploaded."
+msgstr ""
+
+#: opts-page/animations.php:135 opts-page/style.php:114 opts-page/style.php:176
+msgid "Normal"
+msgstr ""
+
+#: opts-page.php:84
+msgid ""
+"Note: After activating the plugin, choose how to put the code in the theme, "
+"manually or automatically."
+msgstr ""
+
+#: opts-page/global-options.php:594 opts-page/global-options.php:731
+#: opts-page/global-options.php:738
+msgid "Number of characters of the news"
+msgstr ""
+
+#: opts-page/animations.php:322
+msgid "Number of title characters"
+msgstr ""
+
+#: opts-page/global-options.php:712
+msgid "Numbre of comments"
+msgstr ""
+
+#: opts-page/global-options.php:711
+msgid "Numbre of posts"
+msgstr ""
+
+#: opts-page/style.php:237
+msgid "Or choose:"
+msgstr ""
+
+#: opts-page.php:124
+msgid "or put this short code in post or page (only manually):"
+msgstr ""
+
+#: includes/filter-functions.php:61
+msgid "Other modifications and additions"
+msgstr ""
+
+#: opts-page.php:150
+msgid "Other settings"
+msgstr ""
+
+#: opts-page/style.php:233
+msgid "padding left"
+msgstr ""
+
+#: opts-page/style.php:233
+msgid "padding right"
+msgstr ""
+
+#: opts-page/animations.php:81 opts-page/style.php:211
+msgid "padding top"
+msgstr ""
+
+#: opts-page/global-options.php:280
+msgid "pages"
+msgstr ""
+
+#: opts-page/animations.php:99 opts-page/animations.php:213
+#: opts-page/animations.php:286 opts-page/animations.php:359
+#: opts-page/animations.php:430
+msgid "Pause on hover"
+msgstr ""
+
+#: opts-page/global-options.php:416
+msgid "pending"
+msgstr ""
+
+#: includes/ie-setts.php:85
+msgid "Please upload a valid .json file."
+msgstr ""
+
+#: includes/global.php:226
+msgid "Please wait..."
+msgstr ""
+
+#: opts-page/global-options.php:506
+msgid "Post Count"
+msgstr ""
+
+#: opts-page/global-options.php:481
+msgid "post id"
+msgstr ""
+
+#: news-ticker-benaceur-page.php:21 news-ticker-benaceur-page.php:25
+#: includes/global.php:519 style-anim/inc/ie8.php:140
+#: style-anim/inc/ie8.php:144
+msgid "prev"
+msgstr ""
+
+#: opts-page/global-options.php:420
+msgid "private"
+msgstr ""
+
+#: opts-page/global-options.php:415
+msgid "publish"
+msgstr ""
+
+#: opts-page/global-options.php:597 opts-page/global-options.php:734
+#: opts-page/global-options.php:741
+msgid "Put 0 to disable"
+msgstr ""
+
+#: opts-page/global-options.php:578
+msgid "Put each news in new line between this tags"
+msgstr ""
+
+#: includes/filter-functions.php:71
+msgid ""
+"Put the code php in the functions.php file when you update your theme, "
+"because it will be deleted after each update of the theme. You can resolve "
+"this problem by using the child theme method. For more details, follow the "
+"following subject: "
+msgstr ""
+
+#: opts-page/global-options.php:650
+msgid "Radius"
+msgstr ""
+
+#: opts-page/style.php:41 opts-page/style.php:210
+msgid "Raise or lower the text (line-height)"
+msgstr ""
+
+#: opts-page/style.php:43
+msgid "Raise or lower the title (line-height)"
+msgstr ""
+
+#: includes/global.php:667
+msgid ""
+"Random ordering was detected for the latest posts while the cache is enabled."
+" The same random selection may be shown until the cache expires. Disable the "
+"cache if you want a new random selection on each page load."
+msgstr ""
+
+#: opts-page/global-options.php:50
+msgid ""
+"Random results: If a filter changes the latest posts or comments query to "
+"return random results, the cache may keep showing the same results until it "
+"expires. Disable the cache if you need a new random selection on each page "
+"load. Results returned directly through ntb_pre_get_recent_posts or "
+"ntb_pre_get_recent_comments bypass the plugin cache."
+msgstr ""
+
+#: opts-page.php:115
+msgid "Relative Position"
+msgstr ""
+
+#: opts-page.php:172
+msgid ""
+"Remove [wp_news_ticker_benaceur_short_code] from posts and pages when the "
+"plugin is disabled (is recommended that take a copy of the database before "
+"this operation)"
+msgstr ""
+
+#: opts-page.php:157
+msgid ""
+"Remove all settings and data of the plugin from database when the plugin is "
+"disabled"
+msgstr ""
+
+#: opts-page/global-options.php:129
+msgid "Remove Selection"
+msgstr ""
+
+#: opts-page.php:195
+msgid "reset all settings"
+msgstr ""
+
+#: opts-page.php:193
+msgid "reset animation settings"
+msgstr ""
+
+#: opts-page/animations.php:479
+msgid "Reset default image"
+msgstr ""
+
+#: opts-page.php:192
+msgid "reset general settings"
+msgstr ""
+
+#: opts-page.php:194
+msgid "reset style settings"
+msgstr ""
+
+#: opts-page.php:185
+msgid "Reset:"
+msgstr ""
+
+#: opts-page/global-options.php:726
+msgid "RTL"
+msgstr ""
+
+#: opts-page.php:227
+msgid "Save all Changes"
+msgstr ""
+
+#: opts-page/animations.php:583
+msgid "Save animation settings"
+msgstr ""
+
+#: opts-page/global-options.php:745
+msgid "Save general settings"
+msgstr ""
+
+#: opts-page.php:223
+msgid "Save other settings"
+msgstr ""
+
+#: opts-page/style.php:444
+msgid "Save style settings"
+msgstr ""
+
+#: opts-page.php:39
+msgid "Saved + reset successfully"
+msgstr ""
+
+#: opts-page/style.php:424
+msgid "Script customization or adding (java/jquery)"
+msgstr ""
+
+#: opts-page/animations.php:34 opts-page/animations.php:35
+msgid "Scroll left"
+msgstr ""
+
+#: opts-page/animations.php:34 opts-page/animations.php:35
+msgid "Scroll right"
+msgstr ""
+
+#: opts-page/animations.php:20
+msgid "Scroll-H"
+msgstr ""
+
+#: opts-page/global-options.php:247
+msgid "search page"
+msgstr ""
+
+#: includes/filter-functions.php:39
+msgid ""
+"Second, depending on the group, for example by excluding comments from the "
+"&#34;administrator&#34; group, in this case put the following code instead "
+"of the first:"
+msgstr ""
+
+#: opts-page/style.php:298
+msgid "Select the fixing method"
+msgstr ""
+
+#: opts-page/global-options.php:149 opts-page/global-options.php:275
+#: opts-page/global-options.php:296 opts-page/global-options.php:485
+msgid "Separate between id by commas, for example: 2,16,223"
+msgstr ""
+
+#: includes/global.php:108
+msgid "Settings"
+msgstr ""
+
+#: opts-page/style.php:5
+msgid "Settings of style"
+msgstr ""
+
+#: opts-page.php:39
+msgid "Settings saved successfully"
+msgstr ""
+
+#: opts-page/global-options.php:201
+msgid "Show in"
+msgstr ""
+
+#: opts-page/animations.php:40
+msgid "Shuffle"
+msgstr ""
+
+#: opts-page/animations.php:44 opts-page/global-options.php:649
+msgid "Simple"
+msgstr ""
+
+#: opts-page/global-options.php:259
+msgid "single post (in post)"
+msgstr ""
+
+#: opts-page/animations.php:30
+msgid "Slide"
+msgstr ""
+
+#: opts-page/animations.php:31
+msgid "Slide Hor"
+msgstr ""
+
+#: opts-page/animations.php:19
+msgid "Slide-Up-Down"
+msgstr ""
+
+#: opts-page/global-options.php:442
+msgid "Spam comments"
+msgstr ""
+
+#: opts-page/animations.php:75 opts-page/animations.php:241
+#: opts-page/animations.php:316 opts-page/animations.php:400
+msgid "Speed"
+msgstr ""
+
+#: opts-page/style.php:417
+msgid "Style customization (css)"
+msgstr ""
+
+#: opts-page/global-options.php:73
+msgid "Submenu"
+msgstr ""
+
+#: opts-page.php:278
+msgid "Support"
+msgstr ""
+
+#: opts-page/global-options.php:479
+msgid "taxonomy id (required)"
+msgstr ""
+
+#: opts-page/global-options.php:36
+msgid "Temporarily store of data"
+msgstr ""
+
+#: opts-page/style.php:12
+msgid "Text color"
+msgstr ""
+
+#: opts-page/style.php:14
+msgid "Text color of title (if animation pulsate is disabled)"
+msgstr ""
+
+#: opts-page/global-options.php:575
+msgid "Text direction"
+msgstr ""
+
+#: opts-page/style.php:125
+msgid "text shadow"
+msgstr ""
+
+#: opts-page/style.php:133
+msgid "text shadow color"
+msgstr ""
+
+#: opts-page/global-options.php:64
+msgid ""
+"The cache (keys) is cleared whenever the data used by the Latest Posts or "
+"Latest Comments ticker changes. It also expires automatically every 12 hours."
+" You can change this duration using the news_ticker_benaceur_transient_time "
+"filter."
+msgstr ""
+
+#: opts-page/animations.php:334
+msgid "The distance between elements"
+msgstr ""
+
+#: opts-page/animations.php:122
+msgid "The distance top of the indicator"
+msgstr ""
+
+#: includes/ie-setts.php:15
+msgid "The export request is invalid."
+msgstr ""
+
+#: opts-page.php:212
+msgid "The following options are excluded from reset:"
+msgstr ""
+
+#: opts-page/style.php:383
+msgid ""
+"The height of the admin bar in a screen width of less than 782px (default "
+"&#34;46&#34; leave blank) | This doesn&#39;t affect the height of the admin "
+"bar, but rather affects the news ticker when you place it at the top of the "
+"site compared to the height of the admin bar"
+msgstr ""
+
+#: opts-page/style.php:374
+msgid ""
+"The height of the admin bar in a screen width of more than 782px (default "
+"&#34;32&#34; leave blank) | This doesn&#39;t affect the height of the admin "
+"bar, but rather affects the news ticker when you place it at the top of the "
+"site compared to the height of the admin bar"
+msgstr ""
+
+#: includes/ie-setts.php:52
+msgid "The import request is invalid."
+msgstr ""
+
+#: opts-page/global-options.php:569
+msgid "The last update of manually news date:"
+msgstr ""
+
+#: opts-page/animations.php:67 opts-page/style.php:39
+msgid "The level of transparency 1-0.1"
+msgstr ""
+
+#: includes/ie-setts.php:100
+msgid "The settings file contains invalid values."
+msgstr ""
+
+#: includes/ie-setts.php:73
+msgid "The settings file could not be uploaded."
+msgstr ""
+
+#: includes/ie-setts.php:94
+msgid "The settings file is invalid."
+msgstr ""
+
+#: includes/global.php:983
+msgid "The settings file was imported successfully"
+msgstr ""
+
+#: opts-page/style.php:257
+msgid "The smaller width than"
+msgstr ""
+
+#: opts-page/global-options.php:561
+msgid "The text that appears if there is no items (manually news)"
+msgstr ""
+
+#: opts-page/global-options.php:165
+msgid "The text that appears if there is no items (posts or comments)"
+msgstr ""
+
+#: opts-page/global-options.php:609
+msgid "The title ltr"
+msgstr ""
+
+#: opts-page/global-options.php:615
+msgid "The title rtl"
+msgstr ""
+
+#: includes/ie-setts.php:79
+msgid "The uploaded settings file is invalid."
+msgstr ""
+
+#: includes/global.php:942
+msgid "There is a newer version, it's recommended to"
+msgstr ""
+
+#: includes/functs.php:587
+msgid ""
+"This filter runs after the plugin retrieves the comments. To provide your "
+"own results before retrieval, use ntb_pre_get_recent_comments. Return null "
+"from the new filter to use the plugin default."
+msgstr ""
+
+#: includes/functs.php:575
+msgid ""
+"This filter runs after the plugin retrieves the posts. To provide your own "
+"results before retrieval, use ntb_pre_get_recent_posts. Return null from the "
+"new filter to use the plugin default."
+msgstr ""
+
+#: opts-page/global-options.php:579
+msgid "This form is correct:"
+msgstr ""
+
+#: opts-page/global-options.php:583
+msgid "This form is incorrect:"
+msgstr ""
+
+#: opts-page/animations.php:3
+msgid ""
+"This option only works if \"Previous/Next button\" option is enabled and "
+"\"Enable style of mobile\" option is disabled."
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"This plugin allow you to display the latest posts or latest comments in a "
+"bar with twenty seven beautiful animations and effects..."
+msgstr ""
+
+#: opts-page/style.php:399 opts-page/style.php:412
+msgid ""
+"This will display the item behind the fixed news ticker. By default, leave "
+"the field blank. If the element does not appear (depending on your theme), "
+"enter the class or ID of the element."
+msgstr ""
+
+#: opts-page/animations.php:10
+msgid "Ticker Animations"
+msgstr ""
+
+#: opts-page/animations.php:235 opts-page/animations.php:274
+#: opts-page/animations.php:406
+msgid "TimeOut"
+msgstr ""
+
+#: opts-page/global-options.php:633
+msgid "Title animation pulsate"
+msgstr ""
+
+#: opts-page/global-options.php:645
+msgid "Title styles"
+msgstr ""
+
+#: includes/filter-functions.php:14
+msgid ""
+"To add the date / author of the post / last modification of the post / the "
+"number of comments on the post, see the following topic:"
+msgstr ""
+
+#: opts-page/animations.php:481
+msgid ""
+"To control the image (move it up or down), use the class ."
+"ntb_img_post_t_scrollntb<br>in &#34;Style customization (css)&#34; Ex: ."
+"ntb_img_post_t_scrollntb {margin-bottom: 2px;}"
+msgstr ""
+
+#: opts-page.php:88
+msgid "To read ..."
+msgstr ""
+
+#: opts-page/global-options.php:666 opts-page/global-options.php:679
+msgid "Top left"
+msgstr ""
+
+#: opts-page/global-options.php:672 opts-page/global-options.php:685
+msgid "Top right"
+msgstr ""
+
+#: opts-page/animations.php:41
+msgid "Toss"
+msgstr ""
+
+#: opts-page/animations.php:60
+msgid "Transparent background"
+msgstr ""
+
+#: opts-page/global-options.php:417
+msgid "trash"
+msgstr ""
+
+#: opts-page/global-options.php:441
+msgid "Trashed comments"
+msgstr ""
+
+#: opts-page/animations.php:27
+msgid "Turn Down"
+msgstr ""
+
+#: opts-page/animations.php:28 opts-page/animations.php:29
+msgid "Turn Left"
+msgstr ""
+
+#: opts-page/animations.php:28 opts-page/animations.php:29
+msgid "Turn Right"
+msgstr ""
+
+#: opts-page/animations.php:26
+msgid "Turn Up"
+msgstr ""
+
+#: opts-page/animations.php:21
+msgid "Typing 1"
+msgstr ""
+
+#: opts-page/animations.php:45
+msgid "Typing 2"
+msgstr ""
+
+#: opts-page/global-options.php:440
+msgid "Unapproved comments"
+msgstr ""
+
+#: opts-page/animations.php:43
+msgid "Uncover"
+msgstr ""
+
+#: opts-page/animations.php:202
+msgid "Up"
+msgstr ""
+
+#: includes/global.php:944
+msgid "update now"
+msgstr ""
+
+#: opts-page/global-options.php:572
+msgid "Update the date of manually news"
+msgstr ""
+
+#: opts-page/animations.php:477
+msgid "Upload image"
+msgstr ""
+
+#: opts-page.php:286
+msgid "Very important"
+msgstr ""
+
+#: opts-page.php:293
+msgid "Visit plugin site:"
+msgstr ""
+
+#: opts-page/style.php:179
+msgid "Weight of prev/next button"
+msgstr ""
+
+#: includes/filter-functions.php:20
+msgid ""
+"When choosing the last comments, it&#39;s possible to exclude the comments "
+"of a specific member from appearing, by his user id:"
+msgstr ""
+
+#: opts-page/global-options.php:49
+msgid ""
+"When should I enable the cache? Enabling it is useful when visitors view the "
+"same latest posts or comments multiple times before they change. If your "
+"site does not add new posts or comments every day, or the list remains "
+"unchanged for longer, the cache will generally be more useful. However, if "
+"the list changes constantly or the ticker is viewed infrequently, the cache "
+"may be less beneficial."
+msgstr ""
+
+#: opts-page/animations.php:57
+msgid "White"
+msgstr ""
+
+#: opts-page/style.php:70
+msgid ""
+"Width by adding: px or % (It is recommended to use % if your theme uses the "
+"percentage in width,"
+msgstr ""
+
+#: opts-page/style.php:353
+msgid "Width in percent %"
+msgstr ""
+
+#: opts-page/style.php:44
+msgid "Width of the title"
+msgstr ""
+
+#: opts-page/style.php:122 opts-page/style.php:138
+msgid "yes"
+msgstr ""
+
+#: includes/ie-setts.php:11
+msgid "You are not allowed to export these settings."
+msgstr ""
+
+#: includes/ie-setts.php:44
+msgid "You are not allowed to import these settings."
+msgstr ""
+
+#: includes/global.php:940
+msgid "You are using Version"
+msgstr ""
+
+#: opts-page.php:280
+msgid "You can ask questions about plugin and settings via this topic:"
+msgstr ""
+
+#: includes/functs.php:1318
+msgid ""
+"You may need to purge the cache after saving the settings, with some cache "
+"plugins, if you are using a cache plugin of course."
+msgstr ""
+
+#: style-anim/inc/ie8.php:149
+msgid ""
+"Your browser is an old version, that's not compatible with this news ticker, "
+"update it!"
+msgstr ""
+
+#: opts-page/global-options.php:580 opts-page/global-options.php:584
+msgid "your first news ..."
+msgstr ""
+
+#: opts-page/global-options.php:581
+msgid "your second news ..."
+msgstr ""
+
+#: opts-page/global-options.php:582
+msgid "your third news ..."
+msgstr ""
+
+#: opts-page/style.php:361
+msgid "z-index"
+msgstr ""

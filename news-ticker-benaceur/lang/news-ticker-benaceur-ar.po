@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: news ticker benaceur v2.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-31 09:29+0000\n"
-"PO-Revision-Date: 2025-01-09 19:01+0000\n"
-"Last-Translator: BENACEUR\n"
+"PO-Revision-Date: 2026-11-16 18:06+0000\n"
+"Last-Translator: \n"
 "Language-Team: العربية\n"
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
@@ -26,25 +26,25 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 "X-Loco-Target-Locale: ar_AE\n"
-"X-Loco-Version: 2.6.14; wp-6.7.1"
+"X-Loco-Version: 2.8.9; wp-7.1.4; php-8.3.6"
 
-#: opts-page/global-options.php:695
+#: opts-page/global-options.php:738
 msgid " (comment)"
 msgstr " (التعليق comment)"
 
-#: opts-page/global-options.php:688
+#: opts-page/global-options.php:731
 msgid " (post)"
 msgstr " (المقالة post)"
 
-#: opts-page/animations.php:56 opts-page/animations.php:63
+#: opts-page/animations.php:60 opts-page/animations.php:67
 msgid "(not fot typing1)"
 msgstr "(غير متوافقة مع Typing1)"
 
-#: opts-page/animations.php:377
+#: opts-page/animations.php:381
 msgid "+ date and title"
 msgstr "+ التاريخ والعنوان"
 
-#: opts-page.php:202
+#: opts-page.php:216
 msgid ""
 "- Enter your news (manually) here (General settings)<br>- The last update of "
 "manually news date (General settings)<br>- Style customization css (Settings "
@@ -54,7 +54,7 @@ msgstr ""
 "اليدوية (إعدادات عامة)<br>- تخصيص الستايل css (خصائص الستايل style)<br>- "
 "تخصيص أو إضافة سكريبت java/jquery (خصائص الستايل style)"
 
-#: opts-page.php:80
+#: opts-page.php:92
 msgid ""
 "- For both &#34;Absolute Position (default)&#34; and &#34;Relative "
 "Position&#34; options, absolute means that the news ticker location is "
@@ -75,7 +75,7 @@ msgstr ""
 "إلا مع خياري &#34;إضافة الكود تلقائياً أعلى الموقع&#34; و &#34;إضافة الكود "
 "تلقائياً أسفل الموقع&#34; فقط."
 
-#: opts-page.php:79
+#: opts-page.php:91
 msgid ""
 "- If you choose to fix the news bar at the top or bottom of the site, it&#39;"
 "s recommended to add the code automatically by activating the option: &#34;"
@@ -91,7 +91,7 @@ msgstr ""
 "لم يظهر الشريط (حسب قالبك) فقم بإضافته يدويا, أما بالنسبة للكود القصير فيوضع "
 "يدويا ولا يشتغل حتى تقوم بتفعيله أسفل هذا الملاحظة,  ولا تثبيت فيه."
 
-#: opts-page.php:271
+#: opts-page.php:288
 #| msgid ""
 #| "1- If you use a caching plugin, it is necessary in most cases to clear "
 #| "the cache after each animation change"
@@ -102,7 +102,7 @@ msgstr ""
 "1- إذا كنت تستخدم إضافة لحفظ الكاش caching plugin, فمن الضروري في أغلب "
 "الحالات إفراغ الكاش بعد تحديث الإعدادات (حفظ التغييرات)"
 
-#: opts-page.php:272
+#: opts-page.php:289
 msgid ""
 "2- Note for developers: When you use (query_posts) to identify articles that "
 "appear in the home page, for example, or in search page or ... must be taken "
@@ -117,7 +117,7 @@ msgstr ""
 "وحتى لا تتعارض مع إعدادات الإدراج أو الاستثناء الخاصة بالإضافة نستعمل شرط: "
 "$query->is_main_query()"
 
-#: opts-page.php:102
+#: opts-page.php:114
 msgid "Absolute Position (default)"
 msgstr "مطلق Absolute Position (افتراضي)"
 
@@ -125,28 +125,41 @@ msgstr "مطلق Absolute Position (افتراضي)"
 msgid "Add date and other"
 msgstr "إضافة التاريخ وغيره"
 
-#: opts-page.php:91
+#: opts-page.php:103
 #| msgid "Add the code automatically to bottom "
 msgid "Add the code automatically to bottom"
 msgstr "إضافة الكود تلقائياً أسفل الموقع"
 
-#: opts-page.php:90
+#: opts-page.php:102
 msgid "Add the code automatically to top"
 msgstr "إضافة الكود تلقائياً أعلى الموقع"
 
-#: opts-page.php:92
+#: opts-page.php:104
 msgid "Add the code manually"
 msgstr "إضافة الكود يدوياً"
 
-#: opts-page/global-options.php:405
-msgid "all"
+#: includes/filter-functions.php:75
+#| msgid ""
+#| "After each code entry or update, you must clear the cache if you are "
+#| "using the (Temporarily store of data) option by clicking on: (Delete data "
+#| "stored now)."
+msgid ""
+"After each new code is added or updated, you must clear the cache if you are "
+"using the (Temporarily store of data) option by clicking on: (Delete data "
+"stored now)."
 msgstr ""
+"بعد كل إضافة لكود جديد أو تحديث له، لابد أن تقوم بإفراغ الكاش إن كنت تستخدم "
+"خيار (التخزين المؤقت للبيانات) بالضغط على: (احذف الآن البيانات المخزنة)."
 
-#: includes/global.php:208
+#: includes/global.php:227
 msgid "All changes saved successfully, close this message!"
 msgstr "تم حفظ جميع التغييرات بنجاح, أغلق هذه الرسالة"
 
-#: includes/global.php:857
+#: opts-page/global-options.php:443
+msgid "All status"
+msgstr "جميع التعليقات (All status)"
+
+#: includes/global.php:1000
 msgid "An error occurred while importing the file."
 msgstr "وقع خطأ أثناء استيراد الملف"
 
@@ -158,7 +171,7 @@ msgstr ""
 "أما إذا اخترت يدويا مع التبيث في الأسفل فقم بإضافة الكود مباشرة قبل وسم "
 "إغلاق البودي في الفوتر footer:"
 
-#: includes/filter-functions.php:38
+#: includes/filter-functions.php:37
 msgid ""
 "And replace No. 1 with the appropriate number, and you can exclude more than "
 "one membership, for example: array(&#39;1&#39;, &#39;55&#39;, &#39;9&#39;)"
@@ -170,17 +183,13 @@ msgstr ""
 msgid "and use px if your theme uses the pixels in width.)"
 msgstr "وباستعمال px إذا كان القالب يحسب العرض بالبيكسل.) "
 
-#: opts-page/animations.php:11
-msgid "Animation"
-msgstr "المؤثرات (Animation)"
+#: opts-page/global-options.php:439
+msgid "Approved comments"
+msgstr "تعليقات موافق عليها (Published)"
 
-#: opts-page/animations.php:7
-msgid "Animation / effects"
-msgstr "المؤثرات (Animation / effects)"
-
-#: opts-page/global-options.php:403
-msgid "approve"
-msgstr ""
+#: opts-page/global-options.php:60
+msgid "Are you sure you want to clear the plugin cache now?"
+msgstr "هل أنت متأكد من حذف كاش الإضافة الآن؟"
 
 #: opts-page/style.php:293
 msgid "At the bottom"
@@ -190,15 +199,15 @@ msgstr "في الأسفل"
 msgid "At the top"
 msgstr "في الأعلى"
 
-#: opts-page/global-options.php:199
+#: opts-page/global-options.php:235
 msgid "author page"
 msgstr "صفحة مقالات الكاتب"
 
-#: opts-page/global-options.php:681
+#: opts-page/global-options.php:724
 msgid "Auto"
 msgstr ""
 
-#: opts-page/global-options.php:385
+#: opts-page/global-options.php:421
 msgid "auto-draft"
 msgstr ""
 
@@ -220,15 +229,15 @@ msgstr "لون خلفية العنوان background-color"
 msgid "benaceur"
 msgstr ""
 
-#: opts-page/animations.php:52
+#: opts-page/animations.php:56
 msgid "Black"
 msgstr "سوداء"
 
-#: opts-page/animations.php:38
+#: opts-page/animations.php:42
 msgid "Blind bott"
 msgstr ""
 
-#: opts-page/animations.php:132 opts-page/style.php:114 opts-page/style.php:176
+#: opts-page/animations.php:136 opts-page/style.php:114 opts-page/style.php:176
 msgid "Bold"
 msgstr "عريض"
 
@@ -276,15 +285,15 @@ msgstr "الإطار العلوي border-top"
 msgid "border top (Title)"
 msgstr "الإطار العلوي border-top (العنوان)"
 
-#: opts-page/global-options.php:655
+#: opts-page/global-options.php:698
 msgid "Bottom left"
 msgstr "أسفل اليسار"
 
-#: opts-page/global-options.php:649
+#: opts-page/global-options.php:692
 msgid "Bottom right"
 msgstr "أسفل اليمين"
 
-#: opts-page/animations.php:573
+#: opts-page/animations.php:577
 msgid "Bottom the news bar"
 msgstr "أسفل شريط الأخبار"
 
@@ -300,48 +309,56 @@ msgstr "لون ظل الصندوق box shadow color"
 msgid "box shadow pixel"
 msgstr "بيكسل ظل الصندوق box-shadow"
 
-#: opts-page/global-options.php:464
+#: opts-page.php:31
+msgid "Cache purged successfully"
+msgstr "تم مسح التخزين المؤقت بنجاح"
+
+#: opts-page/global-options.php:506
 msgid "Category id"
 msgstr "رقم التصنيف id"
 
-#: opts-page/global-options.php:440
+#: opts-page/global-options.php:478
 msgid "category id (include/exclude)"
 msgstr "تصنيف رقم (إدراج/استثناء)"
 
-#: opts-page/global-options.php:464
+#: opts-page/global-options.php:506
 msgid "Category name"
 msgstr "اسم التصنيف"
 
-#: opts-page/global-options.php:187
+#: opts-page/global-options.php:223
 msgid "category page"
 msgstr "صفحة التصنيف"
 
-#: opts-page.php:179
+#: opts-page.php:191
 msgid "Choose a section to reset"
 msgstr "اختر قسما لإعادة الإعدادات الافتراضية"
 
-#: opts-page/global-options.php:564
+#: opts-page/animations.php:14
+msgid "Choose an animation"
+msgstr "اختيار حركة animation"
+
+#: opts-page/global-options.php:605
 msgid ""
 "Choose one title for each site according direction if your multilingual site"
 msgstr "اختر عنوانا لكل موقع حسب الاتجاه إذا كان موقعك متعدد اللغات"
 
-#: opts-page/global-options.php:400
+#: opts-page/global-options.php:436
 msgid "Choose the comment status"
 msgstr "اختر حالة التعليق comment status"
 
-#: opts-page/global-options.php:416
+#: opts-page/global-options.php:454
 msgid "Choose the name of taxonomy"
 msgstr "اختر اسم taxonomy"
 
-#: opts-page/global-options.php:376
+#: opts-page/global-options.php:412
 msgid "Choose the post status (You can select more than one status)"
 msgstr "اختر حالة المقالة post status (يمكنك تحديد أكثر من حالة)"
 
-#: opts-page/global-options.php:351
+#: opts-page/global-options.php:387
 msgid "Choose the post type (You can select more than one type)"
 msgstr "اختر نوع المقالة post type (يمكنك تحديد أكثر من نوع)"
 
-#: opts-page/animations.php:568
+#: opts-page/animations.php:572
 msgid "Choose where to place the Java file"
 msgstr "اختر مكان وضع ملف الجافا"
 
@@ -353,11 +370,11 @@ msgstr "الكلاس أو الإيدي (إذا كان التثبيت أسفل)"
 msgid "Class or id (fixed at the top)"
 msgstr "الكلاس أو الإيدي (إذا كان التثبيت أعلى)"
 
-#: opts-page/global-options.php:542
+#: opts-page/global-options.php:584
 msgid "click here"
 msgstr "اضغط هنا"
 
-#: opts-page.php:239
+#: opts-page.php:256
 #| msgid ""
 #| "Click on \"Import\" to restore all your saved settings from the XML file"
 msgid ""
@@ -368,36 +385,69 @@ msgstr "اضغط على \"استيراد\" لإعادة جميع إعدادات�
 msgid "Color of prev/next button"
 msgstr "لون زر السابق/التالي color"
 
-#: opts-page.php:265
+#: opts-page.php:282
 msgid "Contribute to translation of plugin"
 msgstr "المساهمة في ترجمة الإضافة"
 
-#: opts-page/animations.php:21
+#: opts-page/animations.php:24
 msgid "Curtain Hor"
 msgstr ""
 
-#: opts-page/animations.php:20
+#: opts-page/animations.php:25
+msgid "Curtain Hor RL"
+msgstr ""
+
+#: opts-page/animations.php:23
 msgid "Curtain Ver"
 msgstr ""
 
-#: opts-page/global-options.php:310 opts-page/global-options.php:331
+#: opts-page/global-options.php:51
+msgid ""
+"Custom filters: The plugin cache is for the latest posts and comments "
+"retrieved by the plugin by default. To provide your own results before the "
+"plugin retrieves the latest comments, use ntb_pre_get_recent_comments. For "
+"the latest posts, use ntb_pre_get_recent_posts. Results provided through "
+"these filters do not use the plugin cache. If you want to cache them, create "
+"your own cache and invalidate it when your data changes. The legacy "
+"ntb_filter_get_all_recent_comments and ntb_filter_get_all_recent_posts "
+"filters also bypass the plugin cache. If you use "
+"ntb_filter_get_all_recent_comments to replace the plugin results with your "
+"own, we recommend switching to ntb_pre_get_recent_comments. For posts, "
+"replace ntb_filter_get_all_recent_posts with ntb_pre_get_recent_posts."
+msgstr ""
+"الفلاتر المخصصة: كاش الإضافة مخصص لآخر المقالات وآخر التعليقات التي تجلبها "
+"الإضافة بالطريقة الافتراضية.\n"
+"إذا أردت تقديم نتائجك الخاصة قبل أن تجلب الإضافة آخر التعليقات، استخدم "
+"ntb_pre_get_recent_comments. ولآخر المقالات استخدم ntb_pre_get_recent_posts. "
+"النتائج التي تقدمها بهذه الفلاتر لا تستخدم كاش الإضافة؛ وإذا أردت تخزينها "
+"مؤقتًا، أنشئ كاشًا خاصًا بك وحدّثه عند تغيّر بياناتك.\n"
+"إذا كنت تستخدم ntb_filter_get_all_recent_comments لاستبدال نتائج الإضافة "
+"بنتائجك، فمن الأفضل الانتقال إلى ntb_pre_get_recent_comments. وينطبق الأمر "
+"نفسه على المقالات: استبدل ntb_filter_get_all_recent_posts "
+"بـ`ntb_pre_get_recent_posts`."
+
+#: opts-page/global-options.php:346 opts-page/global-options.php:367
 msgid "Day"
 msgstr "يوم"
 
-#: opts-page/global-options.php:677
+#: opts-page/global-options.php:59
+msgid "Delete data stored now"
+msgstr "احذف الآن البيانات المخزنة"
+
+#: opts-page/global-options.php:720
 msgid "Direction"
 msgstr "الاتجاه"
 
-#: opts-page/animations.php:51
+#: opts-page/animations.php:55
 msgid "Disable"
 msgstr "تعطيل"
 
-#: opts-page/animations.php:152 opts-page/animations.php:220
-#: opts-page/animations.php:293 opts-page/animations.php:437
+#: opts-page/animations.php:156 opts-page/animations.php:224
+#: opts-page/animations.php:297 opts-page/animations.php:441
 msgid "Disable autostart"
 msgstr "تعطيل التشغيل التلقائي"
 
-#: opts-page/animations.php:114
+#: opts-page/animations.php:118
 msgid "Disable cursor"
 msgstr "تعطيل المؤشر"
 
@@ -409,20 +459,20 @@ msgstr "تعطيل التثبيت (أسفل) في شاشة عرضها أقل م�
 msgid "Disable fixation (top) in a screen less than 600px"
 msgstr "تعطيل التثبيت (أعلى) في شاشة عرضها أقل من 600px"
 
-#: opts-page/global-options.php:149
+#: opts-page/global-options.php:185
 msgid "Disable hide/show option"
 msgstr "تعطيل خيار إخفاء/إظهار"
 
-#: opts-page/animations.php:148 opts-page/animations.php:191
-#: opts-page/animations.php:266 opts-page/animations.php:422
-msgid "Disable img next/prev"
+#: opts-page/animations.php:152 opts-page/animations.php:195
+#: opts-page/animations.php:270 opts-page/animations.php:426
+msgid "Disable Previous/Next button"
 msgstr "تعطيل زر السابق/التالي"
 
-#: opts-page/animations.php:480
+#: opts-page/animations.php:484
 msgid "Disable the icon"
 msgstr "تعطيل الأيقونة"
 
-#: opts-page.php:191
+#: opts-page.php:203
 msgid "Disable the reset exclude for below options"
 msgstr "تعطيل استثناء الخيارات التي في الأسفل"
 
@@ -430,39 +480,39 @@ msgstr "تعطيل استثناء الخيارات التي في الأسفل"
 msgid "Disable this font: DroidKufi_Ben "
 msgstr "تعطيل هذا الخط إن كان موجودا عندك: DroidKufi_Ben"
 
-#: opts-page/global-options.php:278
+#: opts-page/global-options.php:314
 msgid "Disable this option"
 msgstr "تعطيل هذا الخيار"
 
-#: opts-page/global-options.php:578
+#: opts-page/global-options.php:621
 msgid "Disable Title"
 msgstr "تعطيل العنوان"
 
-#: opts-page/animations.php:366
+#: opts-page/animations.php:370
 msgid "Disable title (screen mobile)"
 msgstr "تعطيل العنوان (شاشة موبايل)"
 
-#: opts-page/global-options.php:452
+#: opts-page/global-options.php:494
 msgid "Display all categories"
 msgstr "إظهار جميع التصنيفات"
 
-#: opts-page/animations.php:89 opts-page/animations.php:243
-#: opts-page/animations.php:276 opts-page/animations.php:324
-#: opts-page/animations.php:408
+#: opts-page/animations.php:93 opts-page/animations.php:247
+#: opts-page/animations.php:280 opts-page/animations.php:328
+#: opts-page/animations.php:412
 msgid "Distance from the left"
 msgstr "المسافة عن الشمال"
 
-#: opts-page/animations.php:345
+#: opts-page/animations.php:349
 msgid "Distance from the left/right of the image"
 msgstr "المسافة عن شمال/يمين الصورة"
 
-#: opts-page/animations.php:83 opts-page/animations.php:243
-#: opts-page/animations.php:276 opts-page/animations.php:324
-#: opts-page/animations.php:408
+#: opts-page/animations.php:87 opts-page/animations.php:247
+#: opts-page/animations.php:280 opts-page/animations.php:328
+#: opts-page/animations.php:412
 msgid "Distance from the right"
 msgstr "المسافة عن اليمين"
 
-#: opts-page/animations.php:345
+#: opts-page/animations.php:349
 msgid "Distance from the right/left of the image"
 msgstr "المسافة عن يمين/شمال الصورة"
 
@@ -470,27 +520,31 @@ msgstr "المسافة عن يمين/شمال الصورة"
 msgid "distance top the prev/next button"
 msgstr "المسافة أعلى زر السابق/التالي top or margin-top"
 
-#: opts-page.php:152
+#: opts-page.php:164
 msgid "Do not delete"
 msgstr "لا تحذف"
 
-#: opts-page.php:290
+#: opts-page.php:307
 msgid "Do not forget to rate the plugin"
 msgstr "لا تنس تقييم الإضافة"
 
-#: opts-page.php:167
+#: opts-page.php:179
 msgid "Do not remove"
 msgstr "لا تحذف"
 
-#: opts-page/global-options.php:529
+#: opts-page/global-options.php:35
+msgid "Do not temporarily store data"
+msgstr "عدم تخزين البيانات مؤقتا"
+
+#: opts-page/global-options.php:571
 msgid "Do not update the date"
 msgstr "عدم تحديث التاريخ"
 
-#: opts-page/animations.php:204
+#: opts-page/animations.php:208
 msgid "Down"
 msgstr "إلى أسفل"
 
-#: opts-page/global-options.php:382
+#: opts-page/global-options.php:418
 msgid "draft"
 msgstr ""
 
@@ -500,21 +554,16 @@ msgid ""
 "below it:"
 msgstr "حرر ملف functions.php الخاص بقالبك المفعّل وضع أسفله التالي:"
 
-#: opts-page/animations.php:108
+#: opts-page/animations.php:112
 msgid "Enable cursor"
 msgstr "تفعيل المؤشر"
 
-#: opts-page/animations.php:142 opts-page/animations.php:185
-#: opts-page/animations.php:259 opts-page/animations.php:416
-msgid "Enable img next/prev"
-msgstr "تفعيل زر السابق/التالي"
-
-#: opts-page/global-options.php:45
+#: opts-page/global-options.php:81
 msgid "Enable News Ticker Benaceur on admin bar in admin panel"
 msgstr ""
 "تفعيل News Ticker Benaceur في شريط الإدارة (admin bar) على لوحة الإدارة"
 
-#: opts-page/global-options.php:44
+#: opts-page/global-options.php:80
 msgid "Enable News Ticker Benaceur on admin bar in frontend"
 msgstr ""
 "تفعيل News Ticker Benaceur في شريط الإدارة (admin bar) على واجهة الموقع"
@@ -523,11 +572,16 @@ msgstr ""
 msgid "Enable plugin"
 msgstr "تفعيل الإضافة"
 
+#: opts-page/animations.php:146 opts-page/animations.php:189
+#: opts-page/animations.php:263 opts-page/animations.php:420
+msgid "Enable Previous/Next button"
+msgstr "تفعيل زر السابق/التالي"
+
 #: opts-page/style.php:200
 msgid "Enable style of mobile (recommended)"
 msgstr "تفعيل نمط الموبايل (يستحسن تفعيله)"
 
-#: opts-page.php:93
+#: opts-page.php:105
 msgid "Enable the shortcode -only manully-"
 msgstr "تفعيل الكود القصير -يدويا فقط-"
 
@@ -539,15 +593,15 @@ msgstr ""
 "تفعيل هذه الخاصية (نمط الموبايل) إذا كان قالبك يستعمل النسبة المئوية % في "
 "عرض الموقع"
 
-#: opts-page/global-options.php:112
+#: opts-page/global-options.php:148
 msgid "Enter here the user id"
 msgstr "أدخل هنا رقم العضوية"
 
-#: opts-page/global-options.php:446
+#: opts-page/global-options.php:484
 msgid "Enter the id"
 msgstr "أدخل المعرّف"
 
-#: opts-page/global-options.php:526
+#: opts-page/global-options.php:568
 msgid "Enter your news (manually) here:"
 msgstr "أدخل أخبارك (يدويا) هنا:"
 
@@ -555,15 +609,15 @@ msgstr "أدخل أخبارك (يدويا) هنا:"
 msgid "Ex:"
 msgstr "مثال:"
 
-#: opts-page/global-options.php:536
+#: opts-page/global-options.php:578
 msgid "ex:"
 msgstr "مثال:"
 
-#: opts-page/global-options.php:504
+#: opts-page/global-options.php:546
 msgid "Exclude cat id"
 msgstr "استثناء تصنيف رقم"
 
-#: opts-page/global-options.php:505
+#: opts-page/global-options.php:547
 msgid "Exclude post id"
 msgstr "استثناء مقالة رقم"
 
@@ -571,7 +625,7 @@ msgstr "استثناء مقالة رقم"
 msgid "Exclude the comments of a specific member or group"
 msgstr "استثناء تعليقات عضو أو مجموعة معينة"
 
-#: opts-page.php:225
+#: opts-page.php:242
 #| msgid ""
 #| "Export all plugin settings in an XML file that helps you to save all your "
 #| "settings for reuse here or at another location with ease."
@@ -582,31 +636,31 @@ msgstr ""
 "تصدير جميع اعدادات الإضافة في ملف  json يسمح لك ويساعدك في حفظ جميع إعداداتك "
 "الخاصة لإعادة استعمالها هنا أو في موقع آخر بكل سهولة."
 
-#: opts-page.php:223
+#: opts-page.php:240
 msgid "Export settings"
 msgstr "تصدير الإعدادات"
 
-#: opts-page/animations.php:19
+#: opts-page/animations.php:22
 msgid "Fade"
 msgstr ""
 
-#: opts-page/animations.php:35
+#: opts-page/animations.php:39
 msgid "Fade In"
 msgstr ""
 
-#: opts-page/animations.php:33
+#: opts-page/animations.php:37
 msgid "Fade LR"
 msgstr ""
 
-#: opts-page/animations.php:34
+#: opts-page/animations.php:38
 msgid "Fade On"
 msgstr ""
 
-#: opts-page/animations.php:32
+#: opts-page/animations.php:36
 msgid "Fade Up"
 msgstr ""
 
-#: opts-page/animations.php:15
+#: opts-page/animations.php:18
 msgid "FadeIn"
 msgstr ""
 
@@ -638,27 +692,27 @@ msgstr "حجم خط زر السابق/التالي font-size"
 msgid "Font weight"
 msgstr "عرض الخط font-weight"
 
-#: opts-page/global-options.php:383
+#: opts-page/global-options.php:419
 msgid "future"
 msgstr ""
 
-#: opts-page.php:69
+#: opts-page.php:81
 msgid "General settings"
 msgstr "إعدادات عامة"
 
-#: opts-page/global-options.php:324
+#: opts-page/global-options.php:360
 msgid "Get only comments published less than:"
 msgstr "جلب فقط التعليقات التي مرّ عليها أقل من:"
 
-#: opts-page/global-options.php:323
+#: opts-page/global-options.php:359
 msgid "Get only posts published less than:"
 msgstr "جلب فقط المواضيع التي تم على نشرها أقل من:"
 
-#: opts-page/animations.php:28
+#: opts-page/animations.php:32
 msgid "Grow Hor"
 msgstr ""
 
-#: opts-page/animations.php:29
+#: opts-page/animations.php:33
 msgid "Grow Ver"
 msgstr ""
 
@@ -670,56 +724,56 @@ msgstr "الإرتفاع height"
 msgid "height (Title)"
 msgstr "الإرتفاع height (العنوان)"
 
-#: opts-page/global-options.php:286
+#: opts-page/global-options.php:322
 msgid "Hide (when page reloaded)"
 msgstr "إخفاء (يتم بعد إعادة تحميل الصفحة)"
 
-#: opts-page/global-options.php:294
+#: opts-page/global-options.php:330
 msgid "hide (without reloading the page - jquery)"
 msgstr "إخفاء (دون الحاجة لإعادة تحميل الصفحة - جكيري)"
 
-#: opts-page/global-options.php:302
+#: opts-page/global-options.php:338
 msgid "Hide after spending a (the time entered here) of your recent comment:"
 msgstr "إخفاء بعد مرور (الوقت المختار هنا) من تاريخ آخر تعليق:"
 
-#: opts-page/global-options.php:301
+#: opts-page/global-options.php:337
 msgid "Hide after spending a (the time entered here) of your recent post:"
 msgstr "الإخفاء بعد مرور على نشر آخر موضوع أكثر من:"
 
-#: opts-page/global-options.php:303
+#: opts-page/global-options.php:339
 msgid ""
 "Hide after spending a (the time entered here) of your recent update date:"
 msgstr "إخفاء بعد مرور (الوقت المختار هنا) من تاريخ التحديث الأخير:"
 
-#: opts-page/global-options.php:268
+#: opts-page/global-options.php:304
 msgid "Hide after time:"
 msgstr "إخفاء بعد مدة:"
 
-#: opts-page/global-options.php:76
+#: opts-page/global-options.php:112
 msgid "Hide for all except administrator"
 msgstr "إخفاء عن الجميع ماعدا المدير"
 
-#: opts-page/global-options.php:64
+#: opts-page/global-options.php:100
 msgid "Hide for all users"
 msgstr "إخفاء عن جميع الأعضاء"
 
-#: opts-page/global-options.php:88
+#: opts-page/global-options.php:124
 msgid "Hide for this group(s) (You can select more than one group)"
 msgstr "إخفاء عن مجموعة (يمكنك تحديد أكثر من مجموعة)"
 
-#: opts-page/global-options.php:109
+#: opts-page/global-options.php:145
 msgid "Hide for this user id"
 msgstr "إخفاء عن المستخدم حسب المعرف ID"
 
-#: opts-page/global-options.php:52
+#: opts-page/global-options.php:88
 msgid "Hide for visitors"
 msgstr "إخفاء عن الزوار"
 
-#: opts-page/global-options.php:117
+#: opts-page/global-options.php:153
 msgid "Hide if no items (no posts or)"
 msgstr "إخفاء عند عدم وجود عناصر (لا توجد مواضيع أو ...)"
 
-#: opts-page/global-options.php:157
+#: opts-page/global-options.php:193
 msgid "Hide in"
 msgstr "إخفاء في"
 
@@ -731,15 +785,15 @@ msgstr "إخفاء الشريط (news ticker) في شاشة عرضها أقل م
 msgid "Hide the plugin rating icon"
 msgstr "إخفاء أيقونة تقييم الإضافة"
 
-#: opts-page/global-options.php:138
+#: opts-page/global-options.php:174
 msgid "Hide/Show in:"
 msgstr "إخفاء/إظهار في:"
 
-#: opts-page/global-options.php:175
+#: opts-page/global-options.php:211
 msgid "home"
 msgstr "الرئيسية"
 
-#: opts-page/global-options.php:309 opts-page/global-options.php:330
+#: opts-page/global-options.php:345 opts-page/global-options.php:366
 msgid "Hour"
 msgstr "ساعة"
 
@@ -752,11 +806,11 @@ msgstr "لون الروابط عند تمرير الفأرة a:hover"
 msgid "https://benaceur-php.com/"
 msgstr ""
 
-#: opts-page/global-options.php:256
+#: opts-page/global-options.php:292
 msgid "ID of page"
 msgstr "معرف الصفحة (ID of page)"
 
-#: opts-page/global-options.php:235
+#: opts-page/global-options.php:271
 msgid "ID of post"
 msgstr "معرف المقالة (ID of post)"
 
@@ -776,17 +830,17 @@ msgstr ""
 "إذا اخترت يدويا مع التبيث في الأعلى فقم بإضافة الكود مباشرة تحت وسم البودي "
 "body في الهيدر header:"
 
-#: opts-page.php:267
+#: opts-page.php:284
 msgid ""
 "If you want to translate this plugin to your language then send me the "
 "translation files via:"
 msgstr "إذا أردت ترجمة هذه الإضافة إلى لغتك أرسل لي ملفات الترجمة عبر:"
 
-#: opts-page/animations.php:336
+#: opts-page/animations.php:340
 msgid "Image dimensions"
 msgstr "أبعاد الصورة"
 
-#: opts-page.php:237
+#: opts-page.php:254
 msgid "Import settings"
 msgstr "استيراد الإعددات"
 
@@ -794,7 +848,11 @@ msgstr "استيراد الإعددات"
 msgid "Important"
 msgstr "مُهمّ"
 
-#: opts-page.php:79
+#: opts-page/global-options.php:45
+msgid "Important before enabling the cache!"
+msgstr "مهم جدا قبل تفعيل الكاش!"
+
+#: opts-page.php:91
 msgid ""
 "Important: this option under the note is considered null if the fixation "
 "option is activated."
@@ -806,26 +864,27 @@ msgid "In a screen where the maximum width is"
 msgstr "في شاشة عرضها أقل من media screen and max-width"
 
 #: opts-page/style.php:207
+#| msgid "2222222In a screen where the minimum width is"
 msgid "In a screen where the minimum width is"
 msgstr "في شاشة عرضها أكبر من media screen and min-width"
 
-#: opts-page/animations.php:572
+#: opts-page/animations.php:576
 msgid "In footer (recommended)"
 msgstr "في الفوتر -الأسفل- (مستحسن)"
 
-#: opts-page/global-options.php:493
+#: opts-page/global-options.php:535
 msgid "Include cat id"
 msgstr "إدراج تصنيف رقم"
 
-#: opts-page/global-options.php:494
+#: opts-page/global-options.php:536
 msgid "Include post id"
 msgstr "إدراج مقالة رقم"
 
-#: opts-page/animations.php:127
+#: opts-page/animations.php:131
 msgid "Indicator size"
 msgstr "حجم المؤشر"
 
-#: opts-page/global-options.php:386
+#: opts-page/global-options.php:422
 msgid "inherit"
 msgstr ""
 
@@ -845,24 +904,24 @@ msgstr "آخر الأخبار يدوياً"
 msgid "Latest posts"
 msgstr "آخر المقالات (posts)"
 
-#: opts-page/global-options.php:238 opts-page/global-options.php:259
-#: opts-page/global-options.php:446
+#: opts-page/global-options.php:274 opts-page/global-options.php:295
+#: opts-page/global-options.php:484
 msgid "Leave blank to activate All"
 msgstr "اتركه فارغا لتفعيل الجميع"
 
-#: opts-page/global-options.php:131 opts-page/global-options.php:521
+#: opts-page/global-options.php:167 opts-page/global-options.php:563
 msgid "Leave it blank (default text)"
 msgstr "اتركه فارغا (النص الافتراضي)"
 
-#: opts-page/global-options.php:335
+#: opts-page/global-options.php:371
 msgid "Leave it blank to get all comments"
 msgstr "اتركه فارغا لجلب جميع التعليقات"
 
-#: opts-page/global-options.php:334
+#: opts-page/global-options.php:370
 msgid "Leave it blank to get all posts"
 msgstr "اتركه فارغا لجلب جميع المواضيع"
 
-#: opts-page/global-options.php:682
+#: opts-page/global-options.php:725
 msgid "LTR"
 msgstr ""
 
@@ -902,11 +961,11 @@ msgstr "المسافة العلوية من الخارج margin-top (إذا لم 
 msgid "margin top/bottom"
 msgstr "\tالمسافة العلوية/السفلية من الخارج top/bottom"
 
-#: opts-page/global-options.php:36
+#: opts-page/global-options.php:72
 msgid "Menu"
 msgstr "قائمة رئيسية"
 
-#: opts-page/global-options.php:308 opts-page/global-options.php:329
+#: opts-page/global-options.php:344 opts-page/global-options.php:365
 msgid "Minute"
 msgstr "دقيقة"
 
@@ -924,7 +983,7 @@ msgstr ""
 "//wordpress.org/plugins/restrict-usernames-emails-characters/\">Restrict "
 "Usernames Emails Characters</a>"
 
-#: opts-page.php:278
+#: opts-page.php:295
 msgid "My plugins"
 msgstr "إضافاتي My plugins"
 
@@ -932,12 +991,12 @@ msgstr "إضافاتي My plugins"
 msgid "news ticker benaceur"
 msgstr ""
 
-#: opts-page.php:44
+#: opts-page.php:56
 msgid "News-Ticker-Benaceur"
 msgstr ""
 
 #: news-ticker-benaceur-page.php:22 news-ticker-benaceur-page.php:24
-#: includes/global.php:438 style-anim/inc/ie8.php:141
+#: includes/global.php:518 style-anim/inc/ie8.php:141
 #: style-anim/inc/ie8.php:143
 msgid "next"
 msgstr "التالي"
@@ -946,38 +1005,42 @@ msgstr "التالي"
 msgid "no"
 msgstr "لا"
 
-#: includes/functs.php:750
+#: includes/functs.php:1322
 msgid "No items"
 msgstr "لا توجد عناصر"
 
-#: includes/functs.php:754
+#: includes/functs.php:1326
 msgid "No news"
 msgstr "لا توجد أخبار"
 
-#: opts-page/animations.php:131 opts-page/style.php:114 opts-page/style.php:176
+#: includes/ie-setts.php:67
+msgid "No settings file was uploaded."
+msgstr "لم يتم رفع أي ملف إعدادات."
+
+#: opts-page/animations.php:135 opts-page/style.php:114 opts-page/style.php:176
 msgid "Normal"
 msgstr "عادي"
 
-#: opts-page.php:72
+#: opts-page.php:84
 msgid ""
 "Note: After activating the plugin, choose how to put the code in the theme, "
 "manually or automatically."
 msgstr "بعد تفعيل الإضافة اختر طريقة وضع الكود في القالب، يدويا أو تلقائيا."
 
-#: opts-page/global-options.php:552 opts-page/global-options.php:688
-#: opts-page/global-options.php:695
+#: opts-page/global-options.php:594 opts-page/global-options.php:731
+#: opts-page/global-options.php:738
 msgid "Number of characters of the news"
 msgstr "عدد أحرف الخبر"
 
-#: opts-page/animations.php:318
+#: opts-page/animations.php:322
 msgid "Number of title characters"
 msgstr "عدد حروف العنوان"
 
-#: opts-page/global-options.php:669
+#: opts-page/global-options.php:712
 msgid "Numbre of comments"
 msgstr "عدد التعليقات"
 
-#: opts-page/global-options.php:668
+#: opts-page/global-options.php:711
 msgid "Numbre of posts"
 msgstr "عدد المواضيع"
 
@@ -985,11 +1048,15 @@ msgstr "عدد المواضيع"
 msgid "Or choose:"
 msgstr "أو اختيار:"
 
-#: opts-page.php:112
+#: opts-page.php:124
 msgid "or put this short code in post or page (only manually):"
 msgstr "أو ضع هذا الكود القصير داخل المقالة أو الصفحة (يدويا فقط):"
 
-#: opts-page.php:138
+#: includes/filter-functions.php:61
+msgid "Other modifications and additions"
+msgstr "تعديلات وإضافات أخرى"
+
+#: opts-page.php:150
 msgid "Other settings"
 msgstr "إعدادات أخرى"
 
@@ -1001,60 +1068,64 @@ msgstr " المسافة عن الشمال من الداخل padding-left"
 msgid "padding right"
 msgstr "المسافة عن اليمين من الداخل padding-right"
 
-#: opts-page/animations.php:77 opts-page/style.php:211
+#: opts-page/animations.php:81 opts-page/style.php:211
 msgid "padding top"
 msgstr "المسافة العلوية من الداخل padding-top"
 
-#: opts-page/global-options.php:244
+#: opts-page/global-options.php:280
 msgid "pages"
 msgstr "الصفحات pages"
 
-#: opts-page/animations.php:95 opts-page/animations.php:209
-#: opts-page/animations.php:282 opts-page/animations.php:355
-#: opts-page/animations.php:426
+#: opts-page/animations.php:99 opts-page/animations.php:213
+#: opts-page/animations.php:286 opts-page/animations.php:359
+#: opts-page/animations.php:430
 msgid "Pause on hover"
 msgstr "توقف عند تمرير الفأرة"
 
-#: opts-page/global-options.php:380 opts-page/global-options.php:404
+#: opts-page/global-options.php:416
 msgid "pending"
 msgstr ""
 
-#: includes/global.php:207
+#: includes/ie-setts.php:85
+msgid "Please upload a valid .json file."
+msgstr "يُرجى تحميل ملف .json صالح."
+
+#: includes/global.php:226
 msgid "Please wait..."
 msgstr "انتظر قليلا ..."
 
-#: opts-page/global-options.php:464
+#: opts-page/global-options.php:506
 msgid "Post Count"
 msgstr "عدد المواضيع"
 
-#: opts-page/global-options.php:443
+#: opts-page/global-options.php:481
 msgid "post id"
 msgstr "مقالة رقم"
 
 #: news-ticker-benaceur-page.php:21 news-ticker-benaceur-page.php:25
-#: includes/global.php:439 style-anim/inc/ie8.php:140
+#: includes/global.php:519 style-anim/inc/ie8.php:140
 #: style-anim/inc/ie8.php:144
 msgid "prev"
 msgstr "السابق"
 
-#: opts-page/global-options.php:384
+#: opts-page/global-options.php:420
 msgid "private"
 msgstr ""
 
-#: opts-page/global-options.php:379
+#: opts-page/global-options.php:415
 msgid "publish"
 msgstr ""
 
-#: opts-page/global-options.php:555 opts-page/global-options.php:691
-#: opts-page/global-options.php:698
+#: opts-page/global-options.php:597 opts-page/global-options.php:734
+#: opts-page/global-options.php:741
 msgid "Put 0 to disable"
 msgstr "ضع 0 لتعطيلها"
 
-#: opts-page/global-options.php:536
+#: opts-page/global-options.php:578
 msgid "Put each news in new line between this tags"
 msgstr "ضع كل خبر في سطر بين هذين التاجين"
 
-#: includes/filter-functions.php:69
+#: includes/filter-functions.php:71
 msgid ""
 "Put the code php in the functions.php file when you update your theme, "
 "because it will be deleted after each update of the theme. You can resolve "
@@ -1065,7 +1136,7 @@ msgstr ""
 "تحديث للقالب, ويمكنك التخلص من هذه المشكلة باستعمال طريقة القالب الإبن "
 "ولمزيد من التفصيل تابع الموضوع التالي: "
 
-#: opts-page/global-options.php:607
+#: opts-page/global-options.php:650
 msgid "Radius"
 msgstr ""
 
@@ -1077,11 +1148,35 @@ msgstr "رفع النص إلى أعلى أو خفضه (line-height)"
 msgid "Raise or lower the title (line-height)"
 msgstr "رفع نص العنوان إلى أعلى أو خفضه (line-height)"
 
-#: opts-page.php:103
+#: includes/global.php:667
+msgid ""
+"Random ordering was detected for the latest posts while the cache is enabled."
+" The same random selection may be shown until the cache expires. Disable the "
+"cache if you want a new random selection on each page load."
+msgstr ""
+"تم اكتشاف ترتيب عشوائي لآخر المقالات أثناء تفعيل الكاش. قد يستمر عرض النتائج "
+"العشوائية نفسها حتى تنتهي مدة صلاحيته. عطّل الكاش إذا أردت اختيار نتائج "
+"عشوائية جديدة مع كل تحميل للصفحة."
+
+#: opts-page/global-options.php:50
+msgid ""
+"Random results: If a filter changes the latest posts or comments query to "
+"return random results, the cache may keep showing the same results until it "
+"expires. Disable the cache if you need a new random selection on each page "
+"load. Results returned directly through ntb_pre_get_recent_posts or "
+"ntb_pre_get_recent_comments bypass the plugin cache."
+msgstr ""
+"النتائج العشوائية: إذا غيّر فلتر استعلام آخر المقالات أو التعليقات ليعرض "
+"نتائج عشوائية، فقد يستمر الكاش في عرض النتائج نفسها حتى تنتهي صلاحيته. عطّل "
+"الكاش إذا أردت اختيار نتائج عشوائية جديدة مع كل تحميل للصفحة. النتائج التي "
+"تُعاد مباشرةً عبر ntb_pre_get_recent_posts أو ntb_pre_get_recent_comments لا "
+"تستخدم كاش الإضافة."
+
+#: opts-page.php:115
 msgid "Relative Position"
 msgstr "نسبيّ Relative Position"
 
-#: opts-page.php:160
+#: opts-page.php:172
 msgid ""
 "Remove [wp_news_ticker_benaceur_short_code] from posts and pages when the "
 "plugin is disabled (is recommended that take a copy of the database before "
@@ -1090,57 +1185,57 @@ msgstr ""
 "حذف [wp_news_ticker_benaceur_short_code] من المقالات والصفحات عند تعطيل "
 "الإضافة (يستحسن أخذ نسخة احتياطية من قاعدة البيانات قبل هذه العملية)"
 
-#: opts-page.php:145
+#: opts-page.php:157
 msgid ""
 "Remove all settings and data of the plugin from database when the plugin is "
 "disabled"
 msgstr "حذف جميع إعدادات وبيانات الإضافة من قاعدة البيانات عند تعطيلها"
 
-#: opts-page/global-options.php:93
+#: opts-page/global-options.php:129
 msgid "Remove Selection"
 msgstr "إلغاء التحديد"
 
-#: opts-page.php:183
+#: opts-page.php:195
 msgid "reset all settings"
 msgstr "إعادة جميع الإعدادات الافتراضية للإضافة"
 
-#: opts-page.php:181
+#: opts-page.php:193
 msgid "reset animation settings"
 msgstr "إعادة الإعدادات الافتراضية (المؤثرات Animation)"
 
-#: opts-page/animations.php:475
+#: opts-page/animations.php:479
 msgid "Reset default image"
 msgstr "إعادة الصورة الافتراضية"
 
-#: opts-page.php:180
+#: opts-page.php:192
 msgid "reset general settings"
 msgstr "إعادة الإعدادات الافتراضية (إعدادات عامة)"
 
-#: opts-page.php:182
+#: opts-page.php:194
 msgid "reset style settings"
 msgstr "إعادة الإعدادات الافتراضية (خصائص الستايل)"
 
-#: opts-page.php:173
+#: opts-page.php:185
 msgid "Reset:"
 msgstr "إعادة الإعدادات الافتراضية Reset:"
 
-#: opts-page/global-options.php:683
+#: opts-page/global-options.php:726
 msgid "RTL"
 msgstr ""
 
-#: opts-page.php:210
+#: opts-page.php:227
 msgid "Save all Changes"
 msgstr "حفظ جميع التغييرات"
 
-#: opts-page/animations.php:579
+#: opts-page/animations.php:583
 msgid "Save animation settings"
 msgstr "حفظ إعدادات المؤثرات"
 
-#: opts-page/global-options.php:702
+#: opts-page/global-options.php:745
 msgid "Save general settings"
 msgstr "حفظ الإعدادات العامة"
 
-#: opts-page.php:206
+#: opts-page.php:223
 msgid "Save other settings"
 msgstr "حفظ الإعدادات الأخرى"
 
@@ -1148,7 +1243,7 @@ msgstr "حفظ الإعدادات الأخرى"
 msgid "Save style settings"
 msgstr "حفظ إعدادات الستايل"
 
-#: opts-page.php:30
+#: opts-page.php:39
 msgid "Saved + reset successfully"
 msgstr "تمّ الحفظ + إعادة الإعدادات الافتراضية"
 
@@ -1156,23 +1251,23 @@ msgstr "تمّ الحفظ + إعادة الإعدادات الافتراضية"
 msgid "Script customization or adding (java/jquery)"
 msgstr "تخصيص أو إضافة سكريبت (java/jquery)"
 
-#: opts-page/animations.php:30
+#: opts-page/animations.php:34 opts-page/animations.php:35
 msgid "Scroll left"
 msgstr ""
 
-#: opts-page/animations.php:31
+#: opts-page/animations.php:34 opts-page/animations.php:35
 msgid "Scroll right"
 msgstr ""
 
-#: opts-page/animations.php:17
+#: opts-page/animations.php:20
 msgid "Scroll-H"
 msgstr ""
 
-#: opts-page/global-options.php:211
+#: opts-page/global-options.php:247
 msgid "search page"
 msgstr "صفحة نتائج البحث"
 
-#: includes/filter-functions.php:40
+#: includes/filter-functions.php:39
 msgid ""
 "Second, depending on the group, for example by excluding comments from the "
 "&#34;administrator&#34; group, in this case put the following code instead "
@@ -1185,12 +1280,12 @@ msgstr ""
 msgid "Select the fixing method"
 msgstr "حدد طريقة التثبيت"
 
-#: opts-page/global-options.php:113 opts-page/global-options.php:239
-#: opts-page/global-options.php:260 opts-page/global-options.php:447
+#: opts-page/global-options.php:149 opts-page/global-options.php:275
+#: opts-page/global-options.php:296 opts-page/global-options.php:485
 msgid "Separate between id by commas, for example: 2,16,223"
 msgstr "  افصل بين المعرفات بفاصلة (,) على سبيل المثال : 2,16,223"
 
-#: includes/global.php:92
+#: includes/global.php:108
 msgid "Settings"
 msgstr "الإعدادات"
 
@@ -1198,40 +1293,44 @@ msgstr "الإعدادات"
 msgid "Settings of style"
 msgstr "خصائص الستايل style"
 
-#: opts-page.php:30
+#: opts-page.php:39
 msgid "Settings saved successfully"
 msgstr "تمّ حفظ الإعدادات بنجاح"
 
-#: opts-page/global-options.php:165
+#: opts-page/global-options.php:201
 msgid "Show in"
 msgstr "إظهار في"
 
-#: opts-page/animations.php:36
+#: opts-page/animations.php:40
 msgid "Shuffle"
 msgstr ""
 
-#: opts-page/animations.php:40 opts-page/global-options.php:606
+#: opts-page/animations.php:44 opts-page/global-options.php:649
 msgid "Simple"
 msgstr ""
 
-#: opts-page/global-options.php:223
+#: opts-page/global-options.php:259
 msgid "single post (in post)"
 msgstr "داخل المقالة loop single"
 
-#: opts-page/animations.php:26
+#: opts-page/animations.php:30
 msgid "Slide"
 msgstr ""
 
-#: opts-page/animations.php:27
+#: opts-page/animations.php:31
 msgid "Slide Hor"
 msgstr ""
 
-#: opts-page/animations.php:16
+#: opts-page/animations.php:19
 msgid "Slide-Up-Down"
 msgstr ""
 
-#: opts-page/animations.php:71 opts-page/animations.php:237
-#: opts-page/animations.php:312 opts-page/animations.php:396
+#: opts-page/global-options.php:442
+msgid "Spam comments"
+msgstr "تعليقات مزعجة (Spam)"
+
+#: opts-page/animations.php:75 opts-page/animations.php:241
+#: opts-page/animations.php:316 opts-page/animations.php:400
 msgid "Speed"
 msgstr "السرعة"
 
@@ -1239,17 +1338,21 @@ msgstr "السرعة"
 msgid "Style customization (css)"
 msgstr "تخصيص الستايل (css)"
 
-#: opts-page/global-options.php:37
+#: opts-page/global-options.php:73
 msgid "Submenu"
 msgstr "قائمة فرعية"
 
-#: opts-page.php:261
+#: opts-page.php:278
 msgid "Support"
 msgstr "الدعم الفني Support"
 
-#: opts-page/global-options.php:441
+#: opts-page/global-options.php:479
 msgid "taxonomy id (required)"
 msgstr "المعرّف taxonomy id (إجباري)"
+
+#: opts-page/global-options.php:36
+msgid "Temporarily store of data"
+msgstr "التخزين المؤقت للبيانات"
 
 #: opts-page/style.php:12
 msgid "Text color"
@@ -1259,7 +1362,7 @@ msgstr "لون النص color"
 msgid "Text color of title (if animation pulsate is disabled)"
 msgstr "لون نص العنوان color (إذا كان تأثير pulsate معطلا) "
 
-#: opts-page/global-options.php:533
+#: opts-page/global-options.php:575
 msgid "Text direction"
 msgstr "إتجاه النص"
 
@@ -1271,15 +1374,30 @@ msgstr "ظل النص text-shadow"
 msgid "text shadow color"
 msgstr "لون ظل النص text shadow color"
 
-#: opts-page/animations.php:330
+#: opts-page/global-options.php:64
+msgid ""
+"The cache (keys) is cleared whenever the data used by the Latest Posts or "
+"Latest Comments ticker changes. It also expires automatically every 12 hours."
+" You can change this duration using the news_ticker_benaceur_transient_time "
+"filter."
+msgstr ""
+"يتم حذف الكاش (المفاتيح) مع كل تغير في بيانات شريط آخر المقالات أو التعليقات,"
+" كما يتم حذفه تلقائيا كل 12 ساعة ويمكن تعديل المدة عن طريق الفلتر "
+"news_ticker_benaceur_transient_time"
+
+#: opts-page/animations.php:334
 msgid "The distance between elements"
 msgstr "المسافة بين العناصر"
 
-#: opts-page/animations.php:118
+#: opts-page/animations.php:122
 msgid "The distance top of the indicator"
 msgstr "المسافة أعلى المؤشر"
 
-#: opts-page.php:200
+#: includes/ie-setts.php:15
+msgid "The export request is invalid."
+msgstr "طلب التصدير غير صالح"
+
+#: opts-page.php:212
 msgid "The following options are excluded from reset:"
 msgstr "الخيارات التالية مستثناة من إعادة الإعدادات الافتراضية:"
 
@@ -1315,15 +1433,31 @@ msgstr ""
 "&#34;32&#34; اتركه فارغًا) | لا يؤثر هذا على ارتفاع الأدمن بار ، بل يؤثر على "
 "شريط الأخبار عند جعله أعلى الموقع بالنسبة إلى ارتفاع الأدمن بار."
 
-#: opts-page/global-options.php:527
+#: includes/ie-setts.php:52
+msgid "The import request is invalid."
+msgstr "طلب الاستيراد غير صالح."
+
+#: opts-page/global-options.php:569
 msgid "The last update of manually news date:"
 msgstr "آخر تحديث لتاريخ الأخبار اليدوية:"
 
-#: opts-page/animations.php:63 opts-page/style.php:39
+#: opts-page/animations.php:67 opts-page/style.php:39
 msgid "The level of transparency 1-0.1"
 msgstr "نسبة الشفافية opacity من 1 إلى 0.1"
 
-#: includes/global.php:840
+#: includes/ie-setts.php:100
+msgid "The settings file contains invalid values."
+msgstr "يحتوي ملف الإعدادات على قيم غير صالحة."
+
+#: includes/ie-setts.php:73
+msgid "The settings file could not be uploaded."
+msgstr "تعذَّر رفع ملف الإعدادات."
+
+#: includes/ie-setts.php:94
+msgid "The settings file is invalid."
+msgstr "ملف الإعدادات غير صالح."
+
+#: includes/global.php:983
 msgid "The settings file was imported successfully"
 msgstr "تم استيراد ملف الإعدادات بنجاح"
 
@@ -1331,35 +1465,61 @@ msgstr "تم استيراد ملف الإعدادات بنجاح"
 msgid "The smaller width than"
 msgstr "العرض screen width أقل من"
 
-#: opts-page/global-options.php:519
+#: opts-page/global-options.php:561
 #| msgid "The text that appears if there is no element (manually news)"
 msgid "The text that appears if there is no items (manually news)"
 msgstr "النص الذي يظهر إذا لم يكن هناك عناصر (الأخبار يدويا)"
 
-#: opts-page/global-options.php:129
+#: opts-page/global-options.php:165
 #| msgid "The text that appears if there is no element (posts or comments)"
 msgid "The text that appears if there is no items (posts or comments)"
 msgstr "النص الذي يظهر إذا لم يكن هناك عناصر (مقالات أو تعليقات)"
 
-#: opts-page/global-options.php:566
+#: opts-page/global-options.php:609
 msgid "The title ltr"
 msgstr ""
 
-#: opts-page/global-options.php:572
+#: opts-page/global-options.php:615
 msgid "The title rtl"
 msgstr "العنوان rtl"
 
-#: includes/global.php:799
+#: includes/ie-setts.php:79
+msgid "The uploaded settings file is invalid."
+msgstr "ملف الإعدادات الذي تم تحميله غير صالح."
+
+#: includes/global.php:942
 msgid "There is a newer version, it's recommended to"
 msgstr "هناك نسخة أحدث متاحة, يستحسن"
 
-#: opts-page/global-options.php:537
+#: includes/functs.php:587
+msgid ""
+"This filter runs after the plugin retrieves the comments. To provide your "
+"own results before retrieval, use ntb_pre_get_recent_comments. Return null "
+"from the new filter to use the plugin default."
+msgstr ""
+
+#: includes/functs.php:575
+msgid ""
+"This filter runs after the plugin retrieves the posts. To provide your own "
+"results before retrieval, use ntb_pre_get_recent_posts. Return null from the "
+"new filter to use the plugin default."
+msgstr ""
+
+#: opts-page/global-options.php:579
 msgid "This form is correct:"
 msgstr "هذا النموذج صحيح:"
 
-#: opts-page/global-options.php:541
+#: opts-page/global-options.php:583
 msgid "This form is incorrect:"
 msgstr "هذا النموذج غير صحيح:"
+
+#: opts-page/animations.php:3
+msgid ""
+"This option only works if \"Previous/Next button\" option is enabled and "
+"\"Enable style of mobile\" option is disabled."
+msgstr ""
+"هذا الخيار لا يشتغل إلا إذا كان خيار \"زر السابق/التالي\" مفعّلا وخيار "
+"\"تفعيل نمط الموبايل\" معطّلا."
 
 #. Description of the plugin
 msgid ""
@@ -1376,16 +1536,20 @@ msgstr ""
 "هذه لإظهار العنصر الموجود خلف الشريط المثبت، افتراضيا اترك الحقل فارغا، أما "
 "إذا لم يظهر العنصر (حسب قالبك) أدخل الكلاس class أو الإيدي id الخاص بالعنصر."
 
-#: opts-page/animations.php:231 opts-page/animations.php:270
-#: opts-page/animations.php:402
+#: opts-page/animations.php:10
+msgid "Ticker Animations"
+msgstr "حركات الشريط / Ticker Animations"
+
+#: opts-page/animations.php:235 opts-page/animations.php:274
+#: opts-page/animations.php:406
 msgid "TimeOut"
 msgstr "وقت التوقف (بين عنوان وآخر)"
 
-#: opts-page/global-options.php:590
+#: opts-page/global-options.php:633
 msgid "Title animation pulsate"
 msgstr "تأثير pulsate على العنوان"
 
-#: opts-page/global-options.php:602
+#: opts-page/global-options.php:645
 msgid "Title styles"
 msgstr "ستايل العنوان"
 
@@ -1397,79 +1561,97 @@ msgstr ""
 "لإضافة التاريخ / صاحب الموضوع / آخر تعديل للموضوع / عدد التعليقات على "
 "الموضوع, تابع الموضوع التالي:"
 
-#: opts-page.php:76
+#: opts-page/animations.php:481
+msgid ""
+"To control the image (move it up or down), use the class ."
+"ntb_img_post_t_scrollntb<br>in &#34;Style customization (css)&#34; Ex: ."
+"ntb_img_post_t_scrollntb {margin-bottom: 2px;}"
+msgstr ""
+"للتحكم في الصورة رفعا إلى الأعلى أو خفضا استخدم الكلاس ."
+"ntb_img_post_t_scrollntb<br> في &#34;تخصيص الستايل (css)&#34; مثال:<br>."
+"ntb_img_post_t_scrollntb {margin-bottom: 2px;}"
+
+#: opts-page.php:88
 msgid "To read ..."
 msgstr "مهمّ للقراءة ..."
 
-#: opts-page/global-options.php:623 opts-page/global-options.php:636
+#: opts-page/global-options.php:666 opts-page/global-options.php:679
 msgid "Top left"
 msgstr "أعلى اليسار"
 
-#: opts-page/global-options.php:629 opts-page/global-options.php:642
+#: opts-page/global-options.php:672 opts-page/global-options.php:685
 msgid "Top right"
 msgstr "أعلى اليمين"
 
-#: opts-page/animations.php:37
+#: opts-page/animations.php:41
 msgid "Toss"
 msgstr ""
 
-#: opts-page/animations.php:56
+#: opts-page/animations.php:60
 msgid "Transparent background"
 msgstr "خلفية شفّافة"
 
-#: opts-page/global-options.php:381
+#: opts-page/global-options.php:417
 msgid "trash"
 msgstr ""
 
-#: opts-page/animations.php:23
+#: opts-page/global-options.php:441
+msgid "Trashed comments"
+msgstr "تعليقات في سلة المهملات"
+
+#: opts-page/animations.php:27
 msgid "Turn Down"
 msgstr ""
 
-#: opts-page/animations.php:24
+#: opts-page/animations.php:28 opts-page/animations.php:29
 msgid "Turn Left"
 msgstr ""
 
-#: opts-page/animations.php:25
+#: opts-page/animations.php:28 opts-page/animations.php:29
 msgid "Turn Right"
 msgstr ""
 
-#: opts-page/animations.php:22
+#: opts-page/animations.php:26
 msgid "Turn Up"
 msgstr ""
 
-#: opts-page/animations.php:18
+#: opts-page/animations.php:21
 msgid "Typing 1"
 msgstr ""
 
-#: opts-page/animations.php:41
+#: opts-page/animations.php:45
 msgid "Typing 2"
 msgstr ""
 
-#: opts-page/animations.php:39
+#: opts-page/global-options.php:440
+msgid "Unapproved comments"
+msgstr "تعليقات بانتظار المراجعة"
+
+#: opts-page/animations.php:43
 msgid "Uncover"
 msgstr ""
 
-#: opts-page/animations.php:198
+#: opts-page/animations.php:202
 msgid "Up"
 msgstr "إلى أعلى"
 
-#: includes/global.php:801
+#: includes/global.php:944
 msgid "update now"
 msgstr "التحديث الآن"
 
-#: opts-page/global-options.php:530
+#: opts-page/global-options.php:572
 msgid "Update the date of manually news"
 msgstr "تحديث تاريخ الأخبار اليدوية"
 
-#: opts-page/animations.php:473
+#: opts-page/animations.php:477
 msgid "Upload image"
 msgstr "رفع صورة"
 
-#: opts-page.php:269
+#: opts-page.php:286
 msgid "Very important"
 msgstr "هام جدا"
 
-#: opts-page.php:276
+#: opts-page.php:293
 msgid "Visit plugin site:"
 msgstr "زيارة موقع الإضافة:"
 
@@ -1485,7 +1667,22 @@ msgstr ""
 "عند اختيار آخر التعليقات يمكن استثناء تعليقات عضو معين من الظهور وذلك حسب "
 "معرفه:"
 
-#: opts-page/animations.php:53
+#: opts-page/global-options.php:49
+msgid ""
+"When should I enable the cache? Enabling it is useful when visitors view the "
+"same latest posts or comments multiple times before they change. If your "
+"site does not add new posts or comments every day, or the list remains "
+"unchanged for longer, the cache will generally be more useful. However, if "
+"the list changes constantly or the ticker is viewed infrequently, the cache "
+"may be less beneficial."
+msgstr ""
+"متى أفعّل الكاش؟ يفيد تفعيله عندما يشاهد الزوار آخر المقالات أو التعليقات "
+"نفسها مرات متعددة قبل أن تتغير. وإذا كان موقعك لا يضيف مقالات أو تعليقات "
+"جديدة يوميًا، أو تبقى القائمة مدة أطول دون تغيير، فحينئذ يكون الكاش أفيد لك. "
+"أما إذا كانت القائمة تتغير باستمرار أو كان الشريط قليل المشاهدة، فقد تقل "
+"فائدة الكاش."
+
+#: opts-page/animations.php:57
 msgid "White"
 msgstr "بيضاء"
 
@@ -1509,15 +1706,23 @@ msgstr "عرض العنوان (width)"
 msgid "yes"
 msgstr "نعم"
 
-#: includes/global.php:797
+#: includes/ie-setts.php:11
+msgid "You are not allowed to export these settings."
+msgstr "لا يُسمح لك بتصدير هذه الإعدادات."
+
+#: includes/ie-setts.php:44
+msgid "You are not allowed to import these settings."
+msgstr "لا يُسمح لك باستيراد هذه الإعدادات."
+
+#: includes/global.php:940
 msgid "You are using Version"
 msgstr "أنت تستخدم النسخة"
 
-#: opts-page.php:263
+#: opts-page.php:280
 msgid "You can ask questions about plugin and settings via this topic:"
 msgstr "يمكنك طرح استفساراتك حول الإضافة وإعداداتها عبر هذا الموضوع:"
 
-#: includes/functs.php:746
+#: includes/functs.php:1318
 msgid ""
 "You may need to purge the cache after saving the settings, with some cache "
 "plugins, if you are using a cache plugin of course."
@@ -1531,15 +1736,15 @@ msgid ""
 "update it!"
 msgstr "متصفحك الحالي قديم, غير متوافق مع شريط الأخبار هذا, يرجى تحديثه!"
 
-#: opts-page/global-options.php:538 opts-page/global-options.php:542
+#: opts-page/global-options.php:580 opts-page/global-options.php:584
 msgid "your first news ..."
 msgstr "الخبر الأول ..."
 
-#: opts-page/global-options.php:539
+#: opts-page/global-options.php:581
 msgid "your second news ..."
 msgstr "الخبر الثاني ..."
 
-#: opts-page/global-options.php:540
+#: opts-page/global-options.php:582
 msgid "your third news ..."
 msgstr "الخبر الثالث ..."
 

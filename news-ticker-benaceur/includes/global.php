@@ -1,222 +1,241 @@
 <?php
-    if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class class______news_ticker_benaceur {
-
-	protected $scriptVer = '1.0.2';
+	
+	protected $scriptVer = '1.0.3';
 	protected $ntb_notice = false;
 	public $adminbar32;
 	public $adminbar46;
-
-    function __construct(){
-	$adminbar_height = (int) $this->options_sty('adminbar_height');
-	$adminbar_height_mobile = (int) $this->options_sty('adminbar_height_mobile');
-	$this->adminbar32 = $adminbar_height ? $adminbar_height : 32;
-    $this->adminbar46 = $adminbar_height_mobile ? $adminbar_height_mobile : 46;
 	
-	add_action("admin_head-settings_page_news_ticker_benaceur", array($this, 'ntb__admin_head'));
-	add_action("admin_notices", array($this, 'ntb_admin_notices'));
-	add_action('wp_head', array($this, 'ntb_css'));	
-	add_action('wp_loaded', array($this, 'auto_code__'));
-    add_action('wp_head', array($this, 'ntb_head'), 11);
-    add_filter('plugin_action_links_'. NTB_BEN_BASENAME, array($this, 'action_links'));
-	add_action('init', array($this, 'text_domain'));
-	add_action('admin_menu', array($this, 'menu'));
-	add_action('admin_init', array($this, 'options_default_up'));
-	add_action('admin_init', array($this, 'register_options'));
-	register_activation_hook( NTB_BEN_PLUGIN_DIR, array($this, 'plugin_activation'));
-	add_shortcode('wp_news_ticker_benaceur_short_code', array($this, 'shortcode_ntb_func'));
-	add_action('admin_bar_menu', array($this, 'links_on_admin_bar'), 99);
-	register_deactivation_hook( NTB_BEN_PLUGIN_DIR, array($this, 'plugin_deactivation'));
-    add_action('admin_init', array($this, 'reset_options'));
-    add_action('wp_ntb_msg_update', array($this, 'verPlug'));
-	add_action( 'init', array($this, 'exp_imp'));
+	function __construct(){
 	
-	add_action('wp_enqueue_scripts', array($this, 'scripts_'));
-	if ($this->options_anim('scripts_animation') == 'bottom_news_bar')
-	add_action('wp_news_ticker_benaceur_anim_scripts', array($this, 'scripts__'));
+		$adminbar_height = (int) $this->options_sty('adminbar_height');
+		$adminbar_height_mobile = (int) $this->options_sty('adminbar_height_mobile');
+		$this->adminbar32 = $adminbar_height ? $adminbar_height : 32;
+		$this->adminbar46 = $adminbar_height_mobile ? $adminbar_height_mobile : 46;
+		
+		add_action("admin_head-settings_page_news_ticker_benaceur", array($this, 'ntb__admin_head'));
+		add_action("admin_notices", array($this, 'ntb_admin_notices'));
+		add_action('wp_head', array($this, 'ntb_css'));	
+		add_action('wp_loaded', array($this, 'auto_code__'));
+		add_action('wp_head', array($this, 'ntb_head'), 11);
+		add_filter('plugin_action_links_'. NTB_BEN_BASENAME, array($this, 'action_links'));
+		add_action('init', array($this, 'text_domain'));
+		add_action('admin_menu', array($this, 'menu'));
+		add_action('admin_init', array($this, 'options_default_up'));
+		add_action('admin_init', array($this, 'register_options'));
+		register_activation_hook( NTB_BEN_PLUGIN_DIR, array($this, 'plugin_activation'));
+		add_shortcode('wp_news_ticker_benaceur_short_code', array($this, 'shortcode_ntb_func'));
+		add_action('admin_bar_menu', array($this, 'links_on_admin_bar'), 99);
+		register_deactivation_hook( NTB_BEN_PLUGIN_DIR, array($this, 'plugin_deactivation'));
+		register_deactivation_hook( NTB_BEN_PLUGIN_DIR, array($this, 'delete_all_transient_deactivation'));
+		add_action('admin_init', array($this, 'reset_options'));
+		add_action('admin_init', array($this, 'delete_all_transient_reset'));
+		add_action('admin_init', array($this, 'delete_metadata_comment_date'));
+		add_action('wp_ntb_msg_update', array($this, 'verPlug'));
+		add_action( 'init', array($this, 'exp_imp'));
+		
+		add_action('wp_enqueue_scripts', array($this, 'scripts_'));
+		if ( $this->options_anim('scripts_animation') == 'bottom_news_bar' ) {
+			add_action('wp_news_ticker_benaceur_anim_scripts', array($this, 'scripts__'));
+		}
+		
+		add_action('admin_enqueue_scripts', array($this, 'codemirror'));
+		add_action( 'wp_ajax_ntb__prefix_get_image', array($this, 'prefix_get_image') ); // Ajax action to refresh the image	
 	
-	add_action('admin_enqueue_scripts', array($this, 'codemirror'));
-    add_action( 'wp_ajax_ntb__prefix_get_image', array($this, 'prefix_get_image') ); // Ajax action to refresh the image	
+		add_action( 'transition_comment_status', array( $this, '_comment_status_to_new_status' ), 9, 3 );
+		add_filter( 'news_ticker_benaceur_hide_time_comment_date', array( $this, 'filter_hide_time_comment_date' ), 9, 2 );
+		
+		$this->__load();
 	}
 	
-    function ntb_disabled_or_hide() {
-	if ($this->options('enable') != '1' || $this->ntb_hide() ) return true;
-	if ($this->get_time_recent()) return true;
-    return;
+	function __load() {
+	
+		if ( $this->options('enable') != '1' ) return;
+		
+		$this->ntb_store();
+	}
+	
+	function ntb_disabled_or_hide() {
+		if ( $this->options('enable') != '1' || $this->ntb_hide() ) return true;
+		if ( $this->get_time_recent() ) return true;
+		return;
 	}
 	
 	function auto_code__() {
 		
-	if (!$this->condition_auto_code() && $this->options('auto_add_ntb_not_fixed') != 'shortcode')
-	add_action( apply_filters( 'ntb_filter_ntb__manualy', 'wp_news_ticker_benaceur' ), array($this, 'wp_news_ticker_benaceur___') );
+		if ( !$this->condition_auto_code() && $this->options('auto_add_ntb_not_fixed') != 'shortcode' )
+			add_action( apply_filters( 'ntb_filter_ntb__manualy', 'wp_news_ticker_benaceur' ), array($this, 'wp_news_ticker_benaceur___') );
+		
+		add_action( $this->options_sty('fixed_top_bottom_site') == 'top' && $this->options_sty('fixed') || $this->options('auto_add_ntb_not_fixed') == 'top' && ! $this->options_sty('fixed') ? apply_filters( 'ntb_filter_ntb__head', 'wp_head' ) : apply_filters( 'ntb_filter_ntb__footer', 'wp_footer' ), array( $this, 'auto_code' ) );
+	}
 	
-	add_action($this->options_sty('fixed_top_bottom_site') == 'top' && $this->options_sty('fixed') || $this->options('auto_add_ntb_not_fixed') == 'top' && !$this->options_sty('fixed') ? apply_filters( 'ntb_filter_ntb__head', 'wp_head' ) : apply_filters( 'ntb_filter_ntb__footer', 'wp_footer' ), array($this, 'auto_code'));
-	}
-
 	function auto_code() {
-	if ($this->condition_auto_code()) {
-	return $this->wp_news_ticker_benaceur___();
-	}
+		if ($this->condition_auto_code()) {
+			return $this->wp_news_ticker_benaceur___();
+		}
 	}
 	
 	function condition_auto_code() {
-	if ($this->options_sty('fixed') && $this->options_sty('auto_add_ntb_fixed') != 'no' || $this->options('auto_add_ntb_not_fixed') != 'no' && !$this->options_sty('fixed')) {
-	return true;
-	}
-	}
-
-    function ntb_version() {
-		
-    $plugin_data = get_plugin_data( NTB_BEN_PLUGIN_DIR );
-    $plugin_version = $plugin_data['Version'];
-    return $plugin_version;
-    }
-	
-    function latest_version($plugin){
-
-			if( ! function_exists( 'plugins_api' ) ) {
-				include_once ABSPATH . '/wp-admin/includes/plugin-install.php'; 
-			}
-			$api = plugins_api( 'plugin_information', array(
-			'slug' => $plugin,
-			'fields' => array( 'version' => true )
-			) );
-			
-			if( is_wp_error( $api ) ) return;
-			
-				return $api->version;
-    }
-
-    function action_links($links){
-    $links[] = '<a href="'. get_admin_url(null, NTB_BEN_O_G .'?page='. NS_TR_BEN) .'">'. __("Settings", 'news-ticker-benaceur') .'</a>';
-    return $links;
-    }
-
-    function text_domain() {
-    load_plugin_textdomain( 'news-ticker-benaceur', false, NTB_BEN_NAME . '/lang/' );
-    }
-	
-    function ntb_multidimensional_parse_args( &$a, $b ) {
-	$a = (array) $a;
-	$b = (array) $b;
-	$result = $b;
-	foreach ( $a as $k => &$v ) {
-		if ( is_array( $v ) && isset( $result[ $k ] ) ) {
-			$result[ $k ] = $this->ntb_multidimensional_parse_args( $v, $result[ $k ] );
-		} else {
-			$result[ $k ] = $v;
+		if ( $this->options_sty('fixed') && $this->options_sty('auto_add_ntb_fixed') != 'no' || $this->options('auto_add_ntb_not_fixed') != 'no' && ! $this->options_sty('fixed') ) {
+			return true;
 		}
 	}
-	return $result;
+	
+	function ntb_version() {
+		$plugin_data = get_plugin_data( NTB_BEN_PLUGIN_DIR );
+		$plugin_version = $plugin_data['Version'];
+		return $plugin_version;
 	}
-  
-    function ntb_parse_args($option, $get_option, $default_options) {
+	
+	function latest_version($plugin){
+		
+		if ( ! function_exists( 'plugins_api' ) ) {
+			include_once ABSPATH . '/wp-admin/includes/plugin-install.php'; 
+		}
+		$api = plugins_api( 'plugin_information', array(
+		'slug' => $plugin,
+		'fields' => array( 'version' => true )
+		) );
+		
+		if( is_wp_error( $api ) ) return;
+		
+		return $api->version;
+	}
+	
+	function action_links($links){
+		$links[] = '<a href="'. get_admin_url(null, NTB_BEN_O_G .'?page='. NS_TR_BEN) .'">'. __("Settings", 'news-ticker-benaceur') .'</a>';
+		return $links;
+	}
+	
+	function text_domain() {
+		load_plugin_textdomain( 'news-ticker-benaceur', false, NTB_BEN_NAME . '/lang/' );
+	}
+	
+	function ntb_multidimensional_parse_args( &$a, $b ) {
+		$a = (array) $a;
+		$b = (array) $b;
+		$result = $b;
+		foreach ( $a as $k => &$v ) {
+			if ( is_array( $v ) && isset( $result[ $k ] ) ) {
+				$result[ $k ] = $this->ntb_multidimensional_parse_args( $v, $result[ $k ] );
+				} else {
+				$result[ $k ] = $v;
+			}
+		}
+		return $result;
+	}
+	
+	function ntb_parse_args($option, $get_option, $default_options) {
 		$ops_merged = $this->ntb_multidimensional_parse_args($get_option, $default_options);
 		return update_option($option, $ops_merged);
 	}
-
-    function menu() {
-    $menu = add_options_page('news-ticker-benaceur', 'News-Ticker-Benaceur', apply_filters( 'ntb_manage_options_cap', 'manage_options' ), NS_TR_BEN, array($this, 'page_options'));
-    add_action("admin_print_styles-$menu", array($this, 'js_page_panel'));
-    //add_action("admin_head-$menu", array($this, 'droidkufi_ben'));
-    }
-
-    function register_options() {
-    $args = array(
-            'sanitize_callback' => array($this, 'settings_callback')
-            );
-    register_setting('news_ticker_benaceur_glob_group', 'news_ticker_benaceur_glob_options', $args);
-    }
-	 
-    function unset_options_deleted() {
-	$ver = get_option('news_ticker_benaceur_version');
-	$option_name = 'news_ticker_benaceur_glob_options';
 	
-    if ( $this->glob_options() === false ) return;
+	function menu() {
+		$menu = add_options_page('news-ticker-benaceur', 'News-Ticker-Benaceur', apply_filters( 'ntb_manage_options_cap', 'manage_options' ), NS_TR_BEN, array($this, 'page_options'));
+		add_action("admin_print_styles-$menu", array($this, 'js_page_panel'));
+		//add_action("admin_head-$menu", array($this, 'droidkufi_ben'));
+	}
+	
+	function register_options() {
+		$args = array(
+		'sanitize_callback' => array($this, 'settings_callback')
+		);
+		register_setting('news_ticker_benaceur_glob_group', 'news_ticker_benaceur_glob_options', $args);
+	}
+	
+	function unset_options_deleted() {
+		$ver = get_option('news_ticker_benaceur_version');
+		$option_name = 'news_ticker_benaceur_glob_options';
+		
+		if ( $this->glob_options() === false ) return;
 		
 		if ( $ver <= "2.6.5" ) {
-           $this->remove_option($option_name, 'global_options', array('textarea_height_new'));
-		   
-           $this->remove_option($option_name, 'anim_options',  
-           array(
-           'timeout_tickerntb',
-           'speedin_typing_2',
-           'timeout_typing_2',
-           'dis_fin_img_scrollntb',
-           'dis_fin_no_img_scrollntb',
-           'ena_js_scrollntb',
-           'width_typing__2',
-           'timeout_no_scr_typ',
-           'line_no_scr_typ',
-           'cursor_no_scr_typ',
-           'cursor_margin_l_r_no_scr_typ',
-           'np_img_typing_2',
-           'pause_typing_2',
-           'pause_typing'
-           )
-           );
-		   
-           $this->remove_option($option_name, 'style_options',  
-           array(
-           'padding_top_title',
-           'padding_top',
-           'padding_bottom',
-           'min_height_mobile',
-           'border_title',
-           's_line_height',
-           'textarea_height',
-           'script_textarea_height'
-           )
-           );
+			$this->remove_option($option_name, 'global_options', array('textarea_height_new'));
+			
+			$this->remove_option($option_name, 'anim_options',  
+			array(
+			'timeout_tickerntb',
+			'speedin_typing_2',
+			'timeout_typing_2',
+			'dis_fin_img_scrollntb',
+			'dis_fin_no_img_scrollntb',
+			'ena_js_scrollntb',
+			'width_typing__2',
+			'timeout_no_scr_typ',
+			'line_no_scr_typ',
+			'cursor_no_scr_typ',
+			'cursor_margin_l_r_no_scr_typ',
+			'np_img_typing_2',
+			'pause_typing_2',
+			'pause_typing'
+			)
+			);
+			
+			$this->remove_option($option_name, 'style_options',  
+			array(
+			'padding_top_title',
+			'padding_top',
+			'padding_bottom',
+			'min_height_mobile',
+			'border_title',
+			's_line_height',
+			'textarea_height',
+			'script_textarea_height'
+			)
+			);
 		}
 	}
-	 
+	
 	// add_option / update_option
-    function options_default_up() {
+	function options_default_up() {
 		
-	$this->unset_options_deleted();
-	$ver = get_option('news_ticker_benaceur_version');
-	$glob = $this->glob_options();
-	
-    if ( $glob === false ) {
-	add_option('news_ticker_benaceur_glob_options', $this->all_options('all'));
-	add_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
+		$this->unset_options_deleted();
+		$ver = get_option('news_ticker_benaceur_version');
+		$glob = $this->glob_options();
 		
-	$this->oldOptionsToDeleting();
-	
-    } else if ( $ver != NTB_VERSION_BEN ) {
-	$this->ntb_parse_args('news_ticker_benaceur_glob_options', $glob, $this->all_options('all'));
-	update_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
-    }
-	
+		if ( $glob === false ) {
+			add_option('news_ticker_benaceur_glob_options', $this->all_options('all'));
+			add_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
+			
+			$this->oldOptionsToDeleting();
+			
+		} else if ( $ver != NTB_VERSION_BEN ) {
+			$this->ntb_parse_args('news_ticker_benaceur_glob_options', $glob, $this->all_options('all'));
+			update_option( 'news_ticker_benaceur_version', NTB_VERSION_BEN);
+		}
+		
 	}
 	// add_option / update_option
 	
-     function plugin_activation(){
-     if ( version_compare( get_bloginfo('version'), '3.0', '<') )  { 
-        deactivate_plugins( NTB_BEN_FILENAME ); 
-			die(__('<strong>Core Control:</strong> Sorry, This plugin requires WordPress 3.0+', 'core-control'));
-	 } 
-	 }
-	 
-    function js_page_panel(){
-	wp_enqueue_script ('js-page-panel', plugins_url(NTB_BEN_NAME) . '/admin/js.js', array(), $this->ntb_version(), true);
-	$ntb_js_params = array(
-	    'code_copied'   => __("Copied"),
+	function plugin_activation(){
+		if ( version_compare( get_bloginfo('version'), '5.9', '<') )  {
+			deactivate_plugins( NTB_BEN_FILENAME ); 
+			die(__('<strong>Core Control:</strong> Sorry, This plugin (news ticker benaceur) requires WordPress 5.9+', 'core-control'));
+		} elseif (version_compare( PHP_VERSION, '5.6.20', '<' )) {
+			deactivate_plugins( NTB_BEN_FILENAME );
+			die(__('<strong>Core Control:</strong> Sorry, This plugin (news ticker benaceur) requires PHP 5.6.20+', 'core-control'));
+		}
+	}
+	
+	function js_page_panel(){
+		wp_enqueue_script ('js-page-panel', plugins_url(NTB_BEN_NAME) . '/admin/js.js', array(), $this->ntb_version(), true);
+		$ntb_js_params = array(
+		'code_copied'   => __("Copied"),
 		'wait_click'    => __("Please wait...","news-ticker-benaceur"),
 		'changes_saved' => __("All changes saved successfully, close this message!","news-ticker-benaceur"),
 		'scrool_to'     => $this->options_s('scrool_to') ? $this->options_s('scrool_to') : '',
 		'is_rtl'        => is_rtl() ? true : false,
-	);
-	wp_localize_script( 'js-page-panel', 'ntb_admin_js', $ntb_js_params );
+		);
+		wp_localize_script( 'js-page-panel', 'ntb_admin_js', $ntb_js_params );
+		
+		wp_enqueue_style( 'style-NTB', plugins_url(NTB_BEN_NAME) . '/admin/style.css', '', $this->ntb_version() );
+	}
 	
-	wp_enqueue_style( 'style-NTB', plugins_url(NTB_BEN_NAME) . '/admin/style.css', '', $this->ntb_version() );
-    }
-
-    function wp_news_ticker_benaceur___() {
-	    return $this->pagePHP();
-    }
+	function wp_news_ticker_benaceur___() {
+		return $this->pagePHP();
+	}
 	
 	function shortcode_ntb_func($atts){
 		ob_start();
@@ -224,612 +243,734 @@ class class______news_ticker_benaceur {
 		$this->wp_news_ticker_benaceur___();
 		$content = ob_get_contents();
 		ob_end_clean();
-
-	    return $content;
-    }
-
+		
+		return $content;
+	}
+	
 	function pagePHP() {
-	if ($this->ntb_disabled_or_hide()) return;	
-    return require_once(NTB_BEN_DIR . 'news-ticker-benaceur-page.php');
-    }
-   
+		if ( $this->ntb_disabled_or_hide() ) {
+			return;
+		}
+
+		// يُطبع الشريط مرة واحدة كحد أقصى في طلب الصفحة، وأي استدعاء لاحق من shortcode أو من الإضافة التلقائية لا يطبع نسخة أخرى. أبقيت require_once أيضًا كحماية إضافية إذا أُدرج ملف القالب مسبقًا من مسار آخر.
+		// وذلك لحل مشكلة: ( إذا ظهر أكثر من شريط في الصفحة، مثلًا عبر أكثر من shortcode، فالمعرّفات مثل `#scroll-ntb-elem` و`#scroll-ntb` تتكرر، وقد يحرّك السكريبت عنصرًا واحدًا فقط أو يربط الحركة بالحاوية الخطأ )
+		
+		/*
+		static هنا تحتفظ بقيمة المتغير بين استدعاءات الدالة خلال طلب الصفحة نفسه:
+		- في أول استدعاء تكون قيمته false؛ فيمرّ التنفيذ، ثم تُعيَّن true ويُطبع الشريط.
+		- عند الاستدعاء التالي تبقى قيمته true؛ فينفّذ return قبل طباعة القالب.
+		وتُهيّأ القيمة من جديد مع طلب صفحة جديد. لذا يمنع هذا الحارس تكرار الشريط داخل الصفحة الناتجة، مع السماح بظهوره في الصفحات الأخرى.	
+		*/
+		static $ticker_rendered = false;
+
+		if ( $ticker_rendered ) {
+			return;
+		}
+
+		$ticker_rendered = true;
+
+		require_once NTB_BEN_DIR . 'news-ticker-benaceur-page.php';
+	}
+
+	function ntb_strlen_compat( $text ) {
+		$text = (string) $text;
+
+		if ( function_exists( 'mb_strlen' ) ) {
+			return mb_strlen( $text, 'UTF-8' );
+		}
+
+		$result = preg_match_all( '/./us', $text, $matches );
+
+		// عند وجود نص غير صالح كـ UTF-8، استخدم عدّ البايتات لتجنب الخطأ.
+		return false === $result ? strlen( $text ) : $result;
+	}
+
+	function ntb_substr_compat( $text, $start, $length = null ) {
+		$text = (string) $text;
+
+		if ( function_exists( 'mb_substr' ) ) {
+			return null === $length
+				? mb_substr( $text, $start, null, 'UTF-8' )
+				: mb_substr( $text, $start, $length, 'UTF-8' );
+		}
+
+		$result = preg_match_all( '/./us', $text, $matches );
+
+		if ( false === $result ) {
+			return null === $length
+				? substr( $text, $start )
+				: substr( $text, $start, $length );
+		}
+
+		$characters = $matches[0];
+
+		return implode(
+			'',
+			null === $length
+				? array_slice( $characters, $start )
+				: array_slice( $characters, $start, $length )
+		);
+	}	
+	
+	
 	function expt_title_text($text, $length = 0) {
-		if (mb_strlen($text) > $length) {
-			return mb_substr($text,0,$length) .'...';
+		if ($this->ntb_strlen_compat($text) > $length) {
+			return $this->ntb_substr_compat($text,0,$length) .'...';
 		} else {
 			return $text;
 		}
 	}
 	
-    function expt_text_without_tags($text, $length = 100, $ending = '...', $exact = true, $considerHtml = true) {
-       
-	   if ($considerHtml) {
-       // if the plain text is shorter than the maximum length, return the whole text
-       if (mb_strlen(preg_replace('/<.*?>/', '', $text)) <= $length)
-       return $text;
-
-       // splits all html-tags to scanable lines
-       preg_match_all('/(<.+?>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
-
-       $total_length = mb_strlen($ending);
-       $open_tags = array();
-       $truncate = '';
-
-       foreach ($lines as $line_matchings) {
-       // if there is any html-tag in this line, handle it and add it (uncounted) to the output
-       if (!empty($line_matchings[1])) {
-       // if it’s an “empty element” with or without xhtml-conform closing slash (f.e.)
-       if (preg_match('/^<(\s*.+?\/\s*|\s*(img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param)(\s.+?)?)>$/is', $line_matchings[1])) {
-       // if tag is a closing tag (f.e.)
-       } else if (preg_match('/^<\s*\/([^\s]+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
-       // delete tag from $open_tags list
-       $pos = array_search($tag_matchings[1], $open_tags);
-       if ($pos !== false) {
-       unset($open_tags[$pos]);
-       }
-       // if tag is an opening tag (f.e. )
-       } else if (preg_match('/^<\s*([^\s>!]+).*?>$/s', $line_matchings[1], $tag_matchings)) {
-       // add tag to the beginning of $open_tags list
-       array_unshift($open_tags, strtolower($tag_matchings[1]));
-       }
-       // add html-tag to $truncate’d text
-       $truncate .= $line_matchings[1];
-       }
-
-       // calculate the length of the plain text part of the line; handle entities as one character
-       $content_length = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
-       if ($total_length+$content_length > $length) {
-       // the number of characters which are left
-       $left = $length - $total_length;
-       $entities_length = 0;
-       // search for html entities
-       if (preg_match_all('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', $line_matchings[2], $entities, PREG_OFFSET_CAPTURE)) {
-       // calculate the real length of all entities in the legal range
-       foreach ($entities[0] as $entity) {
-       if ($entity[1]+1-$entities_length <= $left) {
-       $left--;
-       $entities_length += mb_strlen($entity[0]);
-       } else {
-       // no more characters left
-       break;
-       }
-       }
-       }
-       $truncate .= mb_substr($line_matchings[2], 0, $left+$entities_length);
-       // maximum lenght is reached, so get off the loop
-       break;
-       } else {
-       $truncate .= $line_matchings[2];
-       $total_length += $content_length;
-       }
-
-       // if the maximum length is reached, get off the loop
-       if($total_length >= $length) {
-       break;
-       }
-       }
-	   
-       } else {
-		   
-       if (mb_strlen($text) <= $length) {
-       return $text;
-       } else {
-       $truncate = mb_substr($text, 0, $length - mb_strlen($ending));
-       }
-       }
-
-       // if the words shouldn't be cut in the middle...
-       if (!$exact) {
-       // ...search the last occurance of a space...
-       $spacepos = strrpos($truncate, ' ');
-       if (isset($spacepos)) {
-       // ...and cut the text in this position
-       $truncate = mb_substr($truncate, 0, $spacepos);
-       }
-       }
-
-       // add the defined ending to the text
-       $truncate .= $ending;
-
-       if($considerHtml) {
-       // close all unclosed html-tags
-       foreach ($open_tags as $tag) {
-       //$truncate .= '';
-	   $truncate .= '</' . $tag . '>';
-       }
-       }
-
-        return $truncate;
-
-    }
-
-    function ntb_hide() {
-  
-    if ($this->options('enable') != '1') return;
-	   
-    $action_hide = $hide = false;
-    $ntb_in_page_id_arr = array_filter(array_unique(array_map('trim', explode(',', $this->options('in_page_id'))))); 
-    $ntb_in_single_id_arr = array_filter(array_unique(array_map('trim', explode(',', $this->options('in_single_id')))));
-
-    $is_single = (is_single() && $this->options('in_single_id') == '');
-    $is_page_id = (is_page($ntb_in_page_id_arr) && !is_front_page());
-    $is_page = (is_page() && !is_front_page() && $this->options('in_page_id') == '');
-    $home = (is_home() || is_front_page());
-
-	if ($this->options('in_home') && $home || 
-	$this->options('in_category') && is_category() || 
-	$this->options('in_author') && is_author() || 
-	$this->options('in_search') && is_search() || 
-	$this->options('in_single') && is_single($ntb_in_single_id_arr) || $this->options('in_single') && $is_single || 
-	$this->options('in_page') && $is_page_id || $this->options('in_page') && $is_page) 
-	{
-	$action_hide = true;
+	function expt_text_without_tags($text, $length = 100, $ending = '...', $exact = true, $considerHtml = true) {
+		
+		if ($considerHtml) {
+			// if the plain text is shorter than the maximum length, return the whole text
+			if ($this->ntb_strlen_compat(preg_replace('/<.*?>/', '', $text)) <= $length)
+			return $text;
+			
+			// splits all html-tags to scanable lines
+			preg_match_all('/(<.+?>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
+			
+			$total_length = $this->ntb_strlen_compat($ending);
+			$open_tags = array();
+			$truncate = '';
+			
+			foreach ($lines as $line_matchings) {
+				// if there is any html-tag in this line, handle it and add it (uncounted) to the output
+				if (!empty($line_matchings[1])) {
+					// if it’s an “empty element” with or without xhtml-conform closing slash (f.e.)
+					if (preg_match('/^<(\s*.+?\/\s*|\s*(img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param)(\s.+?)?)>$/is', $line_matchings[1])) {
+						// if tag is a closing tag (f.e.)
+					} else if (preg_match('/^<\s*\/([^\s]+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
+						// delete tag from $open_tags list
+						$pos = array_search($tag_matchings[1], $open_tags);
+						if ($pos !== false) {
+							unset($open_tags[$pos]);
+						}
+						// if tag is an opening tag (f.e. )
+					} else if (preg_match('/^<\s*([^\s>!]+).*?>$/s', $line_matchings[1], $tag_matchings)) {
+						// add tag to the beginning of $open_tags list
+						array_unshift($open_tags, strtolower($tag_matchings[1]));
+					}
+					// add html-tag to $truncate’d text
+					$truncate .= $line_matchings[1];
+				}
+				
+				// calculate the length of the plain text part of the line; handle entities as one character
+				$content_length = $this->ntb_strlen_compat(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
+				if ($total_length+$content_length > $length) {
+					// the number of characters which are left
+					$left = $length - $total_length;
+					$entities_length = 0;
+					// search for html entities
+					if (preg_match_all('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', $line_matchings[2], $entities, PREG_OFFSET_CAPTURE)) {
+						// calculate the real length of all entities in the legal range
+						foreach ($entities[0] as $entity) {
+							if ($entity[1]+1-$entities_length <= $left) {
+								$left--;
+								$entities_length += $this->ntb_strlen_compat($entity[0]);
+								} else {
+								// no more characters left
+								break;
+							}
+						}
+					}
+					$truncate .= $this->ntb_substr_compat($line_matchings[2], 0, $left+$entities_length);
+					// maximum lenght is reached, so get off the loop
+					break;
+				} else {
+					$truncate .= $line_matchings[2];
+					$total_length += $content_length;
+				}
+				
+				// if the maximum length is reached, get off the loop
+				if($total_length >= $length) {
+					break;
+				}
+			}
+			
+		} else {
+			
+			if ($this->ntb_strlen_compat($text) <= $length) {
+				return $text;
+			} else {
+				$truncate = $this->ntb_substr_compat($text, 0, $length - $this->ntb_strlen_compat($ending));
+			}
+		}
+		
+		// if the words shouldn't be cut in the middle...
+		if (!$exact) {
+			// ...search the last occurance of a space...
+			$spacepos = strrpos($truncate, ' ');
+			if (isset($spacepos)) {
+				// ...and cut the text in this position
+				$truncate = $this->ntb_substr_compat($truncate, 0, $spacepos);
+			}
+		}
+		
+		// add the defined ending to the text
+		$truncate .= $ending;
+		
+		if($considerHtml) {
+			// close all unclosed html-tags
+			foreach ($open_tags as $tag) {
+				//$truncate .= '';
+				$truncate .= '</' . $tag . '>';
+			}
+		}
+		
+		return $truncate;
+		
 	}
 	
-	if (
-	($this->options('hide_or_noHide_in') == 'hide' && $action_hide ||  
-	$this->options('hide_or_noHide_in') == 'show' && !$action_hide) &&
-	$this->options('hide_or_noHide_in') != 'disable_this_option')
-	{
-	$hide = true;	
-	}
-	
-	if (($this->options('for_all_expt_admin') && !current_user_can( 'administrator' )) ||
+	function ntb_hide() {
+		
+		if ($this->options('enable') != '1') return;
+		
+		$action_hide = $hide = false;
+		$ntb_in_page_id_arr = array_filter(array_unique(array_map('trim', explode(',', $this->options('in_page_id'))))); 
+		$ntb_in_single_id_arr = array_filter(array_unique(array_map('trim', explode(',', $this->options('in_single_id')))));
+		
+		$is_single = (is_single() && $this->options('in_single_id') == '');
+		$is_page_id = (is_page($ntb_in_page_id_arr) && !is_front_page());
+		$is_page = (is_page() && !is_front_page() && $this->options('in_page_id') == '');
+		$home = (is_home() || is_front_page());
+		
+		if ($this->options('in_home') && $home || 
+		$this->options('in_category') && is_category() || 
+		$this->options('in_author') && is_author() || 
+		$this->options('in_search') && is_search() || 
+		$this->options('in_single') && is_single($ntb_in_single_id_arr) || $this->options('in_single') && $is_single || 
+		$this->options('in_page') && $is_page_id || $this->options('in_page') && $is_page) 
+		{
+			$action_hide = true;
+		}
+		
+		if (
+		($this->options('hide_or_noHide_in') == 'hide' && $action_hide ||  
+		$this->options('hide_or_noHide_in') == 'show' && !$action_hide) &&
+		$this->options('hide_or_noHide_in') != 'disable_this_option')
+		{
+			$hide = true;	
+		}
+		
+		if (($this->options('for_all_expt_admin') && !current_user_can( 'administrator' )) ||
 		$this->visitors_ntb() || $this->all_users_ntb() || $this->role_cap_ntb() || $this->id_user_ntb() ||
 		apply_filters( 'benresstudents_filter_hide__ntb', false ) ||
 		$hide
-	) 
-	{
-	return true;
+		) 
+		{
+			return true;
+		}
+		
+		return;
 	}
-	
-	return;
-    }
 	
 	function scripts__() {
-	echo '<script src="' . plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts.js?ver='. $this->scriptVer .'" id="ntb_js-anims-js"></script>';
+		echo '<script src="' . plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts.js?ver='. $this->scriptVer .'" id="ntb_js-anims-js"></script>';
 	}
-
-    function scripts_() {
 	
-	if ($this->ntb_disabled_or_hide()) return;
-	
-	$rtl = (is_rtl() && $this->options('dir') != 'ltr' || !is_rtl() && $this->options('dir') == 'rtl') ? true : false ;		
-    $bor = $this->options_sty('border_top') + $this->options_sty('border_bottom');
-	
-    if ($this->options_sty('border_top') > $this->options_sty('border_bottom')) {
-    $bor_ticker = $bor > 0 ? $bor + 1 : $bor;	
-    $bor_li = $bor > 0 ? $bor + 1 : $bor;
-    $bor__pn = $bor > 0 ? $bor + 3 : 3;
-    $bor_scroll = $bor > 0 ? $bor + 2 : $bor+1;
-    } else {
-    $bor_ticker = $bor > 0 ? $bor - 1 : $bor;	
-    $bor_li = $bor > 0 ? $bor - 1 : $bor;
-    $bor__pn = $bor > 0 ? $bor + 1 : 3;
-    $bor_scroll = $bor > 0 ? $bor + 2 : $bor+2;
-    }
-	
-    $titleText_tp1 = '';
-    if ($this->options("title_ltr") != '' && !is_rtl()) { $titleText_tp1 = $this->options("title_ltr"); } elseif ($this->options("title_rtl") != '' && is_rtl()) { $titleText_tp1 = $this->options("title_rtl"); } else { if (!is_rtl()) { $titleText_tp1 = 'Latest news'; } else { $titleText_tp1 = 'آخر الأخبار'; } }
-
-    $direction_tp1 = '';
-    if ($this->options('dir') == 'auto') { if (is_rtl()) {$direction_tp1 = 'rtl';} else {$direction_tp1 = 'ltr';} } elseif ($this->options('dir') == 'ltr') {$direction_tp1 = 'ltr';} elseif ($this->options('dir') == 'rtl') {$direction_tp1 = 'rtl';}
-	
-    $anim_two__if = array('fade','fadeZoom','turnDown','turnUp','curtainX','curtainY','scrollLeft','scrollRight','blindZ');
-	
-	// pas encore utilisé
+	function scripts_() {
+		
+		if ($this->ntb_disabled_or_hide()) return;
+		
+		$rtl = (is_rtl() && $this->options('dir') != 'ltr' || !is_rtl() && $this->options('dir') == 'rtl') ? true : false ;		
+		$bor = $this->options_sty('border_top') + $this->options_sty('border_bottom');
+		
+		if ($this->options_sty('border_top') > $this->options_sty('border_bottom')) {
+			$bor_ticker = $bor > 0 ? $bor + 1 : $bor;	
+			$bor_li = $bor > 0 ? $bor + 1 : $bor;
+			$bor__pn = $bor > 0 ? $bor + 3 : 3;
+			$bor_scroll = $bor > 0 ? $bor + 2 : $bor+1;
+			} else {
+			$bor_ticker = $bor > 0 ? $bor - 1 : $bor;	
+			$bor_li = $bor > 0 ? $bor - 1 : $bor;
+			$bor__pn = $bor > 0 ? $bor + 1 : 3;
+			$bor_scroll = $bor > 0 ? $bor + 2 : $bor+2;
+		}
+		
+		$titleText_tp1 = '';
+		if ($this->options("title_ltr") != '' && !is_rtl()) { $titleText_tp1 = $this->options("title_ltr"); } elseif ($this->options("title_rtl") != '' && is_rtl()) { $titleText_tp1 = $this->options("title_rtl"); } else { if (!is_rtl()) { $titleText_tp1 = 'Latest news'; } else { $titleText_tp1 = 'آخر الأخبار'; } }
+		
+		$direction_tp1 = '';
+		if ($this->options('dir') == 'auto') { if (is_rtl()) {$direction_tp1 = 'rtl';} else {$direction_tp1 = 'ltr';} } elseif ($this->options('dir') == 'ltr') {$direction_tp1 = 'ltr';} elseif ($this->options('dir') == 'rtl') {$direction_tp1 = 'rtl';}
+		
+		$anim_two__if = array('fade','fadeZoom','turnDown','turnUp','curtainX','curtainXRL','curtainY','scrollLeft','scrollRight','blindZ');
+		
+		// pas encore utilisé
 		wp_register_script ('ntb_js_into_anims', null, array('jquery'), $this->scriptVer, false);
-	
-	    $params_into = array(
-	        //'exemple' => '1'
+		
+		$params_into = array(
+		//'exemple' => '1'
 		);
 		wp_localize_script( 'ntb_js_into_anims', 'ntb_i_ls', $params_into );
 		wp_enqueue_script( 'ntb_js_into_anims' );
-	// pas encore utilisé
-	
+		// pas encore utilisé
+		
 		if ($this->options_anim('scripts_animation') == 'footer') {
-		wp_register_script ('ntb_js-anims', plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts.js', array('jquery'), $this->scriptVer, true);
+			wp_register_script ('ntb_js-anims', plugins_url(NTB_BEN_NAME) . '/style-anim/inc/scripts.js', array('jquery'), $this->scriptVer, true);
 		} else {
-		wp_register_script ('ntb_js-anims', null, array('jquery'), $this->scriptVer, false);
+			wp_register_script ('ntb_js-anims', null, array('jquery'), $this->scriptVer, false);
 		}
-	
-	    $params = array(
-	        'animation'               => $this->options_anim('animation'),
-	        'next'                    => __('next','news-ticker-benaceur'),
-	        'prev'                    => __('prev','news-ticker-benaceur'),
-	        'screen_min_width'        => $this->options_sty('screen_min_width'),
-	        'height'                  => $this->options_sty('height'),
-	        'line_height'             => $this->options_sty('line_height'),
-	        'height_mobile'           => $this->options_sty('height_mobile'),
-			'line_height_mobile'      => $this->options_sty('line_height_mobile'),
-			'enable_style_mobile'     => $this->options_sty('enable_style_mobile'),
-			'is_ntb_rtl'              => $this->is_ntb_rtl(),
-			'ntb_f_interval_ie8'      => apply_filters( 'ntb_filter_interval_ie8', 7000 ),
-			'autostart_typ1'          => $this->options_anim('autostart_typ1'),
-			'pause__typing'           => $this->options_anim('pause__typing'),
-	        'mouse'                   => $this->options_anim('pause_scrollntb') ? true : false,
-			'ori_scr'                 => ($this->options('dir') == 'auto' && is_rtl() || $this->options('dir') == 'rtl') ? 'left' : 'right',
-	        'speed_scr'               => $this->options_anim('speed_scrollntb_'),
-			'isrtl'                   => $rtl,
-	        'rtl'                     => $this->is_ntb_rtl() ? 'right' : 'left',
-			'top_600'                 => $this->fixed_top_600_script(),
-			'arr_s_script'            => array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options_sty('s_script'))))) ? true : false,
-			's_script'                => $this->options_sty('s_script'),
-	        'rtl_'                    => $rtl ? 'right' : 'left',
-	        'ocf'                     => $rtl ? 'opts.cssFirst.right' : 'opts.cssFirst.left',
-	        'ocb'                     => $rtl ? 'opts.cssBefore.right' : 'opts.cssBefore.left',
-	        'oai'                     => $rtl ? 'opts.animIn.right' : 'opts.animIn.left',
-	        'oao'                     => $rtl ? 'opts.animOut.right' : 'opts.animOut.left',
-	        'bor'                     => $this->options_sty('border_top') + $this->options_sty('border_bottom'),
-	        'bor__'                   => $bor > 0 ? $bor + 1 : $bor,
-			'bor_'                    => $bor > 0 ? $bor - 1 : $bor,
-			'bor_ticker'              => $bor_ticker,
-			'bor_li'                  => $bor_li,
-			'bor__pn'                 => $bor__pn,
-			'bor_scroll'              => $bor_scroll,
-			'is_two'                  => $this->is_two(),
-			'np_img_anms_two'         => $this->options_anim('np_img_anms_two'),
-			'disable_title'           => $this->options('disable_title'),
-			'width_title_background'  => $this->options_sty('width_title_background'),
-			'speed_anms_two'          => $this->options_anim('speed_anms_two'),
-			'autostart_animtwo'       => $this->options_anim('autostart_animtwo'),
-			'timeout_anms_two'        => $this->options_anim('timeout_anms_two'),
-			'pause_anms_two'          => $this->options_anim('pause_anms_two'),
-			'anim_two__if'            => in_array($this->options_anim('animation'), $anim_two__if) ? true : false,
-			'pause_fadein'            => $this->options_anim('pause_fadein'),
-			'autostart_fadein'        => $this->options_anim('autostart_fadein'),
-			'timeout_fadein'          => $this->options_anim('timeout_fadein'),
-			'speed_slide_up_down'     => $this->options_anim('speed_slide_up_down'),
-			'updown_slide_up_down'    => $this->options_anim('updown_slide_up_down'),
-			'autostart_slide_up_down' => $this->options_anim('autostart_slide_up_down'),
-			'timeout_slide_up_down'   => $this->options_anim('timeout_slide_up_down'),
-			'pause_slide_up_down'     => $this->options_anim('pause_slide_up_down'),
-			'titletext_tp1'           => $titleText_tp1,
-			'direction_tp1'           => $direction_tp1,
-			'speed_no_scr_typ'        => $this->options_anim('speed_no_scr_typ'),
-			'pause_on_items_tp1'      => apply_filters( 'ntb_filter_pause_on_items', 2000 ),
-			'np_img_no_scr_typ'       => $this->options_anim('np_img_no_scr_typ'),
-			'typ1_margin_mobile'      => apply_filters( 'ntb_filter_typ1_margin_mobile', 15 ),
-			'hide_ntb'                => $this->options_hi('hide'),
-			'ellipsis'                => apply_filters( 'ntb_filter_enable_ellipsis', true ),
-			'time_recent_hide'        => $this->get_time_recent(true),
-			'disable_anim'               => apply_filters( 'ntb_filter_play_animation', true ) && $this->ntb_items(true),
+		
+		$params = array(
+		'animation'               => $this->options_anim('animation'),
+		'next'                    => __('next','news-ticker-benaceur'),
+		'prev'                    => __('prev','news-ticker-benaceur'),
+		'screen_min_width'        => $this->options_sty('screen_min_width'),
+		'height'                  => $this->options_sty('height'),
+		'line_height'             => $this->options_sty('line_height'),
+		'height_mobile'           => $this->options_sty('height_mobile'),
+		'line_height_mobile'      => $this->options_sty('line_height_mobile'),
+		'enable_style_mobile'     => $this->options_sty('enable_style_mobile'),
+		'is_ntb_rtl'              => $this->is_ntb_rtl(),
+		'ntb_f_interval_ie8'      => apply_filters( 'ntb_filter_interval_ie8', 7000 ),
+		'autostart_typ1'          => $this->options_anim('autostart_typ1') && 'enable' === $this->options_anim('np_img_no_scr_typ') && ! $this->options_sty('enable_style_mobile'),
+		'pause__typing'           => $this->options_anim('pause__typing'),
+		'mouse'                   => $this->options_anim('pause_scrollntb') ? true : false,
+		'ori_scr'                 => ($this->options('dir') == 'auto' && is_rtl() || $this->options('dir') == 'rtl') ? 'left' : 'right',
+		'speed_scr'               => $this->options_anim('speed_scrollntb_'),
+		'isrtl'                   => $rtl,
+		'rtl'                     => $this->is_ntb_rtl() ? 'right' : 'left',
+		'top_600'                 => $this->fixed_top_600_script(),
+		'arr_s_script'            => array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options_sty('s_script'))))) ? true : false,
+		's_script'                => $this->options_sty('s_script'),
+		'rtl_'                    => $rtl ? 'right' : 'left',
+		'bor'                     => $this->options_sty('border_top') + $this->options_sty('border_bottom'),
+		'bor__'                   => $bor > 0 ? $bor + 1 : $bor,
+		'bor_'                    => $bor > 0 ? $bor - 1 : $bor,
+		'bor_ticker'              => $bor_ticker,
+		'bor_li'                  => $bor_li,
+		'bor__pn'                 => $bor__pn,
+		'bor_scroll'              => $bor_scroll,
+		'is_two'                  => $this->is_two(),
+		'np_img_anms_two'         => $this->options_anim('np_img_anms_two'),
+		'disable_title'           => $this->options('disable_title'),
+		'width_title_background'  => $this->options_sty('width_title_background'),
+		'speed_anms_two'          => $this->options_anim('speed_anms_two'),
+		'autostart_animtwo'       => $this->options_anim('autostart_animtwo') && 'enable' === $this->options_anim('np_img_anms_two') && ! $this->options_sty('enable_style_mobile'),
+		'timeout_anms_two'        => $this->options_anim('timeout_anms_two'),
+		'pause_anms_two'          => $this->options_anim('pause_anms_two'),
+		'anim_two__if'            => in_array( $this->options_anim('animation'), $anim_two__if ) ? true : false,
+		'pause_fadein'            => $this->options_anim('pause_fadein'),
+		'autostart_fadein'        => $this->options_anim('autostart_fadein') && 'enable_img_n_fadein' === $this->options_anim('disa_img_n_fadein') && ! $this->options_sty('enable_style_mobile'),
+		'timeout_fadein'          => $this->options_anim('timeout_fadein'),
+		'speed_slide_up_down'     => $this->options_anim('speed_slide_up_down'),
+		'updown_slide_up_down'    => $this->options_anim('updown_slide_up_down'),
+		'autostart_slide_up_down' => $this->options_anim('autostart_slide_up_down') && 'enable_img_n_scrollup' === $this->options_anim('disa_img_n_scrollup') && ! $this->options_sty('enable_style_mobile'),
+		'timeout_slide_up_down'   => $this->options_anim('timeout_slide_up_down'),
+		'pause_slide_up_down'     => $this->options_anim('pause_slide_up_down'),
+		'titletext_tp1'           => $titleText_tp1,
+		'direction_tp1'           => $direction_tp1,
+		'speed_no_scr_typ'        => $this->options_anim('speed_no_scr_typ'),
+		'pause_on_items_tp1'      => apply_filters( 'ntb_filter_pause_on_items', 2000 ),
+		'np_img_no_scr_typ'       => $this->options_anim('np_img_no_scr_typ'),
+		'typ1_margin_mobile'      => apply_filters( 'ntb_filter_typ1_margin_mobile', 15 ),
+		'hide_ntb'                => $this->options_hi('hide'),
+		'ellipsis'                => apply_filters( 'ntb_filter_enable_ellipsis', true ),
+		'time_recent_hide'        => $this->get_time_recent( true ),
+		'disable_anim'            => apply_filters( 'ntb_filter_play_animation', true ) && $this->ntb_items(true),
 		);
 		wp_localize_script( 'ntb_js-anims', 'ntb_anims', $params );
 		wp_enqueue_script( 'ntb_js-anims' );
-    }
+	}
 	
 	function is_two() {
-	$array_anim_two = array('ScrollNTB','Scroll_Up_NTB','fadein','TickerNTB');	
-	if ( !in_array($this->options_anim('animation'), $array_anim_two) )
-    return true;		
+		$array_anim_two = array('ScrollNTB','Scroll_Up_NTB','fadein','TickerNTB');	
+		if ( !in_array($this->options_anim('animation'), $array_anim_two) )
+		return true;		
 	}
-
+	
 	function get_settings() {
-
+		
 		$settings = array( 
-			'rolexcap_ntb' => (array) $this->options('for_role_x')
+		'rolexcap_ntb' => (array) $this->options('for_role_x')
 		);
-
+		
 		$settings[ 'rolexcap_ntb' ] = array_map( 'trim', array_unique( array_filter( $settings[ 'rolexcap_ntb' ] ) ) );
 		
 		return $settings;
 		
 	}
-
-    function id_user_ntb() {
-
-	$current_user = wp_get_current_user();
-	$user_id = get_current_user_id();
 	
-	$iduser_ntb = array_filter(array_unique(array_map('trim', explode(',', $this->options('for_user_id')))));
-	
-	    if($this->options('for_user_id') && in_array($user_id, $iduser_ntb) && is_user_logged_in())
+	function id_user_ntb() {
+		
+		$current_user = wp_get_current_user();
+		$user_id = get_current_user_id();
+		
+		$iduser_ntb = array_filter(array_unique(array_map('trim', explode(',', $this->options('for_user_id')))));
+		
+		if($this->options('for_user_id') && in_array($user_id, $iduser_ntb) && is_user_logged_in())
 		return true;
-	  	return false;
-    }
-
-    function role_cap_ntb() {
-
-        $settings = $this->get_settings();	
+		return false;
+	}
+	
+	function role_cap_ntb() {
+		
+		$settings = $this->get_settings();	
 		$rolexcap_ntb = $settings[ 'rolexcap_ntb' ];
 		
 		if ( $rolexcap_ntb != '' ) {
 			if ( !is_array( $rolexcap_ntb ) )
 			$rolexcap_ntb = array( $rolexcap_ntb );
-
+			
 			foreach ( $rolexcap_ntb as $role ) {
-			    if ( current_user_can( $role ) && is_user_logged_in() )
+				if ( current_user_can( $role ) && is_user_logged_in() )
 				return true;
-		    }
-	    }
-	
-	return false;
-    }
-
-    function all_users_ntb() {
-		
-	if ($this->options('for_users') && is_user_logged_in())
-	return true;
-	return false;
-    }
-
-    function visitors_ntb() {
-		
-	if ($this->options('for_visitors') && !is_user_logged_in())
-	return true;
-	return false;
-    }
-
-    function links_on_admin_bar($wp_admin_bar) {
-
-    if (current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) && $this->options('links_admin_bar_front') && !is_admin() && $this->options('enable') == '1') {
-    if ($this->options('links_admin_bar_menu') == 'menu') {
-    $wp_admin_bar->add_menu( array( 'id' => 'PLB_ntb5', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
-    } elseif ($this->options('links_admin_bar_menu') == 'submenu' ) { 
-    $wp_admin_bar->add_menu( array( 'parent' => 'appearance', 'id' => 'PLB_ntb6', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
-    }
-	} elseif (current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) && $this->options('links_admin_bar_admin') && is_admin() && $this->options('enable') == '1')  {
-    if ($this->options('links_admin_bar_menu') == 'menu') {
-    $wp_admin_bar->add_menu( array( 'id' => 'PLB_ntb7', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
-    } elseif ($this->options('links_admin_bar_menu') == 'submenu') { 
-    $wp_admin_bar->add_menu( array( 'parent' => 'site-name', 'id' => 'PLB_ntb8', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
-    }
-	}	
-    }
-	
-    function ntb_admin_notices() {
-		
-		if ($this->ntb_notice == false) return;
-		
-		$screen = get_current_screen()->id;
-		if ('settings_page_news_ticker_benaceur' === $screen)
-            include_once ('notices-ntb.php');
-	}
-
-    function page_options() {
-    return require_once (NTB_BEN_DIR . 'opts-page.php');
-	}
-
-    function plugin_deactivation() {
-
-    if ( $this->options_oth('delete_all_options') == 'delete') {
-    delete_option('news_ticker_benaceur_glob_options');	   
-	delete_option( 'news_ticker_benaceur_version');
-    }
-
-	if ( $this->options_oth('remove_short_code') == 'remove') {
-	$this->remove_shortcode_wpdb();	
-	
-    if ( $this->options_oth('delete_all_options') != 'delete') {
-	$this->update_add_option( array('other_options' => array('remove_short_code' => 'not_remove')) );
-	}
-	
-    }
-  
-    }
-  
-    function reset_options() {
-
-    // reset glob
-    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_glob' ) {
-		$this->update_add_option( array('global_options' => $this->unset_from_global_options()) );
-    }
-    // reset glob
-
-    // reset anim 
-    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_anim' ) {
-		$this->update_add_option( array('anim_options' => $this->all_options('anim_options')) );
-    }
-    // reset anim
-
-    // reset sty
-    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_sty' ) {
-		$this->update_add_option( array('style_options' => $this->unset_from_style_options()) );
-	}
-    // reset sty
-
-    // reset all
-    if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_all' ) {
-    $this->_reset_all();
-    }
-    // reset all
-	
-    if ( isset($_GET['settings-updated']) ) {
-		$this->update_add_option( array('exclude_from_reset' => '') );
-	}
-
-    }
-  
-    function settings_callback($posted_options) {
-	
-	$_POST = stripslashes_deep($_POST); // prevent adding a slash if the field contains a quote when $_POST is isset
-	$_COOKIE = stripslashes_deep($_COOKIE); // prevent adding a slash if the field contains a quote when $_COOKIE is isset
-	
-	// Prevent saving all parameters except "global_options" when "submit_global" posted.	
-    if (isset( $_POST['submit_global'] )) {
-		
-	if ($posted_options['global_options']['hide_after_time']['update_manually_date'] == 'yes') {
-	$posted_options['global_options']['hide_after_time']['manually_date'] = current_time( 'mysql' );
-    } else {
-	$posted_options['global_options']['hide_after_time']['manually_date'] = $this->options_hi('manually_date');
-	}
-	$posted_options['global_options']['hide_after_time']['update_manually_date'] = 'no';
-	
-	$global_options = $posted_options;
-	$posted_options = $this->glob_options();
-	$posted_options['global_options'] = $global_options['global_options'];
-	$posted_options['scrool_to'] = 'glob_options';
-    }
-	// Prevent saving all parameters except "anim_options" when "submit_animation" posted.	
-    else if (isset( $_POST['submit_animation'] )) {
-	$anim_options = $posted_options;
-	$posted_options = $this->glob_options();
-	$posted_options['anim_options'] = $anim_options['anim_options'];
-	$posted_options['scrool_to'] = 'anim_options';
-    }
-	// Prevent saving all parameters except "image_att_scrollntb" when "reset_image_selector_ntb" posted.	
-    else if (isset( $_POST['reset_image_selector_ntb'] )) {
-	$posted_options = $this->glob_options();
-	$posted_options['anim_options']['image_att_scrollntb'] = '0';
-	$posted_options['scrool_to'] = 'anim_options';
-    }
-	// Prevent saving all parameters except "style_options" when "submit_style" posted.	
-    else if (isset( $_POST['submit_style'] )) {
-	$style_options = $posted_options;
-	$posted_options = $this->glob_options();
-	$posted_options['style_options'] = $style_options['style_options'];
-	$posted_options['scrool_to'] = 'sty_options';
-    }
-	// Prevent saving all parameters except "other_options" and "reset" when "submit_others" posted.	
-    else if (isset( $_POST['submit_others'] )) {
-	$other_options = $posted_options;
-	$posted_options = $this->glob_options();
-	$posted_options['other_options'] = $other_options['other_options'];
-	$posted_options['exclude_from_reset'] = $other_options['exclude_from_reset'];
-	$posted_options['reset'] = $other_options['reset'];
-	$posted_options['scrool_to'] = 'oth_options';
-    }
-    else if (isset( $_POST['submit__ntb_all'] )) {
-		
-	if ($posted_options['global_options']['hide_after_time']['update_manually_date'] == 'yes') {
-	$posted_options['global_options']['hide_after_time']['manually_date'] = current_time( 'mysql' );
-    } else {
-	$posted_options['global_options']['hide_after_time']['manually_date'] = $this->options_hi('manually_date');
-	}
-	$posted_options['global_options']['hide_after_time']['update_manually_date'] = 'no';
-	
-	} else if (!empty($_POST)) {
-	$posted_options = $this->glob_options();
-	}		
-	
-	// sécuriser les options (les values) avant de les sauveguarder avec wp_kses_post()
-	    $output = array();
-		foreach((array)$posted_options as $key => $value) {
-			//if ($key == 'reset') continue;
-			if (is_array($posted_options[$key])) { // global_options,anim_options,style_options,other_options
-			$output2 = $posted_options[$key];
-			foreach((array)$output2 as $key2 => $value2) {
-			    foreach((array)$value2 as $key3 => $value3) {
-					if (is_array($value2)) {
-					$output[$key][$key2][$key3] = is_array($value3) ? $value3 : (trim($value3) == '' ? $value3 : wp_kses_post( $value3 ) );
-					} else {
-					$output[$key][$key2] = is_array($value2) ? $value2 : (trim($value2) == '' ? $value2 : wp_kses_post( $value2 ) );
-					}
-				}
-		    }
-            } else { // reset,scrool_to
-			$output[$key] = trim($value) == '' ? $value : wp_kses_post( $value );
 			}
 		}
 		
-	$posted_options = $output;
-	// sécuriser les options (les values) avant de les sauveguarder avec wp_kses_post()
-	
-	return $posted_options;
-    }
-	
-    function right_left() {
-	return ($this->options('dir') == 'auto' && is_rtl() || $this->options('dir') == 'rtl') ? "right" : "left";
+		return false;
 	}
 	
-    function left_right() {
-	return ($this->options('dir') == 'auto' && is_rtl() || $this->options('dir') == 'rtl') ? "left" : "right";
+	function all_users_ntb() {
+		
+		if ($this->options('for_users') && is_user_logged_in())
+		return true;
+		return false;
 	}
 	
-    function rtl_left_right() {
-	return is_rtl() ? "left" : "right";
+	function visitors_ntb() {
+		
+		if ($this->options('for_visitors') && !is_user_logged_in())
+		return true;
+		return false;
 	}
 	
-    function rtl_right_left() {
-	return is_rtl() ? "right" : "left";
+	function links_on_admin_bar($wp_admin_bar) {
+		
+		if (current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) && $this->options('links_admin_bar_front') && !is_admin() && $this->options('enable') == '1') {
+			if ($this->options('links_admin_bar_menu') == 'menu') {
+				$wp_admin_bar->add_menu( array( 'id' => 'PLB_ntb5', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
+			} elseif ($this->options('links_admin_bar_menu') == 'submenu' ) { 
+				$wp_admin_bar->add_menu( array( 'parent' => 'appearance', 'id' => 'PLB_ntb6', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
+			}
+		} elseif (current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) && $this->options('links_admin_bar_admin') && is_admin() && $this->options('enable') == '1')  {
+			if ($this->options('links_admin_bar_menu') == 'menu') {
+				$wp_admin_bar->add_menu( array( 'id' => 'PLB_ntb7', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
+			} elseif ($this->options('links_admin_bar_menu') == 'submenu') { 
+				$wp_admin_bar->add_menu( array( 'parent' => 'site-name', 'id' => 'PLB_ntb8', 'title' => __('News Ticker Benaceur'), 'href' => admin_url('/'.NTB_BEN_O_G.'?page=news_ticker_benaceur' ) ) );
+			}
+		}	
+	}
+	
+	function ntb_admin_notices() {
+		$screen = get_current_screen();
+
+		if ( current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) ) {
+			if (
+				'enabled' === $this->options( 'cache_p_c' )
+				&& 'latest_posts' === $this->options( 'latest_p_c' )
+				&& $this->ntb_posts_orderby_is_random( $this->get_arguments( 'posts' ) )
+			) {
+				echo '<div class="notice notice-warning"><p>';
+				echo esc_html__( 'Random ordering was detected for the latest posts while the cache is enabled. The same random selection may be shown until the cache expires. Disable the cache if you want a new random selection on each page load.', 'news-ticker-benaceur' );
+				echo '</p><p>news ticker benaceur</p></div>';
+			}
+		}
+		
+		if ( ! $screen || 'settings_page_news_ticker_benaceur' !== $screen->id ) {
+			return;
+		}
+
+		if ( $this->ntb_notice == false ) {
+			return;
+		}
+
+		include_once 'notices-ntb.php';
+	}	
+	
+	function page_options() {
+		return require_once (NTB_BEN_DIR . 'opts-page.php');
+	}
+	
+	function plugin_deactivation() {
+		
+		if ( $this->options_oth('delete_all_options') == 'delete') {
+			delete_option('news_ticker_benaceur_glob_options');	   
+			delete_option( 'news_ticker_benaceur_version');
+		}
+		
+		if ( $this->options_oth('remove_short_code') == 'remove') {
+			$this->remove_shortcode_wpdb();	
+			
+			if ( $this->options_oth('delete_all_options') != 'delete') {
+				$this->update_add_option( array('other_options' => array('remove_short_code' => 'not_remove')) );
+			}
+			
+		}
+		
+	}
+	
+	function reset_options() {
+		
+		// reset glob
+		if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_glob' ) {
+			$this->update_add_option( array('global_options' => $this->unset_from_global_options()) );
+		}
+		// reset glob
+		
+		// reset anim 
+		if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_anim' ) {
+			$this->update_add_option( array('anim_options' => $this->all_options('anim_options')) );
+		}
+		// reset anim
+		
+		// reset sty
+		if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_sty' ) {
+			$this->update_add_option( array('style_options' => $this->unset_from_style_options()) );
+		}
+		// reset sty
+		
+		// reset all
+		if ( isset($_GET['settings-updated']) && $this->options_s('reset') == 'reset_all' ) {
+			$this->_reset_all();
+		}
+		// reset all
+		
+		if ( isset($_GET['settings-updated']) ) {
+			$this->update_add_option( array('exclude_from_reset' => '') );
+		}
+		
+	}
+	
+	function sanitize_options_values( $value ) {
+		if ( is_array( $value ) ) {
+			$sanitized = array();
+
+			foreach ( $value as $key => $item ) {
+				$sanitized[ $key ] = $this->sanitize_options_values( $item );
+			}
+
+			return $sanitized;
+		}
+
+		if ( is_string( $value ) ) {
+			return '' === trim( $value ) ? $value : wp_kses_post( $value );
+		}
+
+		// تُقبل القيم العددية والمنطقية و null كما هي.
+		if ( is_int( $value ) || is_float( $value ) || is_bool( $value ) || is_null( $value ) ) {
+			return $value;
+		}
+
+		// ارفض أي نوع غير متوقع.
+		return false;
 	}
 
-    function is_ntb_rtl() {
-	return (is_rtl() && $this->options('dir') != 'ltr' || !is_rtl() && $this->options('dir') == 'rtl') ? true : false ;
+	function settings_callback( $posted_options ) {
+		
+		$_POST = stripslashes_deep( $_POST ); // prevent adding a slash if the field contains a quote when $_POST is isset
+		$_COOKIE = stripslashes_deep( $_COOKIE ); // prevent adding a slash if the field contains a quote when $_COOKIE is isset
+		$global_or_all_posted = false;
+		
+		// Prevent saving all parameters except "global_options" when "submit_global" posted.	
+		if (isset( $_POST['submit_global'] )) {
+		
+			$global_or_all_posted = true;
+			
+			if ($posted_options['global_options']['hide_after_time']['update_manually_date'] == 'yes') {
+				$posted_options['global_options']['hide_after_time']['manually_date'] = current_time( 'mysql' );
+			} else {
+				$posted_options['global_options']['hide_after_time']['manually_date'] = $this->options_hi('manually_date');
+			}
+			$posted_options['global_options']['hide_after_time']['update_manually_date'] = 'no';
+			
+			$global_options = $posted_options;
+			$posted_options = $this->glob_options();
+			$posted_options['global_options'] = $global_options['global_options'];
+			$posted_options['scrool_to'] = 'glob_options';
+		}
+		// Prevent saving all parameters except "anim_options" when "submit_animation" posted.	
+		elseif (isset( $_POST['submit_animation'] )) {
+			$anim_options = $posted_options;
+			$posted_options = $this->glob_options();
+			$posted_options['anim_options'] = $anim_options['anim_options'];
+			$posted_options['scrool_to'] = 'anim_options';
+		}
+		// Prevent saving all parameters except "image_att_scrollntb" when "reset_image_selector_ntb" posted.	
+		elseif (isset( $_POST['reset_image_selector_ntb'] )) {
+			$posted_options = $this->glob_options();
+			$posted_options['anim_options']['image_att_scrollntb'] = '0';
+			$posted_options['scrool_to'] = 'anim_options';
+		}
+		// Prevent saving all parameters except "style_options" when "submit_style" posted.	
+		elseif (isset( $_POST['submit_style'] )) {
+			$style_options = $posted_options;
+			$posted_options = $this->glob_options();
+			$posted_options['style_options'] = $style_options['style_options'];
+			$posted_options['scrool_to'] = 'sty_options';
+		}
+		// Prevent saving all parameters except "other_options" and "reset" when "submit_others" posted.	
+		elseif (isset( $_POST['submit_others'] )) {
+			$other_options = $posted_options;
+			$posted_options = $this->glob_options();
+			$posted_options['other_options'] = $other_options['other_options'];
+			$posted_options['exclude_from_reset'] = $other_options['exclude_from_reset'];
+			$posted_options['reset'] = $other_options['reset'];
+			$posted_options['scrool_to'] = 'oth_options';
+		}
+		elseif (isset( $_POST['submit__ntb_all'] )) {
+		
+			$global_or_all_posted = true;
+			
+			if ($posted_options['global_options']['hide_after_time']['update_manually_date'] == 'yes') {
+				$posted_options['global_options']['hide_after_time']['manually_date'] = current_time( 'mysql' );
+			} else {
+				$posted_options['global_options']['hide_after_time']['manually_date'] = $this->options_hi('manually_date');
+			}
+			$posted_options['global_options']['hide_after_time']['update_manually_date'] = 'no';
+			
+		} else if (!empty($_POST)) {
+			$posted_options = $this->glob_options();
+		}
+		
+		if ( $global_or_all_posted ) {
+			do_action( 'news_ticker_benaceur_global_or_all_posted' );
+		}
+		
+		// sécuriser les options (les values) avant de les sauveguarder avec wp_kses_post()
+		$posted_options = $this->sanitize_options_values( $posted_options );
+		// sécuriser les options (les values) avant de les sauveguarder avec wp_kses_post()
+		
+		return $posted_options;
 	}
+	
+	function ntb_store() {
+		add_action( 'news_ticker_benaceur_global_or_all_posted', array( $this, 'update_transient_global_or_all_posted' ) );
+		if ( 'enabled' !== $this->options('cache_p_c') ) return;
 
-    function msg_update_func() {
-        do_action('wp_ntb_msg_update');
-    }
+		add_action( 'wp_insert_post', array( $this, 'transient_wp_insert_post' ), 10, 3 );
+		add_action( 'deleted_post', array( $this, 'transient_post_deleted' ), 10, 2 ); // Fires immediately after the post is deleted from the database.
+		add_action( 'post_updated', array( $this, 'transient_post_updated' ), 10, 3 );
+		add_action( 'set_object_terms', array( $this, 'transient_post_terms_updated' ), 10, 6 );
+		add_action( 'delete_term', array( $this, 'transient_post_term_deleted' ), 10, 3 );
+		add_action( 'wp_insert_comment', array( $this, 'transient_new_comment' ), 10, 2 );
+		add_filter( 'wp_update_comment_data', array( $this, 'transient_comment_update_data' ), 10, 3 );
+		add_action( 'edit_comment', array( $this, 'transient_edit_comment' ), 10, 2 );
+		add_action( 'deleted_comment', array( $this, 'transient_comment_deleted' ), 10, 2 );
+		add_action( 'trashed_post_comments', array( $this, 'transient_post_comments_changed' ), 10, 2 );
+		add_action( 'untrashed_post_comments', array( $this, 'transient_post_comments_changed' ), 10, 1 );
+		add_action( 'transition_comment_status', array( $this, 'transient_status_comment_updated' ), 10, 3 );
+		add_action( 'transition_post_status', array( $this, 'transient_status_post_updated__comment' ), 10, 3 );
+		
+		add_action( 'admin_init', array( $this, 'delete_all_caches_now_action' ) );
+	}
+	
+	function right_left() {
+		return ($this->options('dir') == 'auto' && is_rtl() || $this->options('dir') == 'rtl') ? "right" : "left";
+	}
+	
+	function left_right() {
+		return ($this->options('dir') == 'auto' && is_rtl() || $this->options('dir') == 'rtl') ? "left" : "right";
+	}
+	
+	function rtl_left_right() {
+		return is_rtl() ? "left" : "right";
+	}
+	
+	function rtl_right_left() {
+		return is_rtl() ? "right" : "left";
+	}
+	
+	function is_ntb_rtl() {
+		return (is_rtl() && $this->options('dir') != 'ltr' || !is_rtl() && $this->options('dir') == 'rtl') ? true : false ;
+	}
+	
+	function msg_update_func() {
+		do_action('wp_ntb_msg_update');
+	}
 	
 	function codemirror($hook) {
-        if ( 'settings_page_news_ticker_benaceur' != $hook ) return;
-  
-        wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
-        //$settings['codeEditor'] = wp_enqueue_code_editor(array('type' => 'text/css'));
-        //wp_localize_script('jquery', 'ntb_settings', $settings);
- 
-        wp_enqueue_script('ntb-codemirror-editor-js');
-        wp_enqueue_style('ntb-codemirror-editor-css');
-    }
-	
-    function prefix_get_image() {
-    if(isset($_GET['id']) ){
-        $image = wp_get_attachment_image( filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT ), array('75', '60'), false, array( 'id' => 'ntb__prefix-preview-image' ) );
-        $data = array(
-            'image'    => $image,
-        );
-        wp_send_json_success( $data );
-    } else {
-        wp_send_json_error();
-    }
-    }
-
-    function verPlug(){
+		if ( 'settings_page_news_ticker_benaceur' != $hook ) return;
 		
-	if ( $this->is_php_8_1_wpcore() ) return;
+		wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
+		//$settings['codeEditor'] = wp_enqueue_code_editor(array('type' => 'text/css'));
+		//wp_localize_script('jquery', 'ntb_settings', $settings);
+		
+		wp_enqueue_script('ntb-codemirror-editor-js');
+		wp_enqueue_style('ntb-codemirror-editor-css');
+	}
 	
-	if ( !apply_filters( 'ntb_filter_check_ntb_version', true ) ) return;
-    
-    // $update_plugins = get_site_transient('update_plugins');
-    // if ( isset( $update_plugins->response[ NTB_BEN_BASENAME ] ) ) { 
-			
-    $url = wp_nonce_url(self_admin_url('update.php?action=upgrade-plugin&plugin=' . NTB_BEN_BASENAME), 'upgrade-plugin_' . NTB_BEN_BASENAME);
-    if ($this->ntb_version() < $this->latest_version("news-ticker-benaceur")) {
-	printf('<div style="display:none;" class="ntb-mm4111172p">
-	<div class="ntb-mm411112"><div id="ntb-mm411112-divtoBlink">%1$s %2$s, %3$s <a href="%4$s">%5$s</a>.</div></div>
-    
-    <script>
-    (function($) {
-    $(".ntb-mm4111172p").delay(400).slideToggle("slow");
-    })(jQuery); 
-    </script>
-	</div>',
-	__("You are using Version",'news-ticker-benaceur'),
-	$this->ntb_version(),
-	__("There is a newer version, it's recommended to",'news-ticker-benaceur'),
-	$url,
-	__("update now",'news-ticker-benaceur'));
-    }
-    // } 
-    }
 
-    function exp_imp() {
-        require_once ('ie-setts.php');
+	function prefix_get_image() {
+		if ( ! current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options' ) ) ) {
+			wp_send_json_error( array( 'message' => 'Forbidden' ), 403 );
+		}
+
+		$attachment_id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT );
+
+		if ( ! $attachment_id || 'attachment' !== get_post_type( $attachment_id ) || ! current_user_can( 'edit_post', $attachment_id ) ) {
+			wp_send_json_error( array( 'message' => 'Forbidden' ), 403 );
+		}
+
+		$image = wp_get_attachment_image( $attachment_id, array( '75', '60' ), false, array( 'id' => 'ntb__prefix-preview-image' ) );
+
+		if ( ! $image ) {
+			wp_send_json_error();
+		}
+
+		wp_send_json_success(
+			array(
+				'image' => $image,
+			)
+		);
+	}	
+	
+	function verPlug(){
+		
+		if ( $this->is_php_8_1_wpcore() ) return;
+		
+		if ( !apply_filters( 'ntb_filter_check_ntb_version', true ) ) return;
+		
+		// $update_plugins = get_site_transient('update_plugins');
+		// if ( isset( $update_plugins->response[ NTB_BEN_BASENAME ] ) ) { 
+		
+		$url = wp_nonce_url(self_admin_url('update.php?action=upgrade-plugin&plugin=' . NTB_BEN_BASENAME), 'upgrade-plugin_' . NTB_BEN_BASENAME);
+		if ($this->ntb_version() < $this->latest_version("news-ticker-benaceur")) {
+			printf('<div style="display:none;" class="ntb-mm4111172p">
+			<div class="ntb-mm411112"><div id="ntb-mm411112-divtoBlink">%1$s %2$s, %3$s <a href="%4$s">%5$s</a>.</div></div>
+			
+			<script>
+			(function($) {
+			$(".ntb-mm4111172p").delay(400).slideToggle("slow");
+			})(jQuery); 
+			</script>
+			</div>',
+			__("You are using Version",'news-ticker-benaceur'),
+			$this->ntb_version(),
+			__("There is a newer version, it's recommended to",'news-ticker-benaceur'),
+			$url,
+			__("update now",'news-ticker-benaceur'));
+		}
+		// } 
+	}
+	
+	function exp_imp() {
+		require_once ('ie-setts.php');
 	}
 	
 	function droidkufi_ben() {
 		return sprintf( '
-        <style>
+		<style>
 		@font-face {
-        font-family: DroidKufi_Ben;
-        src: url(%1$s/font/DroidKufi-Regular.eot);
-        src: url(%1$s/font/DroidKufi-Regular.eot?#iefix) format("embedded-opentype"),
-        url(%1$s/font/droidkufi-regular.ttf) format("truetype"),
+		font-family: DroidKufi_Ben;
+		src: url(%1$s/font/DroidKufi-Regular.eot);
+		src: url(%1$s/font/DroidKufi-Regular.eot?#iefix) format("embedded-opentype"),
+		url(%1$s/font/droidkufi-regular.ttf) format("truetype"),
 		url(%1$s/font/droidkufi-regular.woff2) format("woff2"),
-	    url(%1$s/font/droidkufi-regular.woff) format("woff");
-        }
-        </style>
+		url(%1$s/font/droidkufi-regular.woff) format("woff");
+		}
+		</style>
 		', NTB_BEN_URL_DIR );
-    }
+	}
 	
-    function ntb__admin_head() {
+	function ntb__admin_head() {
 		
 		$glob = $this->glob_options();
 		
-        if ( empty($glob) && $glob !== false ) {
-            update_option('news_ticker_benaceur_glob_options', $this->all_options('all'));
+		if ( empty($glob) && $glob !== false ) {
+			update_option('news_ticker_benaceur_glob_options', $this->all_options('all'));
 		}
 		
 		echo $this->droidkufi_ben();
@@ -839,343 +980,342 @@ class class______news_ticker_benaceur {
 		if (get_user_meta( $cur_userid, 'news_ticker_benaceur_msg_opts_up' )) {
 		?>
 		<div style="display:none;" class="ntb__export__file">
-        <p><?php _e('The settings file was imported successfully', 'news-ticker-benaceur') ?></p>
+			<p><?php _e('The settings file was imported successfully', 'news-ticker-benaceur') ?></p>
 		</div>
 		
-        <script type="text/javascript">	
-        jQuery(document).ready( function($) {
-	        setTimeout(function(){
-	            $(".ntb__export__file").slideDown(200).delay(5000).slideUp(300);
-            }, 300);
-        });
-        </script>
-        <?php
-		delete_user_meta( $cur_userid, 'news_ticker_benaceur_msg_opts_up' );
+		<script type="text/javascript">	
+			jQuery(document).ready( function($) {
+				setTimeout(function(){
+					$(".ntb__export__file").slideDown(200).delay(5000).slideUp(300);
+				}, 300);
+			});
+		</script>
+		<?php
+			delete_user_meta( $cur_userid, 'news_ticker_benaceur_msg_opts_up' );
 		}
 		
-		if (get_user_meta( $cur_userid, 'news_ticker_benaceur_error_msg_opts_up' )) {
+		if ( get_user_meta( $cur_userid, 'news_ticker_benaceur_error_msg_opts_up' ) ) {
 		?>
 		<div style="display:none;" class="ntb__export__file" id="err">
-        <p><?php _e('An error occurred while importing the file.', 'news-ticker-benaceur') ?></p>
+			<p><?php _e('An error occurred while importing the file.', 'news-ticker-benaceur') ?></p>
 		</div>
 		
-        <script type="text/javascript">	
-        jQuery(document).ready( function($) {
-	        setTimeout(function(){
-	            $(".ntb__export__file").slideDown(200).delay(5000).slideUp(300);
-            }, 300);
-        });
-        </script>
-        <?php
-		delete_user_meta( $cur_userid, 'news_ticker_benaceur_error_msg_opts_up' );
+		<script type="text/javascript">	
+			jQuery(document).ready( function($) {
+				setTimeout(function(){
+					$(".ntb__export__file").slideDown(200).delay(5000).slideUp(300);
+				}, 300);
+			});
+		</script>
+		<?php
+			delete_user_meta( $cur_userid, 'news_ticker_benaceur_error_msg_opts_up' );
 		}
 		
-    }
+	}
 	
-    function ntb_head() {
-	if ($this->ntb_disabled_or_hide()) return;
-	
-	$height = $this->options_sty('height');
-	$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') : $height;
-	$max_width = $this->options_sty('screen_max_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_max_width') : 782;
-	$min_width = $this->options_sty('screen_min_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_min_width') : 782;
-	$fixed_top_bottom = (int) $this->options_sty('fixed_top_bottom');
-	$ori = is_rtl() ? 'right' : 'left';
-	$theme = wp_get_theme();
-	$and = is_admin_bar_showing() || $this->options_sty('disable_fixed_600_for_top') ? 'and (min-width: 600px)' : '';
-	
-    echo '<style>';
-	
-	if ($this->options_sty('fixed') && $this->options_sty('fixed_top_bottom_site') == 'top') {
+	function ntb_head() {
+		if ($this->ntb_disabled_or_hide()) return;
 		
-	$height_ = $height + $this->adminbar32 + $fixed_top_bottom;
-	$height_mobile_ = $height_mobile + $this->adminbar46 + $fixed_top_bottom;
-	$height = $height + $fixed_top_bottom;
-	$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') + $fixed_top_bottom : $height;
-	
-	$adminbar1 = is_admin_bar_showing() ? "
-	@media only screen and (min-width: {$min_width}px) {
-	    html {margin-top: {$height_}px !important;}
-	}
-	@media screen and (max-width: {$max_width}px) {$and} {
-		html {margin-top: {$height_mobile_}px !important;}
-	}
-	" : "
-	@media only screen and (min-width: {$min_width}px) {
-	    html {margin-top: {$height}px !important;}
-	}
-	@media screen and (max-width: {$max_width}px) {$and} {
-		html {margin-top: {$height_mobile}px !important;}
-	}
-	";
-	echo $adminbar1;
-	/*
-	if ( $theme->name == 'Twenty Fourteen' ) {
-	$adminbar_top = is_admin_bar_showing() ? '
-	@media screen and (min-width: 783px) {
-	    .admin-bar .n_t_ntb_b, .admin-bar .news-ticker-ntb, .admin-bar .news_ticker_ntb_ie8 {top: 80px;} 
-	}
-	' : '
-	@media screen and (min-width: 783px) {
-	    .n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: 48px;} 
-	}
-	';
-	echo $adminbar_top;
-	}
-	*/
-	}
-	
-	if (!$this->options_sty('fixed') && $this->options('personalize_not_fixed') == 'customed') {
+		$height = $this->options_sty('height');
+		$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') : $height;
+		$max_width = $this->options_sty('screen_max_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_max_width') : 782;
+		$min_width = $this->options_sty('screen_min_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_min_width') : 782;
+		$fixed_top_bottom = (int) $this->options_sty('fixed_top_bottom');
+		$ori = is_rtl() ? 'right' : 'left';
+		$theme = wp_get_theme();
+		$and = is_admin_bar_showing() || $this->options_sty('disable_fixed_600_for_top') ? 'and (min-width: 600px)' : '';
 		
-	if (in_array($this->options('auto_add_ntb_not_fixed'), array('top','bottom'))) {
-		$z = $theme->name != 'Twenty Sixteen' ? '4' : '101';
-		echo "
-        .n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {
-        position: absolute !important;
-		$ori:0;
-		z-index: $z;
-        }
-	    ";
-	}
-	if ($this->options('auto_add_ntb_not_fixed') == 'top') {
+		echo '<style>';
 		
-	$margin_top = (int) $this->options_sty('margin_top');	
-	$height_ = $height + $this->adminbar32 + $margin_top;
-	$height_mobile_ = $height_mobile + $this->adminbar46 + $margin_top;
-	$height = $height + $margin_top;
-	$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') + $margin_top : $height;
+		if ($this->options_sty('fixed') && $this->options_sty('fixed_top_bottom_site') == 'top') {
+			
+			$height_ = $height + $this->adminbar32 + $fixed_top_bottom;
+			$height_mobile_ = $height_mobile + $this->adminbar46 + $fixed_top_bottom;
+			$height = $height + $fixed_top_bottom;
+			$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') + $fixed_top_bottom : $height;
+			
+			$adminbar1 = is_admin_bar_showing() ? "
+			@media only screen and (min-width: {$min_width}px) {
+			html {margin-top: {$height_}px !important;}
+			}
+			@media screen and (max-width: {$max_width}px) {$and} {
+			html {margin-top: {$height_mobile_}px !important;}
+			}
+			" : "
+			@media only screen and (min-width: {$min_width}px) {
+			html {margin-top: {$height}px !important;}
+			}
+			@media screen and (max-width: {$max_width}px) {$and} {
+			html {margin-top: {$height_mobile}px !important;}
+			}
+			";
+			echo $adminbar1;
+			/*
+				if ( $theme->name == 'Twenty Fourteen' ) {
+				$adminbar_top = is_admin_bar_showing() ? '
+				@media screen and (min-width: 783px) {
+				.admin-bar .n_t_ntb_b, .admin-bar .news-ticker-ntb, .admin-bar .news_ticker_ntb_ie8 {top: 80px;} 
+				}
+				' : '
+				@media screen and (min-width: 783px) {
+				.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: 48px;} 
+				}
+				';
+				echo $adminbar_top;
+				}
+			*/
+		}
 		
-	$adminbar = is_admin_bar_showing() ? "
-	.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: {$this->adminbar32}px;} 
-	html {margin-top: {$height_}px !important;}
-	@media screen and (max-width: {$max_width}px) {
-	    .n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: {$this->adminbar46}px;} 
-		html {margin-top: {$height_mobile_}px !important;}
-	}
-	" : "
-	.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: 0px;}
-	html {margin-top: {$height}px !important;} 
-	@media screen and (max-width: {$max_width}px) {
-		html {margin-top: {$height_mobile}px !important;}
-	}
-	";
-	echo $adminbar;
-	
-	//if ( $theme->name == 'Twenty Fourteen' )
-	//echo '@media screen and (min-width: 783px) {.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {margin-top:48px;}}';
-	}
-	
-	}
-	
-	echo '</style>';
-	
-	if ( $theme->name == 'Twenty Fifteen' ) {
-		
-		if ($this->options_sty('fixed') && $this->options_sty('fixed_top_bottom_site') == 'bottom') {
-			echo "<style>
-			@media screen and (min-width: 955px) {
-			    .sidebar {padding-bottom: {$height}px;}
+		if (!$this->options_sty('fixed') && $this->options('personalize_not_fixed') == 'customed') {
+			
+			if (in_array($this->options('auto_add_ntb_not_fixed'), array('top','bottom'))) {
+				$z = $theme->name != 'Twenty Sixteen' ? '4' : '101';
+				echo "
+				.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {
+				position: absolute !important;
+				$ori:0;
+				z-index: $z;
+				}
+				";
+			}
+			if ($this->options('auto_add_ntb_not_fixed') == 'top') {
+				
+				$margin_top = (int) $this->options_sty('margin_top');	
+				$height_ = $height + $this->adminbar32 + $margin_top;
+				$height_mobile_ = $height_mobile + $this->adminbar46 + $margin_top;
+				$height = $height + $margin_top;
+				$height_mobile = $this->options_sty('enable_style_mobile') ? $this->options_sty('height_mobile') + $margin_top : $height;
+				
+				$adminbar = is_admin_bar_showing() ? "
+				.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: {$this->adminbar32}px;} 
+				html {margin-top: {$height_}px !important;}
+				@media screen and (max-width: {$max_width}px) {
+				.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: {$this->adminbar46}px;} 
+				html {margin-top: {$height_mobile_}px !important;}
+				}
+				" : "
+				.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {top: 0px;}
+				html {margin-top: {$height}px !important;} 
+				@media screen and (max-width: {$max_width}px) {
+				html {margin-top: {$height_mobile}px !important;}
+				}
+				";
+				echo $adminbar;
+				
+				//if ( $theme->name == 'Twenty Fourteen' )
+				//echo '@media screen and (min-width: 783px) {.n_t_ntb_b, .news-ticker-ntb, .news_ticker_ntb_ie8 {margin-top:48px;}}';
 			}
 			
-			@media screen and (max-width: {$max_width}px) {
+		}
+		
+		echo '</style>';
+		
+		if ( $theme->name == 'Twenty Fifteen' ) {
+			
+			if ($this->options_sty('fixed') && $this->options_sty('fixed_top_bottom_site') == 'bottom') {
+				echo "<style>
+				@media screen and (min-width: 955px) {
+				.sidebar {padding-bottom: {$height}px;}
+				}
+				
+				@media screen and (max-width: {$max_width}px) {
 				.sidebar {padding-bottom: {$height_mobile}px;}
-			}
-			</style>
-			
-			<script type='text/javascript'>
-			jQuery(document).ready( function($) {
-                if (ntb_anims.hide_ntb == 'hide_jquery') {
-                setTimeout(function() {
+				}
+				</style>
+				
+				<script type='text/javascript'>
+				jQuery(document).ready( function($) {
+				if (ntb_anims.hide_ntb == 'hide_jquery') {
+				setTimeout(function() {
 				$('.sidebar').css({'padding-bottom': 'inherit'});
 				}, ntb_anims.time_recent_hide );
 				}
-			});	
-			</script>";
-		}
-		
-	    if (!$this->options_sty('fixed') && $this->options('auto_add_ntb_not_fixed') == 'bottom') {
+				});	
+				</script>";
+			}
 			
-			echo "<script type='text/javascript'>
-			jQuery(document).ready( function($) {
+			if ( ! $this->options_sty('fixed') && $this->options('auto_add_ntb_not_fixed') == 'bottom' ) {
+				
+				echo "<script type='text/javascript'>
+				jQuery(document).ready( function($) {
 				
 				var ntbDiv = $('<div>', {id: 'secondaryntb', 'class': 'secondaryntb'}); 
 				$('#secondary').append(ntbDiv);
 				
-                if (ntb_anims.hide_ntb == 'hide_jquery') {
-                setTimeout(function() {
+				if (ntb_anims.hide_ntb == 'hide_jquery') {
+				setTimeout(function() {
 				$('.secondaryntb').remove();
 				}, ntb_anims.time_recent_hide );
 				}
 				
-			    $(window).scroll(function () {
-					
-				if( window.innerWidth >= 955 ) {
-					
-                var heightOfBar = $('.news-ticker-ntb,.n_t_ntb_b,.news_ticker_ntb_ie8').outerHeight();
-                //var scrollBottom = $(window).scrollTop() + $(window).height();
-                var scrollBottom = $(this).scrollTop() + $(this).height();
-                var scroll__Bottom =  $(document).height() - heightOfBar;
+				$(window).scroll(function () {
 				
-                if(scrollBottom > scroll__Bottom){
-					$('.secondaryntb').css({'padding-bottom': heightOfBar + 'px'});
-                } else {
-					$('.secondaryntb').css({'padding-bottom': 'inherit'});
-                }
+				if( window.innerWidth >= 955 ) {
+				
+				var heightOfBar = $('.news-ticker-ntb,.n_t_ntb_b,.news_ticker_ntb_ie8').outerHeight();
+				//var scrollBottom = $(window).scrollTop() + $(window).height();
+				var scrollBottom = $(this).scrollTop() + $(this).height();
+				var scroll__Bottom =  $(document).height() - heightOfBar;
+				
+				if(scrollBottom > scroll__Bottom){
+				$('.secondaryntb').css({'padding-bottom': heightOfBar + 'px'});
+				} else {
+				$('.secondaryntb').css({'padding-bottom': 'inherit'});
+				}
 				
 				}
-	
-                });
-	
-			});	
-			</script>";
+				
+				});
+				
+				});	
+				</script>";
+			}
+			
 		}
 		
-	}
-	
-	//if (apply_filters( 'ntb_filter_hide_ntb_ul', true ))
-	//echo '<style>.news-ticker-ntb ul, .n_t_ntb_b ul {display:none;}</style>';
-
-        $option = $this->glob_options();
-        do_action('news_ticker_benaceur_ntb_head', $option, $theme);
+		//if (apply_filters( 'ntb_filter_hide_ntb_ul', true ))
+		//echo '<style>.news-ticker-ntb ul, .n_t_ntb_b ul {display:none;}</style>';
+		
+		do_action('news_ticker_benaceur_ntb_head', $this->glob_options(), $theme);
 	}
 	
 	function ntb_css() {
 		
-	if ($this->ntb_disabled_or_hide()) return;	
+		if ($this->ntb_disabled_or_hide()) return;	
 		
-    $s_style = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options_sty('s_style')))));
-    $bor = $this->options_sty('border_top') + $this->options_sty('border_bottom');
-    $bor__ = $bor > 0 ? $bor + 1 : $bor;
-    $bor_ = $bor > 0 ? $bor - 1 : $bor;
-
-    if ($this->options_sty('border_top') > $this->options_sty('border_bottom')) {
-        $bor_ticker = $bor > 0 ? $bor + 1 : $bor;	
-        $bor_li = $bor > 0 ? $bor + 1 : $bor;
-        $bor__pn = $bor > 0 ? $bor + 3 : 3;
-        $bor_scroll = $bor > 0 ? $bor + 5 : $bor+1;
-    } else {
-        $bor_ticker = $bor > 0 ? $bor - 1 : $bor;	
-        $bor_li = $bor > 0 ? $bor - 1 : $bor;
-        $bor__pn = $bor > 0 ? $bor + 1 : 3;
-        $bor_scroll = $bor > 0 ? $bor + 1 : $bor+2;
-    }
-    $bor_t = $bor + $this->options_sty('border_top_title') + $this->options_sty('border_bottom_title');
-
-    $f_ntb_color_border = apply_filters( 'ntb_f_color_border', $this->options_sty('color_border') );
-    $f_ntb_color_back_title = apply_filters( 'ntb_f_color_back_title', $this->options_sty('color_back_title') );
-    $f_ntb_color_text_title = apply_filters( 'ntb_f_color_text_title', $this->options_sty('color_text_title') );
-    $f_ntb_color_text_back = apply_filters( 'ntb_f_color_text_back', $this->options_sty('color_text_back') );
-	
-	$fixed_class_for_top = $this->options_sty('fixed_class_for_top') == '' ? '.ntb_add_class_to_wp_body_footer' : $this->options_sty('fixed_class_for_top');
-	$fixed_class_for_bottom = $this->options_sty('fixed_class_for_bottom') == '' ? '.ntb_add_class_to_wp_body_footer' : $this->options_sty('fixed_class_for_bottom');
-	
-	    $rtl = $this->is_ntb_rtl();		
-	    $rtl_ = $rtl ? 'right' : 'left' ;
-	
-    if ($this->options_anim('animation') != 'ScrollNTB') {
-	    $li1 = '<li>';
-	    $li2 = '</li>';
-	} else {
-		$li1 = '<span class="n_t_ntb_bimg"><span><span class="ntb_img_post_t_scrollntb"></span></span><span>';
-        $li2 = '</span></span>';
-		$ori = $this->right_left();
-	}
+		$s_style = array_filter(array_unique(array_map('trim', explode(PHP_EOL, $this->options_sty('s_style')))));
+		$bor = $this->options_sty('border_top') + $this->options_sty('border_bottom');
+		$bor__ = $bor > 0 ? $bor + 1 : $bor;
+		$bor_ = $bor > 0 ? $bor - 1 : $bor;
 		
-    if ( !$this->options_sty('disable_this_font') ) echo $this->droidkufi_ben();
-	 	
-	echo "<style>#ntbne_five, #ntbne_five_ie8, #ntbne2, #scroll-ntb {display: none;}</style>";
+		if ($this->options_sty('border_top') > $this->options_sty('border_bottom')) {
+			$bor_ticker = $bor > 0 ? $bor + 1 : $bor;	
+			$bor_li = $bor > 0 ? $bor + 1 : $bor;
+			$bor__pn = $bor > 0 ? $bor + 3 : 3;
+			$bor_scroll = $bor > 0 ? $bor + 5 : $bor+1;
+		} else {
+			$bor_ticker = $bor > 0 ? $bor - 1 : $bor;	
+			$bor_li = $bor > 0 ? $bor - 1 : $bor;
+			$bor__pn = $bor > 0 ? $bor + 1 : 3;
+			$bor_scroll = $bor > 0 ? $bor + 1 : $bor+2;
+		}
+		$bor_t = $bor + $this->options_sty('border_top_title') + $this->options_sty('border_bottom_title');
+		
+		$f_ntb_color_border = apply_filters( 'ntb_f_color_border', $this->options_sty('color_border') );
+		$f_ntb_color_back_title = apply_filters( 'ntb_f_color_back_title', $this->options_sty('color_back_title') );
+		$f_ntb_color_text_title = apply_filters( 'ntb_f_color_text_title', $this->options_sty('color_text_title') );
+		$f_ntb_color_text_back = apply_filters( 'ntb_f_color_text_back', $this->options_sty('color_text_back') );
+		
+		$fixed_class_for_top = $this->options_sty('fixed_class_for_top') == '' ? '.ntb_add_class_to_wp_body_footer' : $this->options_sty('fixed_class_for_top');
+		$fixed_class_for_bottom = $this->options_sty('fixed_class_for_bottom') == '' ? '.ntb_add_class_to_wp_body_footer' : $this->options_sty('fixed_class_for_bottom');
+		
+		$rtl = $this->is_ntb_rtl();		
+		$rtl_ = $rtl ? 'right' : 'left' ;
+		
+		if ($this->options_anim('animation') != 'ScrollNTB') {
+			$li1 = '<li>';
+			$li2 = '</li>';
+		} else {
+			$li1 = '<span class="n_t_ntb_bimg"><span><span class="ntb_img_post_t_scrollntb"></span></span><span>';
+			$li2 = '</span></span>';
+			$ori = $this->right_left();
+		}
+		
+		if ( !$this->options_sty('disable_this_font') ) echo $this->droidkufi_ben();
+		
+		echo "<style>#ntbne_five, #ntbne_five_ie8, #ntbne2, #scroll-ntb {display: none;}</style>";
+		
+		switch ($this->options_anim('animation')) {
 			
-            switch ($this->options_anim('animation')) {
+			case 'ScrollNTB':
+			include_once (NTB_BEN_DIR . 'style-anim/scrollntb.php');
+			break;
+			case 'Scroll_Up_NTB':
+			include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-scroll_up.php');
+			break;
+			case 'fadein':
+			include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-fadeIn.php');
+			break;
+			case 'TickerNTB':
+			include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-Ti.php');
+			break;
 			
-			  case 'ScrollNTB':
-			    include_once (NTB_BEN_DIR . 'style-anim/scrollntb.php');
-			    break;
-			  case 'Scroll_Up_NTB':
-			    include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-scroll_up.php');
-			    break;
-			  case 'fadein':
-			    include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-fadeIn.php');
-			    break;
-			  case 'TickerNTB':
-			    include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-Ti.php');
-			    break;
-				
-			  default:
-               	include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-two.php');
-				
+			default:
+			include_once (NTB_BEN_DIR . 'style-anim/no-scrollntb-two.php');
+			
+		}
+		
+		include_once (NTB_BEN_DIR . 'style-anim/style-common.php');
+		
+		echo $this->fixed_top_bottom_site();
+		
+		if ($this->options_sty('disable_in_screen_max_width')) {
+			echo "<style>
+			@media only screen and (max-width: {$this->options_sty('v_screen_max_width')}px) {
+			.news-ticker-ntb, .n_t_ntb_b, .news_ticker_ntb_ie8 {
+			display:none;
 			}
+			{$fixed_class_for_top} {margin-top:0px;}
+			{$fixed_class_for_bottom} {{$this->height_marginBottom()}:0px;}
+			}
+			</style>";
+		}
 		
-	include_once (NTB_BEN_DIR . 'style-anim/style-common.php');
-	
-	echo $this->fixed_top_bottom_site();
-	
-    if ($this->options_sty('disable_in_screen_max_width')) {
-	echo "<style>
-    @media only screen and (max-width: {$this->options_sty('v_screen_max_width')}px) {
-	  .news-ticker-ntb, .n_t_ntb_b, .news_ticker_ntb_ie8 {
-		  display:none;
-	  }
-	{$fixed_class_for_top} {margin-top:0px;}
-	{$fixed_class_for_bottom} {{$this->height_marginBottom()}:0px;}
-    }
-	</style>";
+		echo "<style>#ntbne_five, #ntbne_five_ie8, #scroll-ntb {display: inherit;}</style>";
+		
+		if ($this->options_hi('hide') == 'hide_jquery') { // hide after time with jquery
+			
+			$height = $this->adminbar32;
+			$height_mobile = $this->adminbar46;
+			$max_width = $this->options_sty('screen_max_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_max_width') : 782;
+			$min_width = $this->options_sty('screen_min_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_min_width') : 783;
+			
+			$adminbar = is_admin_bar_showing() ? "
+			@media only screen and (min-width: {$min_width}px) {
+			.ntb_class_hideTop {margin-top: {$height}px !important;}
+			}
+			@media screen and (max-width: {$max_width}px) {
+			.ntb_class_hideTop {margin-top: {$height_mobile}px !important;}
+			}
+			" : "
+			.ntb_class_hideTop {margin-top: initial !important;}
+			";
+			
+			if ($this->is_ntb_top_site())
+			echo "<style>$adminbar</style>";
+		?>
+		<script type="text/javascript">	
+			// hide ticker after delay
+			jQuery(document).ready( function($) {
+				setTimeout(function() {
+					$('.news-ticker-ntb,.n_t_ntb_b').fadeOut("slow");
+					
+					//$('.sidebar').css({'padding-bottom': '0px'});
+					/*
+						var newid = 'ntb_class_hideTop';	
+						var id = $('html').attr('id');
+						var idAttrExists = $('html').get(0).hasAttribute('id');
+						var _id = idAttrExists == true ? (id + ' ' + newid) : newid;
+						$('html').attr('id', _id);
+					*/
+					$("html").addClass('ntb_class_hideTop');
+					//var height = $('#wpadminbar').outerHeight();
+					//$("html").attr({"style": "margin-top: " + height + "px !important"});
+					
+					<?php if ($this->options_sty('fixed_top_bottom_site') == 'top') { ?>
+						$(<?php echo "'{$fixed_class_for_top}'"; ?>).css("margin-top", '0px');
+						<?php } else { ?>
+						$(<?php echo "'{$fixed_class_for_bottom}'"; ?>).css({<?php echo "'{$this->height_marginBottom()}'"; ?>: '0px', 'display' : 'none'});
+					<?php } ?>
+				}, ntb_anims.time_recent_hide );
+			});
+			// hide ticker after delay
+		</script>
+		<?php
+		}
+		
+		if ($s_style)
+		echo "<style>{$this->options_sty('s_style')}</style>";
 	}
 	
-	echo "<style>#ntbne_five, #ntbne_five_ie8, #scroll-ntb {display: inherit;}</style>";
-
-	if ($this->options_hi('hide') == 'hide_jquery') { // hide after time with jquery
-
-	$height = $this->adminbar32;
-	$height_mobile = $this->adminbar46;
-	$max_width = $this->options_sty('screen_max_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_max_width') : 782;
-	$min_width = $this->options_sty('screen_min_width') && $this->options_sty('enable_style_mobile') ? $this->options_sty('screen_min_width') : 783;
-
-	$adminbar = is_admin_bar_showing() ? "
-	@media only screen and (min-width: {$min_width}px) {
-	    .ntb_class_hideTop {margin-top: {$height}px !important;}
-	}
-	@media screen and (max-width: {$max_width}px) {
-		.ntb_class_hideTop {margin-top: {$height_mobile}px !important;}
-	}
-	" : "
-	.ntb_class_hideTop {margin-top: initial !important;}
-	";
-	
-	if ($this->is_ntb_top_site())
-	echo "<style>$adminbar</style>";
-	?>
-    <script type="text/javascript">	
-    // hide ticker after delay
-    jQuery(document).ready( function($) {
-    setTimeout(function() {
-       $('.news-ticker-ntb,.n_t_ntb_b').fadeOut("slow");
-	   
-	   //$('.sidebar').css({'padding-bottom': '0px'});
-	   /*
-		var newid = 'ntb_class_hideTop';	
-		var id = $('html').attr('id');
-		var idAttrExists = $('html').get(0).hasAttribute('id');
-		var _id = idAttrExists == true ? (id + ' ' + newid) : newid;
-        $('html').attr('id', _id);
-		*/
-	   $("html").addClass('ntb_class_hideTop');
-	   //var height = $('#wpadminbar').outerHeight();
-	   //$("html").attr({"style": "margin-top: " + height + "px !important"});
-	   
-	   <?php if ($this->options_sty('fixed_top_bottom_site') == 'top') { ?>
-	   $(<?php echo "'{$fixed_class_for_top}'"; ?>).css("margin-top", '0px');
-	   <?php } else { ?>
-	   $(<?php echo "'{$fixed_class_for_bottom}'"; ?>).css({<?php echo "'{$this->height_marginBottom()}'"; ?>: '0px', 'display' : 'none'});
-	   <?php } ?>
-    }, ntb_anims.time_recent_hide );
-    });
-    // hide ticker after delay
-    </script>
-    <?php
-	}
-
-	if ($s_style)
-	echo "<style>{$this->options_sty('s_style')}</style>";
-	}
-
 }

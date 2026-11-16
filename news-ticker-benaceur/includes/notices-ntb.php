@@ -7,7 +7,7 @@ if ( current_user_can( apply_filters( 'ntb_manage_options_cap', 'manage_options'
 		    ?>
 			<div class="notice notice-success" id="<?php echo $nden_n;  ?>" style="background:#FFE3AD;"><p>
 			<span class="hov-mib-en" onmouseup="ntb_setcookie('<?php echo $nden_n;  ?>',1)" style="color:#009999;"><strong><span style="margin-top:1px;" class="dashicons dashicons-dismiss"></span> &nbsp;</strong></span>
-			<span style="color:red; font-weight: bold;" id="txtClignotantNTB"><?php _e("Important",'news-ticker-benaceur'); ?></span>&nbsp; <?php _e('my latest plugin,perhaps you might be interested <a target="_blank" href="https://wordpress.org/plugins/restrict-usernames-emails-characters/">Restrict Usernames Emails Characters</a>', 'news-ticker-benaceur'); ?>
+			<span style="color:red; font-weight: bold;" id="txtClignotantNTB"><?php esc_html_e("Important",'news-ticker-benaceur'); ?></span>&nbsp; <?php esc_html_e('my latest plugin,perhaps you might be interested <a target="_blank" href="https://wordpress.org/plugins/restrict-usernames-emails-characters/">Restrict Usernames Emails Characters</a>', 'news-ticker-benaceur'); ?>
 			</p></div>
 			
 <style>.hov-mib-en:hover {cursor:pointer;}</style>			
